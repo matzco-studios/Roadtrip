@@ -1,47 +1,43 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-/// <summary>
-/// This is not the final Controller it as been taken from Labyrinth 2. It is temporary there to let other
-/// works in their part while the official PlayerController is not done.
-/// </summary>
-public class TemporaryPlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-    private float speed = 3.0f;    // Vitesse de déplacement vers l'avant/arrière
-    private float turnSpeed = 60.0f;  // Vitesse de rotation
-    public float strafeSpeed = 5.0f;  // Vitesse de déplacement latéral (gauche/droite)
-
-    private float horizontalInput;
-    private float forwardInput;
-
-    private Rigidbody rb;  // Référence au Rigidbody
-
+    [SerializeField] private float movementSpeed = 7;
+    [SerializeField] private float jumpForce = 5;
+    private Collider col;
+    private Rigidbody body;
+    [SerializeField] private Transform head;
+    // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();  // Obtenir le Rigidbody du joueur
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        col = GetComponent<Collider>();
+        body = GetComponent<Rigidbody>();
     }
 
-    // Utiliser FixedUpdate pour les interactions physiques
-    private void FixedUpdate()
+    static float GetKey(KeyCode key) 
     {
-        // Obtenir les entrées utilisateur
-        horizontalInput = Input.GetAxis("Horizontal");
-        forwardInput = Input.GetAxis("Vertical");
+        return Input.GetKey(key) ? 1.0f : 0.0f;
+    }
 
-        // Déplacer l'objet en utilisant le Rigidbody pour respecter la physique
-        Vector3 move = transform.forward * forwardInput * speed * Time.fixedDeltaTime;  // Mouvement vers l'avant/en arrière
-        Vector3 strafe = transform.right * horizontalInput * strafeSpeed * Time.fixedDeltaTime;  // Mouvement latéral (gauche/droite)
+    void Update(){
+        if (Input.GetKeyDown(KeyCode.Space)){
+            body.velocity += Vector3.up*jumpForce;
+        }
+    }
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        Vector3 inputDir = new(GetKey(KeyCode.D)-GetKey(KeyCode.A), 0, GetKey(KeyCode.W)-GetKey(KeyCode.S));
+        inputDir.Normalize();
+        Vector3 direction = Quaternion.AngleAxis(head.eulerAngles.y, Vector3.up) * inputDir;
 
-        // Appliquer le mouvement
-        // Rigidbody.MovePosition est utilisé pour déplacer un objet tout en respectant la physique d'Unity.
-        rb.MovePosition(rb.position + move + strafe);
-
-        // Rotation directe du joueur sur l'axe Y (rotation en fonction de l'entrée horizontale)
-        Vector3 rotation = new Vector3(0f, horizontalInput * turnSpeed * Time.fixedDeltaTime, 0f);
-
-        // Appliquer la rotation directement à l'axe Y
-        rb.transform.Rotate(rotation);
+        float amntToReduce = new Vector3(body.velocity.x, 0, body.velocity.z).magnitude;
+        body.drag = amntToReduce;
+        body.AddForce(movementSpeed * direction);
     }
 }
-
