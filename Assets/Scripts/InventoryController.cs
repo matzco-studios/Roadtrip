@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryController : MonoBehaviour
@@ -11,7 +10,8 @@ public class InventoryController : MonoBehaviour
 
     private GameObject _nearItem = null;
 
-    private List<GameObject> _inventoryItems = new();
+    [SerializeField]
+    private int _currentSelectedItem = 0;
 
     private void ShowPressEPanel()
     {
@@ -20,18 +20,21 @@ public class InventoryController : MonoBehaviour
 
     private void HidePressEPanel()
     {
-        _ePressMessage.SetActive(true);
+        _ePressMessage.SetActive(false);
     }
 
-    void PutNearItemIntoItemContainer()
+    void AddInventoryItem()
     {
-        // Need to resee because the container will have multiple component.
-        if (_itemContainer.transform.childCount > 0)
+        if (_itemContainer.transform.childCount == 3)
         {
-            // Set kinematic to false, to let RigidBody properties apply to the object and see it fall.
-            //_itemContainer.GetComponentInChildren<Rigidbody>().isKinematic = false;
+            var itemToDrop = _itemContainer.transform.GetChild(_currentSelectedItem).transform;
+            itemToDrop.GetComponent<Rigidbody>().isKinematic = false;
+            itemToDrop.transform.SetParent(null);
+        }
 
-            //_itemContainer.transform.DetachChildren();
+        else if (_itemContainer.transform.childCount > 0)
+        {
+            _nearItem.SetActive(false);
         }
 
         _nearItem.transform.SetParent(_itemContainer.transform);
@@ -44,23 +47,11 @@ public class InventoryController : MonoBehaviour
 
         // Set the postion to (0, 0, 0) to let the child(_nearItem) follow the parent Position(_itemContainer).
         _nearItem.transform.localPosition = Vector3.zero;
+
+        // To desactivate RigidBody property.
         _nearItem.GetComponent<Rigidbody>().isKinematic = true;
     }
 
-    void AddInventoryItem()
-    {
-        if (_inventoryItems.Count == 0)
-        {
-            PutNearItemIntoItemContainer();
-        }
-        else if (_inventoryItems.Count == 3)
-        {
-            _inventoryItems.Remove(_itemContainer);
-            PutNearItemIntoItemContainer();
-        }
-
-        _inventoryItems.Add(_nearItem);
-    }
     void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.E) && _nearItem)
