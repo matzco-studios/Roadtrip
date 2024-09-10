@@ -61,6 +61,8 @@ public class InventoryController : MonoBehaviour
             AddInventoryItem();
             HidePressEPanel();
         }
+
+        ChangeCurrentItem();
     }
 
     void OnTriggerEnter(Collider other)
@@ -79,5 +81,29 @@ public class InventoryController : MonoBehaviour
         _nearItem = null;
         Debug.Log("Exited Trigger");
         HidePressEPanel();
+    }
+
+    private void SelectAnotherItem(int otherItemIndex)
+    {
+        _itemContainer.transform.GetChild(_currentSelectedItem).gameObject.SetActive(false);
+        _itemContainer.transform.GetChild(otherItemIndex).gameObject.SetActive(true);
+    }
+
+    void ChangeCurrentItem()
+    {
+        var totalItems = _itemContainer.transform.childCount;
+
+        if (Input.GetKey(KeyCode.Keypad0) && _currentSelectedItem != 0 && totalItems >= 1)
+        {
+            SelectAnotherItem(0);
+        }
+        else if (Input.GetKey(KeyCode.Keypad1) && totalItems >= 2)
+        {
+            SelectAnotherItem(1);
+        }
+        else if (Input.GetKey(KeyCode.Keypad2) && totalItems >= 3)
+        {
+            SelectAnotherItem(2);
+        }
     }
 }
