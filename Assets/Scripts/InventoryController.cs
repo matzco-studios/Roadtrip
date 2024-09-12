@@ -24,12 +24,9 @@ public class InventoryController : MonoBehaviour
 
         // Set the scale to (1, 1, 1).
         nearItem.transform.localScale = Vector3.one;
-
-        // To do that the item has the same rotation as the parent.
-        nearItem.transform.localRotation = transform.localRotation;
-
-        // Set the postion to (0, 0, 0) to let the child(nearItem) follow the parent Position(_itemContainer).
-        nearItem.transform.localPosition = Vector3.zero;
+        
+        // To do give a position of (0, 0, 0) to let the child follow the parent position and applied the rotation of the parent.
+        nearItem.transform.SetLocalPositionAndRotation(Vector3.zero, transform.localRotation);
 
         // To desactivate RigidBody property.
         nearItem.GetComponent<Rigidbody>().isKinematic = true;
