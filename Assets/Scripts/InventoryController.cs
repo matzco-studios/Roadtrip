@@ -11,7 +11,7 @@ public class InventoryController : MonoBehaviour
         {
             var itemToDrop = transform.GetChild(_currentSelectedItem).transform;
             itemToDrop.GetComponent<Rigidbody>().isKinematic = false;
-            nearItem.GetComponent<MeshCollider>().enabled = true;
+            itemToDrop.GetComponent<MeshCollider>().enabled = true;
             itemToDrop.transform.SetParent(null);
         }
 
@@ -24,7 +24,7 @@ public class InventoryController : MonoBehaviour
 
         // Set the scale to (1, 1, 1).
         nearItem.transform.localScale = Vector3.one;
-        
+
         // To do give a position of (0, 0, 0) to let the child follow the parent position and applied the rotation of the parent.
         nearItem.transform.SetLocalPositionAndRotation(Vector3.zero, transform.localRotation);
 
