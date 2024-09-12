@@ -3,41 +3,30 @@ using UnityEngine;
 public class InventoryController : MonoBehaviour
 {
     [SerializeField] private GameObject _ePressMessage;
-    [SerializeField] private GameObject _itemContainer;
     [SerializeField] private int _currentSelectedItem = 0;
-
-    private void ShowPressEPanel()
-    {
-        _ePressMessage.SetActive(true);
-    }
-
-    private void HidePressEPanel()
-    {
-        _ePressMessage.SetActive(false);
-    }
 
     void AddInventoryItem(GameObject nearItem)
     {
-        if (_itemContainer.transform.childCount == 3)
+        if (transform.childCount == 3)
         {
-            var itemToDrop = _itemContainer.transform.GetChild(_currentSelectedItem).transform;
+            var itemToDrop = transform.GetChild(_currentSelectedItem).transform;
             itemToDrop.GetComponent<Rigidbody>().isKinematic = false;
             nearItem.GetComponent<MeshCollider>().enabled = true;
             itemToDrop.transform.SetParent(null);
         }
 
-        else if (_itemContainer.transform.childCount > 0)
+        else if (transform.childCount > 0)
         {
             nearItem.SetActive(false);
         }
 
-        nearItem.transform.SetParent(_itemContainer.transform);
+        nearItem.transform.SetParent(transform);
 
         // Set the scale to (1, 1, 1).
         nearItem.transform.localScale = Vector3.one;
 
         // To do that the item has the same rotation as the parent.
-        nearItem.transform.localRotation = _itemContainer.transform.localRotation;
+        nearItem.transform.localRotation = transform.localRotation;
 
         // Set the postion to (0, 0, 0) to let the child(nearItem) follow the parent Position(_itemContainer).
         nearItem.transform.localPosition = Vector3.zero;
@@ -46,8 +35,9 @@ public class InventoryController : MonoBehaviour
         nearItem.GetComponent<Rigidbody>().isKinematic = true;
         nearItem.GetComponent<MeshCollider>().enabled = false;
 
-        // Should remove because of OnTriggerExit
-        HidePressEPanel();
+        // Calling OnTriggerExit manually, because it does not activate when we get the item, because we do not leave the trigger zone, 
+        // we just desactivate, the item collider and rigidbody.
+        OnTriggerExit();
     }
 
     void FixedUpdate()
@@ -58,45 +48,45 @@ public class InventoryController : MonoBehaviour
     // The function is executed in loop when two objects are colliding.
     void OnTriggerStay(Collider other)
     {
+        print(other.name);
+
         if (other.CompareTag("GrabbableItem"))
         {
-            ShowPressEPanel();
+            _ePressMessage.SetActive(true);
 
             if (Input.GetKeyDown(KeyCode.E))
             {
                 AddInventoryItem(other.gameObject);
             }
         }
-
-        print(other.name);
     }
 
     void OnTriggerExit()
     {
         print("Exited Trigger");
-        HidePressEPanel();
+        _ePressMessage.SetActive(false);
     }
 
     private void SelectAnotherItem(int otherItemIndex)
     {
-        _itemContainer.transform.GetChild(_currentSelectedItem).gameObject.SetActive(false);
-        _itemContainer.transform.GetChild(otherItemIndex).gameObject.SetActive(true);
+        transform.GetChild(_currentSelectedItem).gameObject.SetActive(false);
+        transform.GetChild(otherItemIndex).gameObject.SetActive(true);
         _currentSelectedItem = otherItemIndex;
     }
 
     void ChangeCurrentItem()
     {
-        var totalItems = _itemContainer.transform.childCount;
+        var totalItems = transform.childCount;
 
         if (Input.GetKey(KeyCode.Keypad1) && _currentSelectedItem != 0 && totalItems >= 1)
         {
             SelectAnotherItem(0);
         }
-        else if (Input.GetKey(KeyCode.Keypad2) && totalItems >= 2)
+        else if (Input.GetKey(KeyCode.Keypad2) && _currentSelectedItem != 1 && totalItems >= 2)
         {
             SelectAnotherItem(1);
         }
-        else if (Input.GetKey(KeyCode.Keypad3) && totalItems >= 3)
+        else if (Input.GetKey(KeyCode.Keypad3) && _currentSelectedItem != 2 && totalItems >= 3)
         {
             SelectAnotherItem(2);
         }
