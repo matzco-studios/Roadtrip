@@ -50,16 +50,14 @@ public class InventoryController : MonoBehaviour
 
         // To desactivate RigidBody property.
         _nearItem.GetComponent<Rigidbody>().isKinematic = true;
+        HidePressEPanel();
     }
 
     void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.E) && _nearItem)
         {
-            Debug.Log("Item was get.");
-
             AddInventoryItem();
-            HidePressEPanel();
         }
 
         ChangeCurrentItem();
@@ -87,21 +85,22 @@ public class InventoryController : MonoBehaviour
     {
         _itemContainer.transform.GetChild(_currentSelectedItem).gameObject.SetActive(false);
         _itemContainer.transform.GetChild(otherItemIndex).gameObject.SetActive(true);
+        _currentSelectedItem = otherItemIndex;
     }
 
     void ChangeCurrentItem()
     {
         var totalItems = _itemContainer.transform.childCount;
 
-        if (Input.GetKey(KeyCode.Keypad0) && _currentSelectedItem != 0 && totalItems >= 1)
+        if (Input.GetKey(KeyCode.Keypad1) && _currentSelectedItem != 0 && totalItems >= 1)
         {
             SelectAnotherItem(0);
         }
-        else if (Input.GetKey(KeyCode.Keypad1) && totalItems >= 2)
+        else if (Input.GetKey(KeyCode.Keypad2) && totalItems >= 2)
         {
             SelectAnotherItem(1);
         }
-        else if (Input.GetKey(KeyCode.Keypad2) && totalItems >= 3)
+        else if (Input.GetKey(KeyCode.Keypad3) && totalItems >= 3)
         {
             SelectAnotherItem(2);
         }
