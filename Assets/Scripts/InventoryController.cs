@@ -7,30 +7,27 @@ public class InventoryController : MonoBehaviour
 
     void AddInventoryItem(GameObject nearItem)
     {
-        if (transform.childCount == 3)
-        {
-            var itemToDrop = transform.GetChild(_currentSelectedItem).transform;
-            itemToDrop.GetComponent<Rigidbody>().isKinematic = false;
-            itemToDrop.GetComponent<MeshCollider>().enabled = true;
-            itemToDrop.transform.SetParent(null);
-        }
-
-        else if (transform.childCount > 0)
-        {
-            nearItem.SetActive(false);
-        }
-
         nearItem.transform.SetParent(transform);
-
-        // Set the scale to (1, 1, 1).
+        nearItem.GetComponent<Rigidbody>().isKinematic = true;
+        nearItem.GetComponent<MeshCollider>().enabled = false;
         nearItem.transform.localScale = Vector3.one;
 
         // To do give a position of (0, 0, 0) to let the child follow the parent position and applied the rotation of the parent.
         nearItem.transform.SetLocalPositionAndRotation(Vector3.zero, transform.localRotation);
 
-        // To desactivate RigidBody property.
-        nearItem.GetComponent<Rigidbody>().isKinematic = true;
-        nearItem.GetComponent<MeshCollider>().enabled = false;
+        if (transform.childCount == 4)
+        {
+            var itemToDrop = transform.GetChild(_currentSelectedItem).transform;
+            itemToDrop.GetComponent<Rigidbody>().isKinematic = false;
+            itemToDrop.GetComponent<MeshCollider>().enabled = true;
+            itemToDrop.transform.SetParent(null);
+            nearItem.transform.SetSiblingIndex(_currentSelectedItem);
+        }
+
+        else if (transform.childCount > 1)
+        {
+            nearItem.SetActive(false);
+        }
 
         // Calling OnTriggerExit manually, because it does not activate when we get the item, because we do not leave the trigger zone, 
         // we just desactivate, the item collider and rigidbody.
