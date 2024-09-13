@@ -5,7 +5,21 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private GameObject _ePressMessage;
     [SerializeField] private int _currentSelectedItem = 0;
 
-    void AddInventoryItem(GameObject nearItem)
+    void DropCurrentItem(bool replace = false)
+    {
+        var itemToDrop = transform.GetChild(_currentSelectedItem).transform;
+        itemToDrop.GetComponent<Rigidbody>().isKinematic = false;
+        itemToDrop.GetComponent<MeshCollider>().enabled = true;
+        itemToDrop.transform.SetParent(null);
+
+        if (!replace)
+        {
+            // code the execute if we are just dropping the item without replacing it.
+            print("Not replace");
+        }
+    }
+
+    void AddItem(GameObject nearItem)
     {
         nearItem.transform.SetParent(transform);
         nearItem.GetComponent<Rigidbody>().isKinematic = true;
@@ -17,10 +31,7 @@ public class InventoryController : MonoBehaviour
 
         if (transform.childCount == 4)
         {
-            var itemToDrop = transform.GetChild(_currentSelectedItem).transform;
-            itemToDrop.GetComponent<Rigidbody>().isKinematic = false;
-            itemToDrop.GetComponent<MeshCollider>().enabled = true;
-            itemToDrop.transform.SetParent(null);
+            DropCurrentItem(replace: true);
             nearItem.transform.SetSiblingIndex(_currentSelectedItem);
         }
 
@@ -37,6 +48,12 @@ public class InventoryController : MonoBehaviour
     void FixedUpdate()
     {
         ChangeCurrentItem();
+
+        // Need to fix bug here :
+        if (Input.GetKey(KeyCode.Q))
+        {
+            DropCurrentItem();
+        }
     }
 
     // The function is executed in loop when two objects are colliding.
@@ -50,7 +67,7 @@ public class InventoryController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                AddInventoryItem(other.gameObject);
+                AddItem(other.gameObject);
             }
         }
     }
