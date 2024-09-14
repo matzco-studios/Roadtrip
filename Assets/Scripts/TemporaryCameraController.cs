@@ -2,31 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// This is not the final CameraController it as been taken from Labyrinth 2. It is temporary there to let other
-/// works in their part while the official CameraController is not done.
-/// </summary>
 public class TemporaryCameraController : MonoBehaviour
 {
-    public Transform player;  // Référence à l'objet du joueur
-    public Vector3 offset;    // Décalage de la caméra par rapport au joueur
+    [SerializeField] private float sensitivity = 2.0f;
+    private float verticalRotation = 0;
+    [SerializeField] Transform head;
 
-    void Start()
-    {
-        // Si le décalage n'est pas défini, le calculer par rapport à la position actuelle de la caméra
-        if (offset == Vector3.zero)
-        {
-            offset = transform.position - player.position;
-        }
-    }
+    void Update(){
+        float mouseX = Input.GetAxis("Mouse X")*sensitivity;
+        float mouseY = Input.GetAxis("Mouse Y")*sensitivity;
 
-    void LateUpdate()
-    {
-        // Positionner la caméra derrière le joueur en tenant compte de la rotation du joueur
-        Vector3 desiredPosition = player.position + player.rotation * offset;
-        transform.position = desiredPosition;
+        verticalRotation = Mathf.Clamp(verticalRotation - mouseY, -90f, 90f);
 
-        // Faire en sorte que la caméra regarde toujours le joueur (ou un point devant le joueur)
-        transform.LookAt(player.position + player.forward * 10f);
+        head.localEulerAngles=Vector3.right*verticalRotation;
+        transform.Rotate(Vector3.up*mouseX);
+        
     }
 }
