@@ -1,47 +1,68 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-/// <summary>
-/// This is not the final Controller it as been taken from Labyrinth 2. It is temporary there to let other
-/// works in their part while the official PlayerController is not done.
-/// </summary>
-public class TemporaryPlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-    private float speed = 3.0f;    // Vitesse de déplacement vers l'avant/arrière
-    private float turnSpeed = 60.0f;  // Vitesse de rotation
-    public float strafeSpeed = 5.0f;  // Vitesse de déplacement latéral (gauche/droite)
-
-    private float horizontalInput;
-    private float forwardInput;
-
-    private Rigidbody rb;  // Référence au Rigidbody
-
+    [SerializeField] private float movementSpeed = 4;
+    [SerializeField] private float jumpForce = 5;
+    [SerializeField] private Transform head;
+    [SerializeField] private float coyoteTimeMax = 0.21f;
+    [SerializeField] private float jumpBufferMax = 0.21f;
+    [SerializeField] private float gravityStrength = -9.81f;
+    private float coyoteTime;
+    private float jumpBuffer;
+    private CharacterController controller;
+    private Vector3 velocity = Vector3.zero;
+    private Vector3 gravityVelocity = Vector3.zero;
+    // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();  // Obtenir le Rigidbody du joueur
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        controller = GetComponent<CharacterController>();
     }
 
-    // Utiliser FixedUpdate pour les interactions physiques
-    private void FixedUpdate()
+    void Update(){
+        // Handle jump mechanics
+        coyoteTime -= Time.deltaTime;
+        jumpBuffer -= Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Space)){
+            jumpBuffer = jumpBufferMax;
+        }
+
+        if (jumpBuffer>=0 && coyoteTime>=0){
+            gravityVelocity.y = jumpForce;
+        }
+    }
+    
+    void FixedUpdate()
     {
-        // Obtenir les entrées utilisateur
-        horizontalInput = Input.GetAxis("Horizontal");
-        forwardInput = Input.GetAxis("Vertical");
+        // Get input direction
+        // (Using "GetAxisRaw" instead of "GetAxis" because "GetAxis" has smoothing applied, which makes the controls feel slightly unresponsive)
+        Vector3 inputDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+        Vector3 direction = Quaternion.AngleAxis(head.eulerAngles.y, Vector3.up) * inputDir;
 
-        // Déplacer l'objet en utilisant le Rigidbody pour respecter la physique
-        Vector3 move = transform.forward * forwardInput * speed * Time.fixedDeltaTime;  // Mouvement vers l'avant/en arrière
-        Vector3 strafe = transform.right * horizontalInput * strafeSpeed * Time.fixedDeltaTime;  // Mouvement latéral (gauche/droite)
+        // Handle movement (velocity)
+        Vector3 targetVelocity = movementSpeed * direction;
 
-        // Appliquer le mouvement
-        // Rigidbody.MovePosition est utilisé pour déplacer un objet tout en respectant la physique d'Unity.
-        rb.MovePosition(rb.position + move + strafe);
+        velocity += (targetVelocity-velocity)/15;
+        if (inputDir.Equals(Vector3.zero)){
+            velocity += (Vector3.zero-velocity)/10;
+        }
+        
+        controller.Move(velocity * Time.fixedDeltaTime);
 
-        // Rotation directe du joueur sur l'axe Y (rotation en fonction de l'entrée horizontale)
-        Vector3 rotation = new Vector3(0f, horizontalInput * turnSpeed * Time.fixedDeltaTime, 0f);
+        // Handle gravity
+        gravityVelocity.y += gravityStrength * Time.fixedDeltaTime * ( (gravityVelocity.y<0) ? 1.65f : 1 );
+        
+        controller.Move(gravityVelocity * Time.fixedDeltaTime);
 
-        // Appliquer la rotation directement à l'axe Y
-        rb.transform.Rotate(rotation);
+        if (controller.collisionFlags == CollisionFlags.Below){
+            gravityVelocity.y = 0;
+            coyoteTime = coyoteTimeMax;
+        }
     }
 }
-
