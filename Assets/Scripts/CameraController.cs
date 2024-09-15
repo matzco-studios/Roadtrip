@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TemporaryCameraController : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
     [SerializeField] private float sensitivity = 2.0f;
     private float verticalRotation = 0;
