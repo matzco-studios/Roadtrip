@@ -24,7 +24,8 @@ public class InventoryController : MonoBehaviour
             {
                 _currentSelectedItem = -1;
             }
-            else {
+            else
+            {
                 transform.GetChild(0).gameObject.SetActive(true);
                 _currentSelectedItem = 0;
             }
@@ -61,8 +62,24 @@ public class InventoryController : MonoBehaviour
         OnTriggerExit();
     }
 
+    /// <summary>
+    /// Function to handle scroll wheel input to change the current selected item.
+    /// </summary>
+    void ScrollWheelChange()
+    {
+        if (Input.mouseScrollDelta.y > 0)
+        {
+            SelectAnotherItem(_currentSelectedItem < 2 ? _currentSelectedItem + 1 : 0);
+        }
+        else if (Input.mouseScrollDelta.y < 0)
+        {
+            SelectAnotherItem(_currentSelectedItem > 0 ? _currentSelectedItem - 1 : 2);
+        }
+    }
+
     void FixedUpdate()
     {
+        ScrollWheelChange();
         ChangeCurrentItem();
 
         if (Input.GetKeyDown(KeyCode.Q))
