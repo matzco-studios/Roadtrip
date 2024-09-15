@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 _direction;
     private Vector3 _velocity = Vector3.zero;
     private Vector3 _gravityVelocity = Vector3.zero;
-    // Start is called before the first frame update
+    
     void Start()
     {
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
@@ -37,18 +37,6 @@ public class PlayerController : MonoBehaviour
 
         if (_jumpBuffer>=0 && _coyoteTime>=0){
             _gravityVelocity.y = _jumpForce;
-        }
-    }
-
-    private void Gravity()
-    {
-        _gravityVelocity.y += _gravityStrength * Time.fixedDeltaTime * ( (_gravityVelocity.y<0) ? 1.65f : 1 );
-        
-        _controller.Move(_gravityVelocity * Time.fixedDeltaTime);
-
-        if (_controller.collisionFlags == CollisionFlags.Below){
-            _gravityVelocity.y = 0;
-            _coyoteTime = _coyoteTimeMax;
         }
     }
 
@@ -70,14 +58,26 @@ public class PlayerController : MonoBehaviour
         _controller.Move(_velocity * Time.fixedDeltaTime);
     }
 
+    private void Gravity()
+    {
+        _gravityVelocity.y += _gravityStrength * Time.fixedDeltaTime * ( (_gravityVelocity.y<0) ? 1.65f : 1 );
+        
+        _controller.Move(_gravityVelocity * Time.fixedDeltaTime);
+
+        if (_controller.collisionFlags == CollisionFlags.Below){
+            _gravityVelocity.y = 0;
+            _coyoteTime = _coyoteTimeMax;
+        }
+    }
+
     void Update()
     {
         HandleJump();
+        PlayerDirection();
     }
     
     void FixedUpdate()
     {
-        PlayerDirection();
         Movement();
         Gravity();
     }
