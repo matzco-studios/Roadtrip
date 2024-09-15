@@ -397,10 +397,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TemporaryPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 5713548300795970587, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

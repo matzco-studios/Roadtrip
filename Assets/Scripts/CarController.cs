@@ -34,10 +34,11 @@ public class CarController : MonoBehaviour
     public float highVolume = 1f;
     public float minSpeedVolume = 1f;
     public float maxSpeedVolume = 21f;
+    public bool IsRunning = false;
     void GetInputs()
     {
-        gasInput = Input.GetAxis("Vertical");
-        turnInput = Input.GetAxis("Horizontal");
+        gasInput = (IsRunning) ? Input.GetAxis("Vertical") : 0.0f;
+        turnInput =(IsRunning) ? Input.GetAxis("Horizontal") : 0.0f;
     }
     void MoveCarForward()
     {
@@ -120,6 +121,8 @@ public class CarController : MonoBehaviour
         {
             engineSound.pitch = highVolume;
         }
+        
+        engineSound.mute = !IsRunning;
     }
     // Start is called before the first frame update
     void Start()

@@ -13,6 +13,7 @@ public class InteractableCar : MonoBehaviour, IInteractable
     {
         _player = GameObject.FindGameObjectWithTag("Player");
         _car = transform.parent.gameObject;
+        _car.GetComponent<CarController>().IsRunning = false;
         
     }
     void Update() 
@@ -28,6 +29,6 @@ public class InteractableCar : MonoBehaviour, IInteractable
         _player.transform.localPosition = Vector3.zero;
         _player.GetComponent<PlayerController>().enabled = false;
         _player.GetComponent<CharacterController>().enabled = false;
-        _car.GetComponent<CarController>().enabled = true;
+        _car.GetComponent<CarController>().IsRunning = true;
     }
 }
