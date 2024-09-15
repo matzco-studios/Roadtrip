@@ -17,6 +17,7 @@ public class InventoryController : MonoBehaviour
         itemToDrop.GetComponent<Rigidbody>().isKinematic = false;
         itemToDrop.GetComponent<MeshCollider>().enabled = true;
         itemToDrop.transform.SetParent(null);
+        print(itemToDrop.name);
 
         if (!replace)
         {
