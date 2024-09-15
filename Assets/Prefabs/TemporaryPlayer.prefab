@@ -131,12 +131,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423bac9708f98a764a7ed90ccbf2c34b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
-  jumpForce: 4.5
-  head: {fileID: 4612798954801268853}
-  coyoteTimeMax: 0.21
-  jumpBufferMax: 0.21
-  gravityStrength: -9.81
+  _movementSpeed: 10
+  _jumpForce: 4.5
+  _head: {fileID: 4612798954801268853}
+  _coyoteTimeMax: 0.21
+  _jumpBufferMax: 0.21
+  _gravityStrength: -9.81
 --- !u!114 &2011484979036539009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,8 +149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a191f00a2adb269e7afa06035f54baf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 2
-  head: {fileID: 4612798954801268853}
+  _sensitivity: 2
+  _head: {fileID: 4612798954801268853}
 --- !u!143 &462733346883196038
 CharacterController:
   m_ObjectHideFlags: 0
