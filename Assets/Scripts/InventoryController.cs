@@ -11,6 +11,7 @@ public class InventoryController : MonoBehaviour
         itemToDrop.GetComponent<Rigidbody>().isKinematic = false;
         itemToDrop.GetComponent<MeshCollider>().enabled = true;
         itemToDrop.transform.SetParent(null);
+        print(itemToDrop.name);
 
         if (!replace)
         {
@@ -49,8 +50,7 @@ public class InventoryController : MonoBehaviour
     {
         ChangeCurrentItem();
 
-        // Need to fix bug here :
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             DropCurrentItem();
         }
