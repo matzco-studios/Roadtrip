@@ -3,10 +3,16 @@ using UnityEngine;
 public class InventoryController : MonoBehaviour
 {
     [SerializeField] private GameObject _ePressMessage;
-    [SerializeField] private int _currentSelectedItem = 0;
+    [SerializeField] private int _currentSelectedItem = -1;
 
+    /// <summary>
+    /// Function to drop the current selected item.
+    /// </summary>
+    /// <param name="replace">True mean he is adding an item and dropping the current one because he exceeded the limit, false mean he is directly dropping the current item.</param>
     void DropCurrentItem(bool replace = false)
     {
+        if (_currentSelectedItem == -1) return;
+
         var itemToDrop = transform.GetChild(_currentSelectedItem).transform;
         itemToDrop.GetComponent<Rigidbody>().isKinematic = false;
         itemToDrop.GetComponent<MeshCollider>().enabled = true;
@@ -14,8 +20,14 @@ public class InventoryController : MonoBehaviour
 
         if (!replace)
         {
-            // code the execute if we are just dropping the item without replacing it.
-            print("Not replace");
+            if (transform.childCount == 0)
+            {
+                _currentSelectedItem = -1;
+            }
+            else {
+                transform.GetChild(0).gameObject.SetActive(true);
+                _currentSelectedItem = 0;
+            }
         }
     }
 
@@ -39,6 +51,10 @@ public class InventoryController : MonoBehaviour
         {
             nearItem.SetActive(false);
         }
+        else
+        {
+            _currentSelectedItem = 0;
+        }
 
         // Calling OnTriggerExit manually, because it does not activate when we get the item, because we do not leave the trigger zone, 
         // we just desactivate, the item collider and rigidbody.
@@ -49,8 +65,7 @@ public class InventoryController : MonoBehaviour
     {
         ChangeCurrentItem();
 
-        // Need to fix bug here :
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             DropCurrentItem();
         }
@@ -89,15 +104,15 @@ public class InventoryController : MonoBehaviour
     {
         var totalItems = transform.childCount;
 
-        if (Input.GetKey(KeyCode.Keypad1) && _currentSelectedItem != 0 && totalItems >= 1)
+        if (Input.GetKey(KeyCode.Alpha1) && _currentSelectedItem != 0 && totalItems >= 1)
         {
             SelectAnotherItem(0);
         }
-        else if (Input.GetKey(KeyCode.Keypad2) && _currentSelectedItem != 1 && totalItems >= 2)
+        else if (Input.GetKey(KeyCode.Alpha2) && _currentSelectedItem != 1 && totalItems >= 2)
         {
             SelectAnotherItem(1);
         }
-        else if (Input.GetKey(KeyCode.Keypad3) && _currentSelectedItem != 2 && totalItems >= 3)
+        else if (Input.GetKey(KeyCode.Alpha3) && _currentSelectedItem != 2 && totalItems >= 3)
         {
             SelectAnotherItem(2);
         }
