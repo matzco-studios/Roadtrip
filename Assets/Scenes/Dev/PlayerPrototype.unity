@@ -215,6 +215,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &575380622 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 956024449405087267, guid: 9c565b01f3500c543a35db4ae322a4d4, type: 3}
+  m_PrefabInstance: {fileID: 1123741965}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &639663668 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2145951141328495067, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
@@ -228,6 +233,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1076367530903735901, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
+      propertyPath: _ePressMessage
+      value: 
+      objectReference: {fileID: 575380622}
     - target: {fileID: 1513993545894037140, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.2
@@ -385,7 +394,7 @@ GameObject:
   - component: {fileID: 1411204698}
   m_Layer: 0
   m_Name: InteractableSeat
-  m_TagString: GrabbableItem
+  m_TagString: InteractableItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
