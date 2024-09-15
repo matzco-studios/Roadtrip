@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 462733346883196038}
   m_Layer: 0
   m_Name: TemporaryPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -336,5 +336,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bb999cf08bf56daca0f1aad45eaae7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ePressMessage: {fileID: 0}
+  _ePressMessage: {fileID: 2306358209078528842, guid: 20b0168791393fb49838da38c02dc2b5, type: 3}
   _currentSelectedItem: 0
