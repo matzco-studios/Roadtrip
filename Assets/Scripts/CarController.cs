@@ -34,7 +34,7 @@ public class CarController : MonoBehaviour
     public float highVolume = 1f;
     public float minSpeedVolume = 1f;
     public float maxSpeedVolume = 21f;
-    void getInputs()
+    void GetInputs()
     {
         gasInput = Input.GetAxis("Vertical");
         turnInput = Input.GetAxis("Horizontal");
@@ -81,7 +81,7 @@ public class CarController : MonoBehaviour
             }
         }
     }
-    void setMaxSpeed() // sets the max speed of the car so it doesn't go faster and faster
+    void SetMaxSpeed() // sets the max speed of the car so it doesn't go faster and faster
     {
         if (currentSpeed > maxSpeed)
         {
@@ -132,7 +132,7 @@ public class CarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        getInputs();
+        GetInputs();
         currentSpeed = rb.velocity.magnitude;
     }
     void FixedUpdate()
@@ -142,7 +142,7 @@ public class CarController : MonoBehaviour
         AnimateWheels();
         AnimateSteeringWheel();
         TurnCar();
-        setMaxSpeed();
+        SetMaxSpeed();
         EngineSound();
     }
 }
