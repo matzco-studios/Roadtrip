@@ -5,10 +5,12 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private float _sensitivity = 2.0f;
-    private float _verticalRotation = 0;
     [SerializeField] private Transform _head;
+    private float _verticalRotation = 0;
 
-    void Update(){
+    void Update()
+    {
+        // Rotate camera and head
         float mouseX = Input.GetAxis("Mouse X")*_sensitivity;
         float mouseY = Input.GetAxis("Mouse Y")*_sensitivity;
 
@@ -16,6 +18,5 @@ public class CameraController : MonoBehaviour
 
         _head.localEulerAngles=Vector3.right*_verticalRotation;
         transform.Rotate(Vector3.up*mouseX);
-        
     }
 }

@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     private float _coyoteTime;
     private float _jumpBuffer;
     private CharacterController _controller;
+    private Vector3 _inputDir;
+    private Vector3 _direction;
     private Vector3 _velocity = Vector3.zero;
     private Vector3 _gravityVelocity = Vector3.zero;
     // Start is called before the first frame update
@@ -24,8 +26,8 @@ public class PlayerController : MonoBehaviour
         _controller = GetComponent<CharacterController>();
     }
 
-    void Update(){
-        // Handle jump mechanics
+    private void HandleJump()
+    {
         _coyoteTime -= Time.deltaTime;
         _jumpBuffer -= Time.deltaTime;
 
@@ -37,25 +39,9 @@ public class PlayerController : MonoBehaviour
             _gravityVelocity.y = _jumpForce;
         }
     }
-    
-    void FixedUpdate()
+
+    private void Gravity()
     {
-        // Get input direction
-        // (Using "GetAxisRaw" instead of "GetAxis" because "GetAxis" has smoothing applied, which makes the controls feel slightly unresponsive)
-        Vector3 inputDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
-        Vector3 direction = Quaternion.AngleAxis(_head.eulerAngles.y, Vector3.up) * inputDir;
-
-        // Handle movement (_velocity)
-        Vector3 targetVelocity = _movementSpeed * direction;
-
-        _velocity += (targetVelocity-_velocity)/15;
-        if (inputDir.Equals(Vector3.zero)){
-            _velocity += (Vector3.zero-_velocity)/10;
-        }
-        
-        _controller.Move(_velocity * Time.fixedDeltaTime);
-
-        // Handle gravity
         _gravityVelocity.y += _gravityStrength * Time.fixedDeltaTime * ( (_gravityVelocity.y<0) ? 1.65f : 1 );
         
         _controller.Move(_gravityVelocity * Time.fixedDeltaTime);
@@ -64,5 +50,35 @@ public class PlayerController : MonoBehaviour
             _gravityVelocity.y = 0;
             _coyoteTime = _coyoteTimeMax;
         }
+    }
+
+    private void PlayerDirection()
+    {
+        _inputDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+        _direction = Quaternion.AngleAxis(_head.eulerAngles.y, Vector3.up) * _inputDir;
+    }
+
+    private void Movement()
+    {
+        Vector3 targetVelocity = _movementSpeed * _direction;
+
+        _velocity += (targetVelocity-_velocity)/15;
+        if (_inputDir.Equals(Vector3.zero)){
+            _velocity += (Vector3.zero-_velocity)/10;
+        }
+        
+        _controller.Move(_velocity * Time.fixedDeltaTime);
+    }
+
+    void Update()
+    {
+        HandleJump();
+    }
+    
+    void FixedUpdate()
+    {
+        PlayerDirection();
+        Movement();
+        Gravity();
     }
 }
