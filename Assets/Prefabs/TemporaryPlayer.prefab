@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4612798954801268853}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 5505359964660740188}
   - component: {fileID: 2011484979036539009}
   - component: {fileID: 462733346883196038}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TemporaryPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 4785148442411711627}
   - component: {fileID: 7053671125746518175}
   - component: {fileID: 6087749947573691570}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 7955449613462337594}
   - component: {fileID: 2100325593676013567}
   - component: {fileID: 1076367530903735901}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ItemContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -316,14 +316,14 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.26066685, y: 0.5319649, z: 1.1}
-  m_Center: {x: -0.29, y: 0.23401755, z: 0.52627015}
+  m_Size: {x: 0.26066685, y: 0.28660285, z: 1.0346403}
+  m_Center: {x: -0.29, y: 0.22682422, z: 1.0237603}
 --- !u!114 &1076367530903735901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,5 +336,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bb999cf08bf56daca0f1aad45eaae7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ePressMessage: {fileID: 2306358209078528842, guid: 20b0168791393fb49838da38c02dc2b5, type: 3}
+  _ePressMessage: {fileID: 0}
   _currentSelectedItem: 0

@@ -392,6 +392,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1411204698}
+  - component: {fileID: 1411204699}
   m_Layer: 0
   m_Name: InteractableSeat
   m_TagString: InteractableItem
@@ -414,6 +415,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 639663668}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1411204699
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411204697}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.75, y: 0.75, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1833142247
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,6 +581,10 @@ PrefabInstance:
     - target: {fileID: 2149655372869172895, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
       propertyPath: m_Name
       value: PlayerCar
+      objectReference: {fileID: 0}
+    - target: {fileID: 2704366929361864466, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7818808346866677154, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
       propertyPath: m_Enabled
