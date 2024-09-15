@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private float sensitivity = 2.0f;
-    private float verticalRotation = 0;
-    [SerializeField] Transform head;
+    [SerializeField] private float _sensitivity = 2.0f;
+    private float _verticalRotation = 0;
+    [SerializeField] private Transform _head;
 
     void Update(){
-        float mouseX = Input.GetAxis("Mouse X")*sensitivity;
-        float mouseY = Input.GetAxis("Mouse Y")*sensitivity;
+        float mouseX = Input.GetAxis("Mouse X")*_sensitivity;
+        float mouseY = Input.GetAxis("Mouse Y")*_sensitivity;
 
-        verticalRotation = Mathf.Clamp(verticalRotation - mouseY, -90f, 90f);
+        _verticalRotation = Mathf.Clamp(_verticalRotation - mouseY, -90f, 90f);
 
-        head.localEulerAngles=Vector3.right*verticalRotation;
+        _head.localEulerAngles=Vector3.right*_verticalRotation;
         transform.Rotate(Vector3.up*mouseX);
         
     }

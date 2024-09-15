@@ -6,35 +6,35 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float movementSpeed = 4;
-    [SerializeField] private float jumpForce = 5;
-    [SerializeField] private Transform head;
-    [SerializeField] private float coyoteTimeMax = 0.21f;
-    [SerializeField] private float jumpBufferMax = 0.21f;
-    [SerializeField] private float gravityStrength = -9.81f;
-    private float coyoteTime;
-    private float jumpBuffer;
-    private CharacterController controller;
-    private Vector3 velocity = Vector3.zero;
-    private Vector3 gravityVelocity = Vector3.zero;
+    [SerializeField] private float _movementSpeed = 4;
+    [SerializeField] private float _jumpForce = 5;
+    [SerializeField] private Transform _head;
+    [SerializeField] private float _coyoteTimeMax = 0.21f;
+    [SerializeField] private float _jumpBufferMax = 0.21f;
+    [SerializeField] private float _gravityStrength = -9.81f;
+    private float _coyoteTime;
+    private float _jumpBuffer;
+    private CharacterController _controller;
+    private Vector3 _velocity = Vector3.zero;
+    private Vector3 _gravityVelocity = Vector3.zero;
     // Start is called before the first frame update
     void Start()
     {
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-        controller = GetComponent<CharacterController>();
+        _controller = GetComponent<CharacterController>();
     }
 
     void Update(){
         // Handle jump mechanics
-        coyoteTime -= Time.deltaTime;
-        jumpBuffer -= Time.deltaTime;
+        _coyoteTime -= Time.deltaTime;
+        _jumpBuffer -= Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.Space)){
-            jumpBuffer = jumpBufferMax;
+            _jumpBuffer = _jumpBufferMax;
         }
 
-        if (jumpBuffer>=0 && coyoteTime>=0){
-            gravityVelocity.y = jumpForce;
+        if (_jumpBuffer>=0 && _coyoteTime>=0){
+            _gravityVelocity.y = _jumpForce;
         }
     }
     
@@ -43,26 +43,26 @@ public class PlayerController : MonoBehaviour
         // Get input direction
         // (Using "GetAxisRaw" instead of "GetAxis" because "GetAxis" has smoothing applied, which makes the controls feel slightly unresponsive)
         Vector3 inputDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
-        Vector3 direction = Quaternion.AngleAxis(head.eulerAngles.y, Vector3.up) * inputDir;
+        Vector3 direction = Quaternion.AngleAxis(_head.eulerAngles.y, Vector3.up) * inputDir;
 
-        // Handle movement (velocity)
-        Vector3 targetVelocity = movementSpeed * direction;
+        // Handle movement (_velocity)
+        Vector3 targetVelocity = _movementSpeed * direction;
 
-        velocity += (targetVelocity-velocity)/15;
+        _velocity += (targetVelocity-_velocity)/15;
         if (inputDir.Equals(Vector3.zero)){
-            velocity += (Vector3.zero-velocity)/10;
+            _velocity += (Vector3.zero-_velocity)/10;
         }
         
-        controller.Move(velocity * Time.fixedDeltaTime);
+        _controller.Move(_velocity * Time.fixedDeltaTime);
 
         // Handle gravity
-        gravityVelocity.y += gravityStrength * Time.fixedDeltaTime * ( (gravityVelocity.y<0) ? 1.65f : 1 );
+        _gravityVelocity.y += _gravityStrength * Time.fixedDeltaTime * ( (_gravityVelocity.y<0) ? 1.65f : 1 );
         
-        controller.Move(gravityVelocity * Time.fixedDeltaTime);
+        _controller.Move(_gravityVelocity * Time.fixedDeltaTime);
 
-        if (controller.collisionFlags == CollisionFlags.Below){
-            gravityVelocity.y = 0;
-            coyoteTime = coyoteTimeMax;
+        if (_controller.collisionFlags == CollisionFlags.Below){
+            _gravityVelocity.y = 0;
+            _coyoteTime = _coyoteTimeMax;
         }
     }
 }
