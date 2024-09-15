@@ -37,7 +37,7 @@ public class InventoryController : MonoBehaviour
     {
         nearItem.transform.SetParent(transform);
         nearItem.GetComponent<Rigidbody>().isKinematic = true;
-        nearItem.GetComponent<MeshCollider>().enabled = false;
+        nearItem.GetComponent<Collider>().enabled = false;
         nearItem.transform.localScale = Vector3.one;
 
         // To do give a position of (0, 0, 0) to let the child follow the parent position and applied the rotation of the parent.
