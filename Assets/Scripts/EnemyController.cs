@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TemporaryEnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     private Transform target;
     public float speed;

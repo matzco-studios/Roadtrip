@@ -11,6 +11,7 @@ public class InventoryController : MonoBehaviour
         itemToDrop.GetComponent<Rigidbody>().isKinematic = false;
         itemToDrop.GetComponent<MeshCollider>().enabled = true;
         itemToDrop.transform.SetParent(null);
+        print(itemToDrop.name);
 
         if (!replace)
         {
@@ -23,7 +24,7 @@ public class InventoryController : MonoBehaviour
     {
         nearItem.transform.SetParent(transform);
         nearItem.GetComponent<Rigidbody>().isKinematic = true;
-        nearItem.GetComponent<MeshCollider>().enabled = false;
+        nearItem.GetComponent<Collider>().enabled = false;
         nearItem.transform.localScale = Vector3.one;
 
         // To do give a position of (0, 0, 0) to let the child follow the parent position and applied the rotation of the parent.
@@ -49,8 +50,7 @@ public class InventoryController : MonoBehaviour
     {
         ChangeCurrentItem();
 
-        // Need to fix bug here :
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             DropCurrentItem();
         }

@@ -100,7 +100,7 @@ public class CarController : MonoBehaviour
             }
         }
     }
-    void setMaxSpeed() // sets the max speed of the car so it doesn't go faster and faster
+    void SetMaxSpeed() // sets the max speed of the car so it doesn't go faster and faster
     {
         if (currentSpeed > maxSpeed)
         {
@@ -162,7 +162,7 @@ public class CarController : MonoBehaviour
         AnimateWheels();
         AnimateSteeringWheel();
         TurnCar();
-        setMaxSpeed();
+        SetMaxSpeed();
         EngineSound();
     }
 }
