@@ -19,18 +19,7 @@ public class InventoryController : MonoBehaviour
         itemToDrop.transform.SetParent(null);
         print(itemToDrop.name);
 
-        if (!replace)
-        {
-            if (transform.childCount == 0)
-            {
-                _currentSelectedItem = -1;
-            }
-            else
-            {
-                transform.GetChild(0).gameObject.SetActive(true);
-                _currentSelectedItem = 0;
-            }
-        }
+        if (!replace) _currentSelectedItem = -1;
     }
 
     void AddItem(GameObject nearItem)
@@ -78,15 +67,15 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        ScrollWheelChange();
-        ChangeCurrentItem();
-
         if (Input.GetKeyDown(KeyCode.Q))
         {
             DropCurrentItem();
         }
+
+        //ScrollWheelChange();
+        ChangeCurrentItem();
     }
 
     // The function is executed in loop when two objects are colliding.
@@ -98,7 +87,7 @@ public class InventoryController : MonoBehaviour
         {
             _ePressMessage.SetActive(true);
 
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKey(KeyCode.E))
             {
                 AddItem(other.gameObject);
             }
@@ -113,7 +102,10 @@ public class InventoryController : MonoBehaviour
 
     private void SelectAnotherItem(int otherItemIndex)
     {
-        transform.GetChild(_currentSelectedItem).gameObject.SetActive(false);
+        if(_currentSelectedItem != -1) {
+            transform.GetChild(_currentSelectedItem).gameObject.SetActive(false);
+        }
+
         transform.GetChild(otherItemIndex).gameObject.SetActive(true);
         _currentSelectedItem = otherItemIndex;
     }
