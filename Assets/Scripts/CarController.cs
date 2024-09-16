@@ -15,8 +15,9 @@ public class CarController : MonoBehaviour
     private Rigidbody rb;
     public List<Wheel> wheels;
     public GameObject steeringWheel;
+    private bool carStarted = false;
     public AudioSource engineSound;
-
+    public AudioSource engineStartSound;
 
     private float currentSpeed;
     private float currentEngineVolume;
@@ -29,11 +30,25 @@ public class CarController : MonoBehaviour
 
     private float gasInput;
     private float turnInput;
-    
+    private KeyCode startEngine = KeyCode.I;
     public float lowVolume = 0.1f;
     public float highVolume = 1f;
     public float minSpeedVolume = 1f;
     public float maxSpeedVolume = 21f;
+
+    void StartEngine()
+    {
+        if (Input.GetKeyDown(startEngine) && !carStarted)
+        {
+            engineStartSound.Play();
+            engineSound.PlayDelayed(1f);
+            carStarted = true;
+        } else if (Input.GetKeyDown(startEngine) && carStarted)
+        {
+            engineSound.Stop();
+            carStarted = false;
+        }
+    }
     void getInputs()
     {
         gasInput = Input.GetAxis("Vertical");
@@ -41,9 +56,13 @@ public class CarController : MonoBehaviour
     }
     void MoveCarForward()
     {
-        foreach (Wheel wheel in wheels)
+        if (!carStarted) return;
+        else
         {
-            wheel.wheelCollider.motorTorque = gasInput * acceleration * speedMultiplier * Time.deltaTime;
+            foreach (Wheel wheel in wheels)
+            {
+                wheel.wheelCollider.motorTorque = gasInput * acceleration * speedMultiplier * Time.deltaTime;
+            }
         }
     }
     void TurnCar()
@@ -133,6 +152,7 @@ public class CarController : MonoBehaviour
     void Update()
     {
         getInputs();
+        StartEngine();
         currentSpeed = rb.velocity.magnitude;
     }
     void FixedUpdate()
