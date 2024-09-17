@@ -19,6 +19,11 @@ public class InteractableCar : MonoBehaviour, IInteractable
         _exitOffset = transform.GetChild(0);
         
     }
+    void Update(){
+        if (Input.GetKeyDown(KeyCode.F)){
+            OnInteract();
+        }
+    }
     private void EnterCar()
     {
         _player.transform.SetParent(GetComponentInParent<Transform>());
