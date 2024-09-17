@@ -25,7 +25,7 @@ public class CarController : MonoBehaviour
 
     public float acceleration = 15f;
     private float deceleration = 20f;
-    private float turnAngle = 10f;
+    private float turnAngle = 15f;
     private float speedMultiplier;
     public float maxSpeed = 20f;
 
@@ -75,10 +75,11 @@ public class CarController : MonoBehaviour
     {
         foreach (Wheel wheel in wheels)
         {
-            if (wheel.isFrontWheel)
+            if (wheel.isFrontWheel && currentSpeed > 1)
             {
-                var _steerAngle = turnInput * turnAngle;
-                wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, _steerAngle, acceleration);
+                var _steerAngle = turnInput * turnAngle * (maxSpeed/currentSpeed);
+                Debug.Log(_steerAngle);
+                wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, _steerAngle/4, acceleration);
             }
         }
     }
@@ -130,7 +131,7 @@ public class CarController : MonoBehaviour
     }
     void AnimateSteeringWheel()
     {
-        steeringWheel.transform.localRotation = Quaternion.Lerp(steeringWheel.transform.localRotation, Quaternion.AngleAxis(turnInput * -turnAngle * 5f, Vector3.forward), Time.deltaTime * 5f);
+        steeringWheel.transform.localRotation = Quaternion.Lerp(steeringWheel.transform.localRotation, Quaternion.AngleAxis(turnInput * -turnAngle * 3f, Vector3.forward), Time.deltaTime * 5f);
     }
     void EngineSound()
     {
