@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CarController : MonoBehaviour
@@ -15,13 +16,14 @@ public class CarController : MonoBehaviour
     private Rigidbody rb;
     public List<Wheel> wheels;
     public GameObject steeringWheel;
+    private bool carStarted = false;
     public AudioSource engineSound;
-
+    public AudioSource engineStartSound;
 
     private float currentSpeed;
     private float currentEngineVolume;
 
-    public float acceleration = 25f;
+    public float acceleration = 15f;
     private float deceleration = 20f;
     private float turnAngle = 10f;
     private float speedMultiplier;
@@ -29,12 +31,28 @@ public class CarController : MonoBehaviour
 
     private float gasInput;
     private float turnInput;
-    
-    public float lowVolume = 0.1f;
+    private KeyCode startEngineKey = KeyCode.I;
+    public float lowVolume = 0.25f;
     public float highVolume = 1f;
-    public float minSpeedVolume = 1f;
+    public float minSpeedVolume = 10f;
     public float maxSpeedVolume = 21f;
+
     public bool IsRunning = false;
+    void StartEngine()
+    {
+        if (Input.GetKeyDown(startEngineKey) && !carStarted)
+        {
+            engineStartSound.Play();
+            engineSound.PlayDelayed(1f);
+            engineSound.volume = 1f;
+            carStarted = true;
+        }
+        else if (Input.GetKeyDown(startEngineKey) && carStarted)
+        {
+            carStarted = false;
+            engineSound.pitch = currentEngineVolume;
+        }
+    }
     void GetInputs()
     {
         gasInput = (IsRunning) ? Input.GetAxis("Vertical") : 0.0f;
@@ -42,10 +60,16 @@ public class CarController : MonoBehaviour
     }
     void MoveCarForward()
     {
-        foreach (Wheel wheel in wheels)
+        if (carStarted)
         {
-            wheel.wheelCollider.motorTorque = gasInput * acceleration * speedMultiplier * Time.deltaTime;
+            {
+                foreach (Wheel wheel in wheels)
+                {
+                    wheel.wheelCollider.motorTorque = gasInput * acceleration * speedMultiplier * Time.deltaTime;
+                }
+            }
         }
+        else return;
     }
     void TurnCar()
     {
@@ -60,25 +84,27 @@ public class CarController : MonoBehaviour
     }
     void Brake()
     {
-        if (gasInput == 0) // if no gas is pressed then slows down the car
-        {
-            foreach (Wheel wheel in wheels)
-            {
-                wheel.wheelCollider.brakeTorque = deceleration * 500 * Time.deltaTime;
-            }
-        }
-        else if (gasInput < 0) // if reverse/break is pressed
+        if (gasInput < 0) // if reverse/break is pressed
         {
             foreach (Wheel wheel in wheels)
             {
                 wheel.wheelCollider.brakeTorque = deceleration * 1000 * Time.deltaTime;
+                wheel.wheelCollider.motorTorque = 0;
             }
         }
-        else // if gas is pressed then it removes the brake
+        else if (gasInput > 0 && carStarted) // if gas is pressed then it removes the brake
         {
             foreach (Wheel wheel in wheels)
             {
                 wheel.wheelCollider.brakeTorque = 0;
+            }
+        }
+        else // if no gas is pressed then slows down the car
+        {
+            foreach (Wheel wheel in wheels)
+            {
+                wheel.wheelCollider.brakeTorque = deceleration * 350 * Time.deltaTime;
+                wheel.wheelCollider.motorTorque = 0;
             }
         }
     }
@@ -108,18 +134,17 @@ public class CarController : MonoBehaviour
     }
     void EngineSound()
     {
-        currentEngineVolume = rb.velocity.magnitude / 50f;
         if (currentSpeed < minSpeedVolume)
         {
-            engineSound.pitch = lowVolume;
+            engineSound.pitch = 0.25f;
         }
         if (currentSpeed > minSpeedVolume && currentSpeed < maxSpeedVolume)
         {
-            engineSound.pitch = lowVolume + currentEngineVolume;
+            engineSound.pitch = 0.25f + currentEngineVolume;
         }
-        if (currentSpeed > maxSpeedVolume)
+        if (engineSound.pitch <= 0.25f && !carStarted)
         {
-            engineSound.pitch = highVolume;
+            engineSound.volume = 0;
         }
         
         engineSound.mute = !IsRunning;
@@ -136,7 +161,9 @@ public class CarController : MonoBehaviour
     void Update()
     {
         GetInputs();
+        StartEngine();
         currentSpeed = rb.velocity.magnitude;
+        currentEngineVolume = rb.velocity.magnitude / 50f;
     }
     void FixedUpdate()
     {
