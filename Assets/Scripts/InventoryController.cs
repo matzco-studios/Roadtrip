@@ -1,9 +1,16 @@
+using System;
 using UnityEngine;
 
 public class InventoryController : MonoBehaviour
 {
+    public enum SelectItem
+    {
+        None = -1, First, Second, Third
+    }
+
     [SerializeField] private GameObject _ePressMessage;
-    [SerializeField] private int _currentSelectedItem = -1;
+    [SerializeField] private SelectItem _currentSelectedItem = SelectItem.None;
+    private float _scrollWheelInput;
 
     /// <summary>
     /// Function to drop the current selected item.
@@ -11,15 +18,15 @@ public class InventoryController : MonoBehaviour
     /// <param name="replace">True mean he is adding an item and dropping the current one because he exceeded the limit, false mean he is directly dropping the current item.</param>
     void DropCurrentItem(bool replace = false)
     {
-        if (_currentSelectedItem == -1) return;
+        if (_currentSelectedItem == SelectItem.None) return;
 
-        var itemToDrop = transform.GetChild(_currentSelectedItem).transform;
+        var itemToDrop = transform.GetChild((int)_currentSelectedItem).transform;
         itemToDrop.GetComponent<Rigidbody>().isKinematic = false;
         itemToDrop.GetComponent<MeshCollider>().enabled = true;
         itemToDrop.transform.SetParent(null);
         print(itemToDrop.name);
 
-        if (!replace) _currentSelectedItem = -1;
+        if (!replace) _currentSelectedItem = SelectItem.None;
     }
 
     void AddItem(GameObject nearItem)
@@ -35,7 +42,7 @@ public class InventoryController : MonoBehaviour
         if (transform.childCount == 4)
         {
             DropCurrentItem(replace: true);
-            nearItem.transform.SetSiblingIndex(_currentSelectedItem);
+            nearItem.transform.SetSiblingIndex((int)_currentSelectedItem);
         }
 
         else if (transform.childCount > 1)
@@ -44,7 +51,7 @@ public class InventoryController : MonoBehaviour
         }
         else
         {
-            _currentSelectedItem = 0;
+            _currentSelectedItem = SelectItem.First;
         }
 
         // Calling OnTriggerExit manually, because it does not activate when we get the item, because we do not leave the trigger zone, 
@@ -57,13 +64,17 @@ public class InventoryController : MonoBehaviour
     /// </summary>
     void ScrollWheelChange()
     {
-        if (Input.mouseScrollDelta.y > 0)
+        if (transform.childCount == 0) return;
+
+        _scrollWheelInput = Input.GetAxisRaw("Mouse ScrollWheel");
+
+        if (_scrollWheelInput > 0)
         {
-            SelectAnotherItem(_currentSelectedItem < 2 ? _currentSelectedItem + 1 : 0);
+            SelectAnotherItem((int)_currentSelectedItem == transform.childCount - 1 ? 0 : _currentSelectedItem + 1);
         }
-        else if (Input.mouseScrollDelta.y < 0)
+        else if (_scrollWheelInput < 0)
         {
-            SelectAnotherItem(_currentSelectedItem > 0 ? _currentSelectedItem - 1 : 2);
+            SelectAnotherItem(_currentSelectedItem <= 0 ? (SelectItem) transform.childCount - 1 : _currentSelectedItem - 1);
         }
     }
 
@@ -74,7 +85,7 @@ public class InventoryController : MonoBehaviour
             DropCurrentItem();
         }
 
-        //ScrollWheelChange();
+        ScrollWheelChange();
         ChangeCurrentItem();
     }
 
@@ -100,13 +111,14 @@ public class InventoryController : MonoBehaviour
         _ePressMessage.SetActive(false);
     }
 
-    private void SelectAnotherItem(int otherItemIndex)
+    private void SelectAnotherItem(SelectItem otherItemIndex)
     {
-        if(_currentSelectedItem != -1) {
-            transform.GetChild(_currentSelectedItem).gameObject.SetActive(false);
+        if (_currentSelectedItem != SelectItem.None)
+        {
+            transform.GetChild((int)_currentSelectedItem).gameObject.SetActive(false);
         }
 
-        transform.GetChild(otherItemIndex).gameObject.SetActive(true);
+        transform.GetChild((int)otherItemIndex).gameObject.SetActive(true);
         _currentSelectedItem = otherItemIndex;
     }
 
@@ -114,17 +126,17 @@ public class InventoryController : MonoBehaviour
     {
         var totalItems = transform.childCount;
 
-        if (Input.GetKey(KeyCode.Alpha1) && _currentSelectedItem != 0 && totalItems >= 1)
+        if (Input.GetKey(KeyCode.Alpha1) && _currentSelectedItem != SelectItem.First && totalItems >= 1)
         {
-            SelectAnotherItem(0);
+            SelectAnotherItem(SelectItem.First);
         }
-        else if (Input.GetKey(KeyCode.Alpha2) && _currentSelectedItem != 1 && totalItems >= 2)
+        else if (Input.GetKey(KeyCode.Alpha2) && _currentSelectedItem != SelectItem.Second && totalItems >= 2)
         {
-            SelectAnotherItem(1);
+            SelectAnotherItem(SelectItem.Second);
         }
-        else if (Input.GetKey(KeyCode.Alpha3) && _currentSelectedItem != 2 && totalItems >= 3)
+        else if (Input.GetKey(KeyCode.Alpha3) && _currentSelectedItem != SelectItem.Third && totalItems >= 3)
         {
-            SelectAnotherItem(2);
+            SelectAnotherItem(SelectItem.Third);
         }
     }
 }
