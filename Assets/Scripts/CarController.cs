@@ -27,6 +27,7 @@ public class CarController : MonoBehaviour
     private float deceleration = 20f;
     private float turnAngle = 15f;
     private float speedMultiplier;
+    private float carWheelMaxAngle = 150f;
     public float maxSpeed = 20f;
 
     private float gasInput;
@@ -75,13 +76,16 @@ public class CarController : MonoBehaviour
     }
     void TurnCar()
     {
-        foreach (Wheel wheel in wheels)
+        if (currentSpeed > 0.1f)
         {
-            if (wheel.isFrontWheel && currentSpeed > 1)
+            float _steerAngle = turnInput * turnAngle * (maxSpeed/currentSpeed);
+            _steerAngle = Mathf.Clamp(_steerAngle, -carWheelMaxAngle, carWheelMaxAngle);
+            foreach (Wheel wheel in wheels)
             {
-                var _steerAngle = turnInput * turnAngle * (maxSpeed/currentSpeed);
-                Debug.Log(_steerAngle);
-                wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, _steerAngle/4, acceleration);
+                if (wheel.isFrontWheel)
+                {
+                    wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, _steerAngle/4, acceleration);
+                }
             }
         }
     }
