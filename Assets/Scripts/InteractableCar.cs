@@ -15,7 +15,7 @@ public class InteractableCar : MonoBehaviour, IInteractable
     {
         _player = GameObject.FindGameObjectWithTag("Player");
         _car = transform.parent.gameObject;
-        _car.GetComponent<CarController>().IsRunning = false;
+        _car.GetComponent<CarController>().IsPlayerInside = false;
         _exitOffset = transform.GetChild(0);
         
     }
@@ -30,7 +30,7 @@ public class InteractableCar : MonoBehaviour, IInteractable
         _player.transform.localPosition = Vector3.zero;
         _player.GetComponent<PlayerController>().enabled = false;
         _player.GetComponent<CharacterController>().enabled = false;
-        _car.GetComponent<CarController>().IsRunning = true;
+        _car.GetComponent<CarController>().IsPlayerInside = true;
         _isInCar = true;
     }
     private void ExitCar()
@@ -43,7 +43,7 @@ public class InteractableCar : MonoBehaviour, IInteractable
             _player.transform.eulerAngles = angle;
             _player.GetComponent<PlayerController>().enabled = true;
             _player.GetComponent<CharacterController>().enabled = true;
-            _car.GetComponent<CarController>().IsRunning = false;
+            _car.GetComponent<CarController>().IsPlayerInside = false;
             _isInCar = false;
         }
     }

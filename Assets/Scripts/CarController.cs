@@ -16,7 +16,7 @@ public class CarController : MonoBehaviour
     private Rigidbody rb;
     public List<Wheel> wheels;
     public GameObject steeringWheel;
-    private bool carStarted = false;
+    private bool IsRunning = false;
     public AudioSource engineSound;
     public AudioSource engineStartSound;
 
@@ -37,30 +37,32 @@ public class CarController : MonoBehaviour
     public float minSpeedVolume = 10f;
     public float maxSpeedVolume = 21f;
 
-    public bool IsRunning = false;
+    public bool IsPlayerInside = false;
     void StartEngine()
     {
-        if (Input.GetKeyDown(startEngineKey) && !carStarted)
+        if (Input.GetKeyDown(startEngineKey) && IsPlayerInside)
         {
-            engineStartSound.Play();
-            engineSound.PlayDelayed(1f);
-            engineSound.volume = 1f;
-            carStarted = true;
-        }
-        else if (Input.GetKeyDown(startEngineKey) && carStarted)
-        {
-            carStarted = false;
-            engineSound.pitch = currentEngineVolume;
+            if (!IsRunning)
+            {
+                engineStartSound.Play();
+                engineSound.PlayDelayed(1f);
+                engineSound.volume = 1f;
+                IsRunning = true;
+            }else if (IsRunning)
+            {
+                IsRunning = false;
+                engineSound.pitch = currentEngineVolume;
+            }
         }
     }
     void GetInputs()
     {
-        gasInput = (IsRunning) ? Input.GetAxis("Vertical") : 0.0f;
-        turnInput =(IsRunning) ? Input.GetAxis("Horizontal") : 0.0f;
+        gasInput = (IsPlayerInside) ? Input.GetAxis("Vertical") : 0.0f;
+        turnInput =(IsPlayerInside) ? Input.GetAxis("Horizontal") : 0.0f;
     }
     void MoveCarForward()
     {
-        if (carStarted)
+        if (IsRunning)
         {
             {
                 foreach (Wheel wheel in wheels)
@@ -93,7 +95,7 @@ public class CarController : MonoBehaviour
                 wheel.wheelCollider.motorTorque = 0;
             }
         }
-        else if (gasInput > 0 && carStarted) // if gas is pressed then it removes the brake
+        else if (gasInput > 0 && IsRunning) // if gas is pressed then it removes the brake
         {
             foreach (Wheel wheel in wheels)
             {
@@ -143,12 +145,12 @@ public class CarController : MonoBehaviour
         {
             engineSound.pitch = 0.25f + currentEngineVolume;
         }
-        if (engineSound.pitch <= 0.25f && !carStarted)
+        if (engineSound.pitch <= 0.25f && !IsRunning)
         {
             engineSound.volume = 0;
         }
         
-        engineSound.mute = !IsRunning;
+        engineSound.mute = !IsPlayerInside && !IsRunning;
     }
     // Start is called before the first frame update
     void Start()
