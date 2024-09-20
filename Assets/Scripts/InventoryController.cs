@@ -33,7 +33,6 @@ public class InventoryController : MonoBehaviour
         nearItem.transform.SetParent(transform);
         nearItem.GetComponent<Rigidbody>().isKinematic = true;
         nearItem.GetComponent<Collider>().enabled = false;
-        nearItem.transform.localScale = Vector3.one;
 
         // To do give a position of (0, 0, 0) to let the child follow the parent position and applied the rotation of the parent.
         nearItem.transform.SetLocalPositionAndRotation(Vector3.zero, transform.localRotation);
@@ -44,17 +43,14 @@ public class InventoryController : MonoBehaviour
             nearItem.transform.SetSiblingIndex((int)_currentSelectedItem);
         }
 
-        else if(_currentSelectedItem == SelectItem.None) {
-            _currentSelectedItem = (SelectItem) nearItem.transform.GetSiblingIndex();
-        }
-
-        else if (transform.childCount > 1)
-        {
-            nearItem.SetActive(false);
-        }
         else
         {
-            _currentSelectedItem = SelectItem.First;
+            if (_currentSelectedItem != SelectItem.None)
+            {
+                transform.GetChild((int)_currentSelectedItem).gameObject.SetActive(false);
+            }
+
+            _currentSelectedItem = (SelectItem)nearItem.transform.GetSiblingIndex();
         }
 
         // Calling OnTriggerExit manually, because it does not activate when we get the item, because we do not leave the trigger zone, 
@@ -77,7 +73,7 @@ public class InventoryController : MonoBehaviour
         }
         else if (_scrollWheelInput < 0)
         {
-            SelectAnotherItem(_currentSelectedItem <= 0 ? (SelectItem) transform.childCount - 1 : _currentSelectedItem - 1);
+            SelectAnotherItem(_currentSelectedItem <= 0 ? (SelectItem)transform.childCount - 1 : _currentSelectedItem - 1);
         }
     }
 
