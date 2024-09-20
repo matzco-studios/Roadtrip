@@ -44,6 +44,10 @@ public class InventoryController : MonoBehaviour
             nearItem.transform.SetSiblingIndex((int)_currentSelectedItem);
         }
 
+        else if(_currentSelectedItem == SelectItem.None) {
+            _currentSelectedItem = (SelectItem) nearItem.transform.GetSiblingIndex();
+        }
+
         else if (transform.childCount > 1)
         {
             nearItem.SetActive(false);
