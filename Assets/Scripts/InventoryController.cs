@@ -28,6 +28,10 @@ public class InventoryController : MonoBehaviour
         if (!replace) _currentSelectedItem = SelectItem.None;
     }
 
+    /// <summary>
+    /// Function to add an item in the itemsContainer.
+    /// </summary>
+    /// <param name="nearItem">The item that the is in the Box Collider Trigger of the itemsContainer.</param>
     void AddItem(GameObject nearItem)
     {
         nearItem.transform.SetParent(transform);
