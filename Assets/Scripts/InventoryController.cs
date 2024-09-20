@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class InventoryController : MonoBehaviour
@@ -8,8 +7,8 @@ public class InventoryController : MonoBehaviour
         None = -1, First, Second, Third
     }
 
-    [SerializeField] private GameObject _ePressMessage;
-    [SerializeField] private SelectItem _currentSelectedItem = SelectItem.None;
+    [SerializeField] private ActionMessageController _message;
+    private SelectItem _currentSelectedItem = SelectItem.None;
     private float _scrollWheelInput;
 
     /// <summary>
@@ -96,7 +95,7 @@ public class InventoryController : MonoBehaviour
 
         if (other.CompareTag("GrabbableItem"))
         {
-            _ePressMessage.SetActive(true);
+            _message.GrapItem(other.name);
 
             if (Input.GetKey(KeyCode.E))
             {
@@ -108,7 +107,7 @@ public class InventoryController : MonoBehaviour
     void OnTriggerExit()
     {
         print("Exited Trigger");
-        _ePressMessage.SetActive(false);
+        _message.Disable();
     }
 
     private void SelectAnotherItem(SelectItem otherItemIndex)
