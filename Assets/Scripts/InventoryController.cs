@@ -103,7 +103,7 @@ public class InventoryController : MonoBehaviour
 
         if (other.CompareTag("GrabbableItem"))
         {
-            _message.GrapItem(other.name);
+            _message.GrabItem(other.name);
 
             if (Input.GetKey(KeyCode.E))
             {
