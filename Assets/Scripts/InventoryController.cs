@@ -38,8 +38,12 @@ public class InventoryController : MonoBehaviour
         nearItem.GetComponent<Rigidbody>().isKinematic = true;
         nearItem.GetComponent<Collider>().enabled = false;
 
-        // To do give a position of (0, 0, 0) to let the child follow the parent position and applied the rotation of the parent.
-        nearItem.transform.SetLocalPositionAndRotation(Vector3.zero, transform.localRotation);
+        var nearItemScript = nearItem.GetComponent<GrabbableItem>();
+
+        nearItem.transform.SetLocalPositionAndRotation(
+            Vector3.zero,
+            nearItemScript ? nearItemScript.Rotation : transform.localRotation
+        );
 
         if (transform.childCount == 4)
         {
