@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class InventoryController : MonoBehaviour
@@ -8,8 +7,8 @@ public class InventoryController : MonoBehaviour
         None = -1, First, Second, Third
     }
 
-    [SerializeField] private GameObject _ePressMessage;
-    [SerializeField] private SelectItem _currentSelectedItem = SelectItem.None;
+    [SerializeField] private ActionMessageController _message;
+    private SelectItem _currentSelectedItem = SelectItem.None;
     private float _scrollWheelInput;
 
     /// <summary>
@@ -29,12 +28,15 @@ public class InventoryController : MonoBehaviour
         if (!replace) _currentSelectedItem = SelectItem.None;
     }
 
+    /// <summary>
+    /// Function to add an item in the itemsContainer.
+    /// </summary>
+    /// <param name="nearItem">The item that the is in the Box Collider Trigger of the itemsContainer.</param>
     void AddItem(GameObject nearItem)
     {
         nearItem.transform.SetParent(transform);
         nearItem.GetComponent<Rigidbody>().isKinematic = true;
         nearItem.GetComponent<Collider>().enabled = false;
-        nearItem.transform.localScale = Vector3.one;
 
         // To do give a position of (0, 0, 0) to let the child follow the parent position and applied the rotation of the parent.
         nearItem.transform.SetLocalPositionAndRotation(Vector3.zero, transform.localRotation);
@@ -45,13 +47,14 @@ public class InventoryController : MonoBehaviour
             nearItem.transform.SetSiblingIndex((int)_currentSelectedItem);
         }
 
-        else if (transform.childCount > 1)
-        {
-            nearItem.SetActive(false);
-        }
         else
         {
-            _currentSelectedItem = SelectItem.First;
+            if (_currentSelectedItem != SelectItem.None)
+            {
+                transform.GetChild((int)_currentSelectedItem).gameObject.SetActive(false);
+            }
+
+            _currentSelectedItem = (SelectItem)nearItem.transform.GetSiblingIndex();
         }
 
         // Calling OnTriggerExit manually, because it does not activate when we get the item, because we do not leave the trigger zone, 
@@ -74,7 +77,7 @@ public class InventoryController : MonoBehaviour
         }
         else if (_scrollWheelInput < 0)
         {
-            SelectAnotherItem(_currentSelectedItem <= 0 ? (SelectItem) transform.childCount - 1 : _currentSelectedItem - 1);
+            SelectAnotherItem(_currentSelectedItem <= 0 ? (SelectItem)transform.childCount - 1 : _currentSelectedItem - 1);
         }
     }
 
@@ -96,7 +99,7 @@ public class InventoryController : MonoBehaviour
 
         if (other.CompareTag("GrabbableItem"))
         {
-            _ePressMessage.SetActive(true);
+            _message.GrapItem(other.name);
 
             if (Input.GetKey(KeyCode.E))
             {
@@ -108,7 +111,7 @@ public class InventoryController : MonoBehaviour
     void OnTriggerExit()
     {
         print("Exited Trigger");
-        _ePressMessage.SetActive(false);
+        _message.Disable();
     }
 
     private void SelectAnotherItem(SelectItem otherItemIndex)
