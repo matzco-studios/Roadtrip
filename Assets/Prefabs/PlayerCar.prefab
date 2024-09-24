@@ -183,6 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1784485291381264876}
   - component: {fileID: 7209400511645556222}
+  - component: {fileID: 8927496059500866518}
   m_Layer: 6
   m_Name: FrontL Collider
   m_TagString: WheelOfCar
@@ -244,6 +245,27 @@ WheelCollider:
   m_LayerOverridePriority: 0
   m_Enabled: 1
   m_ProvidesContacts: 0
+--- !u!65 &8927496059500866518
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3744051262977394099}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: -0.1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5266323888378670650
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,6 +276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8316700415229128765}
   - component: {fileID: 2670438239107674315}
+  - component: {fileID: 736666982596034877}
   m_Layer: 6
   m_Name: BackL Collider
   m_TagString: WheelOfCar
@@ -315,6 +338,27 @@ WheelCollider:
   m_LayerOverridePriority: 0
   m_Enabled: 1
   m_ProvidesContacts: 0
+--- !u!65 &736666982596034877
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5266323888378670650}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: -0.1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6156396682527713373
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,6 +400,7 @@ GameObject:
   m_Component:
   - component: {fileID: 960827917888763883}
   - component: {fileID: 409388491892210143}
+  - component: {fileID: 574558193269978478}
   m_Layer: 6
   m_Name: FrontR Collider
   m_TagString: WheelOfCar
@@ -417,6 +462,27 @@ WheelCollider:
   m_LayerOverridePriority: 0
   m_Enabled: 1
   m_ProvidesContacts: 0
+--- !u!65 &574558193269978478
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7768673793560862318}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8862341909297601601
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,6 +493,7 @@ GameObject:
   m_Component:
   - component: {fileID: 454453447794802394}
   - component: {fileID: 5928978759283717977}
+  - component: {fileID: 1073424914858530866}
   m_Layer: 6
   m_Name: BackR Collider
   m_TagString: WheelOfCar
@@ -488,6 +555,27 @@ WheelCollider:
   m_LayerOverridePriority: 0
   m_Enabled: 1
   m_ProvidesContacts: 0
+--- !u!65 &1073424914858530866
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8862341909297601601}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2150096279506093533
 PrefabInstance:
   m_ObjectHideFlags: 0
