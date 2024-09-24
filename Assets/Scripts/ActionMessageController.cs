@@ -21,10 +21,10 @@ public class ActionMessageController : MonoBehaviour
     }
 
     /// <summary>
-    /// Function used by inventory controller to tell the user if he want to grap an item.
+    /// Function used by inventory controller to tell the user if he want to grab an item.
     /// </summary>
     /// <param name="itemName">The name of the item that the user can take.</param>
-    public void GrapItem(string itemName) {
+    public void GrabItem(string itemName) {
         _key.text = "E";
         _action.text = "to grab";
         _itemName.text = itemName;
