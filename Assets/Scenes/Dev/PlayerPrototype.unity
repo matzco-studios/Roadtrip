@@ -2040,9 +2040,69 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2526588004149520181, guid: ca32dd0bcce89174d92abb8d0ee95c80, type: 3}
+      propertyPath: m_Parameters.alignment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526588004149520181, guid: ca32dd0bcce89174d92abb8d0ee95c80, type: 3}
+      propertyPath: m_Parameters.textureMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526588004149520181, guid: ca32dd0bcce89174d92abb8d0ee95c80, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 2526588004149520181, guid: ca32dd0bcce89174d92abb8d0ee95c80, type: 3}
+      propertyPath: m_Positions.Array.data[1].x
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526588004149520181, guid: ca32dd0bcce89174d92abb8d0ee95c80, type: 3}
+      propertyPath: m_Parameters.numCornerVertices
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526588004149520181, guid: ca32dd0bcce89174d92abb8d0ee95c80, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526588004149520181, guid: ca32dd0bcce89174d92abb8d0ee95c80, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913322929265011616, guid: ca32dd0bcce89174d92abb8d0ee95c80, type: 3}
+      propertyPath: m_Size.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913322929265011616, guid: ca32dd0bcce89174d92abb8d0ee95c80, type: 3}
+      propertyPath: m_Size.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955116966636457639, guid: ca32dd0bcce89174d92abb8d0ee95c80, type: 3}
+      propertyPath: m_AngularDrag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955116966636457639, guid: ca32dd0bcce89174d92abb8d0ee95c80, type: 3}
+      propertyPath: m_ImplicitCom
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955116966636457639, guid: ca32dd0bcce89174d92abb8d0ee95c80, type: 3}
+      propertyPath: m_CenterOfMass.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6164636627974796323, guid: ca32dd0bcce89174d92abb8d0ee95c80, type: 3}
+      propertyPath: m_Size.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6164636627974796323, guid: ca32dd0bcce89174d92abb8d0ee95c80, type: 3}
+      propertyPath: m_Center.y
+      value: -0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 6593603207547426097, guid: ca32dd0bcce89174d92abb8d0ee95c80, type: 3}
       propertyPath: m_Name
       value: AirPump
+      objectReference: {fileID: 0}
+    - target: {fileID: 7874686022997476786, guid: ca32dd0bcce89174d92abb8d0ee95c80, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
