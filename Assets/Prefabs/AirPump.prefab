@@ -127,7 +127,7 @@ LineRenderer:
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
-    alignment: 1
+    alignment: 0
     textureMode: 0
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
@@ -202,7 +202,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6593603207547426097}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: -1, z: 0}

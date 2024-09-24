@@ -20,9 +20,13 @@ public class InventoryController : MonoBehaviour
         if (_currentSelectedItem == SelectItem.None) return;
 
         var itemToDrop = transform.GetChild((int)_currentSelectedItem).transform;
-        itemToDrop.GetComponent<Rigidbody>().isKinematic = false;
+        var body = itemToDrop.GetComponent<Rigidbody>();
+        body.isKinematic = false;
         itemToDrop.GetComponent<Collider>().enabled = true;
         itemToDrop.transform.SetParent(null);
+        //(move it forward a bit to avoid collisions with player) itemToDrop.transform.Translate(transform.forward*1f);
+        body.AddForce(transform.forward*100 * body.mass);
+        body.AddForce(transform.up*25 * body.mass);
         //print(itemToDrop.name);
 
         if (!replace) _currentSelectedItem = SelectItem.None;
