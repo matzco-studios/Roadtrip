@@ -23,7 +23,7 @@ public class InventoryController : MonoBehaviour
         itemToDrop.GetComponent<Rigidbody>().isKinematic = false;
         itemToDrop.GetComponent<Collider>().enabled = true;
         itemToDrop.transform.SetParent(null);
-        print(itemToDrop.name);
+        //print(itemToDrop.name);
 
         if (!replace) _currentSelectedItem = SelectItem.None;
     }
@@ -99,7 +99,7 @@ public class InventoryController : MonoBehaviour
     // The function is executed in loop when two objects are colliding.
     void OnTriggerStay(Collider other)
     {
-        print(other.name);
+        //print(other.name);
 
         if (other.CompareTag("GrabbableItem"))
         {
@@ -114,7 +114,7 @@ public class InventoryController : MonoBehaviour
 
     void OnTriggerExit()
     {
-        print("Exited Trigger");
+        //print("Exited Trigger");
         _message.Disable();
     }
 
