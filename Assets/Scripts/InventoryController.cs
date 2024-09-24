@@ -20,10 +20,14 @@ public class InventoryController : MonoBehaviour
         if (_currentSelectedItem == SelectItem.None) return;
 
         var itemToDrop = transform.GetChild((int)_currentSelectedItem).transform;
-        itemToDrop.GetComponent<Rigidbody>().isKinematic = false;
+        var body = itemToDrop.GetComponent<Rigidbody>();
+        body.isKinematic = false;
         itemToDrop.GetComponent<Collider>().enabled = true;
         itemToDrop.transform.SetParent(null);
-        print(itemToDrop.name);
+        //(move it forward a bit to avoid collisions with player) itemToDrop.transform.Translate(transform.forward*1f);
+        body.AddForce(transform.forward*100 * body.mass);
+        body.AddForce(transform.up*25 * body.mass);
+        //print(itemToDrop.name);
 
         if (!replace) _currentSelectedItem = SelectItem.None;
     }
@@ -38,8 +42,12 @@ public class InventoryController : MonoBehaviour
         nearItem.GetComponent<Rigidbody>().isKinematic = true;
         nearItem.GetComponent<Collider>().enabled = false;
 
-        // To do give a position of (0, 0, 0) to let the child follow the parent position and applied the rotation of the parent.
-        nearItem.transform.SetLocalPositionAndRotation(Vector3.zero, transform.localRotation);
+        var nearItemScript = nearItem.GetComponent<GrabbableItem>();
+
+        nearItem.transform.SetLocalPositionAndRotation(
+            Vector3.zero,
+            nearItemScript ? nearItemScript.Rotation : transform.localRotation
+        );
 
         if (transform.childCount == 4)
         {
@@ -95,11 +103,11 @@ public class InventoryController : MonoBehaviour
     // The function is executed in loop when two objects are colliding.
     void OnTriggerStay(Collider other)
     {
-        print(other.name);
+        //print(other.name);
 
         if (other.CompareTag("GrabbableItem"))
         {
-            _message.GrapItem(other.name);
+            _message.GrabItem(other.name);
 
             if (Input.GetKey(KeyCode.E))
             {
@@ -110,7 +118,7 @@ public class InventoryController : MonoBehaviour
 
     void OnTriggerExit()
     {
-        print("Exited Trigger");
+        //print("Exited Trigger");
         _message.Disable();
     }
 
