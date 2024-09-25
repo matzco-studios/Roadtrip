@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GrabbableItem
   - InteractableItem
+  - WheelOfCar
   layers:
   - Default
   - TransparentFX
@@ -14,6 +15,7 @@ TagManager:
   - Water
   - UI
   - WatchedPostProcess
+  - WheelOfCar
   - 
   - 
   - 
