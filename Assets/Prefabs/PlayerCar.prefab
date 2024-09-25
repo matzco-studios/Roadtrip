@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 1784485291381264876}
   - component: {fileID: 7209400511645556222}
   - component: {fileID: 8927496059500866518}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: FrontL Collider
   m_TagString: WheelOfCar
   m_Icon: {fileID: 0}
@@ -277,7 +277,7 @@ GameObject:
   - component: {fileID: 8316700415229128765}
   - component: {fileID: 2670438239107674315}
   - component: {fileID: 736666982596034877}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: BackL Collider
   m_TagString: WheelOfCar
   m_Icon: {fileID: 0}
@@ -401,7 +401,7 @@ GameObject:
   - component: {fileID: 960827917888763883}
   - component: {fileID: 409388491892210143}
   - component: {fileID: 574558193269978478}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: FrontR Collider
   m_TagString: WheelOfCar
   m_Icon: {fileID: 0}
@@ -494,7 +494,7 @@ GameObject:
   - component: {fileID: 454453447794802394}
   - component: {fileID: 5928978759283717977}
   - component: {fileID: 1073424914858530866}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: BackR Collider
   m_TagString: WheelOfCar
   m_Icon: {fileID: 0}
