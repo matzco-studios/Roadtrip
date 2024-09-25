@@ -9,7 +9,8 @@ public class InteractableCar : MonoBehaviour, IInteractable
     private GameObject _car;
     private Transform _exitOffset;
     private bool _isInCar;
-    public string InteractionInfo { get {return "Get in car";} }
+    private bool _canExitCar = false;
+    public string InteractionInfo { get { return "Get in car"; } }
 
     void Start()
     {
@@ -17,34 +18,67 @@ public class InteractableCar : MonoBehaviour, IInteractable
         _car = transform.parent.gameObject;
         _car.GetComponent<CarController>().IsPlayerInside = false;
         _exitOffset = transform.GetChild(0);
-        
+        _isInCar = false;
+
     }
-    void Update(){
-        if (Input.GetKeyDown(KeyCode.F)){
+    void Update()
+    {
+        if (_isInCar && _canExitCar && Input.GetKeyDown(KeyCode.F))
+        {
             OnInteract();
         }
     }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            if (Input.GetKeyDown(KeyCode.F) && !_isInCar && !_canExitCar)
+            {
+                // EnterCar();
+                OnInteract();
+            }
+        }
+    }
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player") && _isInCar)
+        {
+            StartCoroutine(DelayExit(true));
+        }
+        else if (other.gameObject.CompareTag("Player") && !_isInCar)
+        {
+            _canExitCar = false;
+        }
+    }
+    private IEnumerator DelayExit(bool canExit) {
+        yield return new WaitForSeconds(1);
+        if (canExit) _canExitCar = true;
+        else _canExitCar = false;
+    }
     private void EnterCar()
     {
+        _isInCar = true;
         _player.transform.SetParent(GetComponentInParent<Transform>());
         _player.transform.localPosition = Vector3.zero;
         _player.GetComponent<PlayerController>().enabled = false;
         _player.GetComponent<CharacterController>().enabled = false;
         _car.GetComponent<CarController>().IsPlayerInside = true;
-        _isInCar = true;
     }
     private void ExitCar()
     {
-        if (_car.GetComponent<Rigidbody>().velocity.magnitude<0.1f)
+        if (_car.GetComponent<Rigidbody>().velocity.magnitude < 0.1f)
         {
+            _isInCar = false;
             _player.transform.position = _exitOffset.transform.position;
             _player.transform.SetParent(null);
-            Vector3 angle = new(0, _car.transform.eulerAngles.y+10, 0);
+            Vector3 angle = new(0, _car.transform.eulerAngles.y + 10, 0);
             _player.transform.eulerAngles = angle;
             _player.GetComponent<PlayerController>().enabled = true;
             _player.GetComponent<CharacterController>().enabled = true;
             _car.GetComponent<CarController>().IsPlayerInside = false;
-            _isInCar = false;
+            StartCoroutine(DelayExit(false));
+
         }
     }
     public void OnInteract()
