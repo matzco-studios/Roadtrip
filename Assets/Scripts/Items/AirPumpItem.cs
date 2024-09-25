@@ -32,6 +32,7 @@ public class AirPumpItem : GrabbableItem
     {
         _lineRenderer.SetPosition(0, _lineRenderer.transform.position);
         GameObject oth = IsConnected ? IsConnected : _lineRenderer.gameObject;
+        oth = (_lineRenderer.transform.position.y<oth.transform.position.y) ? oth : _lineRenderer.gameObject;
         _lineRenderer.SetPosition(1, oth.transform.position);
     }
 
