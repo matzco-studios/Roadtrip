@@ -1009,10 +1009,6 @@ PrefabInstance:
       propertyPath: _message
       value: 
       objectReference: {fileID: 1123741966}
-    - target: {fileID: 1076367530903735901, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
-      propertyPath: _ePressMessage
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1513993545894037140, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.2
