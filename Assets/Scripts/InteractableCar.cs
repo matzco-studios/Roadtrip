@@ -9,7 +9,6 @@ public class InteractableCar : MonoBehaviour, IInteractable
     private GameObject _car;
     private Transform _exitOffset;
     private bool _isInCar;
-    private bool _canExitCar = false;
     public string InteractionInfo { get { return "Get in car"; } }
 
     void Start()
@@ -19,42 +18,13 @@ public class InteractableCar : MonoBehaviour, IInteractable
         _car.GetComponent<CarController>().IsPlayerInside = false;
         _exitOffset = transform.GetChild(0);
         _isInCar = false;
-
     }
     void Update()
     {
-        if (_isInCar && _canExitCar && Input.GetKeyDown(KeyCode.F))
+        if (_isInCar && Input.GetKeyDown(KeyCode.LeftControl))
         {
-            OnInteract();
+            ExitCar();
         }
-    }
-
-    void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            if (Input.GetKeyDown(KeyCode.F) && !_isInCar && !_canExitCar)
-            {
-                // EnterCar();
-                OnInteract();
-            }
-        }
-    }
-    void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player") && _isInCar)
-        {
-            StartCoroutine(DelayExit(true));
-        }
-        else if (other.gameObject.CompareTag("Player") && !_isInCar)
-        {
-            _canExitCar = false;
-        }
-    }
-    private IEnumerator DelayExit(bool canExit) {
-        yield return new WaitForSeconds(1);
-        if (canExit) _canExitCar = true;
-        else _canExitCar = false;
     }
     private void EnterCar()
     {
@@ -77,15 +47,11 @@ public class InteractableCar : MonoBehaviour, IInteractable
             _player.GetComponent<PlayerController>().enabled = true;
             _player.GetComponent<CharacterController>().enabled = true;
             _car.GetComponent<CarController>().IsPlayerInside = false;
-            StartCoroutine(DelayExit(false));
-
         }
     }
     public void OnInteract()
     {
-        if (_isInCar)
-            ExitCar();
-        else
-            EnterCar();
+        if (_isInCar) ExitCar();
+        else if (!_isInCar) EnterCar();
     }
 }
