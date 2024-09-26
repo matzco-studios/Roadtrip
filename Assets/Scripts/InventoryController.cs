@@ -103,8 +103,6 @@ public class InventoryController : MonoBehaviour
     // The function is executed in loop when two objects are colliding.
     void OnTriggerStay(Collider other)
     {
-        //print(other.name);
-
         if (other.CompareTag("GrabbableItem"))
         {
             _message.GrabItem(other.gameObject);
