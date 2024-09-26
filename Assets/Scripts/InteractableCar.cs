@@ -8,6 +8,7 @@ public class InteractableCar : MonoBehaviour, IInteractable
     private GameObject _player;
     private GameObject _car;
     private Transform _exitOffset;
+    private Transform _seatPosition;
     private bool _isInCar;
     public string InteractionInfo { get { return "Get in car"; } }
 
@@ -17,19 +18,14 @@ public class InteractableCar : MonoBehaviour, IInteractable
         _car = transform.parent.gameObject;
         _car.GetComponent<CarController>().IsPlayerInside = false;
         _exitOffset = transform.GetChild(0);
+        _seatPosition = transform.GetChild(1);
+        _seatPosition.SetParent(null);
         _isInCar = false;
-    }
-    void Update()
-    {
-        if (_isInCar && Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            ExitCar();
-        }
     }
     private void EnterCar()
     {
         _isInCar = true;
-        _player.transform.SetParent(GetComponentInParent<Transform>());
+        _player.transform.SetParent(_seatPosition);
         _player.transform.localPosition = Vector3.zero;
         _player.GetComponent<PlayerController>().enabled = false;
         _player.GetComponent<CharacterController>().enabled = false;
@@ -49,6 +45,13 @@ public class InteractableCar : MonoBehaviour, IInteractable
             _car.GetComponent<CarController>().IsPlayerInside = false;
         }
     }
+
+    void LateUpdate()
+    {
+        _seatPosition.position = transform.position;
+        _seatPosition.rotation = transform.rotation;
+    }
+
     public void OnInteract()
     {
         if (_isInCar) ExitCar();
