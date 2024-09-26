@@ -1,15 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class GrabbableItem : MonoBehaviour
 {
-    [SerializeField] protected string Name;
-    [SerializeField] protected Vector3 Rotation;
+    public Quaternion Rotation;
+    public string Name;
 
     public abstract void OnRightClick();
-    
+
     public abstract void OnLeftClick();
 
-    public void OnCustomAction() {}
+    public abstract void OnCustomAction();
+
+    public GrabbableItem(Quaternion rotation)
+    {
+        Rotation = rotation;
+    }
+
+    public GrabbableItem() {}
 }

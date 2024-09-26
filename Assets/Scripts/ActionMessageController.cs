@@ -12,22 +12,26 @@ public class ActionMessageController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _action;
     [SerializeField] private TextMeshProUGUI _itemName;
 
-    public void Activate() {
+    public void Activate()
+    {
         gameObject.SetActive(true);
     }
 
-    public void Disable() {
+    public void Disable()
+    {
         gameObject.SetActive(false);
     }
 
     /// <summary>
-    /// Function used by inventory controller to tell the user if he want to grap an item.
+    /// Function used by inventory controller to tell the user if he want to grab an item.
     /// </summary>
-    /// <param name="itemName">The name of the item that the user can take.</param>
-    public void GrapItem(string itemName) {
+    /// <param name="item">The item you want to grab.</param>
+    public void GrabItem(GameObject item)
+    {
+        var itemScript = item.GetComponent<GrabbableItem>();
         _key.text = "E";
         _action.text = "to grab";
-        _itemName.text = itemName;
+        _itemName.text = itemScript && itemScript.Name.Length != 0 ? itemScript.Name : item.name;
         Activate();
     }
 }
