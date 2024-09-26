@@ -32,6 +32,7 @@ public class ActionMessageController : MonoBehaviour
         _key.text = "E";
         _action.text = "to grab";
         _itemName.text = itemScript && itemScript.Name.Length != 0 ? itemScript.Name : item.name;
+        print($"Displayed the message for {_itemName.text}.");
         Activate();
     }
 }

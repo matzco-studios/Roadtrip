@@ -100,13 +100,17 @@ public class InventoryController : MonoBehaviour
         ChangeCurrentItem();
     }
 
+    void OnTriggerEnter(Collider collider) {
+        if(collider.CompareTag("GrabbableItem")) {
+            _message.GrabItem(collider.gameObject);
+        }
+    }
+
     // The function is executed in loop when two objects are colliding.
     void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("GrabbableItem"))
         {
-            _message.GrabItem(other.gameObject);
-
             if (Input.GetKey(KeyCode.E))
             {
                 AddItem(other.gameObject);
