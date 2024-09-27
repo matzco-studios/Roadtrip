@@ -39,7 +39,7 @@ public class ActionMessageController : MonoBehaviour
     /// <summary>
     /// Function used by inventory controller to tell the user if he want to grab an item.
     /// </summary>
-    /// <param name="isExit">If the user is trying to </param>
+    /// <param name="isExit">If the user is trying to exit or enter the car.</param>
     public void CarInteraction(bool isExit = false)
     {
         _key.text = "F";
