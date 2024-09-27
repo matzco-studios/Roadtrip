@@ -35,4 +35,16 @@ public class ActionMessageController : MonoBehaviour
         print($"Displayed the message for {_itemName.text}.");
         Activate();
     }
+
+    /// <summary>
+    /// Function used by inventory controller to tell the user if he want to grab an item.
+    /// </summary>
+    /// <param name="isExit">If the user is trying to </param>
+    public void CarInteraction(bool isExit = false)
+    {
+        _key.text = "F";
+        _action.text = isExit ? "to exit" : "to enter";
+        _itemName.text = "car";
+        Activate();
+    }
 }
