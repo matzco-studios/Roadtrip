@@ -9,6 +9,25 @@ public class InventoryController : MonoBehaviour
     private bool _enabled = true;
 
     /// <summary>
+    /// Function that contain shared logic between DropCurrentItem and AddItem.
+    /// </summary>
+    /// <param name="grap">True mean grap actions, false mean drop actions.</param>
+    public void SetItemForGrap(Transform item, bool grap = true)
+    {
+        item.transform.SetParent(grap ? transform : null);
+        var body = item.GetComponent<Rigidbody>();
+        body.isKinematic = grap;
+        item.GetComponent<Collider>().enabled = !grap;
+
+        if (!grap)
+        {
+            //(move it forward a bit to avoid collisions with player) itemToDrop.transform.Translate(transform.forward*1f);
+            body.AddForce(transform.forward * 100 * body.mass);
+            body.AddForce(transform.up * 25 * body.mass);
+        }
+    }
+
+    /// <summary>
     /// Function to drop the current selected item.
     /// </summary>
     /// <param name="replace">True mean he is adding an item and dropping the current one because he exceeded the limit, false mean he is directly dropping the current item.</param>
@@ -16,17 +35,7 @@ public class InventoryController : MonoBehaviour
     {
         if (_currentSelectedItem == None) return;
 
-        var itemToDrop = transform.GetChild(_currentSelectedItem).transform;
-        var body = itemToDrop.GetComponent<Rigidbody>();
-        body.isKinematic = false;
-        itemToDrop.GetComponent<Collider>().enabled = true;
-        itemToDrop.transform.SetParent(null);
-
-        //(move it forward a bit to avoid collisions with player) itemToDrop.transform.Translate(transform.forward*1f);
-        body.AddForce(transform.forward * 100 * body.mass);
-        body.AddForce(transform.up * 25 * body.mass);
-        //print(itemToDrop.name);
-
+        SetItemForGrap(transform.GetChild(_currentSelectedItem).transform, false);
         if (!replace) _currentSelectedItem = None;
     }
 
@@ -36,10 +45,7 @@ public class InventoryController : MonoBehaviour
     /// <param name="nearItem">The item that the is in the Box Collider Trigger of the itemsContainer.</param>
     public void AddItem(GameObject nearItem)
     {
-        nearItem.transform.SetParent(transform);
-        nearItem.GetComponent<Rigidbody>().isKinematic = true;
-        nearItem.GetComponent<Collider>().enabled = false;
-
+        SetItemForGrap(nearItem.transform);
         var rotation = nearItem.GetComponent<GrabbableItem>()?.Rotation;
         nearItem.transform.SetLocalPositionAndRotation(Vector3.zero, rotation ?? transform.localRotation);
 
@@ -86,6 +92,10 @@ public class InventoryController : MonoBehaviour
         transform.GetChild(selectItem).gameObject.SetActive(active);
     }
 
+    /// <summary>
+    /// Function to activate or desactivate the _currentSelectedItem.
+    /// </summary>
+    /// <param name="active">True activate, False desactivate.</param>
     private void SetCurrentItemActive(bool active)
     {
         ChangeItemVisibility(_currentSelectedItem, active);
