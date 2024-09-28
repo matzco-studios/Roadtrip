@@ -86,7 +86,7 @@ public class InventoryController : MonoBehaviour
     /// <param name="active">True activate, false desactivate</param>
     private void ChangeItemVisibility(int selectItem, bool active)
     {
-        if(selectItem == None) return;
+        if (selectItem == None) return;
         transform.GetChild(selectItem).gameObject.SetActive(active);
     }
 
@@ -97,6 +97,9 @@ public class InventoryController : MonoBehaviour
 
     private void SelectAnotherItem(int otherItemIndex)
     {
+        if (_currentSelectedItem == otherItemIndex) return;
+        if (otherItemIndex > transform.childCount - 1) return;
+
         SetCurrentItemActive(false);
         ChangeItemVisibility(otherItemIndex, true);
         _currentSelectedItem = otherItemIndex;
@@ -104,20 +107,9 @@ public class InventoryController : MonoBehaviour
 
     public void ChangeCurrentItem()
     {
-        var totalItems = transform.childCount;
-
-        if (Input.GetKey(KeyCode.Alpha1) && _currentSelectedItem != First && totalItems >= 1)
-        {
-            SelectAnotherItem(First);
-        }
-        else if (Input.GetKey(KeyCode.Alpha2) && _currentSelectedItem != Second && totalItems >= 2)
-        {
-            SelectAnotherItem(Second);
-        }
-        else if (Input.GetKey(KeyCode.Alpha3) && _currentSelectedItem != Third && totalItems >= 3)
-        {
-            SelectAnotherItem(Third);
-        }
+        if (Input.GetKey(KeyCode.Alpha1)) SelectAnotherItem(First);
+        else if (Input.GetKey(KeyCode.Alpha2)) SelectAnotherItem(Second);
+        else if (Input.GetKey(KeyCode.Alpha3)) SelectAnotherItem(Third);
     }
 
     public bool IsActive() => _enabled;
