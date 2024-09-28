@@ -18,6 +18,7 @@ public class InteractableCar : MonoBehaviour, IInteractable
     {
         _message = IInteractable.GetActionMessageController();
         _player = GameObject.FindGameObjectWithTag("Player");
+        _seatPosition = transform;
         _car = transform.parent.gameObject;
         _car.GetComponent<CarController>().IsPlayerInside = false;
         _carBody = _car.GetComponent<Rigidbody>();
