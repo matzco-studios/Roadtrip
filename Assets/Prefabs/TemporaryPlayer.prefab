@@ -244,7 +244,7 @@ Camera:
     height: 1
   near clip plane: 0.05
   far clip plane: 1000
-  field of view: 60
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -298,7 +298,7 @@ Transform:
   m_GameObject: {fileID: 6586820111862076793}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.2824, y: -0.275, z: 0.397}
+  m_LocalPosition: {x: 0.3, y: -0.275, z: 0.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -323,8 +323,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.26066685, y: 0.28660285, z: 1.0346403}
-  m_Center: {x: -0.29, y: 0.22682422, z: 1.0237603}
+  m_Size: {x: 0.26066685, y: 0.28660285, z: 1.39398}
+  m_Center: {x: -0.29, y: 0.22682422, z: 0.84409046}
 --- !u!114 &1076367530903735901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,3 +350,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 112aad297040a954d8efc923c45ba7d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _message: {fileID: 0}
+  _inventory: {fileID: 1076367530903735901}

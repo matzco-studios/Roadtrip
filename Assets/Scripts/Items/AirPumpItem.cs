@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AirPumpItem : GrabbableItem
 {
-    protected GameObject IsConnected = null;
+    public GameObject IsConnected = null;
     private Rigidbody _rigidbody;
     private LineRenderer _lineRenderer;
     public override void OnCustomAction()

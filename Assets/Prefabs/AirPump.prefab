@@ -136,6 +136,72 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!1 &1978054155595163948
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7514610753099549283}
+  - component: {fileID: 8289399145956339358}
+  - component: {fileID: 745685634979459416}
+  m_Layer: 0
+  m_Name: InteractHandle
+  m_TagString: InteractableItem
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7514610753099549283
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978054155595163948}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 937555153058410922}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8289399145956339358
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978054155595163948}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.31, y: 0.1, z: 0.1}
+  m_Center: {x: 0, y: 0.375, z: 0}
+--- !u!114 &745685634979459416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978054155595163948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f19d0ffb0fb7ce8469e2dd706890ce99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6593603207547426097
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,6 +215,7 @@ GameObject:
   - component: {fileID: 5955116966636457639}
   - component: {fileID: 6662922879971409679}
   - component: {fileID: 3913322929265011616}
+  - component: {fileID: 5249325687478373954}
   m_Layer: 0
   m_Name: AirPump
   m_TagString: GrabbableItem
@@ -171,6 +238,7 @@ Transform:
   m_Children:
   - {fileID: 9219095410045999157}
   - {fileID: 5504914779285102487}
+  - {fileID: 7514610753099549283}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &6164636627974796323
@@ -235,6 +303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Rotation: {x: 0, y: 0, z: 0, w: 1}
   Name: AirPump
+  IsConnected: {fileID: 0}
 --- !u!65 &3913322929265011616
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -256,6 +325,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!111 &5249325687478373954
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593603207547426097}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 7a3d3617c106a4b4e86002f442577fc1, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 7a3d3617c106a4b4e86002f442577fc1, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &8681382156347686878
 PrefabInstance:
   m_ObjectHideFlags: 0
