@@ -63,7 +63,7 @@ public class InventoryController : MonoBehaviour
         {
             if (_currentSelectedItem != SelectItem.None)
             {
-                transform.GetChild((int)_currentSelectedItem).gameObject.SetActive(false);
+                ChangeItemVisibility(_currentSelectedItem, false);
             }
 
             _currentSelectedItem = (SelectItem)nearItem.transform.GetSiblingIndex();
@@ -98,10 +98,10 @@ public class InventoryController : MonoBehaviour
     {
         if (_currentSelectedItem != SelectItem.None)
         {
-            transform.GetChild((int)_currentSelectedItem).gameObject.SetActive(false);
+            ChangeItemVisibility(_currentSelectedItem, false);
         }
 
-        transform.GetChild((int)otherItemIndex).gameObject.SetActive(true);
+        ChangeItemVisibility(otherItemIndex, true);
         _currentSelectedItem = otherItemIndex;
     }
 

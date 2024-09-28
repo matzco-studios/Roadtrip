@@ -34,7 +34,7 @@ public class InteractionController : MonoBehaviour
         }
         else if (_inventory.Enabled && other.CompareTag("GrabbableItem"))
         {
-            if (Input.GetKey(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 _inventory.AddItem(other.gameObject);
 
