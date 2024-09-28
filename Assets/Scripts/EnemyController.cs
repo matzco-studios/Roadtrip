@@ -23,7 +23,6 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         // Make the enemy always look the player
-        transform.LookAt(target);
         
         isWatched = GetComponent<Renderer>().isVisible;
         
@@ -31,6 +30,7 @@ public class EnemyController : MonoBehaviour
         if (!isWatched) 
         {
             Debug.Log("Enemy is invisible - Open your eyes");
+            transform.LookAt(target);
             transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         } 
         
