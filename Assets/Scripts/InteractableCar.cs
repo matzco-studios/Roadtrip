@@ -13,6 +13,7 @@ public class InteractableCar : MonoBehaviour, IInteractable
     public string InteractionInfo { get { return "Get in car"; } }
 
     private ActionMessageController _message;
+    [SerializeField] private InventoryController _inventory;
 
     void Start()
     {
@@ -33,6 +34,7 @@ public class InteractableCar : MonoBehaviour, IInteractable
         _player.GetComponent<PlayerController>().enabled = false;
         _player.GetComponent<CharacterController>().enabled = false;
         _car.GetComponent<CarController>().IsPlayerInside = true;
+        _inventory.Desactivate();
     }
     private void ExitCar()
     {
@@ -46,6 +48,7 @@ public class InteractableCar : MonoBehaviour, IInteractable
             _player.GetComponent<PlayerController>().enabled = true;
             _player.GetComponent<CharacterController>().enabled = true;
             _car.GetComponent<CarController>().IsPlayerInside = false;
+            _inventory.Activate();
         }
     }
 

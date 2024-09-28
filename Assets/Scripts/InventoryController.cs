@@ -10,6 +10,9 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private ActionMessageController _message;
     private SelectItem _currentSelectedItem = SelectItem.None;
     private float _scrollWheelInput;
+    private bool _enabled = true;
+
+    public bool Enabled { get => _enabled; }
 
     /// <summary>
     /// Function to drop the current selected item.
@@ -24,10 +27,10 @@ public class InventoryController : MonoBehaviour
         body.isKinematic = false;
         itemToDrop.GetComponent<Collider>().enabled = true;
         itemToDrop.transform.SetParent(null);
-        
+
         //(move it forward a bit to avoid collisions with player) itemToDrop.transform.Translate(transform.forward*1f);
-        body.AddForce(transform.forward*100 * body.mass);
-        body.AddForce(transform.up*25 * body.mass);
+        body.AddForce(transform.forward * 100 * body.mass);
+        body.AddForce(transform.up * 25 * body.mass);
         //print(itemToDrop.name);
 
         if (!replace) _currentSelectedItem = SelectItem.None;
@@ -86,6 +89,11 @@ public class InventoryController : MonoBehaviour
         }
     }
 
+    private void ChangeItemVisibility(SelectItem selectItem, bool active)
+    {
+        transform.GetChild((int)selectItem).gameObject.SetActive(active);
+    }
+
     private void SelectAnotherItem(SelectItem otherItemIndex)
     {
         if (_currentSelectedItem != SelectItem.None)
@@ -113,5 +121,25 @@ public class InventoryController : MonoBehaviour
         {
             SelectAnotherItem(SelectItem.Third);
         }
+    }
+
+    public void Activate()
+    {
+        if (_currentSelectedItem != SelectItem.None)
+        {
+            ChangeItemVisibility(_currentSelectedItem, true);
+        }
+
+        _enabled = true;
+    }
+
+    public void Desactivate()
+    {
+        if (_currentSelectedItem != SelectItem.None)
+        {
+            ChangeItemVisibility(_currentSelectedItem, false);
+        }
+
+        _enabled = false;
     }
 }

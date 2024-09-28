@@ -2059,6 +2059,10 @@ PrefabInstance:
       propertyPath: _message
       value: 
       objectReference: {fileID: 1123741966}
+    - target: {fileID: 546373788323479976, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+      propertyPath: _inventory
+      value: 
+      objectReference: {fileID: 1549802917}
     - target: {fileID: 2145951141328495067, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 16.593575
