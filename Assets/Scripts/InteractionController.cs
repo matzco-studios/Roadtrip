@@ -5,6 +5,12 @@ public class InteractionController : MonoBehaviour
     [SerializeField] private ActionMessageController _message;
     [SerializeField] private InventoryController _inventory;
 
+    private void ForceShowMessage(Collider other)
+    {
+        if (!_message.gameObject.activeSelf)
+            OnTriggerEnter(other);
+    }
+
     void OnTriggerEnter(Collider collider)
     {
         if (collider.CompareTag("GrabbableItem"))
@@ -19,9 +25,12 @@ public class InteractionController : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("InteractableItem") && Input.GetKey(KeyCode.F))
+        if (other.CompareTag("InteractableItem"))
         {
-            other.GetComponent<IInteractable>().OnInteract();
+            if (Input.GetKey(KeyCode.F))
+                other.GetComponent<IInteractable>().OnInteract();
+            else
+                ForceShowMessage(other);
         }
         else if (other.CompareTag("GrabbableItem"))
         {
@@ -31,14 +40,19 @@ public class InteractionController : MonoBehaviour
 
                 // Calling OnTriggerExit manually, because it does not activate when we get the item, because we do not leave the trigger zone, 
                 // we just desactivate, the item collider and rigidbody.
-                OnTriggerExit();
+                OnTriggerExit(other);
+            }else{
+                ForceShowMessage(other);
             }
         }
     }
 
-    void OnTriggerExit()
+    void OnTriggerExit(Collider other)
     {
-        _message.Disable();
+        if (other.CompareTag("InteractableItem") || other.CompareTag("GrabbableItem"))
+        {
+            _message.Disable();
+        }
     }
 
     void Update()
