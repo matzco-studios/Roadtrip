@@ -15,7 +15,7 @@ public class InventoryController : MonoBehaviour
     /// Function to drop the current selected item.
     /// </summary>
     /// <param name="replace">True mean he is adding an item and dropping the current one because he exceeded the limit, false mean he is directly dropping the current item.</param>
-    void DropCurrentItem(bool replace = false)
+    public void DropCurrentItem(bool replace = false)
     {
         if (_currentSelectedItem == SelectItem.None) return;
 
@@ -24,6 +24,7 @@ public class InventoryController : MonoBehaviour
         body.isKinematic = false;
         itemToDrop.GetComponent<Collider>().enabled = true;
         itemToDrop.transform.SetParent(null);
+        
         //(move it forward a bit to avoid collisions with player) itemToDrop.transform.Translate(transform.forward*1f);
         body.AddForce(transform.forward*100 * body.mass);
         body.AddForce(transform.up*25 * body.mass);
@@ -36,7 +37,7 @@ public class InventoryController : MonoBehaviour
     /// Function to add an item in the itemsContainer.
     /// </summary>
     /// <param name="nearItem">The item that the is in the Box Collider Trigger of the itemsContainer.</param>
-    void AddItem(GameObject nearItem)
+    public void AddItem(GameObject nearItem)
     {
         nearItem.transform.SetParent(transform);
         nearItem.GetComponent<Rigidbody>().isKinematic = true;
@@ -64,16 +65,12 @@ public class InventoryController : MonoBehaviour
 
             _currentSelectedItem = (SelectItem)nearItem.transform.GetSiblingIndex();
         }
-
-        // Calling OnTriggerExit manually, because it does not activate when we get the item, because we do not leave the trigger zone, 
-        // we just desactivate, the item collider and rigidbody.
-        OnTriggerExit();
     }
 
     /// <summary>
     /// Function to handle scroll wheel input to change the current selected item.
     /// </summary>
-    void ScrollWheelChange()
+    public void ScrollWheelChange()
     {
         if (transform.childCount == 0) return;
 
@@ -89,42 +86,6 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            DropCurrentItem();
-        }
-
-        ScrollWheelChange();
-        ChangeCurrentItem();
-    }
-
-    void OnTriggerEnter(Collider collider) {
-        if(collider.CompareTag("GrabbableItem")) {
-            _message.GrabItem(collider.gameObject);
-        } else if (collider.CompareTag("InteractableItem")) {
-            collider.gameObject.GetComponent<IInteractable>().InteractionMessage();
-        }
-    }
-
-    // The function is executed in loop when two objects are colliding.
-    void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("GrabbableItem"))
-        {
-            if (Input.GetKey(KeyCode.E))
-            {
-                AddItem(other.gameObject);
-            }
-        }
-    }
-
-    void OnTriggerExit()
-    {
-        _message.Disable();
-    }
-
     private void SelectAnotherItem(SelectItem otherItemIndex)
     {
         if (_currentSelectedItem != SelectItem.None)
@@ -136,7 +97,7 @@ public class InventoryController : MonoBehaviour
         _currentSelectedItem = otherItemIndex;
     }
 
-    void ChangeCurrentItem()
+    public void ChangeCurrentItem()
     {
         var totalItems = transform.childCount;
 
