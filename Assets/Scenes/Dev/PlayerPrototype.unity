@@ -1595,14 +1595,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8172586111032451999, guid: 9c565b01f3500c543a35db4ae322a4d4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8172586111032451999, guid: 9c565b01f3500c543a35db4ae322a4d4, type: 3}
-      propertyPath: m_TagString
-      value: ActionMessage
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
