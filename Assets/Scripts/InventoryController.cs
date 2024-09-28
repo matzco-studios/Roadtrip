@@ -12,8 +12,6 @@ public class InventoryController : MonoBehaviour
     private float _scrollWheelInput;
     private bool _enabled = true;
 
-    public bool Enabled { get => _enabled; }
-
     /// <summary>
     /// Function to drop the current selected item.
     /// </summary>
@@ -61,11 +59,7 @@ public class InventoryController : MonoBehaviour
 
         else
         {
-            if (_currentSelectedItem != SelectItem.None)
-            {
-                ChangeItemVisibility(_currentSelectedItem, false);
-            }
-
+            SetCurrentItemActive(false);
             _currentSelectedItem = (SelectItem)nearItem.transform.GetSiblingIndex();
         }
     }
@@ -89,18 +83,25 @@ public class InventoryController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Function that will get the child with the selectItem index and activate it or desactivate it.
+    /// </summary>
+    /// <param name="selectItem">The index of the child.</param>
+    /// <param name="active">True activate, false desactivate</param>
     private void ChangeItemVisibility(SelectItem selectItem, bool active)
     {
+        if(selectItem == SelectItem.None) return;
         transform.GetChild((int)selectItem).gameObject.SetActive(active);
+    }
+
+    private void SetCurrentItemActive(bool active)
+    {
+        ChangeItemVisibility(_currentSelectedItem, active);
     }
 
     private void SelectAnotherItem(SelectItem otherItemIndex)
     {
-        if (_currentSelectedItem != SelectItem.None)
-        {
-            ChangeItemVisibility(_currentSelectedItem, false);
-        }
-
+        SetCurrentItemActive(false);
         ChangeItemVisibility(otherItemIndex, true);
         _currentSelectedItem = otherItemIndex;
     }
@@ -123,23 +124,11 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    public void Activate()
+    public bool IsActive() => _enabled;
+
+    public void SetActive(bool active = true)
     {
-        if (_currentSelectedItem != SelectItem.None)
-        {
-            ChangeItemVisibility(_currentSelectedItem, true);
-        }
-
-        _enabled = true;
-    }
-
-    public void Desactivate()
-    {
-        if (_currentSelectedItem != SelectItem.None)
-        {
-            ChangeItemVisibility(_currentSelectedItem, false);
-        }
-
-        _enabled = false;
+        SetCurrentItemActive(active);
+        _enabled = active;
     }
 }
