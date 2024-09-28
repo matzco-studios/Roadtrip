@@ -118,8 +118,8 @@ public class InventoryController : MonoBehaviour
 
     void OnTriggerExit()
     {
+        if (_message) _message.Disable();
         //print("Exited Trigger");
-        _message.Disable();
     }
 
     private void SelectAnotherItem(SelectItem otherItemIndex)
