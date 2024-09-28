@@ -40,12 +40,8 @@ public class InventoryController : MonoBehaviour
         nearItem.GetComponent<Rigidbody>().isKinematic = true;
         nearItem.GetComponent<Collider>().enabled = false;
 
-        var nearItemScript = nearItem.GetComponent<GrabbableItem>();
-
-        nearItem.transform.SetLocalPositionAndRotation(
-            Vector3.zero,
-            nearItemScript ? nearItemScript.Rotation : transform.localRotation
-        );
+        var rotation = nearItem.GetComponent<GrabbableItem>()?.Rotation;
+        nearItem.transform.SetLocalPositionAndRotation(Vector3.zero, rotation ?? transform.localRotation);
 
         if (transform.childCount == 4)
         {
