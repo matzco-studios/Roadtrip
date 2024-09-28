@@ -328,7 +328,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1330757318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,7 +395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 77197609385ed0d47b1cc879a8048f4a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.268
+      value: 24.01
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 77197609385ed0d47b1cc879a8048f4a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -611,7 +611,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 13700000, guid: 77197609385ed0d47b1cc879a8048f4a, type: 3}
       propertyPath: m_AABB.m_Extent.x
-      value: 0.006
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 13700000, guid: 77197609385ed0d47b1cc879a8048f4a, type: 3}
+      propertyPath: m_AABB.m_Extent.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 13700000, guid: 77197609385ed0d47b1cc879a8048f4a, type: 3}
+      propertyPath: m_AABB.m_Extent.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 13700000, guid: 77197609385ed0d47b1cc879a8048f4a, type: 3}
       propertyPath: m_DynamicOccludee
@@ -668,6 +676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   postProcess: {fileID: 1330757318}
+  animator: {fileID: 833080738}
   speed: 5
 --- !u!23 &1666372303
 MeshRenderer:
