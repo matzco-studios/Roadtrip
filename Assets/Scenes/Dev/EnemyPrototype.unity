@@ -286,6 +286,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &833080735 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100004, guid: 77197609385ed0d47b1cc879a8048f4a, type: 3}
+  m_PrefabInstance: {fileID: 1340825539}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &833080738
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833080735}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 77197609385ed0d47b1cc879a8048f4a, type: 3}
+  m_Controller: {fileID: 9100000, guid: d55c8214adb0b44649cf749541255e31, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1330757317
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,15 +383,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 77197609385ed0d47b1cc879a8048f4a, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.89353776
+      value: 1.5401987
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 77197609385ed0d47b1cc879a8048f4a, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.1064677
+      value: 1.5446068
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 77197609385ed0d47b1cc879a8048f4a, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.89353776
+      value: 1.5401987
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 77197609385ed0d47b1cc879a8048f4a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -373,7 +399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 77197609385ed0d47b1cc879a8048f4a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.016
+      value: 0.141
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 77197609385ed0d47b1cc879a8048f4a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -616,7 +642,13 @@ PrefabInstance:
       addedObject: {fileID: 1666372303}
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 77197609385ed0d47b1cc879a8048f4a, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1666372305}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 77197609385ed0d47b1cc879a8048f4a, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1666372304}
+    - targetCorrespondingSourceObject: {fileID: 100004, guid: 77197609385ed0d47b1cc879a8048f4a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 833080738}
   m_SourcePrefab: {fileID: 100100000, guid: 77197609385ed0d47b1cc879a8048f4a, type: 3}
 --- !u!1 &1666372299 stripped
 GameObject:
@@ -679,8 +711,35 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!143 &1666372304
-CharacterController:
+--- !u!54 &1666372304
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666372299}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &1666372305
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -698,13 +757,8 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.7845172
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.92, z: 0}
+  m_Size: {x: 1, y: 1.85, z: 0.3}
+  m_Center: {x: 0, y: 0.93, z: 0}
 --- !u!1 &1793613933
 GameObject:
   m_ObjectHideFlags: 0
