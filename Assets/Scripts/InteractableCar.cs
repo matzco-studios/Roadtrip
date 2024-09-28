@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InteractableCar : MonoBehaviour, IInteractable
@@ -9,7 +6,9 @@ public class InteractableCar : MonoBehaviour, IInteractable
     private GameObject _car;
     private Transform _exitOffset;
     private Transform _seatPosition;
+    private Rigidbody _carBody;
     private bool _isInCar;
+    private bool _canExit;
     public string InteractionInfo { get { return "Get in car"; } }
 
     private ActionMessageController _message;
@@ -21,6 +20,7 @@ public class InteractableCar : MonoBehaviour, IInteractable
         _player = GameObject.FindGameObjectWithTag("Player");
         _car = transform.parent.gameObject;
         _car.GetComponent<CarController>().IsPlayerInside = false;
+        _carBody = _car.GetComponent<Rigidbody>();
         _exitOffset = transform.GetChild(0);
         _seatPosition = transform.GetChild(1);
         _seatPosition.SetParent(null);
@@ -38,7 +38,7 @@ public class InteractableCar : MonoBehaviour, IInteractable
     }
     private void ExitCar()
     {
-        if (_car.GetComponent<Rigidbody>().velocity.magnitude < 0.1f)
+        if (_canExit)
         {
             _isInCar = false;
             _player.transform.position = _exitOffset.transform.position;
@@ -66,6 +66,17 @@ public class InteractableCar : MonoBehaviour, IInteractable
 
     public void InteractionMessage()
     {
-        _message.CarInteraction(_isInCar);
+        if(_canExit) {
+            _message.CarInteraction(_isInCar);
+        }
+    }
+
+    void Update() {
+        _canExit = _carBody.velocity.magnitude < 0.1f;
+
+        if(!_canExit && _message.IsActive()) {
+            _message.Disable();
+            print("Disabling car message.");
+        }
     }
 }

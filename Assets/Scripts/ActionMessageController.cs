@@ -26,6 +26,10 @@ public class ActionMessageController : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public bool IsActive() {
+        return gameObject.activeSelf;
+    }
+
     /// <summary>
     /// Function used by inventory controller to tell the user if he want to grab an item.
     /// </summary>
