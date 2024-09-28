@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// MonoBehavior to handle the text popup when the user is going to do an action and need confirmation. 
@@ -11,19 +12,25 @@ public class ActionMessageController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _key;
     [SerializeField] private TextMeshProUGUI _action;
     [SerializeField] private TextMeshProUGUI _itemName;
+    [SerializeField] private Sprite _crosshairNormal;
+    [SerializeField] private Sprite _crosshairLook;
+    private Image _crosshair;
 
     void Start() {
         gameObject.SetActive(false);
+        _crosshair = transform.parent.GetChild(transform.GetSiblingIndex()+1).GetComponent<Image>();
     }
 
     public void Activate()
     {
         gameObject.SetActive(true);
+        _crosshair.sprite = _crosshairLook;
     }
 
     public void Disable()
     {
         gameObject.SetActive(false);
+        _crosshair.sprite = _crosshairNormal;
     }
 
     public bool IsActive() {
