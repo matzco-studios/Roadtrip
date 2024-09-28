@@ -1300,10 +1300,6 @@ PrefabInstance:
       propertyPath: _message
       value: 
       objectReference: {fileID: 1123741966}
-    - target: {fileID: 3383718482952794861, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
-      propertyPath: _inventory
-      value: 
-      objectReference: {fileID: 1549802917}
     - target: {fileID: 5713548300795970587, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
       propertyPath: m_Name
       value: TemporaryPlayer
