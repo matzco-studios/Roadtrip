@@ -30,7 +30,7 @@ public class EnemyController : MonoBehaviour
         if (!isWatched) 
         {
             Debug.Log("Enemy is invisible - Open your eyes");
-            transform.LookAt(target);
+            transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
             transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         } 
         
