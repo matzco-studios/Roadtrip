@@ -12,8 +12,11 @@ public class InteractableCar : MonoBehaviour, IInteractable
     private bool _isInCar;
     public string InteractionInfo { get { return "Get in car"; } }
 
+    private ActionMessageController _message;
+
     void Start()
     {
+        _message = IInteractable.GetActionMessageController();
         _player = GameObject.FindGameObjectWithTag("Player");
         _car = transform.parent.gameObject;
         _car.GetComponent<CarController>().IsPlayerInside = false;
@@ -56,5 +59,10 @@ public class InteractableCar : MonoBehaviour, IInteractable
     {
         if (_isInCar) ExitCar();
         else if (!_isInCar) EnterCar();
+    }
+
+    public void InteractionMessage()
+    {
+        _message.CarInteraction(_isInCar);
     }
 }

@@ -103,6 +103,8 @@ public class InventoryController : MonoBehaviour
     void OnTriggerEnter(Collider collider) {
         if(collider.CompareTag("GrabbableItem")) {
             _message.GrabItem(collider.gameObject);
+        } else if (collider.CompareTag("InteractableItem")) {
+            collider.gameObject.GetComponent<IInteractable>().InteractionMessage();
         }
     }
 
@@ -120,7 +122,6 @@ public class InventoryController : MonoBehaviour
 
     void OnTriggerExit()
     {
-        //print("Exited Trigger");
         _message.Disable();
     }
 

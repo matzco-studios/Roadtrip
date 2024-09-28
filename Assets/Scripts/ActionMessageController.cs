@@ -12,6 +12,10 @@ public class ActionMessageController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _action;
     [SerializeField] private TextMeshProUGUI _itemName;
 
+    void Start() {
+        gameObject.SetActive(false);
+    }
+
     public void Activate()
     {
         gameObject.SetActive(true);
@@ -45,6 +49,17 @@ public class ActionMessageController : MonoBehaviour
         _key.text = "F";
         _action.text = isExit ? "to exit" : "to enter";
         _itemName.text = "car";
+        Activate();
+    }
+
+    /// <summary>
+    /// Default placeholder function for interacting with an object.
+    /// </summary>
+    public void InteractableItem()
+    {
+        _key.text = "F";
+        _action.text = "to interact";
+        _itemName.text = "with object";
         Activate();
     }
 }
