@@ -30,7 +30,7 @@ public class InteractableTrunk : MonoBehaviour, IInteractable
     // Update is called once per frame
     void Update()
     {
-        _rotation += (_targetRotation-_rotation)/45;
+        _rotation += (_targetRotation-_rotation)/80;
         transform.localEulerAngles = new(-_rotation, 0, 0);
     }
 }
