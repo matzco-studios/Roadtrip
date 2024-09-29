@@ -68,8 +68,8 @@ public class InteractionController : MonoBehaviour
                 _inventory.DropCurrentItem();
             }
 
-            _inventory.ScrollWheelChange();
-            _inventory.ChangeCurrentItem();
+            _inventory.ScrollWheelItemChange();
+            _inventory.KeyboardItemChange();
         }
         if (Input.GetKeyDown(KeyCode.E))
             _keyPressE = 2;

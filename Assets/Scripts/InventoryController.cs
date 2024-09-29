@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// Class used by an ItemContainer to manage child items. 
+/// This class uses the ItemContainer like a backpack.
+/// </summary>
 public class InventoryController : MonoBehaviour
 {
     public static readonly int None = -1, First = 0, Second = 1, Third = 2;
@@ -65,7 +69,7 @@ public class InventoryController : MonoBehaviour
     /// <summary>
     /// Function to handle scroll wheel input to change the current selected item.
     /// </summary>
-    public void ScrollWheelChange()
+    public void ScrollWheelItemChange()
     {
         if (transform.childCount == 0) return;
 
@@ -101,6 +105,11 @@ public class InventoryController : MonoBehaviour
         ChangeItemVisibility(_currentSelectedItem, active);
     }
 
+    /// <summary>
+    /// Function that lets the user change the _currentSelectedItem, used by several functions like 
+    /// KeyboardItemChange and ScrollWheelItemChange.
+    /// </summary>
+    /// <param name="otherItemIndex">The index of the item that the user wants to select.</param>
     private void SelectAnotherItem(int otherItemIndex)
     {
         if (_currentSelectedItem == otherItemIndex) return;
@@ -111,15 +120,26 @@ public class InventoryController : MonoBehaviour
         _currentSelectedItem = otherItemIndex;
     }
 
-    public void ChangeCurrentItem()
+    /// <summary>
+    /// Function that let the user change the current item using the alpha keys (1, 2 and 3).
+    /// </summary>
+    public void KeyboardItemChange()
     {
         if (Input.GetKey(KeyCode.Alpha1)) SelectAnotherItem(First);
         else if (Input.GetKey(KeyCode.Alpha2)) SelectAnotherItem(Second);
         else if (Input.GetKey(KeyCode.Alpha3)) SelectAnotherItem(Third);
     }
 
+    /// <summary>
+    /// Function that tell if the InventoryController is activated or not.
+    /// </summary>
+    /// <returns>_enabled value</returns>
     public bool IsActive() => _enabled;
 
+    /// <summary>
+    /// Function to activate or desactivate the InventoryController instance.
+    /// </summary>
+    /// <param name="active">To tell to activate or desactivate.</param>
     public void SetActive(bool active = true)
     {
         SetCurrentItemActive(active);
