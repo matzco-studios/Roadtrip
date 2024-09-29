@@ -75,8 +75,8 @@ public class InteractableCar : MonoBehaviour, IInteractable
     void Update() {
         _canExit = _carBody.velocity.magnitude < 0.1f;
 
-        if(!_canExit && _message.IsActive()) {
-            _message.Disable();
+        if(!_canExit && _message.Active) {
+            _message.SetActive(false);
             print("Disabling car message.");
         }
     }

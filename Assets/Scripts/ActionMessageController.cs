@@ -15,26 +15,22 @@ public class ActionMessageController : MonoBehaviour
     [SerializeField] private Sprite _crosshairNormal;
     [SerializeField] private Sprite _crosshairLook;
     private Image _crosshair;
+    public bool Active { get => gameObject.activeSelf; set => SetActive(value); }
 
-    void Start() {
-        gameObject.SetActive(false);
-        _crosshair = transform.parent.GetChild(transform.GetSiblingIndex()+1).GetComponent<Image>();
-    }
-
-    public void Activate()
-    {
-        gameObject.SetActive(true);
-        _crosshair.sprite = _crosshairLook;
-    }
-
-    public void Disable()
+    void Start()
     {
         gameObject.SetActive(false);
-        _crosshair.sprite = _crosshairNormal;
+        _crosshair = transform.parent.GetChild(transform.GetSiblingIndex() + 1).GetComponent<Image>();
     }
 
-    public bool IsActive() {
-        return gameObject.activeSelf;
+    /// <summary>
+    /// Function to activate or desactivate the ActionMessageController instance.
+    /// </summary>
+    /// <param name="active">To tell to activate or desactivate.</param>
+    public void SetActive(bool active = true)
+    {
+        gameObject.SetActive(active);
+        _crosshair.sprite = active ? _crosshairLook : _crosshairNormal;
     }
 
     /// <summary>
@@ -45,7 +41,7 @@ public class ActionMessageController : MonoBehaviour
         _key.text = key;
         _action.text = action;
         _itemName.text = itemName;
-        Activate();
+        SetActive();
     }
 
     /// <summary>
