@@ -55,7 +55,7 @@ public class InteractionController : MonoBehaviour
     {
         if (other.CompareTag("InteractableItem") || other.CompareTag("GrabbableItem"))
         {
-            _message.Disable();
+            _message.SetActive(false);
         }
     }
 
