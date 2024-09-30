@@ -57,7 +57,6 @@ public class CarController : MonoBehaviour
                     Debug.Log("Out of fuel");
                     engineCoughSound.volume = 0.5f;
                     engineCoughSound.Play();
-                    currentFuel = 100f;
                 }
                 else
                 {
@@ -89,7 +88,7 @@ public class CarController : MonoBehaviour
                     wheel.wheelCollider.motorTorque = gasInput * acceleration * speedMultiplier * Time.deltaTime;
                 }
             }
-            fuelConsumption = (currentSpeed > 0) ? currentSpeed : 0f;
+            fuelConsumption =  currentSpeed * Math.Abs(gasInput);
         }
         else fuelConsumption = 0f;
     }
@@ -210,7 +209,7 @@ public class CarController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         engineSound = GetComponent<AudioSource>();
-        currentFuel = 50f;
+        currentFuel = 100f;
         fuelBar.fillAmount = 1f;
     }
 
