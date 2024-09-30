@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
     private Transform target;
 
     public PostProcessVolume postProcess;
+    public Animator animator;
 
     public float speed;
     // public float activationDistance;
@@ -23,16 +24,15 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         // Make the enemy always look the player
-        transform.LookAt(target);
-        
         isWatched = GetComponent<Renderer>().isVisible;
-        
         // Make the enemy run to the player if he's not looking at him
         if (!isWatched) 
         {
             Debug.Log("Enemy is invisible - Open your eyes");
+            transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
             transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         } 
+        animator.enabled = isWatched ? false : true;
         
         postProcess.weight = Mathf.Lerp(
             postProcess.weight, 
