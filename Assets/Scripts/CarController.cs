@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CarController : MonoBehaviour
 {
@@ -15,69 +17,139 @@ public class CarController : MonoBehaviour
     private Rigidbody rb;
     public List<Wheel> wheels;
     public GameObject steeringWheel;
+    private bool IsRunning = false;
     public AudioSource engineSound;
-
-
+    public AudioSource engineStartSound;
+    public AudioSource engineCoughSound;
+    public List<Light> carLights;
     private float currentSpeed;
     private float currentEngineVolume;
 
-    public float acceleration = 25f;
+    public float acceleration = 15f;
     private float deceleration = 20f;
-    private float turnAngle = 10f;
+    private float turnAngle = 15f;
     private float speedMultiplier;
+    private float carWheelMaxAngle = 150f;
     public float maxSpeed = 20f;
+
+    private bool outOfFuel = false;
+    public float currentFuel;
+    private float fuelConsumption;
+    public Image fuelBar;
 
     private float gasInput;
     private float turnInput;
-    
-    public float lowVolume = 0.1f;
+    private KeyCode startEngineKey = KeyCode.I;
+    public float lowVolume = 0.25f;
     public float highVolume = 1f;
-    public float minSpeedVolume = 1f;
+    public float minSpeedVolume = 10f;
     public float maxSpeedVolume = 21f;
+
+    public bool IsPlayerInside = false;
+    void StartEngine()
+    {
+        if (Input.GetKeyDown(startEngineKey) && IsPlayerInside)
+        {
+            if (!IsRunning)
+            {
+                if (outOfFuel)
+                {
+                    Debug.Log("Out of fuel");
+                    engineCoughSound.volume = 0.5f;
+                    engineCoughSound.Play();
+                }
+                else
+                {
+                    engineStartSound.Play();
+                    engineSound.PlayDelayed(1f);
+                    engineSound.volume = 1f;
+                    IsRunning = true;
+                }
+            }
+            else if (IsRunning)
+            {
+                IsRunning = false;
+                engineSound.pitch = currentEngineVolume;
+            }
+        }
+    }
     void GetInputs()
     {
-        gasInput = Input.GetAxis("Vertical");
-        turnInput = Input.GetAxis("Horizontal");
+        gasInput = IsPlayerInside ? Input.GetAxis("Vertical") : 0.0f;
+        turnInput = IsPlayerInside ? Input.GetAxis("Horizontal") : 0.0f;
     }
     void MoveCarForward()
     {
-        foreach (Wheel wheel in wheels)
+        if (IsRunning)
         {
-            wheel.wheelCollider.motorTorque = gasInput * acceleration * speedMultiplier * Time.deltaTime;
+            {
+                foreach (Wheel wheel in wheels)
+                {
+                    wheel.wheelCollider.motorTorque = gasInput * acceleration * speedMultiplier * Time.deltaTime;
+                }
+            }
+            fuelConsumption =  currentSpeed * Math.Abs(gasInput);
+        }
+        else fuelConsumption = 0f;
+    }
+
+    public void Refuel() => currentFuel = 100f;
+
+    void ReduceFuel()
+    {
+        if (currentFuel <= 0)
+        {
+            outOfFuel = true;
+            IsRunning = false;
+            engineSound.pitch = currentEngineVolume;
+        }
+        else
+        {
+            outOfFuel = false;
+            currentFuel -= Time.deltaTime * fuelConsumption;
+            Math.Clamp(currentFuel, 0, 100);
+            fuelBar.fillAmount = currentFuel / 100;
         }
     }
+
     void TurnCar()
     {
-        foreach (Wheel wheel in wheels)
+        if (currentSpeed > 0.1f)
         {
-            if (wheel.isFrontWheel)
+            float _steerAngle = turnInput * turnAngle * (maxSpeed / currentSpeed);
+            _steerAngle = Mathf.Clamp(_steerAngle, -carWheelMaxAngle, carWheelMaxAngle);
+            foreach (Wheel wheel in wheels)
             {
-                var _steerAngle = turnInput * turnAngle;
-                wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, _steerAngle, acceleration);
+                if (wheel.isFrontWheel)
+                {
+                    wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, _steerAngle / 4, acceleration);
+                }
             }
         }
     }
     void Brake()
     {
-        if (gasInput == 0) // if no gas is pressed then slows down the car
-        {
-            foreach (Wheel wheel in wheels)
-            {
-                wheel.wheelCollider.brakeTorque = deceleration * 500 * Time.deltaTime;
-            }
-        }
-        else if (gasInput < 0) // if reverse/break is pressed
+        if (gasInput < 0) // if reverse/break is pressed
         {
             foreach (Wheel wheel in wheels)
             {
                 wheel.wheelCollider.brakeTorque = deceleration * 1000 * Time.deltaTime;
+                wheel.wheelCollider.motorTorque = 0;
             }
         }
-        else // if gas is pressed then it removes the brake
+        else if (gasInput > 0 && IsRunning) // if gas is pressed then it removes the brake
         {
             foreach (Wheel wheel in wheels)
             {
                 wheel.wheelCollider.brakeTorque = 0;
+            }
+        }
+        else // if no gas is pressed then slows down the car
+        {
+            foreach (Wheel wheel in wheels)
+            {
+                wheel.wheelCollider.brakeTorque = deceleration * 350 * Time.deltaTime;
+                wheel.wheelCollider.motorTorque = 0;
             }
         }
     }
@@ -103,37 +175,53 @@ public class CarController : MonoBehaviour
     }
     void AnimateSteeringWheel()
     {
-        steeringWheel.transform.localRotation = Quaternion.Lerp(steeringWheel.transform.localRotation, Quaternion.AngleAxis(turnInput * -turnAngle * 5f, Vector3.forward), Time.deltaTime * 5f);
+        steeringWheel.transform.localRotation = Quaternion.Lerp(steeringWheel.transform.localRotation, Quaternion.AngleAxis(turnInput * -turnAngle * 3f, Vector3.forward), Time.deltaTime * 5f);
     }
     void EngineSound()
     {
-        currentEngineVolume = rb.velocity.magnitude / 50f;
         if (currentSpeed < minSpeedVolume)
         {
-            engineSound.pitch = lowVolume;
+            engineSound.pitch = 0.25f;
         }
         if (currentSpeed > minSpeedVolume && currentSpeed < maxSpeedVolume)
         {
-            engineSound.pitch = lowVolume + currentEngineVolume;
+            engineSound.pitch = 0.25f + currentEngineVolume;
         }
-        if (currentSpeed > maxSpeedVolume)
+        if (engineSound.pitch <= 0.25f && !IsRunning)
         {
-            engineSound.pitch = highVolume;
+            engineSound.volume = 0;
+        }
+
+        engineSound.mute = !IsPlayerInside && !IsRunning;
+    }
+    void ToggleLights()
+    {
+        if (Input.GetKeyDown(KeyCode.L) && IsPlayerInside)
+        {
+            foreach (Light light in carLights)
+            {
+                light.intensity = (light.intensity == 0) ? 1 : 0;
+            }
         }
     }
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.centerOfMass = new Vector3(0, -0.9f, 0);
         engineSound = GetComponent<AudioSource>();
+        currentFuel = 100f;
+        fuelBar.fillAmount = 1f;
     }
 
     // Update is called once per frame
     void Update()
     {
         GetInputs();
+        StartEngine();
+        ToggleLights();
+        ReduceFuel();
         currentSpeed = rb.velocity.magnitude;
+        currentEngineVolume = rb.velocity.magnitude / 50f;
     }
     void FixedUpdate()
     {

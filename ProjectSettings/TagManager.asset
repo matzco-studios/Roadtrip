@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - GrabbableItem
+  - InteractableItem
+  - WheelOfCar
+  - ActionMessage
   layers:
   - Default
   - TransparentFX
@@ -12,7 +15,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - WatchedPostProcess
+  - WheelOfCar
   - 
   - 
   - 
