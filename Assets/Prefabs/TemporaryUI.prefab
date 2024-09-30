@@ -652,11 +652,11 @@ GameObject:
   - component: {fileID: 118685849262620877}
   m_Layer: 5
   m_Name: ActionMessage
-  m_TagString: Untagged
+  m_TagString: ActionMessage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6409815119162017309
 RectTransform:
   m_ObjectHideFlags: 0

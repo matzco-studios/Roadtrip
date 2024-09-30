@@ -12,22 +12,58 @@ public class ActionMessageController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _action;
     [SerializeField] private TextMeshProUGUI _itemName;
 
-    public void Activate() {
+    void Start() {
+        gameObject.SetActive(false);
+    }
+
+    public void Activate()
+    {
         gameObject.SetActive(true);
     }
 
-    public void Disable() {
+    public void Disable()
+    {
         gameObject.SetActive(false);
+    }
+
+    public bool IsActive() {
+        return gameObject.activeSelf;
     }
 
     /// <summary>
     /// Function used by inventory controller to tell the user if he want to grab an item.
     /// </summary>
-    /// <param name="itemName">The name of the item that the user can take.</param>
-    public void GrabItem(string itemName) {
+    /// <param name="item">The item you want to grab.</param>
+    public void GrabItem(GameObject item)
+    {
+        var itemScript = item.GetComponent<GrabbableItem>();
         _key.text = "E";
         _action.text = "to grab";
-        _itemName.text = itemName;
+        _itemName.text = itemScript && itemScript.Name.Length != 0 ? itemScript.Name : item.name;
+        print($"Displayed the message for {_itemName.text}.");
+        Activate();
+    }
+
+    /// <summary>
+    /// Function used by inventory controller to tell the user if he want to grab an item.
+    /// </summary>
+    /// <param name="isExit">If the user is trying to exit or enter the car.</param>
+    public void CarInteraction(bool isExit = false)
+    {
+        _key.text = "F";
+        _action.text = isExit ? "to exit" : "to enter";
+        _itemName.text = "car";
+        Activate();
+    }
+
+    /// <summary>
+    /// Default placeholder function for interacting with an object.
+    /// </summary>
+    public void InteractableItem()
+    {
+        _key.text = "F";
+        _action.text = "to interact";
+        _itemName.text = "with object";
         Activate();
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CarController : MonoBehaviour
 {
@@ -19,7 +20,8 @@ public class CarController : MonoBehaviour
     private bool IsRunning = false;
     public AudioSource engineSound;
     public AudioSource engineStartSound;
-
+    public AudioSource engineCoughSound;
+    public List<Light> carLights;
     private float currentSpeed;
     private float currentEngineVolume;
 
@@ -29,6 +31,11 @@ public class CarController : MonoBehaviour
     private float speedMultiplier;
     private float carWheelMaxAngle = 150f;
     public float maxSpeed = 20f;
+
+    private bool outOfFuel = false;
+    public float currentFuel;
+    private float fuelConsumption;
+    public Image fuelBar;
 
     private float gasInput;
     private float turnInput;
@@ -45,11 +52,22 @@ public class CarController : MonoBehaviour
         {
             if (!IsRunning)
             {
-                engineStartSound.Play();
-                engineSound.PlayDelayed(1f);
-                engineSound.volume = 1f;
-                IsRunning = true;
-            }else if (IsRunning)
+                if (outOfFuel)
+                {
+                    Debug.Log("Out of fuel");
+                    engineCoughSound.volume = 0.5f;
+                    engineCoughSound.Play();
+                    currentFuel = 100f;
+                }
+                else
+                {
+                    engineStartSound.Play();
+                    engineSound.PlayDelayed(1f);
+                    engineSound.volume = 1f;
+                    IsRunning = true;
+                }
+            }
+            else if (IsRunning)
             {
                 IsRunning = false;
                 engineSound.pitch = currentEngineVolume;
@@ -58,8 +76,8 @@ public class CarController : MonoBehaviour
     }
     void GetInputs()
     {
-        gasInput = (IsPlayerInside) ? Input.GetAxis("Vertical") : 0.0f;
-        turnInput =(IsPlayerInside) ? Input.GetAxis("Horizontal") : 0.0f;
+        gasInput = IsPlayerInside ? Input.GetAxis("Vertical") : 0.0f;
+        turnInput = IsPlayerInside ? Input.GetAxis("Horizontal") : 0.0f;
     }
     void MoveCarForward()
     {
@@ -71,20 +89,41 @@ public class CarController : MonoBehaviour
                     wheel.wheelCollider.motorTorque = gasInput * acceleration * speedMultiplier * Time.deltaTime;
                 }
             }
+            fuelConsumption = (currentSpeed > 0) ? currentSpeed : 0f;
         }
-        else return;
+        else fuelConsumption = 0f;
     }
+
+    public void Refuel() => currentFuel = 100f;
+
+    void ReduceFuel()
+    {
+        if (currentFuel <= 0)
+        {
+            outOfFuel = true;
+            IsRunning = false;
+            engineSound.pitch = currentEngineVolume;
+        }
+        else
+        {
+            outOfFuel = false;
+            currentFuel -= Time.deltaTime * fuelConsumption;
+            Math.Clamp(currentFuel, 0, 100);
+            fuelBar.fillAmount = currentFuel / 100;
+        }
+    }
+
     void TurnCar()
     {
         if (currentSpeed > 0.1f)
         {
-            float _steerAngle = turnInput * turnAngle * (maxSpeed/currentSpeed);
+            float _steerAngle = turnInput * turnAngle * (maxSpeed / currentSpeed);
             _steerAngle = Mathf.Clamp(_steerAngle, -carWheelMaxAngle, carWheelMaxAngle);
             foreach (Wheel wheel in wheels)
             {
                 if (wheel.isFrontWheel)
                 {
-                    wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, _steerAngle/4, acceleration);
+                    wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, _steerAngle / 4, acceleration);
                 }
             }
         }
@@ -153,14 +192,26 @@ public class CarController : MonoBehaviour
         {
             engineSound.volume = 0;
         }
-        
+
         engineSound.mute = !IsPlayerInside && !IsRunning;
+    }
+    void ToggleLights()
+    {
+        if (Input.GetKeyDown(KeyCode.L) && IsPlayerInside)
+        {
+            foreach (Light light in carLights)
+            {
+                light.intensity = (light.intensity == 0) ? 1 : 0;
+            }
+        }
     }
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         engineSound = GetComponent<AudioSource>();
+        currentFuel = 50f;
+        fuelBar.fillAmount = 1f;
     }
 
     // Update is called once per frame
@@ -168,6 +219,8 @@ public class CarController : MonoBehaviour
     {
         GetInputs();
         StartEngine();
+        ToggleLights();
+        ReduceFuel();
         currentSpeed = rb.velocity.magnitude;
         currentEngineVolume = rb.velocity.magnitude / 50f;
     }
