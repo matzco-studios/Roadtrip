@@ -1,34 +1,57 @@
 using UnityEngine;
 
+/// <summary>
+/// Class used by an ItemContainer to manage child items. 
+/// This class uses the ItemContainer like a backpack.
+/// </summary>
 public class InventoryController : MonoBehaviour
 {
-    [SerializeField] private GameObject _ePressMessage;
-    [SerializeField] private int _currentSelectedItem = 0;
+    public static readonly int None = -1, First = 0, Second = 1, Third = 2;
+    [SerializeField] private ActionMessageController _message;
+    private int _currentSelectedItem = None;
+    private float _scrollWheelInput;
+    private bool _enabled = true;
 
-    void DropCurrentItem(bool replace = false)
+    /// <summary>
+    /// Function that contain shared logic between DropCurrentItem and AddItem.
+    /// </summary>
+    /// <param name="grap">True mean grap actions, false mean drop actions.</param>
+    public void SetItemForGrap(Transform item, bool grap = true)
     {
-        var itemToDrop = transform.GetChild(_currentSelectedItem).transform;
-        itemToDrop.GetComponent<Rigidbody>().isKinematic = false;
-        itemToDrop.GetComponent<MeshCollider>().enabled = true;
-        itemToDrop.transform.SetParent(null);
-        print(itemToDrop.name);
+        item.transform.SetParent(grap ? transform : null);
+        var body = item.GetComponent<Rigidbody>();
+        body.isKinematic = grap;
+        item.GetComponent<Collider>().enabled = !grap;
 
-        if (!replace)
+        if (!grap)
         {
-            // code the execute if we are just dropping the item without replacing it.
-            print("Not replace");
+            //(move it forward a bit to avoid collisions with player) itemToDrop.transform.Translate(transform.forward*1f);
+            body.AddForce(transform.forward * 100 * body.mass);
+            body.AddForce(transform.up * 25 * body.mass);
         }
     }
 
-    void AddItem(GameObject nearItem)
+    /// <summary>
+    /// Function to drop the current selected item.
+    /// </summary>
+    /// <param name="replace">True mean he is adding an item and dropping the current one because he exceeded the limit, false mean he is directly dropping the current item.</param>
+    public void DropCurrentItem(bool replace = false)
     {
-        nearItem.transform.SetParent(transform);
-        nearItem.GetComponent<Rigidbody>().isKinematic = true;
-        nearItem.GetComponent<Collider>().enabled = false;
-        nearItem.transform.localScale = Vector3.one;
+        if (_currentSelectedItem == None) return;
 
-        // To do give a position of (0, 0, 0) to let the child follow the parent position and applied the rotation of the parent.
-        nearItem.transform.SetLocalPositionAndRotation(Vector3.zero, transform.localRotation);
+        SetItemForGrap(transform.GetChild(_currentSelectedItem).transform, false);
+        if (!replace) _currentSelectedItem = None;
+    }
+
+    /// <summary>
+    /// Function to add an item in the itemsContainer.
+    /// </summary>
+    /// <param name="nearItem">The item that the is in the Box Collider Trigger of the itemsContainer.</param>
+    public void AddItem(GameObject nearItem)
+    {
+        SetItemForGrap(nearItem.transform);
+        var rotation = nearItem.GetComponent<GrabbableItem>()?.Rotation;
+        nearItem.transform.SetLocalPositionAndRotation(Vector3.zero, rotation ?? transform.localRotation);
 
         if (transform.childCount == 4)
         {
@@ -36,70 +59,90 @@ public class InventoryController : MonoBehaviour
             nearItem.transform.SetSiblingIndex(_currentSelectedItem);
         }
 
-        else if (transform.childCount > 1)
+        else
         {
-            nearItem.SetActive(false);
-        }
-
-        // Calling OnTriggerExit manually, because it does not activate when we get the item, because we do not leave the trigger zone, 
-        // we just desactivate, the item collider and rigidbody.
-        OnTriggerExit();
-    }
-
-    void FixedUpdate()
-    {
-        ChangeCurrentItem();
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            DropCurrentItem();
+            SetCurrentItemActive(false);
+            _currentSelectedItem = nearItem.transform.GetSiblingIndex();
         }
     }
 
-    // The function is executed in loop when two objects are colliding.
-    void OnTriggerStay(Collider other)
+    /// <summary>
+    /// Function to handle scroll wheel input to change the current selected item.
+    /// </summary>
+    public void ScrollWheelItemChange()
     {
-        print(other.name);
+        if (transform.childCount == 0) return;
 
-        if (other.CompareTag("GrabbableItem"))
+        _scrollWheelInput = Input.GetAxisRaw("Mouse ScrollWheel");
+
+        if (_scrollWheelInput > 0)
         {
-            _ePressMessage.SetActive(true);
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                AddItem(other.gameObject);
-            }
+            SelectAnotherItem(_currentSelectedItem == transform.childCount - 1 ? 0 : _currentSelectedItem + 1);
+        }
+        else if (_scrollWheelInput < 0)
+        {
+            SelectAnotherItem(_currentSelectedItem <= 0 ? transform.childCount - 1 : _currentSelectedItem - 1);
         }
     }
 
-    void OnTriggerExit()
+    /// <summary>
+    /// Function that will get the child with the selectItem index and activate it or desactivate it.
+    /// </summary>
+    /// <param name="selectItem">The index of the child.</param>
+    /// <param name="active">True activate, false desactivate</param>
+    private void ChangeItemVisibility(int selectItem, bool active)
     {
-        print("Exited Trigger");
-        _ePressMessage.SetActive(false);
+        if (selectItem == None) return;
+        transform.GetChild(selectItem).gameObject.SetActive(active);
     }
 
+    /// <summary>
+    /// Function to activate or desactivate the _currentSelectedItem.
+    /// </summary>
+    /// <param name="active">True activate, False desactivate.</param>
+    private void SetCurrentItemActive(bool active)
+    {
+        ChangeItemVisibility(_currentSelectedItem, active);
+    }
+
+    /// <summary>
+    /// Function that lets the user change the _currentSelectedItem, used by several functions like 
+    /// KeyboardItemChange and ScrollWheelItemChange.
+    /// </summary>
+    /// <param name="otherItemIndex">The index of the item that the user wants to select.</param>
     private void SelectAnotherItem(int otherItemIndex)
     {
-        transform.GetChild(_currentSelectedItem).gameObject.SetActive(false);
-        transform.GetChild(otherItemIndex).gameObject.SetActive(true);
+        if (_currentSelectedItem == otherItemIndex) return;
+        if (otherItemIndex > transform.childCount - 1) return;
+
+        SetCurrentItemActive(false);
+        ChangeItemVisibility(otherItemIndex, true);
         _currentSelectedItem = otherItemIndex;
     }
 
-    void ChangeCurrentItem()
+    /// <summary>
+    /// Function that let the user change the current item using the alpha keys (1, 2 and 3).
+    /// </summary>
+    public void KeyboardItemChange()
     {
-        var totalItems = transform.childCount;
+        if (Input.GetKey(KeyCode.Alpha1)) SelectAnotherItem(First);
+        else if (Input.GetKey(KeyCode.Alpha2)) SelectAnotherItem(Second);
+        else if (Input.GetKey(KeyCode.Alpha3)) SelectAnotherItem(Third);
+    }
 
-        if (Input.GetKey(KeyCode.Keypad1) && _currentSelectedItem != 0 && totalItems >= 1)
-        {
-            SelectAnotherItem(0);
-        }
-        else if (Input.GetKey(KeyCode.Keypad2) && _currentSelectedItem != 1 && totalItems >= 2)
-        {
-            SelectAnotherItem(1);
-        }
-        else if (Input.GetKey(KeyCode.Keypad3) && _currentSelectedItem != 2 && totalItems >= 3)
-        {
-            SelectAnotherItem(2);
-        }
+    /// <summary>
+    /// Function that tell if the InventoryController is activated or not.
+    /// </summary>
+    /// <returns>_enabled value</returns>
+    public bool IsActive() => _enabled;
+
+    /// <summary>
+    /// Function to activate or desactivate the InventoryController instance.
+    /// </summary>
+    /// <param name="active">To tell to activate or desactivate.</param>
+    public void SetActive(bool active = true)
+    {
+        SetCurrentItemActive(active);
+        _enabled = active;
     }
 }
