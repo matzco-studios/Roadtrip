@@ -72,6 +72,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetKey(KeyCode.Escape)) {
+            Application.Quit();
+        }
+
         HandleJump();
         PlayerDirection();
     }

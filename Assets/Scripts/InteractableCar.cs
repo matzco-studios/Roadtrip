@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class InteractableCar : MonoBehaviour, IInteractable
+public class InteractableCar : IInteractable
 {
     private GameObject _player;
     private GameObject _car;
@@ -9,14 +9,14 @@ public class InteractableCar : MonoBehaviour, IInteractable
     private Rigidbody _carBody;
     private bool _isInCar;
     private bool _canExit;
-    public string InteractionInfo { get { return "Get in car"; } }
 
-    private ActionMessageController _message;
+    [SerializeField] private ActionMessageController _message;
     [SerializeField] private InventoryController _inventory;
 
     void Start()
     {
-        _message = IInteractable.GetActionMessageController();
+        print("Start");
+        InteractionInfo = "Get in car";
         _player = GameObject.FindGameObjectWithTag("Player");
         _seatPosition = transform;
         _car = transform.parent.gameObject;
@@ -26,6 +26,7 @@ public class InteractableCar : MonoBehaviour, IInteractable
         _seatPosition = transform.GetChild(1);
         _seatPosition.SetParent(null);
         _isInCar = false;
+        print("End");
     }
     private void EnterCar()
     {
@@ -59,13 +60,13 @@ public class InteractableCar : MonoBehaviour, IInteractable
         _seatPosition.rotation = transform.rotation;
     }
 
-    public void OnInteract()
+    public override void OnInteract()
     {
         if (_isInCar) ExitCar();
         else if (!_isInCar) EnterCar();
     }
 
-    public void InteractionMessage()
+    public override void InteractionMessage()
     {
         if(_canExit) {
             _message.CarInteraction(_isInCar);

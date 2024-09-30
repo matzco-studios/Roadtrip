@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Level1.unity
     guid: 7613acfbaf647b41399780731f129113
   - enabled: 1
-    path: Assets/Scenes/Dev/PlayerPrototype.unity
-    guid: 8b4d61d7e78486e40881a17c74aec38b
+    path: Assets/Scenes/Dev/SprintOneRelease.unity
+    guid: ed67369aac6cb5327a1ad16731709607
   m_configObjects: {}

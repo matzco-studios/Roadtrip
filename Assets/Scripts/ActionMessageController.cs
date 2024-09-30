@@ -19,7 +19,6 @@ public class ActionMessageController : MonoBehaviour
 
     void Start()
     {
-        gameObject.SetActive(false);
         _crosshair = transform.parent.GetChild(transform.GetSiblingIndex() + 1).GetComponent<Image>();
     }
 

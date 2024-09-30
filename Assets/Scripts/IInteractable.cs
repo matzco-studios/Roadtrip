@@ -1,21 +1,14 @@
+using System;
 using UnityEngine;
 
-public interface IInteractable
+public abstract class IInteractable : MonoBehaviour
 {
-    string InteractionInfo { get; }
+    public string InteractionInfo;
 
-    void OnInteract();
-
-    /// <summary>
-    /// Function that will display a message to the user how he can interact with the object.
-    /// </summary>
-    void InteractionMessage();
-
+    public abstract void OnInteract();
 
     /// <summary>
     /// Function that will display a message to the user how he can interact with the object.
     /// </summary>
-    public static ActionMessageController GetActionMessageController() {
-        return GameObject.FindWithTag("ActionMessage").GetComponent<ActionMessageController>();
-    }
+    public abstract void InteractionMessage();
 }
