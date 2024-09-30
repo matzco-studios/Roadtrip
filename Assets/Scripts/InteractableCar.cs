@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class InteractableCar : IInteractable
+public class InteractableCar : Interactable
 {
     private GameObject _player;
     private GameObject _car;

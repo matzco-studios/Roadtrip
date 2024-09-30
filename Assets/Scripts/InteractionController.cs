@@ -21,7 +21,7 @@ public class InteractionController : MonoBehaviour
         }
         else if (collider.CompareTag("InteractableItem"))
         {
-            collider.gameObject.GetComponent<IInteractable>().InteractionMessage();
+            collider.gameObject.GetComponent<Interactable>().InteractionMessage();
         }
     }
 
@@ -30,7 +30,7 @@ public class InteractionController : MonoBehaviour
         if (other.CompareTag("InteractableItem"))
         {
             if (_keyPressF>0){
-                other.GetComponent<IInteractable>().OnInteract();
+                other.GetComponent<Interactable>().OnInteract();
                 _keyPressF = 0;
             }else
                 ForceShowMessage(other);

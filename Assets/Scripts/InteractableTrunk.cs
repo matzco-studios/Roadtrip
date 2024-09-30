@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractableTrunk : IInteractable
+public class InteractableTrunk : Interactable
 {
     [SerializeField] private ActionMessageController _message;
     private float _targetRotation = 0f;
