@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AirPumpItem : GrabbableItem
@@ -7,20 +5,6 @@ public class AirPumpItem : GrabbableItem
     public GameObject IsConnected = null;
     private Rigidbody _rigidbody;
     private LineRenderer _lineRenderer;
-    public override void OnCustomAction()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void OnLeftClick()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void OnRightClick()
-    {
-        throw new System.NotImplementedException();
-    }
 
     void Start() 
     {

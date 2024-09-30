@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class GrabbableItem : MonoBehaviour
@@ -5,11 +6,9 @@ public abstract class GrabbableItem : MonoBehaviour
     public Quaternion Rotation;
     public string Name;
 
-    public abstract void OnRightClick();
+    public delegate void KeyAction();
 
-    public abstract void OnLeftClick();
-
-    public abstract void OnCustomAction();
+    public Dictionary<KeyCode, KeyAction> ActionDictionary = new();
 
     public GrabbableItem(Quaternion rotation)
     {
