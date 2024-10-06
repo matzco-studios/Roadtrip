@@ -10,6 +10,10 @@ public class InteractableTrunk : Interactable
     private float[] _targets = { 0f, 84f };
     private bool _isOpen = false;
 
+    void Start() {
+        _message = GetMessage();
+    }
+
     public override void InteractionMessage()
     {
         _message.InteractableItem();

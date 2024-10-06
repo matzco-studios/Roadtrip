@@ -26,6 +26,7 @@ public class InteractableCar : Interactable
         _seatPosition = transform.GetChild(1);
         _seatPosition.SetParent(null);
         _isInCar = false;
+        _message = GetMessage();
         print("End");
     }
     private void EnterCar()
