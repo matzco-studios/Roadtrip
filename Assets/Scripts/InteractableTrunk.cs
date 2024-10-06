@@ -8,7 +8,7 @@ public class InteractableTrunk : Interactable
     private float _targetRotation = 0f;
     private float _rotation = 0f;
     private float[] _targets = { 0f, 84f };
-    private bool _isOpen = false;
+    private bool _open = false;
 
     void Start() {
         _message = GetMessage();
@@ -21,8 +21,8 @@ public class InteractableTrunk : Interactable
 
     public override void OnInteract()
     {
-        _isOpen = !_isOpen;
-        _targetRotation = _targets[_isOpen ? 1 : 0];
+        _open = !_open;
+        _targetRotation = _targets[_open ? 1 : 0];
     }
 
     // Update is called once per frame
