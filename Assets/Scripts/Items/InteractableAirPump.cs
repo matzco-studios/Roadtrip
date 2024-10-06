@@ -12,11 +12,12 @@ public class InteractableAirPump : Interactable
     {
         _airPumpItem = transform.parent.GetComponent<AirPumpItem>();
         _airPumpAnim = _airPumpItem.GetComponent<Animation>();
+        _message = GetMessage();
     }
 
     public override void InteractionMessage()
     {
-        _message.InteractableItem();
+        _message.InteractableItem("air", "to pump");
     }
 
     public override void OnInteract()
