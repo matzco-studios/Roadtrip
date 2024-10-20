@@ -15,15 +15,16 @@ public class InventoryController : MonoBehaviour
     /// <summary>
     /// Function that contain shared logic between DropCurrentItem and AddItem.
     /// </summary>
-    /// <param name="grap">True mean grap actions, false mean drop actions.</param>
-    public void SetItemForGrap(Transform item, bool grap = true)
+    /// <param name="item">The item you want to set for grab.</param>
+    /// <param name="grab">True mean grab actions, false mean drop actions.</param>
+    private void SetItemForGrab(Transform item, bool grab = true)
     {
-        item.transform.SetParent(grap ? transform : null);
+        item.transform.SetParent(grab ? transform : null);
         var body = item.GetComponent<Rigidbody>();
-        body.isKinematic = grap;
-        item.GetComponent<Collider>().enabled = !grap;
+        body.isKinematic = grab;
+        item.GetComponent<Collider>().enabled = !grab;
 
-        if (!grap)
+        if (!grab)
         {
             //(move it forward a bit to avoid collisions with player) itemToDrop.transform.Translate(transform.forward*1f);
             body.AddForce(transform.forward * 100 * body.mass);
@@ -39,7 +40,7 @@ public class InventoryController : MonoBehaviour
     {
         if (_currentSelectedItem == None) return;
 
-        SetItemForGrap(transform.GetChild(_currentSelectedItem).transform, false);
+        SetItemForGrab(transform.GetChild(_currentSelectedItem).transform, false);
         if (!replace) _currentSelectedItem = None;
     }
 
@@ -49,7 +50,7 @@ public class InventoryController : MonoBehaviour
     /// <param name="nearItem">The item that the is in the Box Collider Trigger of the itemsContainer.</param>
     public void AddItem(GameObject nearItem)
     {
-        SetItemForGrap(nearItem.transform);
+        SetItemForGrab(nearItem.transform);
         var rotation = nearItem.GetComponent<GrabbableItem>()?.Rotation;
         nearItem.transform.SetLocalPositionAndRotation(Vector3.zero, rotation ?? transform.localRotation);
 
