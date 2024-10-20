@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class CarEventsManager : MonoBehaviour
 {
-    private List<CarEvent> _events = new ();
-    
+    private List<CarEvent> _events = new();
+
     private IEnumerator EventLoop()
     {
-        yield return null;
+        while (true)
+        {
+            var timer = Random.Range(45, 76);
+            print($"Next event will be in {timer} seconds.");
+            yield return new WaitForSeconds(timer);
+        }
     }
-    
+
     private void Start()
     {
         _events.Add(gameObject.AddComponent<DeadBatteryEvent>());
