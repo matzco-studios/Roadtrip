@@ -8,6 +8,7 @@ TagManager:
   - InteractableItem
   - WheelOfCar
   - ActionMessage
+  - Car
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,6 @@ TagManager:
   - UI
   - WatchedPostProcess
   - WheelOfCar
-  - 
   - 
   - 
   - 
