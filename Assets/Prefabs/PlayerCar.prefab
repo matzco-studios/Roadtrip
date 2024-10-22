@@ -1377,7 +1377,7 @@ MonoBehaviour:
   _message: {fileID: 0}
   Targets:
   - 0
-  - 80
+  - 60
   Speed: 12
 --- !u!1 &2148947316399782063 stripped
 GameObject:
