@@ -18,6 +18,6 @@ public class FuelIndicator : MonoBehaviour
     void Update()
     {
         float fuel = _car.currentFuel/100f;
-        transform.localEulerAngles = new Vector3(0, 0, Mathf.LerpAngle(aFull, aEmpty, fuel) );
+        transform.localEulerAngles = new Vector3(0, 0, Mathf.LerpAngle(aEmpty, aFull, fuel) );
     }
 }
