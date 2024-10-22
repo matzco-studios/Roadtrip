@@ -15,4 +15,7 @@ public abstract class Interactable : MonoBehaviour
     public ActionMessageController GetMessage(){
         return GameObject.FindGameObjectWithTag("ActionMessage").GetComponent<ActionMessageController>();
     }
+    public CarController GetCar(){
+        return GameObject.FindGameObjectWithTag("Car").GetComponent<CarController>();
+    }
 }
