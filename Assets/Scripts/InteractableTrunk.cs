@@ -47,6 +47,6 @@ public class InteractableTrunk : Interactable
         _rotation += (_targetRotation - _rotation) / Speed;
         transform.localEulerAngles = new(-_rotation, 0, 0);
 
-        CheckCarEnter();
+        //CheckCarEnter();
     }
 }
