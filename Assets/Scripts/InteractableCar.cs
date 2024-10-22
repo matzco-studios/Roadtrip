@@ -9,6 +9,7 @@ public class InteractableCar : Interactable
     private Rigidbody _carBody;
     private bool _isInCar;
     private bool _canExit;
+    private bool _canExitDelayed;
 
     [SerializeField] private ActionMessageController _message;
     [SerializeField] private InventoryController _inventory;
@@ -77,9 +78,10 @@ public class InteractableCar : Interactable
     void Update() {
         _canExit = _carBody.velocity.magnitude < 0.1f;
 
-        if(!_canExit && _message.Active) {
+        if(!_canExit && _message.Active && (_canExit!=_canExitDelayed)) {
             _message.SetActive(false);
             print("Disabling car message.");
         }
+        _canExitDelayed = _canExit;
     }
 }
