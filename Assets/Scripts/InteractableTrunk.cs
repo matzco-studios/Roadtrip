@@ -34,8 +34,8 @@ public class InteractableTrunk : Interactable
     public void CheckCarEnter()
     {
         if (_car.IsPlayerInside!=_wasInside){
-            _open = false; 
-            _targetRotation = Targets[0];
+            //_open = false; 
+            //_targetRotation = Targets[0];
             _box.enabled = !_car.IsPlayerInside;
         }
         _wasInside = _car.IsPlayerInside;
@@ -47,6 +47,6 @@ public class InteractableTrunk : Interactable
         _rotation += (_targetRotation - _rotation) / Speed;
         transform.localEulerAngles = new(-_rotation, 0, 0);
 
-        //CheckCarEnter();
+        CheckCarEnter();
     }
 }
