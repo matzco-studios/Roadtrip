@@ -825,6 +825,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Car
       objectReference: {fileID: 0}
+    - target: {fileID: 1161866868296360, guid: 20d6170d440e52b438267a860798bb0a, type: 3}
+      propertyPath: m_TagString
+      value: InteractableItem
+      objectReference: {fileID: 0}
     - target: {fileID: 1184304882269554, guid: 20d6170d440e52b438267a860798bb0a, type: 3}
       propertyPath: m_Name
       value: FrontR
@@ -991,6 +995,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1627548045935554, guid: 20d6170d440e52b438267a860798bb0a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1195273729534381135}
+    - targetCorrespondingSourceObject: {fileID: 1161866868296360, guid: 20d6170d440e52b438267a860798bb0a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2073397697369746779}
+    - targetCorrespondingSourceObject: {fileID: 1161866868296360, guid: 20d6170d440e52b438267a860798bb0a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 501468626354757583}
     - targetCorrespondingSourceObject: {fileID: 1184304882269554, guid: 20d6170d440e52b438267a860798bb0a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7245372555415831746}
@@ -1325,6 +1335,50 @@ WheelCollider:
   m_LayerOverridePriority: 0
   m_Enabled: 0
   m_ProvidesContacts: 0
+--- !u!1 &2148935667343658869 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1161866868296360, guid: 20d6170d440e52b438267a860798bb0a, type: 3}
+  m_PrefabInstance: {fileID: 2150096279506093533}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &2073397697369746779
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2148935667343658869}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.7, y: 0.5, z: 0.42}
+  m_Center: {x: 0, y: -0.25, z: 1}
+--- !u!114 &501468626354757583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2148935667343658869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc4f2ab6c9c9b14683f5e4d3f2314c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InteractionInfo: hood
+  _message: {fileID: 0}
+  Targets:
+  - 0
+  - 80
+  Speed: 12
 --- !u!1 &2148947316399782063 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1184304882269554, guid: 20d6170d440e52b438267a860798bb0a, type: 3}
@@ -1408,8 +1462,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afc4f2ab6c9c9b14683f5e4d3f2314c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InteractionInfo: 
+  InteractionInfo: trunk
   _message: {fileID: 0}
+  Targets:
+  - 0
+  - 84
+  Speed: 20
 --- !u!1 &2149178393413683133 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1626658843361888, guid: 20d6170d440e52b438267a860798bb0a, type: 3}
