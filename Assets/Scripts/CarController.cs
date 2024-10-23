@@ -46,9 +46,13 @@ public class CarController : MonoBehaviour
     public float maxSpeedVolume = 21f;
 
     public bool IsPlayerInside = false;
-    void StartEngine()
+
+    public bool IsCarRunning() {
+        return IsRunning;
+    }
+    public void StartEngine()
     {
-        if (Input.GetKeyDown(startEngineKey) && IsPlayerInside)
+        if (IsPlayerInside)
         {
             if (!IsRunning)
             {
@@ -217,7 +221,6 @@ public class CarController : MonoBehaviour
     void Update()
     {
         GetInputs();
-        StartEngine();
         ToggleLights();
         ReduceFuel();
         currentSpeed = rb.velocity.magnitude;

@@ -20,6 +20,7 @@ public class ActionMessageController : MonoBehaviour
     void Start()
     {
         _crosshair = transform.parent.GetChild(transform.GetSiblingIndex() + 1).GetComponent<Image>();
+        SetActive(false);
     }
 
     /// <summary>
