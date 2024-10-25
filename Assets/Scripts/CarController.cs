@@ -36,6 +36,7 @@ public class CarController : MonoBehaviour
     private bool outOfFuel = false;
     public float currentFuel;
     private float fuelConsumption;
+    private bool IsLightsOn = false;
     public Image fuelBar;
 
     private float gasInput;
@@ -203,19 +204,20 @@ public class CarController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.L) && IsPlayerInside)
         {
+            IsLightsOn = !IsLightsOn;
             foreach (Light light in carLights)
             {
-                light.intensity = (light.intensity == 0) ? 1 : 0;
+                light.intensity = IsLightsOn ? 1 : 0;
             }
             foreach (ParticleSystem flare in carFlares)
             {
-                if (flare.isPlaying)
+                if (IsLightsOn)
                 {
-                    flare.Stop();
+                    flare.Play();
                 }
                 else
                 {
-                    flare.Play();
+                    flare.Stop();
                 }
             }
         }
