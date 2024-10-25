@@ -16,8 +16,8 @@ public class CarController : MonoBehaviour
         
         public int Pressure { get => _pressure; }
         public void FlatTire() => _pressure = 0;
-        public void AddPressure(int amount) => _pressure = Math.Clamp(_pressure - amount, 0, MaxPsi);
-        public void ReducePressure(int amount) => _pressure = Math.Clamp(_pressure + amount, 0, MaxPsi);
+        public void AddPressure(int amount) => _pressure = Math.Clamp(_pressure + amount, 0, MaxPsi);
+        public void ReducePressure(int amount) => _pressure = Math.Clamp(_pressure - amount, 0, MaxPsi);
     }
     
     private Rigidbody rb;
