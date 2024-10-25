@@ -23,7 +23,6 @@ public class CarController : MonoBehaviour
     public AudioSource engineCoughSound;
     public List<Light> carLights;
     public List<ParticleSystem> carFlares;
-    public List<ParticleSystem> backFlares;
     private float currentSpeed;
     private float currentEngineVolume;
 
@@ -70,17 +69,6 @@ public class CarController : MonoBehaviour
                     engineSound.PlayDelayed(1f);
                     engineSound.volume = 1f;
                     IsRunning = true;
-                    foreach (ParticleSystem flare in backFlares)
-                    {
-                        if (flare.isPlaying)
-                        {
-                            flare.Stop();
-                        }
-                        else
-                        {
-                            flare.Play();
-                        }
-                    }
                 }
             }
             else if (IsRunning)
