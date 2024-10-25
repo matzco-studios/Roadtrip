@@ -9,6 +9,7 @@ TagManager:
   - WheelOfCar
   - ActionMessage
   - Car
+  - CarUI
   layers:
   - Default
   - TransparentFX

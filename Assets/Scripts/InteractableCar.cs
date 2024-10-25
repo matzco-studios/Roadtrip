@@ -4,6 +4,7 @@ public class InteractableCar : Interactable
 {
     private GameObject _player;
     private GameObject _car;
+    private GameObject _carUI;
     private Transform _exitOffset;
     private Transform _seatPosition;
     private Rigidbody _carBody;
@@ -28,6 +29,8 @@ public class InteractableCar : Interactable
         _seatPosition.SetParent(null);
         _isInCar = false;
         _message = GetMessage();
+        _carUI = GameObject.FindGameObjectWithTag("CarUI");
+        if (_carUI != null) _carUI.SetActive(false);
         print("End");
     }
     private void EnterCar()
@@ -39,6 +42,7 @@ public class InteractableCar : Interactable
         _player.GetComponent<CharacterController>().enabled = false;
         _car.GetComponent<CarController>().IsPlayerInside = true;
         _inventory.SetActive(false);
+        if (_carUI != null) _carUI.SetActive(true);
     }
     private void ExitCar()
     {
@@ -53,6 +57,7 @@ public class InteractableCar : Interactable
             _player.GetComponent<CharacterController>().enabled = true;
             _car.GetComponent<CarController>().IsPlayerInside = false;
             _inventory.SetActive();
+            _carUI.SetActive(false);
         }
     }
 
