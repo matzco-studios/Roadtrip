@@ -25,9 +25,4 @@ public class BatteryPickup : MonoBehaviour
             GetComponent<Rigidbody>().isKinematic = true;
         }
     }
-
-    void Update()
-    {
-        
-    }
 }

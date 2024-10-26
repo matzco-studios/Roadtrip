@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class Interactable : MonoBehaviour
 {
-    public string InteractionInfo;
+    protected string InteractionInfo { get; set; }
 
     public abstract void OnInteract();
 
@@ -12,12 +12,12 @@ public abstract class Interactable : MonoBehaviour
     /// </summary>
     public abstract void InteractionMessage();
 
-    public UI.ActionMessageController GetMessage()
+    protected UI.ActionMessageController GetMessage()
     {
         return GameObject.FindGameObjectWithTag("ActionMessage").GetComponent<UI.ActionMessageController>();
     }
 
-    public CarController GetCar()
+    protected CarController GetCar()
     {
         return GameObject.FindGameObjectWithTag("Car").GetComponent<CarController>();
     }
