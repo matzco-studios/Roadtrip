@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+using Car;
 using UnityEngine;
 
 namespace Items
@@ -9,15 +12,27 @@ namespace Items
         
         public bool IsWorking;
         
-        private Vector3 _initialPosition;
-        private Quaternion _initialRotation;
-
-        private void Start() =>
-            IsWorking = true;
-
-        public CarLight()
+        private void Start()
         {
             Name = "CarLight";
+            IsWorking = true;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!other.CompareTag("LightCollider")) return;
+            
+            GameObject.FindGameObjectWithTag("Car")
+                .GetComponent<CarController>().carLights
+                .First(l => !l.IsWorking)
+                .IsWorking = true;
+            
+            /*
+             * Only destroy the CarLight component not the object
+             * -
+             * Why : So the player will still have the non-functional light bulb
+             */
+            Destroy(this); 
         }
     }
 }

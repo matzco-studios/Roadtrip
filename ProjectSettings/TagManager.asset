@@ -11,6 +11,7 @@ TagManager:
   - Car
   - Battery
   - BatteryCollider
+  - LightCollider
   layers:
   - Default
   - TransparentFX
