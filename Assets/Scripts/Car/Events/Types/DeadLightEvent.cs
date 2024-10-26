@@ -6,7 +6,10 @@ namespace Car.Events.Types
     {
         public override void Activate()
         {
-            print($"Light number {Random.Range(0, 2)} is broken.");
+            int lightIndex = Random.Range(0, 4);
+            Car.carLights[lightIndex].IsWorking = false;
+            
+            print($"Light number {lightIndex} is broken.");
         }
     }
 }

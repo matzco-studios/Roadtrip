@@ -17,7 +17,6 @@ namespace Car
         public AudioSource engineStartSound;
         public AudioSource engineCoughSound;
         public List<CarLight> carLights;
-        public List<ParticleSystem> carFlares;
         public float currentSpeed;
         private float currentEngineVolume;
 
@@ -28,10 +27,10 @@ namespace Car
         private float carWheelMaxAngle = 150f;
         public float maxSpeed = 20f;
 
-        private bool outOfFuel = false;
+        private bool outOfFuel;
         public float currentFuel;
         private float fuelConsumption;
-        private bool IsLightsOn = false;
+        private bool IsLightsOn;
         public Image fuelBar;
 
         private float gasInput;
@@ -42,7 +41,7 @@ namespace Car
         public float minSpeedVolume = 10f;
         public float maxSpeedVolume = 21f;
 
-        public bool IsPlayerInside = false;
+        public bool IsPlayerInside;
 
         public bool IsCarRunning()
         {
@@ -204,23 +203,11 @@ namespace Car
         {
             if (Input.GetKeyDown(KeyCode.L) && IsPlayerInside)
             {
-                
                 IsLightsOn = !IsLightsOn;
-                foreach (CarLight light in carLights)
+                foreach (var light in carLights)
                 {
-                    if (light.IsWorking) light.LightFlare.intensity = IsLightsOn ? 1 : 0;
-                }
-
-                foreach (ParticleSystem flare in carFlares)
-                {
-                    if (IsLightsOn)
-                    {
-                        flare.Play();
-                    }
-                    else
-                    {
-                        flare.Stop();
-                    }
+                    if (light.IsWorking) light.ULight.intensity = IsLightsOn ? 1 : 0;
+                    if (IsLightsOn) light.UFlare.Play(); else light.UFlare.Stop();
                 }
             }
         }
