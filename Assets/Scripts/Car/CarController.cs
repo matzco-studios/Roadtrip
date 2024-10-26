@@ -144,13 +144,11 @@ namespace Car
                 }
             
             // if gas is pressed then it removes the brake
-            else if (gasInput > 0 && IsRunning) 
-                foreach (Wheel wheel in wheels) 
-                    wheel.wheelCollider.brakeTorque = 0;
+            else if (gasInput > 0 && IsRunning) foreach (var wheel in wheels) wheel.wheelCollider.brakeTorque = 0;
             
             // if no gas is pressed then slows down the car
             else 
-                foreach (Wheel wheel in wheels)
+                foreach (var wheel in wheels)
                 {
                     wheel.wheelCollider.brakeTorque = deceleration * 350 * Time.deltaTime;
                     wheel.wheelCollider.motorTorque = 0;
