@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public class Mackbook : GrabbableItem
+namespace Items
 {
-    public Mackbook() : base(Quaternion.Euler(0, 107.799995f, 0))
+    public class Mackbook : GrabbableItem
     {
-        ActionDictionary.Add(KeyCode.A, () => { print("Hello World!"); });
+        public Mackbook() : base(Quaternion.Euler(0, 107.799995f, 0))
+        {
+            ActionDictionary.Add(KeyCode.A, () => { print("Hello World!"); });
+        }
     }
 }

@@ -1,19 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class GrabbableItem : MonoBehaviour
+namespace Items
 {
-    public Quaternion Rotation;
-    public string Name;
-
-    public delegate void KeyAction();
-
-    public Dictionary<KeyCode, KeyAction> ActionDictionary = new();
-
-    public GrabbableItem(Quaternion rotation)
+    public abstract class GrabbableItem : MonoBehaviour
     {
-        Rotation = rotation;
-    }
+        public Quaternion Rotation;
+        public string Name;
 
-    public GrabbableItem() {}
+        public delegate void KeyAction();
+
+        public Dictionary<KeyCode, KeyAction> ActionDictionary = new();
+
+        public GrabbableItem(Quaternion rotation)
+        {
+            Rotation = rotation;
+        }
+
+        public GrabbableItem()
+        {
+        }
+    }
 }
