@@ -76,7 +76,7 @@ namespace Car
             }
         }
 
-        void GetInputs()
+        private void GetInputs()
         {
             gasInput = IsPlayerInside ? Input.GetAxis("Vertical") : 0.0f;
             turnInput = IsPlayerInside ? Input.GetAxis("Horizontal") : 0.0f;
@@ -99,7 +99,7 @@ namespace Car
 
         public void Refuel() => currentFuel = 100f;
 
-        void ReduceFuel()
+        private void ReduceFuel()
         {
             if (currentFuel <= 0)
             {
@@ -199,7 +199,7 @@ namespace Car
             engineSound.mute = !IsPlayerInside && !IsRunning;
         }
 
-        void ToggleLights()
+        private void ToggleLights()
         {
             if (Input.GetKeyDown(KeyCode.L) && IsPlayerInside)
             {
