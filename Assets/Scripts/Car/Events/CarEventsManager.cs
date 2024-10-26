@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Car.Events.Types;
 using UnityEngine;
 
+namespace Car.Events
+{
 public class CarEventsManager : MonoBehaviour
 {
     private readonly List<CarEvent> _events = new();
@@ -71,4 +74,5 @@ public class CarEventsManager : MonoBehaviour
             });
         }
     }
+}
 }
