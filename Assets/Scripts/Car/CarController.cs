@@ -16,7 +16,7 @@ namespace Car
         public AudioSource engineSound;
         public AudioSource engineStartSound;
         public AudioSource engineCoughSound;
-        public List<Light> carLights;
+        public List<CarLight> carLights;
         public List<ParticleSystem> carFlares;
         public float currentSpeed;
         private float currentEngineVolume;
@@ -204,10 +204,11 @@ namespace Car
         {
             if (Input.GetKeyDown(KeyCode.L) && IsPlayerInside)
             {
+                
                 IsLightsOn = !IsLightsOn;
-                foreach (Light light in carLights)
+                foreach (CarLight light in carLights)
                 {
-                    light.intensity = IsLightsOn ? 1 : 0;
+                    if (light.IsWorking) light.LightFlare.intensity = IsLightsOn ? 1 : 0;
                 }
 
                 foreach (ParticleSystem flare in carFlares)
