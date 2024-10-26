@@ -246,10 +246,12 @@ public class CarController : MonoBehaviour
         currentSpeed = rb.velocity.magnitude;
         currentEngineVolume = rb.velocity.magnitude / 50f;
 
-        wheels.ForEach(w => {
-            var consuming = Time.deltaTime * currentSpeed/2.5f;
-            w.ReducePressure((consuming+(Time.deltaTime/4))/50);
-        });
+        if (currentSpeed>0){
+            wheels.ForEach(w => {
+                var consuming = Time.deltaTime * currentSpeed/2.5f;
+                w.ReducePressure((consuming+(Time.deltaTime/4))/50);
+            });
+        }
     }
     void FixedUpdate()
     {
