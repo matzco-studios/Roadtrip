@@ -1,10 +1,12 @@
+using UnityEngine;
+
 namespace Car.Events.Types
 {
     public class DeadLightEvent : CarEvent
     {
         public override void Activate()
         {
-            // Light is dead
+            print($"Light number {Random.Range(0, 2)} is broken.");
         }
     }
 }

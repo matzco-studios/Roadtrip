@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Car.Parts;
+using Items;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -160,17 +161,8 @@ namespace Car
             }
         }
 
-        void SetMaxSpeed() // sets the max speed of the car so it doesn't go faster and faster
-        {
-            if (currentSpeed > maxSpeed)
-            {
-                speedMultiplier = 0;
-            }
-            else
-            {
-                speedMultiplier = 400;
-            }
-        }
+        void SetMaxSpeed() => // sets the max speed of the car so it doesn't go faster and faster
+            speedMultiplier = (currentSpeed > maxSpeed) ? 0 : 400; 
 
         void AnimateWheels()
         {

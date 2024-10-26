@@ -20,7 +20,7 @@ namespace Car.Events
 
                 var index = Random.Range(1, 13) switch
                 {
-                    // LightBreakEvent
+                    // DeadLightEvent
                     <= 3 => 0,
                     // FlatTireEvent
                     <= 6 => 1,
@@ -44,7 +44,7 @@ namespace Car.Events
         private void Start()
         {
             _events.Add(gameObject.AddComponent<DeadBatteryEvent>());
-            _events.Add(gameObject.AddComponent<LightBreakEvent>());
+            _events.Add(gameObject.AddComponent<DeadLightEvent>());
             _events.Add(gameObject.AddComponent<FlatTireEvent>());
             StartCoroutine(EventLoop());
         }
