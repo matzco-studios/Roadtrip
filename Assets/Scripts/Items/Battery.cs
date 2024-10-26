@@ -20,8 +20,7 @@ public class BatteryPickup : MonoBehaviour
         if (other.CompareTag("BatteryCollider"))
         {
             transform.SetParent(carHood);
-            transform.localPosition = initialPosition;
-            transform.localRotation = initialRotation;
+            transform.SetLocalPositionAndRotation(initialPosition, initialRotation);
             GetComponent<Rigidbody>().isKinematic = true;
         }
     }
