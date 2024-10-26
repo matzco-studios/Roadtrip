@@ -6,7 +6,7 @@ public class CarEventsManager : MonoBehaviour
 {
     private readonly List<CarEvent> _events = new();
     private CarController _carController;
-
+    
     private IEnumerator ScheduledLoop()
     {
         while (true)
