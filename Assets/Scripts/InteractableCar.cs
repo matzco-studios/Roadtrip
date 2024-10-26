@@ -1,6 +1,9 @@
+using Car;
+using Player;
+using Player.Mechanics;
 using UnityEngine;
 
-public class InteractableCar : Interactable
+public class InteractableCar : Items.Mechanics.Interactable
 {
     private GameObject _player;
     private GameObject _car;
@@ -12,7 +15,7 @@ public class InteractableCar : Interactable
     private bool _canExit;
     private bool _canExitDelayed;
 
-    [SerializeField] private ActionMessageController _message;
+    [SerializeField] private UI.ActionMessageController _message;
     [SerializeField] private InventoryController _inventory;
 
     void Start()

@@ -9,9 +9,14 @@ TagManager:
   - WheelOfCar
   - ActionMessage
   - Car
+<<<<<<< HEAD
   - CarUI
   - GasPump
   - FuelTank
+=======
+  - Battery
+  - BatteryCollider
+>>>>>>> origin/dev
   layers:
   - Default
   - TransparentFX

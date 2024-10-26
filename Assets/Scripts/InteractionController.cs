@@ -1,8 +1,10 @@
+using Items.Mechanics;
+using Player.Mechanics;
 using UnityEngine;
 
 public class InteractionController : MonoBehaviour
 {
-    [SerializeField] private ActionMessageController _message;
+    [SerializeField] private UI.ActionMessageController _message;
     [SerializeField] private InventoryController _inventory;
     private int _keyPressE;
     private int _keyPressF;
