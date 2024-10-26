@@ -14,7 +14,7 @@ public class CarController : MonoBehaviour
     public AudioSource engineCoughSound;
     public List<Light> carLights;
     public List<ParticleSystem> carFlares;
-    private float currentSpeed;
+    public float currentSpeed;
     private float currentEngineVolume;
 
     public float acceleration = 15f;
@@ -230,13 +230,6 @@ public class CarController : MonoBehaviour
         ReduceFuel();
         currentSpeed = rb.velocity.magnitude;
         currentEngineVolume = rb.velocity.magnitude / 50f;
-
-        if (currentSpeed>0){
-            wheels.ForEach(w => {
-                var consuming = Time.deltaTime * currentSpeed/2.5f;
-                w.ReducePressure((consuming+(Time.deltaTime/4))/50);
-            });
-        }
     }
     void FixedUpdate()
     {

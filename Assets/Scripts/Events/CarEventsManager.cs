@@ -14,8 +14,8 @@ public class CarEventsManager : MonoBehaviour
             // Will be set to 60sec after dev.
             yield return new WaitForSeconds(10);
             print("Scheduled event.");
-            _carController.wheels[0].ReducePressure(10);
-            print(_carController.wheels[0].Pressure);
+            //_carController.wheels[0].ReducePressure(10);
+            //print(_carController.wheels[0].Pressure);
         }
     }
 
@@ -59,5 +59,16 @@ public class CarEventsManager : MonoBehaviour
         _events.Add(gameObject.AddComponent<FlatTireEvent>());
         StartCoroutine(EventLoop());
         StartCoroutine(ScheduledLoop());
+    }
+
+    void Update()
+    {
+        
+        if (_carController.currentSpeed>0){
+            _carController.wheels.ForEach(w => {
+                var consuming = Time.deltaTime * _carController.currentSpeed/2.5f;
+                w.ReducePressure((consuming+(Time.deltaTime/4))/50);
+            });
+        }
     }
 }
