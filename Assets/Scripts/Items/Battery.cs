@@ -10,9 +10,9 @@ public class BatteryPickup : MonoBehaviour
     void Start()
     {
         // Stocke la position et la rotation initiales de la batterie
-        initialPosition = transform.localPosition;
+        initialPosition = new Vector3(0.500626624f, 0.195687994f, 1.54742706f);
         initialRotation = transform.localRotation;
-        carHood = transform.parent;
+        carHood = GameObject.FindGameObjectWithTag("Car").transform.GetChild(0).GetChild(0);
     }
 
     private void OnTriggerEnter(Collider other)
