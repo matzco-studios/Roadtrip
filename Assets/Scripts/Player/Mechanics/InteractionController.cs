@@ -60,7 +60,7 @@ namespace Player.Mechanics
 
         void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("InteractableItem") || other.CompareTag("GrabbableItem"))
+            if (other.CompareTag("InteractableItem") || other.CompareTag("GrabbableItem") || other.CompareTag("Battery"))
             {
                 _message.SetActive(false);
             }
