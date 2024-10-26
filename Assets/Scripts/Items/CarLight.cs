@@ -1,13 +1,16 @@
 namespace Items
 {
-    public class CarLight : Mechanics.GrabbableItem
+    namespace Items
     {
-        private float _health;
-
-        public CarLight()
+        public class CarLight : Mechanics.GrabbableItem
         {
-            this._health = 100f;
-            Name = "CarLight";
+            private float _health;
+
+            public CarLight()
+            {
+                this._health = 100f;
+                Name = "CarLight";
+            }
         }
     }
 }
