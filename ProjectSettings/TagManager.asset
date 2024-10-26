@@ -9,6 +9,8 @@ TagManager:
   - WheelOfCar
   - ActionMessage
   - Car
+  - Battery
+  - BatteryCollider
   layers:
   - Default
   - TransparentFX

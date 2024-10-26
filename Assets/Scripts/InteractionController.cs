@@ -15,7 +15,7 @@ public class InteractionController : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if (_inventory.IsActive() && collider.CompareTag("GrabbableItem"))
+        if (_inventory.IsActive() && (collider.CompareTag("GrabbableItem") || collider.CompareTag("Battery")))
         {
             _message.GrabItem(collider.gameObject);
         }
@@ -35,7 +35,7 @@ public class InteractionController : MonoBehaviour
             }else
                 ForceShowMessage(other);
         }
-        else if (_inventory.IsActive() && other.CompareTag("GrabbableItem"))
+        else if (_inventory.IsActive() && other.CompareTag("GrabbableItem") || other.CompareTag("Battery"))
         {
             if (_keyPressE>0)
             {
