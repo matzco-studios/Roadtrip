@@ -97,7 +97,15 @@ namespace Car
             else fuelConsumption = 0f;
         }
 
-        public void Refuel() => currentFuel = 100f;
+        public void Refuel(float amount)
+        {
+            if (currentFuel < 100)
+            {
+                currentFuel += amount;
+                Math.Clamp(currentFuel, 0, 100);
+                fuelBar.fillAmount = currentFuel / 100;
+            }
+        }
 
         void ReduceFuel()
         {
@@ -237,7 +245,7 @@ namespace Car
         {
             rb = GetComponent<Rigidbody>();
             engineSound = GetComponent<AudioSource>();
-            currentFuel = 100f;
+            currentFuel = 50f;
             fuelBar.fillAmount = 1f;
         }
 
