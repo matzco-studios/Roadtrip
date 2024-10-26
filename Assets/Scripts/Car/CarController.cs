@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Car.Parts;
 using Items;
 using UnityEngine;
@@ -136,28 +137,24 @@ namespace Car
         private void Brake()
         {
             if (gasInput < 0) // if reverse/break is pressed
-            {
-                foreach (Wheel wheel in wheels)
+                foreach (var wheel in wheels)
                 {
                     wheel.wheelCollider.brakeTorque = deceleration * 1000 * Time.deltaTime;
                     wheel.wheelCollider.motorTorque = 0;
                 }
-            }
-            else if (gasInput > 0 && IsRunning) // if gas is pressed then it removes the brake
-            {
-                foreach (Wheel wheel in wheels)
-                {
+            
+            // if gas is pressed then it removes the brake
+            else if (gasInput > 0 && IsRunning) 
+                foreach (Wheel wheel in wheels) 
                     wheel.wheelCollider.brakeTorque = 0;
-                }
-            }
-            else // if no gas is pressed then slows down the car
-            {
+            
+            // if no gas is pressed then slows down the car
+            else 
                 foreach (Wheel wheel in wheels)
                 {
                     wheel.wheelCollider.brakeTorque = deceleration * 350 * Time.deltaTime;
                     wheel.wheelCollider.motorTorque = 0;
                 }
-            }
         }
 
         private void SetMaxSpeed() => // sets the max speed of the car so it doesn't go faster and faster
@@ -173,29 +170,16 @@ namespace Car
             }
         }
 
-        private void AnimateSteeringWheel()
-        {
+        private void AnimateSteeringWheel() =>
             steeringWheel.transform.localRotation = Quaternion.Lerp(steeringWheel.transform.localRotation,
                 Quaternion.AngleAxis(turnInput * -turnAngle * 3f, Vector3.forward), Time.deltaTime * 5f);
-        }
 
         private void EngineSound()
         {
-            if (currentSpeed < minSpeedVolume)
-            {
-                engineSound.pitch = 0.25f;
-            }
-
-            if (currentSpeed > minSpeedVolume && currentSpeed < maxSpeedVolume)
-            {
-                engineSound.pitch = 0.25f + currentEngineVolume;
-            }
-
-            if (engineSound.pitch <= 0.25f && !IsRunning)
-            {
-                engineSound.volume = 0;
-            }
-
+            if (currentSpeed < minSpeedVolume) engineSound.pitch = 0.25f;
+            if (currentSpeed > minSpeedVolume && currentSpeed < maxSpeedVolume) engineSound.pitch = 0.25f + currentEngineVolume;
+            if (engineSound.pitch <= 0.25f && !IsRunning) engineSound.volume = 0;
+            
             engineSound.mute = !IsPlayerInside && !IsRunning;
         }
 
@@ -209,6 +193,12 @@ namespace Car
                     if (light.IsWorking) light.ULight.intensity = IsLightsOn ? 1 : 0;
                     if (IsLightsOn) light.UFlare.Play(); else light.UFlare.Stop();
                 }
+            }
+            
+            foreach (var light in carLights.Where(light => !light.IsWorking))
+            {
+                light.ULight.intensity = 0;
+                light.UFlare.Stop();
             }
         }
 

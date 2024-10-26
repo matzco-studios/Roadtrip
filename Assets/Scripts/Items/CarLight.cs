@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Items
@@ -14,11 +12,11 @@ namespace Items
         private Vector3 _initialPosition;
         private Quaternion _initialRotation;
 
-        public CarLight(Vector3 position)
-        {
-            _initialPosition = position;
-            
+        private void Start() =>
             IsWorking = true;
+
+        public CarLight()
+        {
             Name = "CarLight";
         }
     }
