@@ -53,7 +53,6 @@ public class InventoryController : MonoBehaviour
         SetItemForGrab(nearItem.transform);
         var rotation = nearItem.GetComponent<GrabbableItem>()?.Rotation;
         nearItem.transform.SetLocalPositionAndRotation(Vector3.zero, rotation ?? transform.localRotation);
-
         if (transform.childCount == 4)
         {
             DropCurrentItem(replace: true);

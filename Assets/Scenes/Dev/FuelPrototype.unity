@@ -228,54 +228,26 @@ MonoBehaviour:
   m_Script: {fileID: 910771039, guid: f56d46228aee4734f9114056c53bb57e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &85807352 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100382, guid: c295009961e3e85448fd2aeea2a367db, type: 3}
-  m_PrefabInstance: {fileID: 1979404710}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &85807356
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 85807352}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300008, guid: 5d0c5e19063770a4bbe1cb90de75d6a6, type: 3}
 --- !u!114 &85807357
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 85807352}
+  m_GameObject: {fileID: 1979374008}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d360ac3103d28642be78e9e2fa5bdf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rotation: {x: 0, y: 0, z: 0, w: 0}
-  Name: GasPump
+  _message: {fileID: 0}
 --- !u!54 &85807358
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 85807352}
+  m_GameObject: {fileID: 1979374008}
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
@@ -294,8 +266,29 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &85807362
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979374008}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 7.517294, y: 19.219412, z: 10.088823}
+  m_Center: {x: -0.2, y: -6.1181393, z: 0.9598191}
 --- !u!1001 &90792496
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1382,15 +1375,169 @@ PrefabInstance:
       propertyPath: _message
       value: 
       objectReference: {fileID: 1123741966}
+    - target: {fileID: 3383718482952794861, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
+      propertyPath: gasPumpOnPlayer
+      value: 
+      objectReference: {fileID: 809696318}
     - target: {fileID: 5713548300795970587, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
       propertyPath: m_Name
       value: TemporaryPlayer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7955449613462337594, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 809696319}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
+--- !u!1 &809696318
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 809696319}
+  - component: {fileID: 809696324}
+  - component: {fileID: 809696323}
+  - component: {fileID: 809696322}
+  - component: {fileID: 809696321}
+  - component: {fileID: 809696320}
+  m_Layer: 0
+  m_Name: GasPump
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 0
+--- !u!4 &809696319
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809696318}
+  serializedVersion: 2
+  m_LocalRotation: {x: -6.123234e-17, y: -1, z: -0.0000018099951, w: -1.1083024e-22}
+  m_LocalPosition: {x: 0.2807638, y: -0.08897957, z: -0.15002632}
+  m_LocalScale: {x: 0.098679096, y: 0.0986791, z: 0.098679066}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1549802920}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+--- !u!114 &809696320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809696318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d360ac3103d28642be78e9e2fa5bdf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _message: {fileID: 0}
+--- !u!54 &809696321
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809696318}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &809696322
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809696318}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 4
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.6, y: 2.8, z: 13.9}
+  m_Center: {x: 6.14, y: 0.22682422, z: 0.8440905}
+--- !u!23 &809696323
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809696318}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 5d040a4146a70544580f556a62a4e61d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &809696324
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809696318}
+  m_Mesh: {fileID: 4300008, guid: 5d0c5e19063770a4bbe1cb90de75d6a6, type: 3}
 --- !u!1 &1008770103
 GameObject:
   m_ObjectHideFlags: 0
@@ -2164,54 +2311,26 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 9a3b57f0a1248be419dd9c4d54748512, type: 3}
---- !u!1 &1527331597 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 127744, guid: c295009961e3e85448fd2aeea2a367db, type: 3}
-  m_PrefabInstance: {fileID: 1979404710}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &1527331601
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1527331597}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300034, guid: 5d0c5e19063770a4bbe1cb90de75d6a6, type: 3}
 --- !u!114 &1527331602
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1527331597}
+  m_GameObject: {fileID: 1979359910}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d360ac3103d28642be78e9e2fa5bdf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rotation: {x: 0, y: 0, z: 0, w: 0}
-  Name: GasPump
+  _message: {fileID: 0}
 --- !u!54 &1527331603
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1527331597}
+  m_GameObject: {fileID: 1979359910}
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
@@ -2230,8 +2349,29 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &1527331607
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979359910}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 7.5173597, y: 19.219528, z: 10.088491}
+  m_Center: {x: 0.26, y: 6.1181397, z: 0.9597063}
 --- !u!114 &1549802917 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1076367530903735901, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
@@ -2243,6 +2383,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bb999cf08bf56daca0f1aad45eaae7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1549802920 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7955449613462337594, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
+  m_PrefabInstance: {fileID: 722656199}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1697317796
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2759,6 +2904,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2148278672981037845, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+      propertyPath: m_TagString
+      value: FuelTank
+      objectReference: {fileID: 0}
     - target: {fileID: 2148326986083918639, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -2868,6 +3017,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+--- !u!1 &1979359910 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 127744, guid: c295009961e3e85448fd2aeea2a367db, type: 3}
+  m_PrefabInstance: {fileID: 1979404710}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1979374008 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100382, guid: c295009961e3e85448fd2aeea2a367db, type: 3}
+  m_PrefabInstance: {fileID: 1979404710}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1979404710
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2877,12 +3036,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 100382, guid: c295009961e3e85448fd2aeea2a367db, type: 3}
+      propertyPath: m_Name
+      value: GasPump
+      objectReference: {fileID: 0}
+    - target: {fileID: 100382, guid: c295009961e3e85448fd2aeea2a367db, type: 3}
       propertyPath: m_TagString
-      value: GrabbableItem
+      value: GasPump
+      objectReference: {fileID: 0}
+    - target: {fileID: 127744, guid: c295009961e3e85448fd2aeea2a367db, type: 3}
+      propertyPath: m_Name
+      value: GasPump
       objectReference: {fileID: 0}
     - target: {fileID: 127744, guid: c295009961e3e85448fd2aeea2a367db, type: 3}
       propertyPath: m_TagString
-      value: GrabbableItem
+      value: GasPump
       objectReference: {fileID: 0}
     - target: {fileID: 148414, guid: c295009961e3e85448fd2aeea2a367db, type: 3}
       propertyPath: m_Name
@@ -2946,22 +3113,22 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 100382, guid: c295009961e3e85448fd2aeea2a367db, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 85807356}
-    - targetCorrespondingSourceObject: {fileID: 100382, guid: c295009961e3e85448fd2aeea2a367db, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 85807357}
+      addedObject: {fileID: 85807362}
     - targetCorrespondingSourceObject: {fileID: 100382, guid: c295009961e3e85448fd2aeea2a367db, type: 3}
       insertIndex: -1
       addedObject: {fileID: 85807358}
+    - targetCorrespondingSourceObject: {fileID: 100382, guid: c295009961e3e85448fd2aeea2a367db, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 85807357}
     - targetCorrespondingSourceObject: {fileID: 127744, guid: c295009961e3e85448fd2aeea2a367db, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1527331601}
-    - targetCorrespondingSourceObject: {fileID: 127744, guid: c295009961e3e85448fd2aeea2a367db, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1527331602}
+      addedObject: {fileID: 1527331607}
     - targetCorrespondingSourceObject: {fileID: 127744, guid: c295009961e3e85448fd2aeea2a367db, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1527331603}
+    - targetCorrespondingSourceObject: {fileID: 127744, guid: c295009961e3e85448fd2aeea2a367db, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1527331602}
   m_SourcePrefab: {fileID: 100100000, guid: c295009961e3e85448fd2aeea2a367db, type: 3}
 --- !u!1 &2128802846
 GameObject:
@@ -3159,6 +3326,10 @@ PrefabInstance:
     - target: {fileID: 937555153058410922, guid: ca32dd0bcce89174d92abb8d0ee95c80, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6164636627974796323, guid: ca32dd0bcce89174d92abb8d0ee95c80, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6593603207547426097, guid: ca32dd0bcce89174d92abb8d0ee95c80, type: 3}
       propertyPath: m_Name
