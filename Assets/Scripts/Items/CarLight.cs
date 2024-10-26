@@ -1,6 +1,6 @@
 namespace Items
 {
-    public class CarLight : GrabbableItem
+    public class CarLight : Mechanics.GrabbableItem
     {
         private float _health;
 

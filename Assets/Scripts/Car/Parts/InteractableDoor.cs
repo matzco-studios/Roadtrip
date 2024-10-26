@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Car.Parts
 {
-    public class InteractableDoor : Interactable
+    public class InteractableDoor : Items.Mechanics.Interactable
     {
         private GameObject _player;
         private GameObject _car;

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Car.Parts
 {
-    public class InteractableKeyHole : Interactable
+    public class InteractableKeyHole : Items.Mechanics.Interactable
     {
         [SerializeField] private UI.ActionMessageController _message;
         private CarController _car;

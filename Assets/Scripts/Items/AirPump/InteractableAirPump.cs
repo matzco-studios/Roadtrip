@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Items.AirPump
 {
-    public class InteractableAirPump : Interactable
+    public class InteractableAirPump : Mechanics.Interactable
     {
         [SerializeField] private UI.ActionMessageController _message;
         private AirPumpItem _airPumpItem;

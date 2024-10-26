@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Items
+namespace Items.Mechanics
 {
     public abstract class GrabbableItem : MonoBehaviour
     {

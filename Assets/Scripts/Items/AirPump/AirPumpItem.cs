@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Items.AirPump
 {
-    public class AirPumpItem : GrabbableItem
+    public class AirPumpItem : Mechanics.GrabbableItem
     {
         public GameObject IsConnected = null;
         private Rigidbody _rigidbody;

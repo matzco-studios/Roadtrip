@@ -1,4 +1,4 @@
-using Items;
+using Items.Mechanics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Car.Parts
 {
-    public class InteractableTrunk : Interactable
+    public class InteractableTrunk : Items.Mechanics.Interactable
     {
         [SerializeField] private UI.ActionMessageController _message;
         private float _targetRotation = 0f;
