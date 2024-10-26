@@ -8,7 +8,7 @@ public class CarController : MonoBehaviour
     [Serializable]
     public class Wheel
     {
-        public const float MaxPsi = 32;
+        public const float MaxPsi = 38;
         public GameObject wheelObject;
         public WheelCollider wheelCollider;
         public bool isFrontWheel;
