@@ -4,7 +4,7 @@ namespace Car.Parts
 {
     public class InteractableKeyHole : Interactable
     {
-        [SerializeField] private ActionMessageController _message;
+        [SerializeField] private UI.ActionMessageController _message;
         private CarController _car;
 
         void Start()

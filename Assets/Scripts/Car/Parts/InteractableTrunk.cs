@@ -4,7 +4,7 @@ namespace Car.Parts
 {
     public class InteractableTrunk : Interactable
     {
-        [SerializeField] private ActionMessageController _message;
+        [SerializeField] private UI.ActionMessageController _message;
         private float _targetRotation = 0f;
         private float _rotation = 0f;
         private bool _open = false;

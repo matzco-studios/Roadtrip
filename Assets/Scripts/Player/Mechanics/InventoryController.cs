@@ -9,7 +9,7 @@ namespace Player.Mechanics
     public class InventoryController : MonoBehaviour
     {
         public static readonly int None = -1, First = 0, Second = 1, Third = 2;
-        [SerializeField] private ActionMessageController _message;
+        [SerializeField] private UI.ActionMessageController _message;
         private int _currentSelectedItem = None;
         private float _scrollWheelInput;
         private bool _enabled = true;

@@ -12,10 +12,13 @@ public abstract class Interactable : MonoBehaviour
     /// </summary>
     public abstract void InteractionMessage();
 
-    public ActionMessageController GetMessage(){
-        return GameObject.FindGameObjectWithTag("ActionMessage").GetComponent<ActionMessageController>();
+    public UI.ActionMessageController GetMessage()
+    {
+        return GameObject.FindGameObjectWithTag("ActionMessage").GetComponent<UI.ActionMessageController>();
     }
-    public CarController GetCar(){
+
+    public CarController GetCar()
+    {
         return GameObject.FindGameObjectWithTag("Car").GetComponent<CarController>();
     }
 }

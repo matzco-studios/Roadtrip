@@ -15,7 +15,7 @@ namespace Car.Parts
         private bool _canExit;
         private bool _canExitDelayed;
 
-        [SerializeField] private ActionMessageController _message;
+        [SerializeField] private UI.ActionMessageController _message;
         [SerializeField] private InventoryController _inventory;
 
         void Start()
