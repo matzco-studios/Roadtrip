@@ -24,10 +24,11 @@ public class InteractableAirPump : Interactable
 
     public override void OnInteract()
     {
+        if (_airPumpAnim.isPlaying) {return;}
         if (_airPumpItem.IsConnected){
             WheelCollider wheel = _airPumpItem.IsConnected.GetComponent<WheelCollider>();
             _car.wheels.ForEach(w=>{
-                if (w.wheelCollider==wheel) {w.AddPressure(0.6f);}
+                if (w.wheelCollider==wheel) {w.AddPressure(1.15f);}
                 print(w.Pressure);
             });
         }else 
