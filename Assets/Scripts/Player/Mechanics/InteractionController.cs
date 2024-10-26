@@ -9,7 +9,6 @@ public class InteractionController : MonoBehaviour
     [SerializeField] private InventoryController _inventory;
     private int _keyPressE;
     private int _keyPressF;
-    public GameObject gasPumpOnPlayer;
 
     private void ForceShowMessage(Collider other)
     {
@@ -26,10 +25,6 @@ public class InteractionController : MonoBehaviour
         else if (collider.CompareTag("InteractableItem"))
         {
             collider.gameObject.GetComponent<Interactable>().InteractionMessage();
-        }
-        else if (collider.CompareTag("GasPump"))
-        {
-            _message.GrabItem(collider.gameObject);
         }
     }
 
@@ -57,18 +52,6 @@ public class InteractionController : MonoBehaviour
                 // we just desactivate, the item collider and rigidbody.
                 OnTriggerExit(other);
             }else{
-                ForceShowMessage(other);
-            }
-        }
-        else if (other.CompareTag("GasPump"))
-        {
-            if (_keyPressE>0)
-            {
-                _inventory.SetActive(false);
-                gasPumpOnPlayer.SetActive(true);
-                other.gameObject.SetActive(false);
-                OnTriggerExit(other);
-            } else {
                 ForceShowMessage(other);
             }
         }

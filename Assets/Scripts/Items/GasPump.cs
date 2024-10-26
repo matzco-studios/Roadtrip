@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Items
 {
-    public class GasPump : MonoBehaviour
+    public class GasPump : Mechanics.GrabbableItem
     {
         [SerializeField] private UI.ActionMessageController _message;
 
@@ -13,6 +13,7 @@ namespace Items
 
         void Start()
         {
+            Rotation = Quaternion.Euler(0, 0, 0);
             initialParent = transform.parent.gameObject;
             initialPosition = transform.localPosition;
             fillingPosition = new Vector3(1.25f, -0.05f, -0.26f);
