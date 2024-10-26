@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 4994396217701988263}
   - component: {fileID: 546373788323479976}
   m_Layer: 0
-  m_Name: InteractableSeat
+  m_Name: InteractableDoor
   m_TagString: InteractableItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1744,6 +1744,8 @@ MonoBehaviour:
   - {fileID: 8044059402246517912}
   - {fileID: 1215347229834356377}
   - {fileID: 4016942231829878390}
+  carFlares: []
+  currentSpeed: 0
   acceleration: 16
   maxSpeed: 20
   currentFuel: 0
