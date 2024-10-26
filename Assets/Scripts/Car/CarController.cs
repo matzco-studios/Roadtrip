@@ -82,12 +82,12 @@ namespace Car
             turnInput = IsPlayerInside ? Input.GetAxis("Horizontal") : 0.0f;
         }
 
-        void MoveCarForward()
+        private void MoveCarForward()
         {
             if (IsRunning)
             {
                 {
-                    foreach (Wheel wheel in wheels)
+                    foreach (var wheel in wheels)
                     {
                         wheel.wheelCollider.motorTorque = gasInput * acceleration * speedMultiplier * Time.deltaTime;
                     }
@@ -116,7 +116,7 @@ namespace Car
             }
         }
 
-        void TurnCar()
+        private void TurnCar()
         {
             if (currentSpeed > 0.1f)
             {
@@ -133,7 +133,7 @@ namespace Car
             }
         }
 
-        void Brake()
+        private void Brake()
         {
             if (gasInput < 0) // if reverse/break is pressed
             {
@@ -160,10 +160,10 @@ namespace Car
             }
         }
 
-        void SetMaxSpeed() => // sets the max speed of the car so it doesn't go faster and faster
+        private void SetMaxSpeed() => // sets the max speed of the car so it doesn't go faster and faster
             speedMultiplier = (currentSpeed > maxSpeed) ? 0 : 400; 
 
-        void AnimateWheels()
+        private void AnimateWheels()
         {
             foreach (Wheel wheel in wheels)
             {
@@ -173,13 +173,13 @@ namespace Car
             }
         }
 
-        void AnimateSteeringWheel()
+        private void AnimateSteeringWheel()
         {
             steeringWheel.transform.localRotation = Quaternion.Lerp(steeringWheel.transform.localRotation,
                 Quaternion.AngleAxis(turnInput * -turnAngle * 3f, Vector3.forward), Time.deltaTime * 5f);
         }
 
-        void EngineSound()
+        private void EngineSound()
         {
             if (currentSpeed < minSpeedVolume)
             {
