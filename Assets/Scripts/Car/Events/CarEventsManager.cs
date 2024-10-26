@@ -44,7 +44,6 @@ namespace Car.Events
         private void Start()
         {
             _events.Add(gameObject.AddComponent<DeadBatteryEvent>());
-            _events.Add(gameObject.AddComponent<DeadLightEvent>());
             _events.Add(gameObject.AddComponent<LightBreakEvent>());
             _events.Add(gameObject.AddComponent<FlatTireEvent>());
             StartCoroutine(EventLoop());
