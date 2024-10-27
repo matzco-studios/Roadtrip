@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Car.Parts;
+using Items;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,9 +33,7 @@ namespace Car
         private float fuelConsumption;
         private bool IsLightsOn = false;
         public Image fuelBar;
-        private bool isDeadBattery = false;
-        public float batteryLife = 100f;
-
+        public BatteryPickup Battery;
         private float gasInput;
         private float turnInput;
         private KeyCode startEngineKey = KeyCode.I;
@@ -44,6 +43,8 @@ namespace Car
         public float maxSpeedVolume = 21f;
 
         public bool IsPlayerInside = false;
+
+        public bool isBatteryInside() => Battery != null;
 
         public bool IsCarRunning()
         {
@@ -63,7 +64,7 @@ namespace Car
                         engineCoughSound.volume = 0.5f;
                         engineCoughSound.Play();
                     }
-                    else if (isDeadBattery || batteryLife <= 0)
+                    else if (!isBatteryInside() || Battery.IsDead())
                     {
                         Debug.Log("The battery is dead");
                         engineCoughSound.volume = 0.5f;
@@ -83,11 +84,6 @@ namespace Car
                     engineSound.pitch = currentEngineVolume;
                 }
             }
-        }
-
-        public void SetBatteryState(bool isDead)
-        {
-            isDeadBattery = isDead;
         }
 
         void GetInputs()

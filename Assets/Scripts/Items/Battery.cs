@@ -1,15 +1,31 @@
+using System;
 using UnityEngine;
 
 namespace Items
 {
     public class BatteryPickup : MonoBehaviour
     {
-        private Vector3 _initialPosition; 
-        private Quaternion _initialRotation; 
-        private bool _isPickedUp = false; 
+        private Vector3 _initialPosition;
+        private Quaternion _initialRotation;
+        private bool _isPickedUp = false;
         private Transform _carHood;
         private Car.CarController _carController;
         private BoxCollider _boxColider;
+        public const int MaxHealth = 100;
+        private float _health = MaxHealth;
+
+        public float Health
+        {
+            get => _health;
+        }
+
+        public bool IsDead() => _health == 0;
+
+        public void SetDead() => _health = 0;
+
+        public void AddHealth(float amount) => _health = Math.Clamp(_health + amount, 0, MaxHealth);
+
+        public void ReduceHealth(float amount) => _health = Math.Clamp(_health - amount, 0, MaxHealth);
 
         void Start()
         {
@@ -18,8 +34,6 @@ namespace Items
             _carHood = GameObject.FindGameObjectWithTag("Car").transform.GetChild(0).GetChild(0);
             _carController = GameObject.FindGameObjectWithTag("Car").GetComponent<Car.CarController>();
             _boxColider = GetComponent<BoxCollider>();
-
-
         }
 
         private void OnTriggerEnter(Collider other)
@@ -32,19 +46,18 @@ namespace Items
                 GetComponent<Rigidbody>().isKinematic = true;
 
                 _boxColider.enabled = true;
-                _carController.SetBatteryState(false);
+                _carController.Battery = this;
                 Debug.Log("Batterie insérée dans la voiture");
             }
         }
+
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("BatteryCollider") && _carController != null)
             {
                 _boxColider.enabled = false;
-                _carController.SetBatteryState(true);
+                _carController.Battery = null;
                 Debug.Log("Batterie retirée de la voiture");
-                
-
             }
         }
     }
