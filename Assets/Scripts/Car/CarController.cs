@@ -32,6 +32,8 @@ namespace Car
         private float fuelConsumption;
         private bool IsLightsOn = false;
         public Image fuelBar;
+        private bool isDeadBattery = false;
+        public float batteryLife = 100f;
 
         private float gasInput;
         private float turnInput;
@@ -50,6 +52,7 @@ namespace Car
 
         public void StartEngine()
         {
+
             if (IsPlayerInside)
             {
                 if (!IsRunning)
@@ -57,6 +60,12 @@ namespace Car
                     if (outOfFuel)
                     {
                         Debug.Log("Out of fuel");
+                        engineCoughSound.volume = 0.5f;
+                        engineCoughSound.Play();
+                    }
+                    else if (isDeadBattery || batteryLife <= 0)
+                    {
+                        Debug.Log("The battery is dead");
                         engineCoughSound.volume = 0.5f;
                         engineCoughSound.Play();
                     }
@@ -74,6 +83,11 @@ namespace Car
                     engineSound.pitch = currentEngineVolume;
                 }
             }
+        }
+
+        public void SetBatteryState(bool isDead)
+        {
+            isDeadBattery = isDead;
         }
 
         void GetInputs()
