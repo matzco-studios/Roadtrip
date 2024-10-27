@@ -39,7 +39,9 @@ namespace Items.AirPump
                 {
                     if (w.wheelCollider == wheel)
                     {
-                        w.AddPressure(1.15f);
+                        float pressure = Mathf.Max(1.125f, (30f-w.Pressure)*0.2f);
+                        w.AddPressure(pressure);
+                        print(pressure);
                     }
 
                     print(w.Pressure);
