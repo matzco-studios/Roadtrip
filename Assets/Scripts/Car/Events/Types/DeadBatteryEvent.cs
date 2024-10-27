@@ -4,7 +4,15 @@ namespace Car.Events.Types
     {
         public override void Activate()
         {
-            print("Battery is dead.");
+            if (Car.Battery)
+            {
+                print("Battery is dead.");
+                Car.Battery.SetDead();
+            }
+            else
+            {
+                print("Car does not have a battery, dead event skipped.");
+            }
         }
     }
 }
