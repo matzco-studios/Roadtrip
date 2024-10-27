@@ -35,9 +35,9 @@ public class CarEventsManager : MonoBehaviour
             {
                 // LightBreakEvent
                 <= 3 => 0,
-                // FlatTireEvent
-                <= 6 => 1,
                 // DeadBatteryEvent
+                <= 6 => 1,
+                // FlatTireEvent
                 <= 7 => 2,
                 // None
                 _ => -1
