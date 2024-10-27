@@ -42,9 +42,9 @@ namespace Car.Events
                     _ => -1
                 };
 
-                if (true)
+                if (index != -1)
                 {
-                    _events[0].Activate();
+                    _events[index].Activate();
                 }
                 else
                 {
