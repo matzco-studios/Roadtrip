@@ -1,3 +1,5 @@
+using System.Linq;
+using Car.Parts;
 using UnityEngine;
 
 namespace Car.Events.Types
@@ -6,7 +8,10 @@ namespace Car.Events.Types
     {
         public override void Activate()
         {
-            print($"The tire number {Random.Range(0, 4)} is dead.");
+            int tire = Random.Range(0, 4);
+            Wheel wheel = Car.wheels.ElementAt(tire);
+            wheel.FlatTire();
+            print($"The tire number {tire} is dead.");
         }
     }
 }
