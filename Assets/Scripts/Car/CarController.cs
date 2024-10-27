@@ -44,7 +44,7 @@ namespace Car
 
         public bool IsPlayerInside = false;
 
-        public bool isBatteryInside() => Battery != null;
+        public bool IsBatteryInside() => Battery != null;
 
         public bool IsCarRunning()
         {
@@ -64,7 +64,7 @@ namespace Car
                         engineCoughSound.volume = 0.5f;
                         engineCoughSound.Play();
                     }
-                    else if (!isBatteryInside() || Battery.IsDead())
+                    else if (!IsBatteryInside() || Battery.IsDead())
                     {
                         Debug.Log("The battery is dead");
                         engineCoughSound.volume = 0.5f;
