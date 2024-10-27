@@ -9,7 +9,7 @@ namespace Items
         private bool _isPickedUp = false; 
         private Transform _carHood;
         private Car.CarController _carController;
-
+        private BoxCollider _boxColider;
 
         void Start()
         {
@@ -17,8 +17,10 @@ namespace Items
             _initialRotation = transform.localRotation;
             _carHood = GameObject.FindGameObjectWithTag("Car").transform.GetChild(0).GetChild(0);
             _carController = GameObject.FindGameObjectWithTag("Car").GetComponent<Car.CarController>();
+            _boxColider = GetComponent<BoxCollider>();
 
-        }   
+
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -29,6 +31,7 @@ namespace Items
                 transform.localRotation = _initialRotation;
                 GetComponent<Rigidbody>().isKinematic = true;
 
+                _boxColider.enabled = true;
                 _carController.SetBatteryState(false);
                 Debug.Log("Batterie insérée dans la voiture");
             }
@@ -37,8 +40,11 @@ namespace Items
         {
             if (other.CompareTag("BatteryCollider") && _carController != null)
             {
+                _boxColider.enabled = false;
                 _carController.SetBatteryState(true);
                 Debug.Log("Batterie retirée de la voiture");
+                
+
             }
         }
     }
