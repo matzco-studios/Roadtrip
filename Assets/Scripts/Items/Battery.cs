@@ -11,8 +11,8 @@ namespace Items
         private Transform _carHood;
         private Car.CarController _carController;
         private BoxCollider _boxColider;
-        public const int MaxHealth = 100;
-        private float _health = MaxHealth;
+        public const float MaxHealth = 100f;
+        private float _health = 80;
 
         public float Health
         {
@@ -20,6 +20,8 @@ namespace Items
         }
 
         public bool IsDead() => _health == 0;
+
+        public bool IsFull() => _health == MaxHealth;
 
         public void SetDead() => _health = 0;
 
