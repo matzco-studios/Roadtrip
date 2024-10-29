@@ -18,7 +18,7 @@ namespace Car.Events
                 print($"Event scheduled in {timer} seconds.");
                 yield return new WaitForSeconds(timer);
 
-                var index = Random.Range(1, 13) switch
+                var index = Random.Range(1, 15) switch
                 {
                     // LightBreakEvent
                     <= 3 => 0,
@@ -26,6 +26,8 @@ namespace Car.Events
                     <= 6 => 1,
                     // DeadBatteryEvent
                     <= 7 => 2,
+                    // BrokenPartEvent
+                    <= 9 => 3,
                     // None
                     _ => -1
                 };
@@ -47,6 +49,7 @@ namespace Car.Events
             _events.Add(gameObject.AddComponent<Types.DeadBatteryEvent>());
             _events.Add(gameObject.AddComponent<Types.LightBreakEvent>());
             _events.Add(gameObject.AddComponent<Types.FlatTireEvent>());
+            _events.Add(gameObject.AddComponent<Types.BrokenPartEvent>());
             StartCoroutine(EventLoop());
             
             StartCoroutine(BatteryHealing());
