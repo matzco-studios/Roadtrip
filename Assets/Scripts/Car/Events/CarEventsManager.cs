@@ -104,7 +104,25 @@ namespace Car.Events
                 }
             }
         }
-
+        
+        /// <summary>
+        /// Function that simulates the gas cost of the engine, when it is running.
+        /// This makes the game harder, because the player cannot just leave the engine running, because he will lose gas.
+        /// </summary>
+        private IEnumerator EngineConsumption()
+        {
+            while (true)
+            {
+                yield return null;
+                
+                if (_carController.IsCarRunning())
+                {
+                    _carController.RemoveFuel(Time.deltaTime / 2);
+                    print(_carController.currentFuel);
+                }
+            }
+        }
+        
         /// <summary>
         /// Function that takes the <c>_probabilities</c> field and put
         /// each <c>key</c> the number of times the <c>value</c> in the <c>_eventTypesList</c> field.
@@ -138,6 +156,7 @@ namespace Car.Events
             StartCoroutine(BatteryHealing());
             StartCoroutine(BatteryConsumption());
             StartCoroutine(WheelConsumption());
+            StartCoroutine(EngineConsumption());
         }
     }
 }
