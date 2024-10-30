@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using Car;
 using UnityEngine;
 
@@ -37,7 +39,9 @@ namespace Items.AirPump
                 {
                     if (w.wheelCollider == wheel)
                     {
-                        w.AddPressure(1.15f);
+                        float pressure = Mathf.Max(1.15f, Mathf.Sqrt(Mathf.Max(30f-w.Pressure, 0))/2);
+                        w.AddPressure(pressure);
+                        print(pressure);
                     }
 
                     print(w.Pressure);

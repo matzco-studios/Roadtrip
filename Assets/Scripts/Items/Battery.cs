@@ -11,6 +11,7 @@ namespace Items
         private Transform _carHood;
         private Car.CarController _carController;
         private BoxCollider _boxColider;
+        private Rigidbody _rigidbody;
         public const float MaxHealth = 100f;
         private float _health = 80;
 
@@ -36,6 +37,7 @@ namespace Items
             _carHood = GameObject.FindGameObjectWithTag("Car").transform.GetChild(0).GetChild(0);
             _carController = GameObject.FindGameObjectWithTag("Car").GetComponent<Car.CarController>();
             _boxColider = GetComponent<BoxCollider>();
+            _rigidbody = GetComponent<Rigidbody>();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -43,10 +45,8 @@ namespace Items
             if (other.CompareTag("BatteryCollider"))
             {
                 transform.SetParent(_carHood);
-                transform.localPosition = _initialPosition;
-                transform.localRotation = _initialRotation;
-                GetComponent<Rigidbody>().isKinematic = true;
-
+                transform.SetLocalPositionAndRotation(_initialPosition, _initialRotation);
+                _rigidbody.isKinematic = true;
                 _boxColider.enabled = true;
                 _carController.Battery = this;
                 Debug.Log("Batterie insérée dans la voiture");
