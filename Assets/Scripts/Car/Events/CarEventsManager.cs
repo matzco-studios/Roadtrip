@@ -6,9 +6,24 @@ namespace Car.Events
 {
     public class CarEventsManager : MonoBehaviour
     {
-        private readonly List<CarEvent> _events = new();
         private CarController _carController;
-
+        private readonly List<CarEvent> _carEvents = new();
+        private readonly Dictionary<CarEventType, int> _probabilities = new()
+        {
+            { CarEventType.DeadBatteryEvent, 1 },
+            { CarEventType.LightBreakEvent, 3 },
+            { CarEventType.FlatTireEvent, 3 },
+            { CarEventType.BrokenPartEvent, 2 },
+            { CarEventType.None, 5 },
+        };
+        
+        // A list that will be generated using the _probabilities field.
+        private readonly List<CarEventType> _eventTypesList = new();
+        
+        /// <summary>
+        /// Function that randomly activates events that affect the car in a bad way
+        /// to simulate the player experience.
+        /// </summary>
         private IEnumerator EventLoop()
         {
             while (true)
@@ -18,43 +33,14 @@ namespace Car.Events
                 print($"Event scheduled in {timer} seconds.");
                 yield return new WaitForSeconds(timer);
 
-                var index = Random.Range(1, 15) switch
+                var eventType = _eventTypesList[Random.Range(0, _eventTypesList.Count)];
+                if (eventType != CarEventType.None)
                 {
-                    // LightBreakEvent
-                    <= 3 => 0,
-                    // FlatTireEvent
-                    <= 6 => 1,
-                    // DeadBatteryEvent
-                    <= 7 => 2,
-                    // BrokenPartEvent
-                    <= 9 => 3,
-                    // None
-                    _ => -1
-                };
-
-                if (index != -1)
-                {
-                    _events[index].Activate();
+                    _carEvents[(int)eventType].Activate();
                 }
-                else
-                {
-                    print("None event.");
-                }
+                
+                else print("No event triggered.");
             }
-        }
-
-        private void Start()
-        {
-            _carController = GetComponent<CarController>();
-            _events.Add(gameObject.AddComponent<Types.DeadBatteryEvent>());
-            _events.Add(gameObject.AddComponent<Types.LightBreakEvent>());
-            _events.Add(gameObject.AddComponent<Types.FlatTireEvent>());
-            _events.Add(gameObject.AddComponent<Types.BrokenPartEvent>());
-            StartCoroutine(EventLoop());
-            
-            StartCoroutine(BatteryHealing());
-            StartCoroutine(BatteryConsumption());
-            StartCoroutine(WheelConsumption());
         }
 
         /// <summary>
@@ -105,7 +91,7 @@ namespace Car.Events
             while (true)
             {
                 yield return null;
-                
+
                 if (_carController.currentSpeed > 0.10f)
                 {
                     print(_carController.currentSpeed);
@@ -117,6 +103,41 @@ namespace Car.Events
                     });
                 }
             }
+        }
+
+        /// <summary>
+        /// Function that takes the <c>_probabilities</c> field and put
+        /// each <c>key</c> the number of times the <c>value</c> in the <c>_eventTypesList</c> field.
+        /// For examples: <c>{ DeadLightEvent, 3 }</c>, means that the list will have 3 <c>DeadLightEvent</c> in the list <c>_eventTypesList</c>.
+        /// </summary>
+        private void GenerateProbabilities()
+        {
+            // Generate a list with the probabilities
+            foreach (var pair in _probabilities)
+            {
+                for (var i = 0; i < pair.Value; i++)
+                {
+                    _eventTypesList.Add(pair.Key);
+                }
+            }
+        }
+        
+        private void Start()
+        {
+            _carController = GetComponent<CarController>();
+            
+            // This order must follow the CarEventType enumeration order.
+            _carEvents.Add(gameObject.AddComponent<Types.DeadBatteryEvent>());
+            _carEvents.Add(gameObject.AddComponent<Types.LightBreakEvent>());
+            _carEvents.Add(gameObject.AddComponent<Types.FlatTireEvent>());
+            _carEvents.Add(gameObject.AddComponent<Types.BrokenPartEvent>());
+
+            GenerateProbabilities();
+
+            StartCoroutine(EventLoop());
+            StartCoroutine(BatteryHealing());
+            StartCoroutine(BatteryConsumption());
+            StartCoroutine(WheelConsumption());
         }
     }
 }
