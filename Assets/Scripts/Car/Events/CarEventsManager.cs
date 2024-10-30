@@ -94,12 +94,11 @@ namespace Car.Events
 
                 if (_carController.currentSpeed > 0.10f)
                 {
-                    print(_carController.currentSpeed);
                     _carController.wheels.ForEach(w =>
                     {
                         var consuming = Time.deltaTime * _carController.currentSpeed / 2.5f;
                         w.ReducePressure((consuming + (Time.deltaTime / 4)) / 50);
-                        print($"{w.wheelCollider.name} as {w.Pressure}");
+                        //print($"{w.wheelCollider.name} as {w.Pressure}");
                     });
                 }
             }
@@ -118,7 +117,6 @@ namespace Car.Events
                 if (_carController.IsCarRunning())
                 {
                     _carController.RemoveFuel(Time.deltaTime / 2);
-                    print(_carController.currentFuel);
                 }
             }
         }
