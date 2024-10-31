@@ -53,7 +53,7 @@ namespace Items
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("BatteryCollider") && _carController.Battery.Equals(this))
+            if (other.CompareTag("BatteryCollider") && _carController.Battery && _carController.Battery.Equals(this))
             {
                 _boxColider.enabled = false;
                 _carController.Battery = null;
