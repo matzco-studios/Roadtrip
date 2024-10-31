@@ -66,7 +66,7 @@ namespace Car
                     }
                     else if (!IsBatteryInside() || Battery.IsDead())
                     {
-                        Debug.Log("The battery is dead");
+                        Debug.Log(!IsBatteryInside() ? "The battery is not inside the car." : "The battery is dead.");
                         engineCoughSound.volume = 0.5f;
                         engineCoughSound.Play();
                     }
