@@ -1,32 +1,66 @@
+using System;
 using UnityEngine;
 
-public class BatteryPickup : MonoBehaviour
+namespace Items
 {
-    private Vector3 initialPosition;    // Position d'origine de la batterie
-    private Quaternion initialRotation; // Rotation d'origine de la batterie
-    private bool isPickedUp = false; // État de prise
-    private Transform carHood;
-
-    void Start()
+    public class BatteryPickup : MonoBehaviour
     {
-        // Stocke la position et la rotation initiales de la batterie
-        initialPosition = new Vector3(0.500626624f, 0.195687994f, 1.54742706f);
-        initialRotation = transform.localRotation;
-        carHood = GameObject.FindGameObjectWithTag("Car").transform.GetChild(0).GetChild(0);
-    }
+        private Vector3 _initialPosition;
+        private Quaternion _initialRotation;
+        private bool _isPickedUp = false;
+        private Transform _carHood;
+        private Car.CarController _carController;
+        private BoxCollider _boxColider;
+        private Rigidbody _rigidbody;
+        public const float MaxHealth = 100f;
+        private float _health = 80;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("BatteryCollider"))
+        public float Health
         {
-            transform.SetParent(carHood);
-            transform.SetLocalPositionAndRotation(initialPosition, initialRotation);
-            GetComponent<Rigidbody>().isKinematic = true;
+            get => _health;
         }
-    }
 
-    void Update()
-    {
-        
+        public bool IsDead() => _health == 0;
+
+        public bool IsFull() => _health == MaxHealth;
+
+        public void SetDead() => _health = 0;
+
+        public void AddHealth(float amount) => _health = Math.Clamp(_health + amount, 0, MaxHealth);
+
+        public void ReduceHealth(float amount) => _health = Math.Clamp(_health - amount, 0, MaxHealth);
+
+        void Start()
+        {
+            _initialPosition = new Vector3(0.500626624f, 0.195687994f, 1.54742706f);
+            _initialRotation = transform.localRotation;
+            _carHood = GameObject.FindGameObjectWithTag("Car").transform.GetChild(0).GetChild(0);
+            _carController = GameObject.FindGameObjectWithTag("Car").GetComponent<Car.CarController>();
+            _boxColider = GetComponent<BoxCollider>();
+            _rigidbody = GetComponent<Rigidbody>();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("BatteryCollider"))
+            {
+                transform.SetParent(_carHood);
+                transform.SetLocalPositionAndRotation(_initialPosition, _initialRotation);
+                _rigidbody.isKinematic = true;
+                _boxColider.enabled = true;
+                _carController.Battery = this;
+                Debug.Log("Batterie insérée dans la voiture");
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("BatteryCollider") && _carController != null)
+            {
+                _boxColider.enabled = false;
+                _carController.Battery = null;
+                Debug.Log("Batterie retirée de la voiture");
+            }
+        }
     }
 }
