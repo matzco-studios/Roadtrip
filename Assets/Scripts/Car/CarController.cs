@@ -33,7 +33,7 @@ namespace Car
         private float fuelConsumption;
         private bool IsLightsOn = false;
         public Image fuelBar;
-        public BatteryPickup Battery;
+        public Battery Battery;
         private float gasInput;
         private float turnInput;
         private KeyCode startEngineKey = KeyCode.I;

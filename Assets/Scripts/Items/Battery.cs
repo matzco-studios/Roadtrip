@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Items
 {
-    public class BatteryPickup : MonoBehaviour
+    public class Battery : MonoBehaviour
     {
         private Vector3 _initialPosition;
         private Quaternion _initialRotation;
@@ -12,7 +12,7 @@ namespace Items
         private Car.CarController _carController;
         private BoxCollider _boxColider;
         public const int MaxHealth = 100;
-        private float _health = MaxHealth;
+        [SerializeField] private float _health = MaxHealth;
 
         public float Health
         {
