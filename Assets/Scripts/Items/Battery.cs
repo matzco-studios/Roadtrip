@@ -38,7 +38,7 @@ namespace Items
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("BatteryCollider"))
+            if (other.CompareTag("BatteryCollider") && _carController.Battery == null)
             {
                 transform.SetParent(_carHood);
                 transform.localPosition = _initialPosition;
@@ -53,7 +53,7 @@ namespace Items
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("BatteryCollider") && _carController != null)
+            if (other.CompareTag("BatteryCollider") && _carController.Battery.Equals(this))
             {
                 _boxColider.enabled = false;
                 _carController.Battery = null;
