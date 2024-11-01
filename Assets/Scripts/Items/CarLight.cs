@@ -32,7 +32,7 @@ namespace Items
              * -
              * Why : So the player will still have the non-functional light bulb
              */
-            Destroy(this); 
+            Destroy(gameObject); 
         }
     }
 }
