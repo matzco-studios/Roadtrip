@@ -181,6 +181,15 @@ namespace Car
             engineSound.mute = !IsPlayerInside && !IsRunning;
         }
 
+        private void DisableLights()
+        {
+            foreach (var light in carLights.Where(light => !light.IsWorking))
+            {
+                light.ULight.intensity = 0;
+                light.UFlare.Stop();
+            } 
+        }
+        
         private void ToggleLights()
         {
             if (Input.GetKeyDown(KeyCode.L) && IsPlayerInside)
@@ -192,12 +201,7 @@ namespace Car
                     if (IsLightsOn) light.UFlare.Play(); else light.UFlare.Stop();
                 }
             }
-            
-            foreach (var light in carLights.Where(light => !light.IsWorking))
-            {
-                light.ULight.intensity = 0;
-                light.UFlare.Stop();
-            }
+            DisableLights();      
         }
 
         // Start is called before the first frame update
