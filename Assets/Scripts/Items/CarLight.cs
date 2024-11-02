@@ -21,17 +21,17 @@ namespace Items
         private void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag("LightCollider")) return;
-            
-            GameObject.FindGameObjectWithTag("Car")
+
+            var c = GameObject
+                .FindGameObjectWithTag("Car")
                 .GetComponent<CarController>().carLights
-                .First(l => !l.IsWorking)
-                .IsWorking = true;
+                .FirstOrDefault(l => !l.IsWorking);
             
-            /*
-             * Only destroy the CarLight component not the object
-             * -
-             * Why : So the player will still have the non-functional light bulb
-             */
+            if (!c) return;
+            c.ULight.intensity = 1;
+            c.UFlare.Play();
+            c.IsWorking = true;
+            
             Destroy(gameObject); 
         }
     }
