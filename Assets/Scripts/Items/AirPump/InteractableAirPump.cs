@@ -22,6 +22,7 @@ namespace Items.AirPump
         }
 
         public Wheel GetCurrentWheel() {
+            if (!_airPumpItem.IsConnected) return null;
             WheelCollider wheel = _airPumpItem.IsConnected.GetComponent<WheelCollider>();
             Wheel wheelResult = null;
             _car.wheels.ForEach(w =>
