@@ -8,6 +8,12 @@ TagManager:
   - GrabbableItem
   - GasPump
   - FuelTank
+  - InteractableItem
+  - Car
+  - WheelOfCar
+  - CarUI
+  - ActionMessage
+  - GasMachine
   layers:
   - Default
   - TransparentFX
