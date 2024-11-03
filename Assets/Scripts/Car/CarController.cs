@@ -31,7 +31,7 @@ namespace Car
         private bool outOfFuel;
         public float currentFuel;
         private float fuelConsumption;
-        private bool IsLightsOn;
+        public bool IsLightsOn;
         public Image fuelBar;
         public Battery Battery;
         private float gasInput;

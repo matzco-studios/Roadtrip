@@ -144,7 +144,7 @@ namespace Car.Events
             
             // This order must follow the CarEventType enumeration order.
             _carEvents.Add(gameObject.AddComponent<Types.DeadBatteryEvent>());
-            _carEvents.Add(gameObject.AddComponent<Types.LightBreakEvent>());
+            _carEvents.Add(gameObject.AddComponent<Types.DeadLightEvent>());
             _carEvents.Add(gameObject.AddComponent<Types.FlatTireEvent>());
             _carEvents.Add(gameObject.AddComponent<Types.BrokenPartEvent>());
 
