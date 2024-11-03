@@ -34,7 +34,7 @@ namespace Car
         private float fuelConsumption;
         public bool IsLightsOn = false;
         public Image fuelBar;
-        public BatteryPickup Battery;
+        public Battery Battery;
         private float gasInput;
         private float turnInput;
         private KeyCode startEngineKey = KeyCode.I;
@@ -68,7 +68,7 @@ namespace Car
                     }
                     else if (!IsBatteryInside() || Battery.IsDead())
                     {
-                        Debug.Log("The battery is dead");
+                        Debug.Log(!IsBatteryInside() ? "The battery is not inside the car." : "The battery is dead.");
                         engineCoughSound.volume = 0.5f;
                         engineCoughSound.Play();
                     }
