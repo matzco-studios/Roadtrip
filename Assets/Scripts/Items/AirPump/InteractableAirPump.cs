@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Car;
+using Car.Parts;
 using UnityEngine;
 
 namespace Items.AirPump
@@ -20,6 +21,21 @@ namespace Items.AirPump
             _car = GetCar();
         }
 
+        public Wheel GetCurrentWheel() {
+            if (!_airPumpItem.IsConnected) return null;
+            WheelCollider wheel = _airPumpItem.IsConnected.GetComponent<WheelCollider>();
+            Wheel wheelResult = null;
+            _car.wheels.ForEach(w =>
+            {
+                if (w.wheelCollider == wheel)
+                {
+                    wheelResult = w;
+                }
+            });
+
+            return wheelResult;
+        }
+
         public override void InteractionMessage()
         {
             _message.InteractableItem("air", "to pump");
@@ -34,18 +50,10 @@ namespace Items.AirPump
 
             if (_airPumpItem.IsConnected)
             {
-                WheelCollider wheel = _airPumpItem.IsConnected.GetComponent<WheelCollider>();
-                _car.wheels.ForEach(w =>
-                {
-                    if (w.wheelCollider == wheel)
-                    {
-                        float pressure = Mathf.Max(1.15f, Mathf.Sqrt(Mathf.Max(30f-w.Pressure, 0))/2);
-                        w.AddPressure(pressure);
-                        print(pressure);
-                    }
-
-                    print(w.Pressure);
-                });
+                Wheel w = GetCurrentWheel();
+                float pressure = Mathf.Max(1.15f, Mathf.Sqrt(Mathf.Max(30f-w.Pressure, 0))/2);
+                w.AddPressure(pressure);
+                print(pressure);
             }
             else
                 print("Pump air for nothing");

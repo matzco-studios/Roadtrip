@@ -1,3 +1,5 @@
+using Car.Parts;
+using TMPro;
 using UnityEngine;
 
 namespace Items.AirPump
@@ -7,11 +9,15 @@ namespace Items.AirPump
         public GameObject IsConnected = null;
         private Rigidbody _rigidbody;
         private LineRenderer _lineRenderer;
+        private TextMeshPro _psiDisplay;
+        private InteractableAirPump _interactableAirPump;
 
         void Start()
         {
             _rigidbody = GetComponent<Rigidbody>();
             _lineRenderer = GetComponentInChildren<LineRenderer>();
+            _interactableAirPump = GetComponentInChildren<InteractableAirPump>();
+            _psiDisplay = GetComponentInChildren<TextMeshPro>();
         }
 
         void LateUpdate()
@@ -20,6 +26,9 @@ namespace Items.AirPump
             GameObject oth = IsConnected ? IsConnected : _lineRenderer.gameObject;
             oth = (_lineRenderer.transform.position.y < oth.transform.position.y) ? oth : _lineRenderer.gameObject;
             _lineRenderer.SetPosition(1, oth.transform.position);
+
+            Wheel wheel = _interactableAirPump.GetCurrentWheel();
+            _psiDisplay.text = (wheel!=null) ? wheel.Pressure.ToString("00.0"):"--.-";
         }
 
         void OnTriggerStay(Collider other)
