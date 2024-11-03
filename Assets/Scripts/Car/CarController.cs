@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Car.Parts;
 using Items;
 using UnityEngine;
@@ -17,8 +18,7 @@ namespace Car
         public AudioSource engineSound;
         public AudioSource engineStartSound;
         public AudioSource engineCoughSound;
-        public List<Light> carLights;
-        public List<ParticleSystem> carFlares;
+        public List<CarLight> carLights;
         public float currentSpeed;
         private float currentEngineVolume;
 
@@ -28,11 +28,10 @@ namespace Car
         private float speedMultiplier;
         private float carWheelMaxAngle = 150f;
         public float maxSpeed = 20f;
-            
-        private bool outOfFuel = false;
+        private bool outOfFuel;
         public float currentFuel;
         private float fuelConsumption;
-        public bool IsLightsOn = false;
+        private bool IsLightsOn;
         public Image fuelBar;
         public Battery Battery;
         private float gasInput;
@@ -42,7 +41,6 @@ namespace Car
         public float highVolume = 1f;
         public float minSpeedVolume = 10f;
         public float maxSpeedVolume = 21f;
-
         public bool IsPlayerInside = false;
         public const float MaxFuel = 100f;
 
@@ -88,18 +86,18 @@ namespace Car
             }
         }
 
-        void GetInputs()
+        private void GetInputs()
         {
             gasInput = IsPlayerInside ? Input.GetAxis("Vertical") : 0.0f;
             turnInput = IsPlayerInside ? Input.GetAxis("Horizontal") : 0.0f;
         }
 
-        void MoveCarForward()
+        private void MoveCarForward()
         {
             if (IsRunning)
             {
                 {
-                    foreach (Wheel wheel in wheels)
+                    foreach (var wheel in wheels)
                     {
                         wheel.wheelCollider.motorTorque = gasInput * acceleration * speedMultiplier * Time.deltaTime;
                     }
@@ -135,7 +133,7 @@ namespace Car
             }
         }
 
-        void TurnCar()
+        private void TurnCar()
         {
             if (currentSpeed > 0.1f)
             {
@@ -152,46 +150,31 @@ namespace Car
             }
         }
 
-        void Brake()
+        private void Brake()
         {
             if (gasInput < 0) // if reverse/break is pressed
-            {
-                foreach (Wheel wheel in wheels)
+                foreach (var wheel in wheels)
                 {
                     wheel.wheelCollider.brakeTorque = deceleration * 1000 * Time.deltaTime;
                     wheel.wheelCollider.motorTorque = 0;
                 }
-            }
-            else if (gasInput > 0 && IsRunning) // if gas is pressed then it removes the brake
-            {
-                foreach (Wheel wheel in wheels)
-                {
-                    wheel.wheelCollider.brakeTorque = 0;
-                }
-            }
-            else // if no gas is pressed then slows down the car
-            {
-                foreach (Wheel wheel in wheels)
+            
+            // if gas is pressed then it removes the brake
+            else if (gasInput > 0 && IsRunning) foreach (var wheel in wheels) wheel.wheelCollider.brakeTorque = 0;
+            
+            // if no gas is pressed then slows down the car
+            else 
+                foreach (var wheel in wheels)
                 {
                     wheel.wheelCollider.brakeTorque = deceleration * 350 * Time.deltaTime;
                     wheel.wheelCollider.motorTorque = 0;
                 }
-            }
         }
 
-        void SetMaxSpeed() // sets the max speed of the car so it doesn't go faster and faster
-        {
-            if (currentSpeed > maxSpeed)
-            {
-                speedMultiplier = 0;
-            }
-            else
-            {
-                speedMultiplier = 400;
-            }
-        }
+        private void SetMaxSpeed() => // sets the max speed of the car so it doesn't go faster and faster
+            speedMultiplier = (currentSpeed > maxSpeed) ? 0 : 400; 
 
-        void AnimateWheels()
+        private void AnimateWheels()
         {
             foreach (Wheel wheel in wheels)
             {
@@ -201,54 +184,40 @@ namespace Car
             }
         }
 
-        void AnimateSteeringWheel()
-        {
+        private void AnimateSteeringWheel() =>
             steeringWheel.transform.localRotation = Quaternion.Lerp(steeringWheel.transform.localRotation,
                 Quaternion.AngleAxis(turnInput * -turnAngle * 3f, Vector3.forward), Time.deltaTime * 5f);
-        }
 
-        void EngineSound()
+        private void EngineSound()
         {
-            if (currentSpeed < minSpeedVolume)
-            {
-                engineSound.pitch = 0.25f;
-            }
-
-            if (currentSpeed > minSpeedVolume && currentSpeed < maxSpeedVolume)
-            {
-                engineSound.pitch = 0.25f + currentEngineVolume;
-            }
-
-            if (engineSound.pitch <= 0.25f && !IsRunning)
-            {
-                engineSound.volume = 0;
-            }
-
+            if (currentSpeed < minSpeedVolume) engineSound.pitch = 0.25f;
+            if (currentSpeed > minSpeedVolume && currentSpeed < maxSpeedVolume) engineSound.pitch = 0.25f + currentEngineVolume;
+            if (engineSound.pitch <= 0.25f && !IsRunning) engineSound.volume = 0;
+            
             engineSound.mute = !IsPlayerInside && !IsRunning;
         }
 
-        void ToggleLights()
+        private void DisableLights()
+        {
+            foreach (var light in carLights.Where(light => !light.IsWorking))
+            {
+                light.ULight.intensity = 0;
+                light.UFlare.Stop();
+            } 
+        }
+        
+        private void ToggleLights()
         {
             if (Input.GetKeyDown(KeyCode.L) && IsPlayerInside)
             {
                 IsLightsOn = !IsLightsOn;
-                foreach (Light light in carLights)
+                foreach (var light in carLights)
                 {
-                    light.intensity = IsLightsOn ? 1 : 0;
-                }
-
-                foreach (ParticleSystem flare in carFlares)
-                {
-                    if (IsLightsOn)
-                    {
-                        flare.Play();
-                    }
-                    else
-                    {
-                        flare.Stop();
-                    }
+                    if (light.IsWorking) light.ULight.intensity = IsLightsOn ? 1 : 0;
+                    if (IsLightsOn) light.UFlare.Play(); else light.UFlare.Stop();
                 }
             }
+            DisableLights();      
         }
 
         // Start is called before the first frame update
