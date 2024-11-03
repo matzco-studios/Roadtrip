@@ -91,7 +91,7 @@ namespace Car.Parts
                 _message.SetActive(false);
                 print("Disabling car message.");
             }
-
+            
             _canExitDelayed = _canExit;
         }
     }

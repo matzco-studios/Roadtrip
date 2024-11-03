@@ -13,7 +13,10 @@ TagManager:
   - WheelOfCar
   - CarUI
   - ActionMessage
-  - GasMachine
+  - Car
+  - Battery
+  - BatteryCollider
+  - LightCollider
   layers:
   - Default
   - TransparentFX

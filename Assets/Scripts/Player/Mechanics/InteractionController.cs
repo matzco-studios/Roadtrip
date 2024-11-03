@@ -57,13 +57,13 @@ public class InteractionController : MonoBehaviour
         }
     }
 
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("InteractableItem") || other.CompareTag("GrabbableItem") || other.CompareTag("GasPump"))
+        void OnTriggerExit(Collider other)
         {
-            _message.SetActive(false);
+            if (other.CompareTag("InteractableItem") || other.CompareTag("GrabbableItem") || other.CompareTag("Battery"))
+            {
+                _message.SetActive(false);
+            }
         }
-    }
 
     void Update()
     {
