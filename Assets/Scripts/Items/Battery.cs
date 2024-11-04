@@ -34,7 +34,7 @@ namespace Items
         {
             _initialPosition = new Vector3(0.500625f,0.118f,1.547f);
             _initialRotation = transform.localRotation;
-            _carHood = GameObject.FindGameObjectWithTag("Car").transform.FindChild("Body/Body");
+            _carHood = GameObject.FindGameObjectWithTag("Car").transform.Find("Body/Body");
             _carController = GameObject.FindGameObjectWithTag("Car").GetComponent<Car.CarController>();
             _boxColider = GetComponent<BoxCollider>();
             _rigidbody = GetComponent<Rigidbody>();
