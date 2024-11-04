@@ -42,19 +42,16 @@ namespace Items
                     transform.SetParent(fuelTank);
                     transform.localPosition = _fillingPosition;
                     transform.localRotation = _fillingRotation;
-                    rb.isKinematic = true;
-                    rb.useGravity = false;
                     GameObject.FindGameObjectWithTag("Car").GetComponent<CarController>().Refuel(0.1f);
                 }
-                else
+                else if (rb.isKinematic)
                 {
                     transform.localPosition = _pickedPosition;
                     transform.localRotation = _pickedRotation;
                     transform.SetParent(_pickedParent.transform);
-                    rb.isKinematic = false;
                 }
             }
-            else if (other.gameObject.CompareTag("GasMachine") && !_isPicked)
+            else if (other.gameObject.CompareTag("GasMachine") && !_isPicked && transform.parent == null)
             {
                 transform.position = _initialPosition;
                 transform.rotation = Quaternion.Euler(_initialRotation);
@@ -63,7 +60,7 @@ namespace Items
             }
         }
 
-        void Update()
+        void FixedUpdate()
         {
             if (transform.parent != null && transform.parent.gameObject != null)
             {
@@ -78,6 +75,7 @@ namespace Items
                 else
                 {
                     _isPicked = false;
+                    rb.useGravity = false;
                     rb.constraints = RigidbodyConstraints.None;
                 }
             }
