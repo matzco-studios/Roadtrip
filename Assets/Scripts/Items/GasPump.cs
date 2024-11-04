@@ -51,7 +51,7 @@ namespace Items
                     transform.SetParent(_pickedParent.transform);
                 }
             }
-            else if (other.gameObject.CompareTag("GasMachine") && !_isPicked)
+            else if (other.gameObject.CompareTag("GasMachine") && !_isPicked && transform.parent == null)
             {
                 transform.position = _initialPosition;
                 transform.rotation = Quaternion.Euler(_initialRotation);
@@ -75,6 +75,7 @@ namespace Items
                 else
                 {
                     _isPicked = false;
+                    rb.useGravity = false;
                     rb.constraints = RigidbodyConstraints.None;
                 }
             }
