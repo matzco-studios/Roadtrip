@@ -3,60 +3,59 @@ using UnityEngine;
 
 namespace Player.Mechanics
 {
-    public class InteractionController : MonoBehaviour
+public class InteractionController : MonoBehaviour
+{
+    [SerializeField] private UI.ActionMessageController _message;
+    [SerializeField] private InventoryController _inventory;
+    private int _keyPressE;
+    private int _keyPressF;
+
+    private void ForceShowMessage(Collider other)
     {
-        [SerializeField] private UI.ActionMessageController _message;
-        [SerializeField] private InventoryController _inventory;
-        private int _keyPressE;
-        private int _keyPressF;
+        if (!_message.gameObject.activeSelf)
+            OnTriggerEnter(other);
+    }
 
-        private void ForceShowMessage(Collider other)
+    void OnTriggerEnter(Collider collider)
+    {
+        if (_inventory.IsActive() && (collider.CompareTag("GrabbableItem") || collider.CompareTag("Battery")))
         {
-            if (!_message.gameObject.activeSelf)
-                OnTriggerEnter(other);
+            _message.GrabItem(collider.gameObject);
         }
-
-        void OnTriggerEnter(Collider collider)
+        else if (collider.CompareTag("InteractableItem"))
         {
-            if (_inventory.IsActive() && (collider.CompareTag("GrabbableItem") || collider.CompareTag("Battery")))
-            {
-                _message.GrabItem(collider.gameObject);
-            }
-            else if (collider.CompareTag("InteractableItem"))
-            {
-                collider.gameObject.GetComponent<Interactable>().InteractionMessage();
-            }
+            collider.gameObject.GetComponent<Interactable>().InteractionMessage();
         }
+    }
 
-        void OnTriggerStay(Collider other)
+    void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("InteractableItem"))
         {
-            if (other.CompareTag("InteractableItem"))
-            {
-                if (_keyPressF > 0)
-                {
-                    other.GetComponent<Interactable>().OnInteract();
-                    _keyPressF = 0;
-                }
-                else
-                    ForceShowMessage(other);
+            if (_keyPressF>0){
+                other.GetComponent<Interactable>().OnInteract();
+                _keyPressF = 0;
             }
-            else if (_inventory.IsActive() && other.CompareTag("GrabbableItem") || other.CompareTag("Battery"))
+            else
             {
-                if (_keyPressE > 0)
-                {
-                    _inventory.AddItem(other.gameObject);
-                    _keyPressE = 0;
-
-                    // Calling OnTriggerExit manually, because it does not activate when we get the item, because we do not leave the trigger zone, 
-                    // we just desactivate, the item collider and rigidbody.
-                    OnTriggerExit(other);
-                }
-                else
-                {
-                    ForceShowMessage(other);
-                }
+                ForceShowMessage(other);
             }
         }
+        else if (_inventory.IsActive() && (other.CompareTag("GrabbableItem") || other.CompareTag("Battery")))
+        {
+            if (_keyPressE>0)
+            {
+                _inventory.AddItem(other.gameObject);
+                _keyPressE = 0;
+
+                // Calling OnTriggerExit manually, because it does not activate when we get the item, because we do not leave the trigger zone, 
+                // we just desactivate, the item collider and rigidbody.
+                OnTriggerExit(other);
+            }else{
+                ForceShowMessage(other);
+            }
+        }
+    }
 
         void OnTriggerExit(Collider other)
         {
@@ -66,29 +65,27 @@ namespace Player.Mechanics
             }
         }
 
-        void Update()
+    void Update()
+    {
+        if (_inventory.IsActive())
         {
-            if (_inventory.IsActive())
+            if (Input.GetKeyDown(KeyCode.Q))
             {
-                if (Input.GetKeyDown(KeyCode.Q))
-                {
-                    _inventory.DropCurrentItem();
-                }
-
-                _inventory.ScrollWheelItemChange();
-                _inventory.KeyboardItemChange();
+                _inventory.DropCurrentItem();
             }
 
-            if (Input.GetKeyDown(KeyCode.E))
-                _keyPressE = 2;
-            if (Input.GetKeyDown(KeyCode.F))
-                _keyPressF = 2;
+            _inventory.ScrollWheelItemChange();
+            _inventory.KeyboardItemChange();
         }
-
-        void FixedUpdate()
-        {
-            _keyPressE--;
-            _keyPressF--;
-        }
+        if (Input.GetKeyDown(KeyCode.E))
+            _keyPressE = 2;
+        if (Input.GetKeyDown(KeyCode.F))
+            _keyPressF = 2;
     }
+    void FixedUpdate()
+    {
+        _keyPressE--;
+        _keyPressF--;
+    }
+}
 }

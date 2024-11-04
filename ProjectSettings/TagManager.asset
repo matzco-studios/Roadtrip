@@ -4,9 +4,14 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Undefined
   - GrabbableItem
+  - GasPump
+  - FuelTank
   - InteractableItem
+  - Car
   - WheelOfCar
+  - CarUI
   - ActionMessage
   - Car
   - Battery
@@ -16,11 +21,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - GasPump
   - Water
   - UI
-  - WatchedPostProcess
-  - WheelOfCar
+  - 
+  - 
   - 
   - 
   - 
