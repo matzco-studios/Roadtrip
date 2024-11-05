@@ -40,21 +40,18 @@ namespace Items
                 if (Input.GetKey(KeyCode.E))
                 {
                     transform.SetParent(fuelTank);
-                    transform.localPosition = _fillingPosition;
-                    transform.localRotation = _fillingRotation;
+                    transform.SetLocalPositionAndRotation(_fillingPosition, _fillingRotation);
                     GameObject.FindGameObjectWithTag("Car").GetComponent<CarController>().Refuel(0.1f);
                 }
                 else if (rb.isKinematic)
                 {
-                    transform.localPosition = _pickedPosition;
-                    transform.localRotation = _pickedRotation;
+                    transform.SetLocalPositionAndRotation(_pickedPosition, _pickedRotation);
                     transform.SetParent(_pickedParent.transform);
                 }
             }
             else if (other.gameObject.CompareTag("GasMachine") && !_isPicked && (transform.parent == null || transform.parent ==_initialParent.transform))
             {
-                transform.position = _initialPosition;
-                transform.rotation = Quaternion.Euler(_initialRotation);
+                transform.SetPositionAndRotation(_initialPosition, Quaternion.Euler(_initialRotation));
                 transform.SetParent(_initialParent.transform);
                 rb.constraints = RigidbodyConstraints.FreezeAll;
             }
