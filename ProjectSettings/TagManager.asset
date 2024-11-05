@@ -4,19 +4,27 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Undefined
   - GrabbableItem
+  - GasPump
+  - FuelTank
   - InteractableItem
+  - Car
   - WheelOfCar
+  - CarUI
   - ActionMessage
+  - Car
+  - Battery
+  - BatteryCollider
+  - LightCollider
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - GasPump
   - Water
   - UI
-  - WatchedPostProcess
-  - WheelOfCar
+  - 
   - 
   - 
   - 
