@@ -10,7 +10,7 @@ namespace Car.Parts
         void Start()
         {
             _message = GetMessage();
-            _car = transform.parent.GetComponent<CarController>();
+            _car = GetCar();
         }
 
         public override void InteractionMessage()
