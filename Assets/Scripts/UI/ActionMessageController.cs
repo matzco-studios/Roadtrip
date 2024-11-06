@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Items.Mechanics;
 using TMPro;
 using UnityEngine;
@@ -25,10 +27,18 @@ namespace UI
             set => SetActive(value);
         }
 
+        private void Reset()
+        {
+            _press.text = "";
+            _key.text = "";
+            _action.text = "";
+            _itemName.text = "";
+        }
+
         void Start()
         {
             _crosshair = transform.parent.GetChild(transform.GetSiblingIndex() + 1).GetComponent<Image>();
-            SetActive(false);
+            Reset();
         }
 
         /// <summary>
@@ -46,6 +56,7 @@ namespace UI
         /// </summary>
         public void InteractableItem(string itemName = "with object", string action = "to interact", string key = "F")
         {
+            _press.text = "Press";
             _key.text = key;
             _action.text = action;
             _itemName.text = itemName;
