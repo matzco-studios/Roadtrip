@@ -1,3 +1,4 @@
+using System.Net;
 using UnityEngine;
 
 namespace Car.Parts
@@ -51,6 +52,15 @@ namespace Car.Parts
             transform.localEulerAngles = new(-_rotation, 0, 0);
 
             CheckCarEnter();
+        }
+
+        void OnTriggerEnter(Collider collision)
+        {
+            if (collision.gameObject.CompareTag("Player") && Mathf.Abs(_targetRotation - _rotation)>12)
+            {
+                print("Entered");
+                OnInteract();
+            }
         }
     }
 }
