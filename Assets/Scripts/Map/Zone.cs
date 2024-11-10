@@ -8,7 +8,7 @@ namespace Map
     {
         [SerializeField] private PostProcessVolume zone;
         private Transform _player;
-        private const float ActivationDistance = 0.76f;
+        private const float ActivationDistance = 0.02f;
         
         private void Start()
         {
