@@ -88,5 +88,10 @@ namespace Player
             Movement();
             Gravity();
         }
+
+        public void ApplyVelocity(Vector3 force)
+        {
+            _velocity += force;
+        }
     }
 }
