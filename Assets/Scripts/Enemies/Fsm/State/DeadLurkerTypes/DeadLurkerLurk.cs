@@ -37,7 +37,7 @@ namespace Enemies.Fsm.State.DeadLurkerTypes
                 Agent.speed = _runAwaySpeed;
             }else{
                 _targetPos = _posBehindPlayer;
-                Agent.speed = Mathf.Sqrt(Agent.remainingDistance*2)+0.25f;
+                Agent.speed = Mathf.Sqrt(Agent.remainingDistance*2.2f)+0.65f;
             }
             
             Agent.SetDestination(pos);
