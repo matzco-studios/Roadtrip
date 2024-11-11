@@ -1,0 +1,29 @@
+using UnityEngine;
+using UnityEngine.AI;
+using Enemies.Fsm.State;
+using Enemies.Fsm.State.Types;
+using Enemies.Fsm.State.DeadLurkerTypes;
+
+public class DeadlurkerEnemy : EnemyController
+{
+    private NavMeshAgent agent;
+    private Animator anim;
+    private EnemyState currentState;
+
+    private Transform player;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        currentState = new DeadLurkerIdle(GetComponent<EnemyController>(), agent, anim, player);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        currentState = currentState.Process();
+    }
+}
