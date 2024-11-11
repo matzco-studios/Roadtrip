@@ -1641,6 +1641,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
+--- !u!1 &875247628 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5713548300795970587, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
+  m_PrefabInstance: {fileID: 722656199}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1008770103
 GameObject:
   m_ObjectHideFlags: 0
@@ -2122,6 +2127,11 @@ MonoBehaviour:
   ULight: {fileID: 0}
   UFlare: {fileID: 0}
   IsWorking: 0
+--- !u!1 &1381291872 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2148278672981037845, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+  m_PrefabInstance: {fileID: 1862597306}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1384432457
 GameObject:
   m_ObjectHideFlags: 0
@@ -2208,6 +2218,7 @@ GameObject:
   - component: {fileID: 1409984327}
   - component: {fileID: 1409984326}
   - component: {fileID: 1409984325}
+  - component: {fileID: 1409984328}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2265,6 +2276,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1409984328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409984324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf8704ef7ca5f6b4bade9a730eaed76b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 875247628}
+  carTrunk: {fileID: 1381291872}
+  scorchletPrefab: {fileID: 9045630014139443270, guid: 63d6428fb96935548bb4c0cd3d5204b4, type: 3}
 --- !u!1 &1500947433
 GameObject:
   m_ObjectHideFlags: 0
