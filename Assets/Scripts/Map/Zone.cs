@@ -21,14 +21,6 @@ namespace Map
         private void Update()
         {
             var inZone = IsInTheZone();
-            if (inZone)
-            {
-                print("Player is in the zone.");
-            }
-            else
-            {
-                print("Player is outside the zone.");
-            }
             
             _ppv.weight = Mathf.Lerp(
                 _ppv.weight, 
