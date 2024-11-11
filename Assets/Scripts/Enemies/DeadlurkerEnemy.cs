@@ -18,7 +18,7 @@ public class DeadlurkerEnemy : EnemyController
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        currentState = new DeadLurkerIdle(GetComponent<EnemyController>(), agent, anim, player);
+        currentState = new DeadLurkerIdle(this, agent, anim, player);
     }
 
     // Update is called once per frame
