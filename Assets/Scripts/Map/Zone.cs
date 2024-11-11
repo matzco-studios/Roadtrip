@@ -1,4 +1,5 @@
 using System;
+using Player;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
@@ -7,12 +8,12 @@ namespace Map
     public class Zone : MonoBehaviour
     {
         [SerializeField] private PostProcessVolume _ppv;
-        private Transform _player;
+        private PlayerController _player;
         private const float ActivationDistance = 0.02f;
         
         private void Start()
         {
-            _player = GameObject.FindGameObjectWithTag("Player").transform;
+            _player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
             _ppv.weight = 0;
         }
 
@@ -21,6 +22,12 @@ namespace Map
         private void Update()
         {
             var inZone = IsInTheZone();
+
+            if (inZone)
+            {
+                _player.ReduceHealth(2 * Time.deltaTime);
+                print(_player.Health);
+            }
             
             _ppv.weight = Mathf.Lerp(
                 _ppv.weight, 
