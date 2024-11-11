@@ -29,6 +29,7 @@ namespace Enemies.Fsm.State.DeadLurkerTypes
             var pos = Player.position + Quaternion.AngleAxis(Player.eulerAngles.y, Player.up) * _targetPos;
             Agent.SetDestination(pos);
             Debug.DrawLine(Npc.transform.position, pos);
+            Agent.speed = Mathf.Sqrt(Agent.remainingDistance*2)+0.25f;
             
             /*if (Npc.CanAttackPlayer)
             {
