@@ -31,7 +31,6 @@ namespace Enemies.Fsm.State.DeadLurkerTypes
 
         protected override void Update()
         {
-            Npc.transform.LookAt(Vector3.Scale(Player.position, new Vector3(1f, 0f, 1f)));
             Vector3 pos = Player.position + Quaternion.AngleAxis(Player.eulerAngles.y, Player.up) * _targetPos;
             
             if (_renderer.isVisible) {
@@ -41,6 +40,7 @@ namespace Enemies.Fsm.State.DeadLurkerTypes
                 _targetPos = _posBehindPlayer;
                 Agent.speed = Mathf.Sqrt(Agent.remainingDistance*2.2f)+0.65f;
                 Agent.speed = (Agent.speed == float.PositiveInfinity) ? 0.65f : Agent.speed;
+                Npc.transform.LookAt(Vector3.Scale(Player.position, new Vector3(1f, 0f, 1f)));
             }
             
             Agent.SetDestination(pos);
