@@ -6,8 +6,7 @@ public class ScorchletController : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
-    {
-        
+    {        
     }
 
     void OnTriggerEnter(Collider other)
@@ -22,11 +21,14 @@ public class ScorchletController : MonoBehaviour
                 other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             }
         }
+        // } else if (other.gameObject.tag == "Car")
+        // {
+        //     gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * 1000);
+        // }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 }

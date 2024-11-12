@@ -2290,7 +2290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 875247628}
   carTrunk: {fileID: 1381291872}
-  scorchletPrefab: {fileID: 9045630014139443270, guid: 63d6428fb96935548bb4c0cd3d5204b4, type: 3}
+  scorchletPrefab: {fileID: 127060, guid: 95ff2b139e7da8a43baedd7f27edf718, type: 3}
 --- !u!1 &1500947433
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,9 @@ public class ScorchletSpawn : MonoBehaviour
     public GameObject scorchletPrefab;
     private GameObject scorchlet;
     private float timeAway;
+    private Vector3 truckPosition;
+    private Vector3 spawnPositionDistance;
+    private Animator anim;
 
     void Start()
     {
@@ -28,11 +31,15 @@ public class ScorchletSpawn : MonoBehaviour
                 {
                     if (scorchlet == null)
                     {
-                        scorchlet = Instantiate(scorchletPrefab);
+                        truckPosition = carTrunk.transform.position;
+                        spawnPositionDistance = new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
+                        scorchlet = Instantiate(scorchletPrefab, truckPosition + spawnPositionDistance, Quaternion.identity);
+                        anim = scorchlet.GetComponent<Animator>();
                     }
                     else
                     {
                         MoveScorchlet(scorchlet);
+                        Debug.Log("Scorchlet is moving");
                     }
                 }
             }
@@ -40,15 +47,17 @@ public class ScorchletSpawn : MonoBehaviour
     }
     void MoveScorchlet(GameObject enemy)
     {
-        Transform objectTaken = scorchlet.transform.childCount > 0 ? scorchlet.transform.GetChild(0) : null;
-        if (objectTaken == null)
-        {
-            enemy.transform.LookAt(player.transform);
-            enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, carTrunk.transform.position, 5f * Time.deltaTime);
-        } else if (objectTaken != null)
-        {
-            Debug.Log("Scorchlet has taken" + objectTaken.name);
-            scorchlet.transform.position = Vector3.MoveTowards(scorchlet.transform.position, player.transform.position, 5f * Time.deltaTime);
-        }
+        anim.SetInteger("moving", 1);
+        // enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, player.transform.position, 1f * Time.deltaTime);
+        // Transform objectTaken = scorchlet.transform.childCount > 0 ? scorchlet.transform.GetChild(0) : null;
+        // if (objectTaken == null)
+        // {
+        //     enemy.transform.LookAt(carTrunk.transform);
+        //     enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, carTrunk.transform.position, 5f * Time.deltaTime);
+        // } else if (objectTaken != null)
+        // {
+        //     Debug.Log("Scorchlet has taken" + objectTaken.name);
+        //     scorchlet.transform.position = Vector3.MoveTowards(scorchlet.transform.position, player.transform.position, 5f * Time.deltaTime);
+        // }
     }
 }
