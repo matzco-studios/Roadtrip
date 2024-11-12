@@ -1,47 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ScorchletController : MonoBehaviour
 {
-    public GameObject player;
-    public GameObject carTrunk;
-    public GameObject scorchletPrefab;
-    private GameObject scorchlet;
-    private float timeAway;
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "GrabbableItem")
+        {
+            Transform parent = other.gameObject.transform.parent;
+            if (parent == null || parent.CompareTag("Scorchlet") == false || parent.CompareTag("Player") == false)
+            {
+                other.gameObject.transform.SetParent(transform);
+                other.gameObject.transform.localPosition = new Vector3(1.25f, -0.15f, -0.26f);
+                other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (player != null && carTrunk != null)
-        {
-            float distance = Vector3.Distance(player.transform.position, carTrunk.transform.position);
-            if (distance > 10)
-            {
-                timeAway += Time.deltaTime;
-                Debug.Log(timeAway);
-                if (timeAway > 10)
-                {
-                    if (scorchlet == null)
-                    {
-                        scorchlet = Instantiate(scorchletPrefab);
-                    }
-                    else
-                    {
-                        GoToCar(scorchlet);
-                    }
-                }
-            }
-        }
-    }
-    void GoToCar(GameObject enemy)
-    {
-        enemy.transform.LookAt(player.transform);
-        enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, carTrunk.transform.position, 5f * Time.deltaTime);
+        
     }
 }
