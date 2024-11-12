@@ -16,7 +16,7 @@ public class DeadlurkerEnemy : EnemyController
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         currentState = new DeadLurkerIdle(this, agent, anim, player);
     }
