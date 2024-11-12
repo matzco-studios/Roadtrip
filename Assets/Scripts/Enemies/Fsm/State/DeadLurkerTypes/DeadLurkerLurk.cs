@@ -1,3 +1,4 @@
+using System;
 using Enemies.Fsm.State.Types;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -24,6 +25,7 @@ namespace Enemies.Fsm.State.DeadLurkerTypes
         {
             _renderer = Npc.GetComponentInChildren<Renderer>();
             _targetPos = _posBehindPlayer;
+            Anim.SetBool("IsMoving", true);
             base.Enter();
         }
 
@@ -38,6 +40,7 @@ namespace Enemies.Fsm.State.DeadLurkerTypes
             }else{
                 _targetPos = _posBehindPlayer;
                 Agent.speed = Mathf.Sqrt(Agent.remainingDistance*2.2f)+0.65f;
+                Agent.speed = (Agent.speed == float.PositiveInfinity) ? 0.65f : Agent.speed;
             }
             
             Agent.SetDestination(pos);
@@ -46,6 +49,8 @@ namespace Enemies.Fsm.State.DeadLurkerTypes
             if (_targetPos==_posBehindPlayer && (Npc.transform.position-pos).magnitude<1) {
                 Debug.Log("Can attack");
             }
+
+            Anim.SetFloat("WalkSpeed", Agent.velocity.magnitude);
 
             /*if (Npc.CanAttackPlayer)
             {

@@ -11,9 +11,15 @@ namespace Enemies.Fsm.State.DeadLurkerTypes
         {
             Name = StateType.Idle;
         }
+        protected override void Enter()
+        {
+            Anim.SetBool("IsMoving", false);
+            base.Enter();
+        }
         protected override void Update()
         {
-            
+            NextEnemyState = new DeadLurkerLurk(Npc, Agent, Anim, Player);
+            Stage = EventStage.Exit;
         }
     }
 }
