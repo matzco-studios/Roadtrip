@@ -38,8 +38,8 @@ namespace Enemies.Fsm.State.DeadLurkerTypes
                 Agent.speed = _runAwaySpeed;
             }else{
                 _targetPos = _posBehindPlayer;
-                Agent.speed = Mathf.Sqrt(Agent.remainingDistance*2.2f)+0.65f;
-                Agent.speed = (Agent.speed == float.PositiveInfinity) ? 0.65f : Agent.speed;
+                var spd = Mathf.Sqrt(Agent.remainingDistance*2.2f)+0.65f;
+                Agent.speed = (spd == float.PositiveInfinity) ? 0.65f : spd;
                 Npc.transform.LookAt(Vector3.Scale(Player.position, new Vector3(1f, 0f, 1f)));
             }
             
