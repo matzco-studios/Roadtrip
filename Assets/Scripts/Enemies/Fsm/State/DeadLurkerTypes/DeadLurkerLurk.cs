@@ -21,6 +21,12 @@ namespace Enemies.Fsm.State.DeadLurkerTypes
             Agent.speed = 5.0f;
             Agent.isStopped = false;
         }
+
+        private void LookAtPlayer()
+        {
+            Npc.transform.LookAt(Vector3.Scale(Player.position, new Vector3(1f, 0f, 1f)));
+        }
+
         protected override void Enter()
         {
             _renderer = Npc.GetComponentInChildren<Renderer>();
@@ -40,14 +46,18 @@ namespace Enemies.Fsm.State.DeadLurkerTypes
                 _targetPos = _posBehindPlayer;
                 var spd = Mathf.Sqrt(Agent.remainingDistance*2.2f)+0.65f;
                 Agent.speed = (spd == float.PositiveInfinity) ? 0.65f : spd;
-                Npc.transform.LookAt(Vector3.Scale(Player.position, new Vector3(1f, 0f, 1f)));
+                LookAtPlayer();
             }
             
             Agent.SetDestination(pos);
             Debug.DrawLine(Npc.transform.position, pos);
 
-            if (_targetPos==_posBehindPlayer && (Npc.transform.position-pos).magnitude<1) {
-                Debug.Log("Can attack");
+            if (_targetPos==_posBehindPlayer && (Npc.transform.position-pos).magnitude<1.2) {
+                LookAtPlayer();
+                Agent.SetDestination(Player.position);
+                NextEnemyState = new DeadLurkerAttack(Npc, Agent, Anim, Player);
+                Stage = EventStage.Exit;
+                Debug.Log("Attack now");
             }
 
             Anim.SetFloat("WalkSpeed", Agent.velocity.magnitude);
