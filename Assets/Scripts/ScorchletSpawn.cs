@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -21,43 +22,36 @@ public class ScorchletSpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player != null && carTrunk != null)
+        float distance = Vector3.Distance(player.transform.position, carTrunk.transform.position);
+        if (distance > 10 && scorchlet == null)
         {
-            float distance = Vector3.Distance(player.transform.position, carTrunk.transform.position);
-            if (distance > 10)
+            timeAway += Time.deltaTime;
+            Debug.Log(timeAway);
+            if (timeAway > 10)
             {
-                timeAway += Time.deltaTime;
-                if (timeAway > 10)
+                int random = UnityEngine.Random.Range(0, 1); // Set spawn chance
+                if (random == 0)
                 {
-                    if (scorchlet == null)
-                    {
-                        truckPosition = carTrunk.transform.position;
-                        spawnPositionDistance = new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
-                        scorchlet = Instantiate(scorchletPrefab, truckPosition + spawnPositionDistance, Quaternion.identity);
-                        anim = scorchlet.GetComponent<Animator>();
-                    }
-                    else
-                    {
-                        MoveScorchlet(scorchlet);
-                        Debug.Log("Scorchlet is moving");
-                    }
+                    SpawnScorchlet();
+                    timeAway = 0;
+                }
+                else
+                {
+                    timeAway = 0;
                 }
             }
         }
+        else if (distance <= 10)
+        {
+            timeAway = 0;
+        }
     }
-    void MoveScorchlet(GameObject enemy)
+
+    void SpawnScorchlet()
     {
-        anim.SetInteger("moving", 1);
-        // enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, player.transform.position, 1f * Time.deltaTime);
-        // Transform objectTaken = scorchlet.transform.childCount > 0 ? scorchlet.transform.GetChild(0) : null;
-        // if (objectTaken == null)
-        // {
-        //     enemy.transform.LookAt(carTrunk.transform);
-        //     enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, carTrunk.transform.position, 5f * Time.deltaTime);
-        // } else if (objectTaken != null)
-        // {
-        //     Debug.Log("Scorchlet has taken" + objectTaken.name);
-        //     scorchlet.transform.position = Vector3.MoveTowards(scorchlet.transform.position, player.transform.position, 5f * Time.deltaTime);
-        // }
+        truckPosition = carTrunk.transform.position;
+        spawnPositionDistance = new Vector3(UnityEngine.Random.Range(-5, 5), 0, UnityEngine.Random.Range(-5, 5));
+        scorchlet = Instantiate(scorchletPrefab, new Vector3(truckPosition.x + spawnPositionDistance.x, 0, truckPosition.z + spawnPositionDistance.z), Quaternion.identity);
+        anim = scorchlet.GetComponent<Animator>();
     }
 }
