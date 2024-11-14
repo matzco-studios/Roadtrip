@@ -14,7 +14,6 @@ public class ScorchletController : MonoBehaviour
     {
         carTrunk = GameObject.FindGameObjectWithTag("FuelTank");
         anim = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody>();
     }
 
     void OnTriggerEnter(Collider other)
