@@ -18,6 +18,7 @@ namespace Items
         private Vector3 _initialPosition;
         private Vector3 _initialRotation;
         private Rigidbody rb;
+        private BoxCollider triggerBox;
 
         void Start()
         {
@@ -28,6 +29,7 @@ namespace Items
             _pickedParent = null;
             _initialParent = transform.parent.gameObject;
             rb = GetComponent<Rigidbody>();
+            triggerBox = GetComponent<BoxCollider>();
         }
 
         void OnTriggerStay(Collider other)
@@ -39,12 +41,14 @@ namespace Items
                 fuelTank = GameObject.FindGameObjectWithTag("FuelTank").transform;
                 if (Input.GetKey(KeyCode.E))
                 {
+                    triggerBox.excludeLayers = LayerMask.GetMask("Ignore Raycast");
                     transform.SetParent(fuelTank);
                     transform.SetLocalPositionAndRotation(_fillingPosition, _fillingRotation);
                     GameObject.FindGameObjectWithTag("Car").GetComponent<CarController>().Refuel(0.1f);
                 }
                 else if (rb.isKinematic)
                 {
+                    triggerBox.excludeLayers = LayerMask.GetMask();
                     transform.SetLocalPositionAndRotation(_pickedPosition, _pickedRotation);
                     transform.SetParent(_pickedParent.transform);
                 }
