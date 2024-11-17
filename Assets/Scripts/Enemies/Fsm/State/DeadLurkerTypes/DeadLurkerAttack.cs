@@ -14,7 +14,6 @@ namespace Enemies.Fsm.State.DeadLurkerTypes
         }
         protected override void Enter()
         {
-            Agent.isStopped = true;
             Stage = EventStage.Update;
             Anim.SetTrigger("StartAttack");
         }
