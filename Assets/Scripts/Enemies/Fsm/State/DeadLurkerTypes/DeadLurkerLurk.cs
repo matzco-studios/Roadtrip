@@ -39,20 +39,19 @@ namespace Enemies.Fsm.State.DeadLurkerTypes
         {
             Vector3 pos = Player.position + Quaternion.AngleAxis(Player.eulerAngles.y, Player.up) * _targetPos;
             
+            _targetPos = _posBehindPlayer;
+            var spd = Mathf.Sqrt(Agent.remainingDistance*2.2f)+0.65f;
+            Agent.speed = (spd == float.PositiveInfinity) ? 0.65f : spd;
+            LookAtPlayer();
+
             if (_renderer.isVisible) {
-                if (_targetPos==_posBehindPlayer){ _targetPos = _posLeftPlayer; /* Choose between left/right */ }
-                Agent.speed = _runAwaySpeed;
-            }else{
-                _targetPos = _posBehindPlayer;
-                var spd = Mathf.Sqrt(Agent.remainingDistance*2.2f)+0.65f;
-                Agent.speed = (spd == float.PositiveInfinity) ? 0.65f : spd;
-                LookAtPlayer();
+                Agent.speed += _runAwaySpeed;
             }
             
             Agent.SetDestination(pos);
             Debug.DrawLine(Npc.transform.position, pos);
 
-            if (_targetPos==_posBehindPlayer && (Npc.transform.position-pos).magnitude<1.2) {
+            if (Vector3.Distance(Player.position, Npc.transform.position)<3f) {
                 LookAtPlayer();
                 Agent.SetDestination(Player.position);
                 NextEnemyState = new DeadLurkerAttack(Npc, Agent, Anim, Player);
