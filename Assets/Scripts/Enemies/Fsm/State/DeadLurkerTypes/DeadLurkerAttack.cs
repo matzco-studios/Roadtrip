@@ -21,7 +21,6 @@ namespace Enemies.Fsm.State.DeadLurkerTypes
         {
             wait-= 1.0f;
             Anim.SetFloat("WalkSpeed", 0);
-            Debug.Log(wait);
             Npc.transform.LookAt(Vector3.Scale(Player.position, new Vector3(1f, 0f, 1f)));
 
             if (wait<=0){
