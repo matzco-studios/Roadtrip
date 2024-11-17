@@ -55,8 +55,11 @@ namespace Items.Mechanics
                 _priorItems.Enqueue(_akkum);
             
             // CarLight
-            else if (_car.carLights.Select(carLight => carLight.IsWorking).Count() >= 2 && !_priorItems.Contains(_carLight))
+            else if (_car.carLights.FindAll(l => !l.IsWorking).Count >= 2 && !_priorItems.Contains(_carLight))
+            {
                 _priorItems.Enqueue(_carLight);
+                Debug.Log(_car.carLights.FindAll(l => !l.IsWorking).Count());
+            }
             
             // Bonus
             else
@@ -75,13 +78,12 @@ namespace Items.Mechanics
             while (true)
             {
                 var spawnPos = _playerPosition.position + Random.insideUnitSphere * spawnRadius;
-                CheckPlayerNeeds();
                 
                 yield return new WaitForSeconds(spawnDelay);
+                CheckPlayerNeeds();
                 
                 Instantiate(_priorItems.Peek(), new Vector3(spawnPos.x, .2f, spawnPos.z), Quaternion.identity);
                 _priorItems.Dequeue();
-                Debug.Log($"Battery: {_car.IsBatteryInside()} - Lights: {_car.carLights.Count} - NextElement: {_priorItems.Peek()} - Size: {_priorItems.Count}");
             }
         }
 
