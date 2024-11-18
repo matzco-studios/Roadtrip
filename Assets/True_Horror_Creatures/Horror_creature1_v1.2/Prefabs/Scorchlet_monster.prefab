@@ -810,8 +810,9 @@ GameObject:
   - component: {fileID: 9547856}
   - component: {fileID: 14374098}
   - component: {fileID: 11437258}
-  - component: {fileID: 3066446499945362111}
   - component: {fileID: 3075568349587917840}
+  - component: {fileID: 3611200904880615624}
+  - component: {fileID: 4262808407614803478}
   m_Layer: 0
   m_Name: Scorchlet_monster
   m_TagString: Scorchlet
@@ -874,7 +875,7 @@ CharacterController:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.83
@@ -899,18 +900,6 @@ MonoBehaviour:
   runSpeed: 4
   turnSpeed: 98
   gravity: 20
---- !u!114 &3066446499945362111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 127060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5bc5653d8c13b8459b07b2ca809d633, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &3075568349587917840
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -932,6 +921,40 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.43, y: 1, z: 1.51}
   m_Center: {x: 0, y: 1.14, z: 0.21}
+--- !u!65 &3611200904880615624
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127060}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 1.15, z: 0}
+--- !u!114 &4262808407614803478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5bc5653d8c13b8459b07b2ca809d633, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!1 &127234
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,55 +6,85 @@ using UnityEngine;
 public class ScorchletController : MonoBehaviour
 {
     private GameObject carTrunk;
+    private GameObject player;
     private Animator anim;
     private bool hasTakenObject;
     private bool isInTrunk;
+    private bool hasJumped;
+    private bool canJump;
+
+    // public void Jump()
+    // {
+    //     if (anim.GetInteger("moving") != 16)
+    //     {
+    //         anim.SetInteger("moving", 16);
+    //         transform.position += new Vector3(2, 5, 0);
+    //         Debug.Log("Scorchlet has jumped");
+    //     }
+    // }
     // Start is called before the first frame update
     void Start()
     {
-        carTrunk = GameObject.FindGameObjectWithTag("FuelTank");
+        canJump = false;
+        hasJumped = false;
+        carTrunk = GameObject.FindGameObjectWithTag("CarTrunk");
+        player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
     }
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Scorchlet has collided with " + other.gameObject.tag);
-        if (other.CompareTag("GrabbableItem") && isInTrunk)
-        {
-            Transform parent = other.gameObject.transform.parent;
-            if (parent == null || !parent.CompareTag("Scorchlet") || !parent.CompareTag("Player"))
-            {
-                other.gameObject.transform.SetParent(transform);
-                other.gameObject.transform.localPosition = new Vector3(1.25f, -0.15f, -0.26f);
-                other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-                hasTakenObject = true;
-            }
-        }
+
+        // if (other.CompareTag("JumpingZone"))
+        // {
+        //     anim.SetInteger("battle", 1);
+        //     canJump = true;
+        // }
     }
+
+    // void OnTriggerStay(Collider other)
+    // {
+    //     if (other.CompareTag("JumpingZone") && canJump)
+    //     {
+    //         Jump();
+    //     }
+    // }
 
     // Update is called once per frame
     void Update()
     {
         if (!hasTakenObject && !isInTrunk)
         {
-            Debug.Log("Scorchlet is moving towards the car trunk");
             float distance = Vector3.Distance(transform.position, carTrunk.transform.position);
-            Debug.Log(distance);
-            if (distance > 0.5f)
+            if (distance > 2f)
             {
-                transform.LookAt(carTrunk.transform);
+                transform.LookAt(carTrunk.transform.position);
                 anim.SetInteger("moving", 1);
+                transform.position = Vector3.MoveTowards(transform.position, carTrunk.transform.position, 2f);
             }
             else
             {
-                isInTrunk = true;
                 anim.SetInteger("moving", 0);
+                isInTrunk = true;
             }
         }
-        else if (isInTrunk && hasTakenObject)
+        if (isInTrunk && !hasTakenObject)
         {
-            Debug.Log("Scorchlet has taken object and is in trunk");
-            anim.SetInteger("moving", 0);
+            if (carTrunk.transform.childCount > 0)
+            {
+                GameObject item = carTrunk.transform.GetChild(Random.Range(0, carTrunk.transform.childCount)).gameObject;
+                item.GetComponent<Rigidbody>().isKinematic = true;
+                item.transform.SetParent(transform);
+                item.transform.localPosition = new Vector3(0, 0.80f, 0.9f);
+                hasTakenObject = true;
+            }
+        }
+        else if (hasTakenObject)
+        {
+            Debug.Log("Scorchlet has taken object");
+            anim.SetInteger("moving", 1);
+            transform.LookAt(player.transform.position);
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, 5f);
         }
     }
 }

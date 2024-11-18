@@ -13,7 +13,6 @@ public class ScorchletSpawn : MonoBehaviour
     private float timeAway;
     private Vector3 truckPosition;
     private Vector3 spawnPositionDistance;
-    private Animator anim;
 
     void Start()
     {
@@ -26,8 +25,7 @@ public class ScorchletSpawn : MonoBehaviour
         if (distance > 10 && scorchlet == null)
         {
             timeAway += Time.deltaTime;
-            Debug.Log(timeAway);
-            if (timeAway > 10)
+            if (timeAway > 2) // set time away
             {
                 int random = UnityEngine.Random.Range(0, 1); // Set spawn chance
                 if (random == 0)
@@ -51,7 +49,29 @@ public class ScorchletSpawn : MonoBehaviour
     {
         truckPosition = carTrunk.transform.position;
         spawnPositionDistance = new Vector3(UnityEngine.Random.Range(-5, 5), 0, UnityEngine.Random.Range(-5, 5));
-        scorchlet = Instantiate(scorchletPrefab, new Vector3(truckPosition.x + spawnPositionDistance.x, 0, truckPosition.z + spawnPositionDistance.z), Quaternion.identity);
-        anim = scorchlet.GetComponent<Animator>();
+        Vector3 spawnPosition = new Vector3(truckPosition.x + spawnPositionDistance.x, 0, truckPosition.z + spawnPositionDistance.z);
+        if (IsOverlapping(spawnPosition))
+        {
+            SpawnScorchlet();
+        }
+        else
+        {
+            scorchlet = Instantiate(scorchletPrefab, new Vector3(truckPosition.x + spawnPositionDistance.x, 0, truckPosition.z + spawnPositionDistance.z), Quaternion.identity);
+        }
+    }
+
+    bool IsOverlapping(Vector3 position)
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(position, 1);
+        int i = 0;
+        while (i < hitColliders.Length)
+        {
+            if (hitColliders[i].CompareTag("Scorchlet"))
+            {
+                return true;
+            }
+            i++;
+        }
+        return false;
     }
 }
