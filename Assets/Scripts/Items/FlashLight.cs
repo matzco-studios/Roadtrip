@@ -4,7 +4,7 @@ namespace Items
 {
     public class FlashLight : Mechanics.GrabbableItem
     {
-        private float _battery = 100f;
+        private float _battery = 0f;
         private bool _isTurnedOn = false;
         private Light _light;
         private void LeftMouse()
@@ -29,10 +29,10 @@ namespace Items
         {
             if (_isTurnedOn)
             {
-                if (_battery<10){
-                    _light.enabled = ! (Mathf.Floor(_battery*300) % Mathf.Ceil(_battery*1.5f)==0);
+                if (_battery<45){
+                    _light.enabled = ! (Mathf.Floor(_battery*_battery*150) % Mathf.Ceil(_battery*3)<=Mathf.Sqrt(Mathf.Sqrt(_battery)*0.865f));
                 }
-                if (_battery<=0){ _battery += 2.32f; LeftMouse(); }
+                if (_battery<0){ LeftMouse(); _battery += 2.6725f; }
                 else{ _battery -= Time.deltaTime; }
             }
         }
