@@ -33,6 +33,7 @@ namespace Cinematic.EndScene
         public bool IsPlayerInside;
         private bool _batteryDead;
         private bool _stopped = true;
+        [SerializeField] PlayerScript _player;
 
         void PlayDeadBatterySound()
         {
@@ -170,6 +171,8 @@ namespace Cinematic.EndScene
             }
             
             _leftFrontDoorAnim.enabled = true;
+            yield return new WaitForSeconds(1f);
+            _player.enabled = true;
         }
     }
 }
