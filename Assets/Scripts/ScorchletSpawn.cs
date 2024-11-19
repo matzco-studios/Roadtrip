@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class ScorchletSpawn : MonoBehaviour
 {
-    public GameObject player;
-    public GameObject carTrunk;
+    private GameObject player;
+    private GameObject carTrunk;
     public GameObject scorchletPrefab;
     private GameObject scorchlet;
     private float timeAway;
@@ -16,6 +16,8 @@ public class ScorchletSpawn : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        carTrunk = GameObject.FindGameObjectWithTag("CarTrunk");
     }
 
     // Update is called once per frame
@@ -48,7 +50,7 @@ public class ScorchletSpawn : MonoBehaviour
     void SpawnScorchlet()
     {
         truckPosition = carTrunk.transform.position;
-        spawnPositionDistance = new Vector3(UnityEngine.Random.Range(-5, 5), 0, UnityEngine.Random.Range(-5, 5));
+        spawnPositionDistance = new Vector3(UnityEngine.Random.Range(-4, 4), 0, UnityEngine.Random.Range(-4, 4));
         Vector3 spawnPosition = new Vector3(truckPosition.x + spawnPositionDistance.x, 0, truckPosition.z + spawnPositionDistance.z);
         if (IsOverlapping(spawnPosition))
         {
@@ -56,7 +58,7 @@ public class ScorchletSpawn : MonoBehaviour
         }
         else
         {
-            scorchlet = Instantiate(scorchletPrefab, new Vector3(truckPosition.x + spawnPositionDistance.x, 0, truckPosition.z + spawnPositionDistance.z), Quaternion.identity);
+            scorchlet = Instantiate(scorchletPrefab, spawnPosition, Quaternion.identity);
         }
     }
 
