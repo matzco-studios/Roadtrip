@@ -110,6 +110,8 @@ namespace Cinematic.EndScene
             ToggleEngine();
             ToggleLights();
 
+            yield return new WaitForSeconds(1f);
+            
             for (int i = 0; i < 3; i++)
             {
                 PlayDeadBatterySound();
@@ -142,29 +144,32 @@ namespace Cinematic.EndScene
             _leftFrontDoorAnim.enabled = false;
 
             StartCoroutine(DeadBatteryEvent());
+            StartCoroutine(CarLoop());
         }
 
-        void Update()
+        IEnumerator CarLoop()
         {
-            if (!_stopped)
+            while (!_batteryDead || !_stopped)
             {
+                yield return null;
+                
                 currentSpeed = _rb.velocity.magnitude;
                 currentEngineVolume = _rb.velocity.magnitude / 50f;
+                
+                if (!_batteryDead)
+                {
+                    MoveCarForward();
+                    AnimateWheels();
+                    SetMaxSpeed();
+                }
+                
+                else if(!_stopped)
+                {
+                    Brake();
+                }
             }
-        }
-
-        void FixedUpdate()
-        {
-            if (!_batteryDead)
-            {
-                MoveCarForward();
-                AnimateWheels();
-                SetMaxSpeed();
-            }
-            else if(!_stopped)
-            {
-                Brake();
-            }
+            
+            print("Car loop end.");
         }
     }
 }
