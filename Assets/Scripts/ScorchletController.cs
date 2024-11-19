@@ -12,6 +12,8 @@ public class ScorchletController : MonoBehaviour
     private bool isInTrunk;
     private bool hasJumped;
     private bool canJump;
+    private bool isWatched;
+    private float playerDistance;
 
     // public void Jump()
     // {
@@ -25,6 +27,7 @@ public class ScorchletController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        isWatched = false;
         canJump = false;
         hasJumped = false;
         carTrunk = GameObject.FindGameObjectWithTag("CarTrunk");
@@ -53,6 +56,8 @@ public class ScorchletController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        isWatched = gameObject.GetComponent<Renderer>().isVisible;
+        playerDistance = Vector3.Distance(transform.position, player.transform.position);
         if (!hasTakenObject && !isInTrunk)
         {
             float distance = Vector3.Distance(transform.position, carTrunk.transform.position);
@@ -79,12 +84,13 @@ public class ScorchletController : MonoBehaviour
                 hasTakenObject = true;
             }
         }
-        else if (hasTakenObject)
+        if ((isWatched && playerDistance <= 7) || hasTakenObject)
         {
-            Debug.Log("Scorchlet has taken object");
+            Debug.Log("Scorchlet is fleeing");
             anim.SetInteger("moving", 1);
-            transform.LookAt(player.transform.position);
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, 5f);
+            Vector3 randomDirection = new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
+            transform.LookAt(randomDirection);
+            transform.position = Vector3.MoveTowards(transform.position, randomDirection, 10f);
         }
     }
 }
