@@ -342,7 +342,6 @@ MonoBehaviour:
     wheelCollider: {fileID: 1294388560}
     isFrontWheel: 0
   engineSound: {fileID: 564822733}
-  engineStartSound: {fileID: 1862597309}
   engineCoughSound: {fileID: 1862597308}
   carLights:
   - {fileID: 238514033}
@@ -1099,6 +1098,10 @@ PrefabInstance:
     - {fileID: -1277011661330654034, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
     - {fileID: 9191584575290114786, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
     - {fileID: 5122357311636334117, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+    - {fileID: 1073424914858530866, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+    - {fileID: 736666982596034877, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+    - {fileID: 8927496059500866518, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+    - {fileID: 574558193269978478, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
     m_RemovedGameObjects:
     - {fileID: 5743802951743660838, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
     - {fileID: 998182899037733900, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
@@ -1123,11 +1126,6 @@ Transform:
 --- !u!82 &1862597308 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 8507575998937061898, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
-  m_PrefabInstance: {fileID: 1862597306}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &1862597309 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 1611881037938127960, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
   m_PrefabInstance: {fileID: 1862597306}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1888097777 stripped
