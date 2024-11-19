@@ -342,8 +342,8 @@ MonoBehaviour:
     wheelCollider: {fileID: 1294388560}
     isFrontWheel: 0
   engineSound: {fileID: 564822733}
-  engineStartSound: {fileID: 564822733}
-  engineCoughSound: {fileID: 564822733}
+  engineStartSound: {fileID: 1862597309}
+  engineCoughSound: {fileID: 1862597308}
   carLights:
   - {fileID: 238514033}
   - {fileID: 2105569633}
@@ -1118,6 +1118,16 @@ PrefabInstance:
 --- !u!4 &1862597307 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2145951141328495067, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+  m_PrefabInstance: {fileID: 1862597306}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1862597308 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8507575998937061898, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+  m_PrefabInstance: {fileID: 1862597306}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1862597309 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1611881037938127960, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
   m_PrefabInstance: {fileID: 1862597306}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1888097777 stripped

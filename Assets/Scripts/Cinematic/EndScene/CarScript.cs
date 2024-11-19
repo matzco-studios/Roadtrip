@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 using Car.Parts;
@@ -11,7 +12,6 @@ namespace Cinematic.EndScene
         public List<Wheel> Wheels;
         private bool _running;
         public AudioSource engineSound;
-        public AudioSource engineStartSound;
         public AudioSource engineCoughSound;
         public List<CarLight> carLights;
         public float currentSpeed;
@@ -19,7 +19,7 @@ namespace Cinematic.EndScene
         [SerializeField] private Animator _leftFrontDoorAnim;
 
         public float acceleration = 15f;
-        private float deceleration = 20f;
+        private float deceleration = 10f;
         private float turnAngle = 15f;
         private float speedMultiplier;
         private float carWheelMaxAngle = 150f;
@@ -32,45 +32,39 @@ namespace Cinematic.EndScene
         public float maxSpeedVolume = 21f;
         public bool IsPlayerInside;
         private bool _batteryDead;
+        private bool _stopped = true;
 
-        public void StartEngine()
+        void PlayDeadBatterySound()
+        {
+            Debug.Log("The battery is dead.");
+            engineCoughSound.volume = 0.5f;
+            engineCoughSound.Play();
+        }
+
+        private void ToggleEngine()
         {
             if (!IsPlayerInside) return;
-            
+
             if (_running)
             {
                 _running = false;
+                _stopped = false;
                 engineSound.pitch = currentEngineVolume;
             }
-            
-            else
+
+            else if (!_batteryDead)
             {
-                if (_batteryDead)
-                {
-                    Debug.Log("The battery is dead.");
-                    engineCoughSound.volume = 0.5f;
-                    engineCoughSound.Play();
-                }
-                else
-                {
-                    engineStartSound.Play();
-                    engineSound.PlayDelayed(1f);
-                    engineSound.volume = 1f;
-                    _running = true;
-                }
+                engineSound.Play();
+                engineSound.volume = 1f;
+                _running = true;
             }
         }
 
         private void MoveCarForward()
         {
-            if (_running)
+            foreach (var wheel in Wheels)
             {
-                {
-                    foreach (var wheel in Wheels)
-                    {
-                        wheel.wheelCollider.motorTorque = gasInput * acceleration * speedMultiplier * Time.deltaTime;
-                    }
-                }
+                wheel.wheelCollider.motorTorque = gasInput * acceleration * speedMultiplier * Time.deltaTime;
             }
         }
 
@@ -109,27 +103,66 @@ namespace Cinematic.EndScene
             IsLightsOn = !IsLightsOn;
         }
 
+        IEnumerator DeadBatteryEvent()
+        {
+            yield return new WaitForSeconds(3f);
+            _batteryDead = true;
+            ToggleEngine();
+            ToggleLights();
+
+            for (int i = 0; i < 3; i++)
+            {
+                PlayDeadBatterySound();
+                yield return new WaitForSeconds(2f);
+            }
+
+            currentSpeed = 0;
+            engineSound.Stop();
+            _stopped = false;
+        }
+
+        private void Brake()
+        {
+            foreach (var wheel in Wheels)
+            {
+                wheel.wheelCollider.brakeTorque = deceleration * 350 * Time.deltaTime;
+                wheel.wheelCollider.motorTorque = 0;
+            }
+        }
+
         void Start()
         {
             _rb = GetComponent<Rigidbody>();
             engineSound = GetComponent<AudioSource>();
             ToggleLights();
-            StartEngine();
+            ToggleEngine();
             EngineSound();
             _leftFrontDoorAnim.enabled = false;
+
+            StartCoroutine(DeadBatteryEvent());
         }
 
         void Update()
         {
-            currentSpeed = _rb.velocity.magnitude;
-            currentEngineVolume = _rb.velocity.magnitude / 50f;
+            if (!_stopped)
+            {
+                currentSpeed = _rb.velocity.magnitude;
+                currentEngineVolume = _rb.velocity.magnitude / 50f;
+            }
         }
 
         void FixedUpdate()
         {
-            MoveCarForward();
-            AnimateWheels();
-            SetMaxSpeed();
+            if (!_batteryDead)
+            {
+                MoveCarForward();
+                AnimateWheels();
+                SetMaxSpeed();
+            }
+            else if(!_stopped)
+            {
+                Brake();
+            }
         }
     }
 }
