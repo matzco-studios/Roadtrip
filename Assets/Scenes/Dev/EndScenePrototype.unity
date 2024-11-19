@@ -662,7 +662,7 @@ PrefabInstance:
     - target: {fileID: 1076367530903735901, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
       propertyPath: _message
       value: 
-      objectReference: {fileID: 1123741966}
+      objectReference: {fileID: 0}
     - target: {fileID: 1513993545894037140, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.9
@@ -706,7 +706,7 @@ PrefabInstance:
     - target: {fileID: 3383718482952794861, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
       propertyPath: _message
       value: 
-      objectReference: {fileID: 1123741966}
+      objectReference: {fileID: 0}
     - target: {fileID: 3383718482952794861, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
       propertyPath: gasPumpOnPlayer
       value: 
@@ -715,9 +715,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TemporaryPlayer
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2011484979036539009, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
     m_RemovedGameObjects:
     - {fileID: 6362826837890257876, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
+    - {fileID: 6586820111862076793, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
@@ -906,21 +908,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8793793983721885509, guid: 9c565b01f3500c543a35db4ae322a4d4, type: 3}
+    - {fileID: 8172586111032451999, guid: 9c565b01f3500c543a35db4ae322a4d4, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c565b01f3500c543a35db4ae322a4d4, type: 3}
---- !u!114 &1123741966 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 118685849262620877, guid: 9c565b01f3500c543a35db4ae322a4d4, type: 3}
-  m_PrefabInstance: {fileID: 1123741965}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85ac0ec60775c33ce8f0f487cc7b0838, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1280514594 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2149745963345890741, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
@@ -1157,17 +1150,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1502775694}
   m_CullTransparentMesh: 1
---- !u!114 &1549802917 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1076367530903735901, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
-  m_PrefabInstance: {fileID: 722656199}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bb999cf08bf56daca0f1aad45eaae7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1711667066 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2148261330560452919, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
@@ -1299,15 +1281,15 @@ PrefabInstance:
     - target: {fileID: 501468626354757583, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
       propertyPath: _message
       value: 
-      objectReference: {fileID: 1123741966}
+      objectReference: {fileID: 0}
     - target: {fileID: 546373788323479976, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
       propertyPath: _message
       value: 
-      objectReference: {fileID: 1123741966}
+      objectReference: {fileID: 0}
     - target: {fileID: 546373788323479976, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
       propertyPath: _inventory
       value: 
-      objectReference: {fileID: 1549802917}
+      objectReference: {fileID: 0}
     - target: {fileID: 671921668060538116, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -1504,8 +1486,12 @@ PrefabInstance:
       propertyPath: fuelBar
       value: 
       objectReference: {fileID: 1384432459}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 1195273729534381135, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+    - {fileID: 501468626354757583, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 5743802951743660838, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+    - {fileID: 998182899037733900, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2149745963345890741, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
