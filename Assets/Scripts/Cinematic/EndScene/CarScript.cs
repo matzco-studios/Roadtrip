@@ -128,6 +128,8 @@ namespace Cinematic.EndScene
                 wheel.wheelCollider.brakeTorque = deceleration * 350 * Time.deltaTime;
                 wheel.wheelCollider.motorTorque = 0;
             }
+            
+            AnimateWheels();
         }
 
         void Start()
