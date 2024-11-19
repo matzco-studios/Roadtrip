@@ -1048,6 +1048,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2150606385139031291, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2150966801789658657, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -1337,11 +1341,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementSpeed: 4
-  _jumpForce: 5
-  _coyoteTimeMax: 0.21
-  _jumpBufferMax: 0.21
-  _gravityStrength: -9.81
-  _health: 100
   _controller: {fileID: 2060181273}
 --- !u!114 &2105569633 stripped
 MonoBehaviour:

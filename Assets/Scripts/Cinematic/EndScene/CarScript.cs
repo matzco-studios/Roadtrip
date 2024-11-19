@@ -139,7 +139,7 @@ namespace Cinematic.EndScene
         {
             _rb = GetComponent<Rigidbody>();
             engineSound = GetComponent<AudioSource>();
-            ToggleLights();
+               ToggleLights();
             ToggleEngine();
             EngineSound();
             _leftFrontDoorAnim.enabled = false;
