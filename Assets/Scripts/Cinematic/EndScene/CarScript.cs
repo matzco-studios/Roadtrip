@@ -13,6 +13,7 @@ namespace Cinematic.EndScene
         private bool _running;
         public AudioSource engineSound;
         public AudioSource engineCoughSound;
+        public AudioSource CrashSound;
         public List<CarLight> carLights;
         public float currentSpeed;
         private float currentEngineVolume;
@@ -171,6 +172,7 @@ namespace Cinematic.EndScene
             }
             
             _leftFrontDoorAnim.enabled = true;
+            CrashSound.Play();
             yield return new WaitForSeconds(1f);
             _player.enabled = true;
         }

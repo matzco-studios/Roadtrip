@@ -11,7 +11,7 @@ namespace Cinematic.EndScene
 
         private void OnEnable()
         {
-            transform.position = new (15.135f, 1.08f, transform.position.z);
+            transform.position = new (15.024f, 1.08f, transform.position.z);
             transform.SetParent(null);
             _controller.enabled = true;
         }
