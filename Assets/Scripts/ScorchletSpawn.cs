@@ -53,7 +53,7 @@ public class ScorchletSpawn : MonoBehaviour
     {
         truckPosition = carTrunk.transform.position;
         spawnPositionDistance = new Vector3(UnityEngine.Random.Range(-3, 3), 0, UnityEngine.Random.Range(-3, 3));
-        Vector3 spawnPosition = new Vector3(truckPosition.x + spawnPositionDistance.x + 2f, 0, truckPosition.z + spawnPositionDistance.z + 2f);
+        Vector3 spawnPosition = new Vector3(truckPosition.x + spawnPositionDistance.x + 4f, 0, truckPosition.z + spawnPositionDistance.z + 4f);
         scorchlet = Instantiate(scorchletPrefab, spawnPosition, Quaternion.identity);
     }
 }
