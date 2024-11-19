@@ -23,7 +23,7 @@ namespace Cinematic.EndScene
         private float turnAngle = 15f;
         private float speedMultiplier;
         private float carWheelMaxAngle = 150f;
-        public float maxSpeed = 20f;
+        public float maxSpeed = 5f;
         public bool IsLightsOn;
         private float gasInput = 5f;
         public float lowVolume = 0.25f;
@@ -69,7 +69,7 @@ namespace Cinematic.EndScene
         }
 
         private void SetMaxSpeed() => // sets the max speed of the car so it doesn't go faster and faster
-            speedMultiplier = (currentSpeed > maxSpeed) ? 0 : 100;
+            speedMultiplier = currentSpeed > maxSpeed ? 0 : 100;
 
         private void AnimateWheels()
         {
@@ -105,13 +105,14 @@ namespace Cinematic.EndScene
 
         IEnumerator DeadBatteryEvent()
         {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
             _batteryDead = true;
             ToggleEngine();
             ToggleLights();
 
             yield return new WaitForSeconds(1f);
-            
+            engineSound.mute = true;
+
             for (int i = 0; i < 3; i++)
             {
                 PlayDeadBatterySound();
@@ -119,7 +120,6 @@ namespace Cinematic.EndScene
             }
 
             currentSpeed = 0;
-            engineSound.Stop();
             _stopped = true;
         }
 
@@ -143,8 +143,8 @@ namespace Cinematic.EndScene
             EngineSound();
             _leftFrontDoorAnim.enabled = false;
 
-            StartCoroutine(DeadBatteryEvent());
             StartCoroutine(CarLoop());
+            StartCoroutine(DeadBatteryEvent());
         }
 
         IEnumerator CarLoop()
