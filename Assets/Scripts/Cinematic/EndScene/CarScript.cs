@@ -120,7 +120,7 @@ namespace Cinematic.EndScene
 
             currentSpeed = 0;
             engineSound.Stop();
-            _stopped = false;
+            _stopped = true;
         }
 
         private void Brake()
@@ -169,7 +169,7 @@ namespace Cinematic.EndScene
                 }
             }
             
-            print("Car loop end.");
+            _leftFrontDoorAnim.enabled = true;
         }
     }
 }
