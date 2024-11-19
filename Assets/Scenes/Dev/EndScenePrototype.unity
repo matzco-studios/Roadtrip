@@ -170,6 +170,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ppv: {fileID: 469901245}
+  _player: {fileID: 2060181272}
+  Speed: 0.75
 --- !u!23 &232297013
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1442,6 +1444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movementSpeed: 4
   _controller: {fileID: 2060181273}
+  _zone: {fileID: 232297012}
 --- !u!114 &2105569633 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4611639926656270449, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
