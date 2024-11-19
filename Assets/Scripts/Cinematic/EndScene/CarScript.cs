@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.Linq;
 using Car.Parts;
 using Items;
 
@@ -17,6 +16,7 @@ namespace Cinematic.EndScene
         public List<CarLight> carLights;
         public float currentSpeed;
         private float currentEngineVolume;
+        [SerializeField] private Animator _leftFrontDoorAnim;
 
         public float acceleration = 15f;
         private float deceleration = 20f;
@@ -116,6 +116,7 @@ namespace Cinematic.EndScene
             ToggleLights();
             StartEngine();
             EngineSound();
+            _leftFrontDoorAnim.enabled = false;
         }
 
         void Update()

@@ -352,6 +352,7 @@ MonoBehaviour:
   - {fileID: 98975548}
   - {fileID: 511424151}
   currentSpeed: 0
+  _leftFrontDoorAnim: {fileID: 1711667070}
   acceleration: 15
   maxSpeed: 20
   IsLightsOn: 1
