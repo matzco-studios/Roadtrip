@@ -23,7 +23,7 @@ namespace Map
             if(_playerController) StartCoroutine(RemovePlayerHealth());
         }
 
-        private bool IsInTheZone() => _player.transform.position.z - transform.position.z <= ActivationDistance;
+        public bool IsInTheZone() => _player.transform.position.z - transform.position.z <= ActivationDistance;
 
         IEnumerator RemovePlayerHealth()
         {

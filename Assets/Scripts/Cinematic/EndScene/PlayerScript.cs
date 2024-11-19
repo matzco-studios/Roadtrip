@@ -10,6 +10,7 @@ namespace Cinematic.EndScene
         [SerializeField] private CharacterController _controller;
         private Vector3 _direction;
         [SerializeField] private Zone _zone;
+        [SerializeField] private CameraScript _camera;
 
         private void OnEnable()
         {
@@ -27,6 +28,11 @@ namespace Cinematic.EndScene
         void FixedUpdate()
         {
             Movement();
+
+            if (_zone.IsInTheZone() && !_camera.enabled)
+            {
+                _camera.enabled = true;
+            }
         }
     }
 }
