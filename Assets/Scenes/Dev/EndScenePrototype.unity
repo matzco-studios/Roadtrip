@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 232297012}
   m_Layer: 0
   m_Name: Zone
-  m_TagString: Untagged
+  m_TagString: Zone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -586,6 +586,7 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 6362826837890257876, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
     - {fileID: 6586820111862076793, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
+    - {fileID: 1677422335151271740, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1513993545894037140, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
       insertIndex: -1

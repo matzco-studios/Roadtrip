@@ -17,6 +17,8 @@ TagManager:
   - Battery
   - BatteryCollider
   - LightCollider
+  - GasMachine
+  - Zone
   layers:
   - Default
   - TransparentFX
