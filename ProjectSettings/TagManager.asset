@@ -20,7 +20,7 @@ TagManager:
   - GasMachine
   - Scorchlet
   - CarTrunk
-  - JumpingZone
+  - ScorchletSurface
   layers:
   - Default
   - TransparentFX

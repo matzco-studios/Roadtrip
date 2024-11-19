@@ -9,7 +9,7 @@ namespace Items
         private Light _light;
         private void LeftMouse()
         {
-            _battery-=0.8f;
+            _battery -= 0.8f;
             _isTurnedOn = !_isTurnedOn;
             _light.enabled = _isTurnedOn;
         }
@@ -29,9 +29,21 @@ namespace Items
         {
             if (_isTurnedOn)
             {
-                _light.enabled = ! (Mathf.Floor(_battery*_battery*185) % Mathf.Ceil(_battery*3.35f)<=Mathf.Sqrt(Mathf.Sqrt(_battery)*0.865f));
-                if (_battery<0){ LeftMouse(); _battery += 2.6725f; }
-                else{ _battery -= Time.deltaTime; }
+                _light.enabled = !(Mathf.Floor(_battery * _battery * 185) % Mathf.Ceil(_battery * 3.35f) <= Mathf.Sqrt(Mathf.Sqrt(_battery) * 0.865f));
+                if (_battery < 0) { LeftMouse(); _battery += 2.6725f; }
+                else { _battery -= Time.deltaTime; }
+            }
+        }
+
+        void FixedUpdate()
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.up, out hit, 5))
+            {
+                if (hit.collider.CompareTag("Scorchlet") && _isTurnedOn)
+                {
+                    hit.collider.GetComponent<ScorchletController>().IsFlashed();
+                }
             }
         }
     }

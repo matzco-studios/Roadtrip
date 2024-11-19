@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class ScorchletController : MonoBehaviour
 {
@@ -10,62 +12,42 @@ public class ScorchletController : MonoBehaviour
     private Animator anim;
     private bool hasTakenObject;
     private bool isInTrunk;
-    private bool hasJumped;
-    private bool canJump;
     private bool isWatched;
+    private bool isFleeing;
     private float playerDistance;
+    private float fleeSpeed = 15f;
+    private Vector3 oppositeDirection;
+    private NavMeshAgent agent;
+    private AudioSource screechingSound;
 
-    // public void Jump()
-    // {
-    //     if (anim.GetInteger("moving") != 16)
-    //     {
-    //         anim.SetInteger("moving", 16);
-    //         transform.position += new Vector3(2, 5, 0);
-    //         Debug.Log("Scorchlet has jumped");
-    //     }
-    // }
     // Start is called before the first frame update
     void Start()
     {
+        isFleeing = false;
+        screechingSound = GetComponent<AudioSource>();
+        agent = GetComponent<NavMeshAgent>();
         isWatched = false;
-        canJump = false;
-        hasJumped = false;
         carTrunk = GameObject.FindGameObjectWithTag("CarTrunk");
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
     }
-
-    void OnTriggerEnter(Collider other)
-    {
-
-        // if (other.CompareTag("JumpingZone"))
-        // {
-        //     anim.SetInteger("battle", 1);
-        //     canJump = true;
-        // }
-    }
-
-    // void OnTriggerStay(Collider other)
-    // {
-    //     if (other.CompareTag("JumpingZone") && canJump)
-    //     {
-    //         Jump();
-    //     }
-    // }
-
     // Update is called once per frame
+
+    public void IsFlashed()
+    {
+        isWatched = true;
+    }
     void Update()
     {
-        isWatched = gameObject.GetComponent<Renderer>().isVisible;
         playerDistance = Vector3.Distance(transform.position, player.transform.position);
-        if (!hasTakenObject && !isInTrunk)
+        if (!hasTakenObject && !isInTrunk && !isWatched)
         {
             float distance = Vector3.Distance(transform.position, carTrunk.transform.position);
             if (distance > 2f)
             {
+                transform.position = Vector3.MoveTowards(transform.position, carTrunk.transform.position, 0.1f);
                 transform.LookAt(carTrunk.transform.position);
                 anim.SetInteger("moving", 1);
-                transform.position = Vector3.MoveTowards(transform.position, carTrunk.transform.position, 2f);
             }
             else
             {
@@ -84,13 +66,29 @@ public class ScorchletController : MonoBehaviour
                 hasTakenObject = true;
             }
         }
-        if ((isWatched && playerDistance <= 7) || hasTakenObject)
+        if (isWatched)
         {
-            Debug.Log("Scorchlet is fleeing");
-            anim.SetInteger("moving", 1);
-            Vector3 randomDirection = new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
-            transform.LookAt(randomDirection);
-            transform.position = Vector3.MoveTowards(transform.position, randomDirection, 10f);
+            if (!isFleeing && playerDistance <= 7 && playerDistance > 2)
+            {
+                oppositeDirection = player.transform.forward;
+                screechingSound.Play();
+                Debug.Log("Scorchlet is fleeing");
+                anim.SetInteger("moving", 1);
+                anim.speed = fleeSpeed;
+                agent.SetDestination(oppositeDirection);
+                isFleeing = true;
+            }
+            if (isFleeing && playerDistance > 7)
+            {
+                isFleeing = false;
+                isWatched = false;
+                Destroy(gameObject);
+            }
+        }
+        if (playerDistance <= 2 && !isFleeing && !isWatched)
+        {
+            transform.LookAt(player.transform.position);
+            SceneManager.LoadScene("ScorchletJumpscare");
         }
     }
 }
