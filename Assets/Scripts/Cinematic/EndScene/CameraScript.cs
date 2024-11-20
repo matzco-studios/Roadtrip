@@ -10,6 +10,7 @@ namespace Cinematic.EndScene
         private const float MaxRotation = -90f;
         private const float RotationDelta = 50f;
         [SerializeField] private GameObject _brokenEffect;
+        [SerializeField] private AudioSource _brokenSound;
 
         private void OnEnable()
         {
@@ -26,6 +27,7 @@ namespace Cinematic.EndScene
                 yield return null;
             }
 
+            _brokenSound.Play();
             _brokenEffect.SetActive(true);
             yield return null;
         }

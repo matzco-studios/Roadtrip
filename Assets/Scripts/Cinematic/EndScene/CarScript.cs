@@ -107,7 +107,7 @@ namespace Cinematic.EndScene
 
         IEnumerator DeadBatteryEvent()
         {
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(2f);
             _batteryDead = true;
             ToggleEngine();
             ToggleLights();
