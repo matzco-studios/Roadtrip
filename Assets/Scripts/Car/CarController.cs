@@ -44,7 +44,7 @@ namespace Car
         public bool IsPlayerInside = false;
         public const float MaxFuel = 100f;
 
-        public bool IsBatteryInside() => Battery != null;
+        public bool IsBatteryInside() => Battery;
 
         public bool IsCarRunning()
         {
@@ -184,7 +184,7 @@ namespace Car
 
         private void AnimateWheels()
         {
-            foreach (Wheel wheel in wheels)
+            foreach (var wheel in wheels)
             {
                 wheel.wheelCollider.GetWorldPose(out Vector3 position, out Quaternion rotation);
                 wheel.wheelObject.transform.position = position;

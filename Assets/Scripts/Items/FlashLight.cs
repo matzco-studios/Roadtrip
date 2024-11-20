@@ -7,44 +7,51 @@ namespace Items
         private float _battery = 100f;
         private bool _isTurnedOn = false;
         private Light _light;
+        private float _shakeAmnt;
+        private Animator _animator;
+        private Rigidbody _rigidbody;
         private void LeftMouse()
         {
             _battery -= 0.8f;
             _isTurnedOn = !_isTurnedOn;
             _light.enabled = _isTurnedOn;
+            _animator.SetTrigger("Toggle");
+        }
+        private void Shake()
+        {
+            _shakeAmnt += 15;
+            _battery += 10;
+            _isTurnedOn = false;
+            _light.enabled = _isTurnedOn;
         }
         public FlashLight() : base(Quaternion.Euler(-19.109f, -90, -85.682f))
         {
-            KeyAction mouseLeft = LeftMouse;
-            ActionDictionary.Add(KeyCode.Mouse0, mouseLeft);
+            KeyAction mouseL = LeftMouse;
+            ActionDictionary.Add(KeyCode.Mouse0, mouseL);
+            KeyAction mouseR = Shake;
+            ActionDictionary.Add(KeyCode.Mouse1, mouseR);
         }
 
         void Start()
         {
             _light = transform.GetComponentInChildren<Light>();
             _light.enabled = _isTurnedOn;
+            _animator = GetComponent<Animator>();
+            _rigidbody = GetComponent<Rigidbody>();
         }
 
         void Update()
         {
+            _battery = Mathf.Clamp(_battery, -2, 150);
             if (_isTurnedOn)
             {
-                _light.enabled = !(Mathf.Floor(_battery * _battery * 185) % Mathf.Ceil(_battery * 3.35f) <= Mathf.Sqrt(Mathf.Sqrt(_battery) * 0.865f));
-                if (_battery < 0) { LeftMouse(); _battery += 2.6725f; }
-                else { _battery -= Time.deltaTime; }
+                _light.enabled = ! (Mathf.Floor(_battery*_battery*80) % Mathf.Ceil(_battery*1.35f)<=Mathf.Sqrt(Mathf.Sqrt(_battery)*0.865f));
+                if (_battery<0){ LeftMouse(); _battery += 2.6725f; }
+                else{ _battery -= Time.deltaTime*22; }
             }
-        }
-
-        void FixedUpdate()
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.up, out hit, 5))
-            {
-                if (hit.collider.CompareTag("Scorchlet") && _isTurnedOn)
-                {
-                    hit.collider.GetComponent<ScorchletController>().IsFlashed();
-                }
-            }
+            _animator.enabled = _rigidbody.isKinematic;
+            _shakeAmnt += (0-_shakeAmnt)/20;
+            _animator.SetFloat("Shake", _shakeAmnt);
         }
     }
 }
