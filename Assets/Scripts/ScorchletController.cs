@@ -43,11 +43,9 @@ public class ScorchletController : MonoBehaviour
         if (!hasTakenObject && !isInTrunk && !isWatched)
         {
             float distance = Vector3.Distance(transform.position, carTrunk.transform.position);
-            if (distance > 2f)
+            if (distance > 2.5f)
             {
-                transform.position = Vector3.MoveTowards(transform.position, carTrunk.transform.position, 0.1f);
-                transform.LookAt(carTrunk.transform.position);
-                anim.SetInteger("moving", 1);
+                MoveToTrunk();
             }
             else
             {
@@ -55,27 +53,23 @@ public class ScorchletController : MonoBehaviour
                 isInTrunk = true;
             }
         }
-        if (isInTrunk && !hasTakenObject)
+        if (isInTrunk && !isWatched)
         {
-            if (carTrunk.transform.childCount > 0)
+            if (carTrunk.transform.childCount > 0 && !hasTakenObject)
             {
                 GameObject item = carTrunk.transform.GetChild(Random.Range(0, carTrunk.transform.childCount)).gameObject;
-                item.GetComponent<Rigidbody>().isKinematic = true;
-                item.transform.SetParent(transform);
-                item.transform.localPosition = new Vector3(0, 0.80f, 0.9f);
+                TakeObject(item);
                 hasTakenObject = true;
             }
+            anim.SetInteger("moving", 1);
+            anim.speed = 0f;
+            transform.LookAt(player.transform.position);
         }
         if (isWatched)
         {
             if (!isFleeing && playerDistance <= 7 && playerDistance > 2)
             {
-                oppositeDirection = player.transform.forward;
-                screechingSound.Play();
-                Debug.Log("Scorchlet is fleeing");
-                anim.SetInteger("moving", 1);
-                anim.speed = fleeSpeed;
-                agent.SetDestination(oppositeDirection);
+                Flee();
                 isFleeing = true;
             }
             if (isFleeing && playerDistance > 7)
@@ -87,8 +81,27 @@ public class ScorchletController : MonoBehaviour
         }
         if (playerDistance <= 2 && !isFleeing && !isWatched)
         {
-            transform.LookAt(player.transform.position);
             SceneManager.LoadScene("ScorchletJumpscare");
         }
     }
+    void MoveToTrunk()
+    {
+        transform.LookAt(carTrunk.transform.position);
+        anim.SetInteger("moving", 1);
+    }
+    void Flee()
+    {
+        oppositeDirection = player.transform.forward;
+        screechingSound.Play();
+        anim.SetInteger("moving", 1);
+        anim.speed = fleeSpeed;
+        agent.SetDestination(oppositeDirection);
+    }
+    void TakeObject(GameObject item)
+    {
+        item.GetComponent<Rigidbody>().isKinematic = true;
+        item.transform.SetParent(transform);
+        item.transform.localPosition = new Vector3(0, 0.80f, 0.9f);
+    }
+
 }
