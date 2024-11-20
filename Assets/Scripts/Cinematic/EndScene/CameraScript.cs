@@ -9,6 +9,7 @@ namespace Cinematic.EndScene
         private float _rotation;
         private const float MaxRotation = -90f;
         private const float RotationDelta = 50f;
+        [SerializeField] private GameObject _brokenEffect;
 
         private void OnEnable()
         {
@@ -25,6 +26,7 @@ namespace Cinematic.EndScene
                 yield return null;
             }
 
+            _brokenEffect.SetActive(true);
             yield return null;
         }
     }
