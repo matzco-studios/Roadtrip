@@ -45,13 +45,25 @@ namespace Items
             _battery = Mathf.Clamp(_battery, -2, 150);
             if (_isTurnedOn)
             {
-                _light.enabled = ! (Mathf.Floor(_battery*_battery*80) % Mathf.Ceil(_battery*1.35f)<=Mathf.Sqrt(Mathf.Sqrt(_battery)*0.865f));
-                if (_battery<0){ LeftMouse(); _battery += 2.6725f; }
-                else{ _battery -= Time.deltaTime*22; }
+                _light.enabled = !(Mathf.Floor(_battery * _battery * 80) % Mathf.Ceil(_battery * 1.35f) <= Mathf.Sqrt(Mathf.Sqrt(_battery) * 0.865f));
+                if (_battery < 0) { LeftMouse(); _battery += 2.6725f; }
+                else { _battery -= Time.deltaTime * 22; }
             }
             _animator.enabled = _rigidbody.isKinematic;
-            _shakeAmnt += (0-_shakeAmnt)/20;
+            _shakeAmnt += (0 - _shakeAmnt) / 20;
             _animator.SetFloat("Shake", _shakeAmnt);
+        }
+
+        void FixedUpdate()
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.up, out hit, 5))
+            {
+                if (hit.collider.CompareTag("Scorchlet") && _isTurnedOn)
+                {
+                    hit.collider.GetComponent<ScorchletController>().IsFlashed();
+                }
+            }
         }
     }
 }

@@ -29,9 +29,9 @@ public class ScorchletSpawn : MonoBehaviour
         if (distance > 10 && scorchlet == null)
         {
             timeAway += Time.deltaTime;
-            if (timeAway > 2) // set time away
+            if (timeAway > 10) // FOR DEBUG, CHANGE TO 2
             {
-                int random = UnityEngine.Random.Range(0, 1); // Set spawn chance
+                int random = UnityEngine.Random.Range(0, 3); // FOR DEBUG, CHANGE TO 1
                 if (random == 0)
                 {
                     SpawnScorchlet();
