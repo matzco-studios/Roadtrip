@@ -25,7 +25,7 @@ namespace Cinematic.EndScene
         private float speedMultiplier;
         private float carWheelMaxAngle = 150f;
         public float maxSpeed = 5f;
-        public bool IsLightsOn;
+        public bool IsLightsOn = true;
         private float gasInput = 5f;
         public float lowVolume = 0.25f;
         public float highVolume = 1f;
@@ -97,9 +97,9 @@ namespace Cinematic.EndScene
         {
             foreach (var currentLight in carLights)
             {
-                currentLight.ULight.intensity = IsLightsOn ? 1 : 0;
-                if (IsLightsOn) currentLight.UFlare.Play();
-                else currentLight.UFlare.Stop();
+                currentLight.ULight.intensity = IsLightsOn ? 0 : 1;
+                if (IsLightsOn) currentLight.UFlare.Stop();
+                else currentLight.UFlare.Play();
             }
 
             IsLightsOn = !IsLightsOn;
@@ -107,7 +107,7 @@ namespace Cinematic.EndScene
 
         IEnumerator DeadBatteryEvent()
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(2.5f);
             _batteryDead = true;
             ToggleEngine();
             ToggleLights();
@@ -140,7 +140,6 @@ namespace Cinematic.EndScene
         {
             _rb = GetComponent<Rigidbody>();
             engineSound = GetComponent<AudioSource>();
-               ToggleLights();
             ToggleEngine();
             EngineSound();
             _leftFrontDoorAnim.enabled = false;

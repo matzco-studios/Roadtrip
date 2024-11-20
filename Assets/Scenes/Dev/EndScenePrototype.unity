@@ -892,6 +892,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2138133950150385393, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+      propertyPath: IsWorking
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2145951141328495067, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 16.593575
@@ -1077,16 +1081,80 @@ PrefabInstance:
       value: 0.5006266
       objectReference: {fileID: 0}
     - target: {fileID: 2351396336324755784, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351396336324755784, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351396336324755784, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
       propertyPath: EmissionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772274252424690141, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772274252424690141, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+      propertyPath: playOnAwake
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2935263465517384706, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 4611639926656270449, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+      propertyPath: IsWorking
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5151735239352740456, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5151735239352740456, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5205388878936006604, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+      propertyPath: IsWorking
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6712437887747939722, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6712437887747939722, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6803720004962261856, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6803720004962261856, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907836987147554202, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907836987147554202, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951508780350461852, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+      propertyPath: IsWorking
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6974177542609472893, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
+      propertyPath: IsWorking
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8948840509806978128, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
       propertyPath: IsWorking
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9191584575290114786, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
       propertyPath: Battery
