@@ -695,67 +695,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 220022237}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1001 &307469208
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 999744862}
-    m_Modifications:
-    - target: {fileID: 100000, guid: 9c65e1482462ff74d9bb4b162b3f9478, type: 3}
-      propertyPath: m_Name
-      value: THE_INFESTOR_Prefab
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 9c65e1482462ff74d9bb4b162b3f9478, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.1309994
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 9c65e1482462ff74d9bb4b162b3f9478, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.014999688
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 9c65e1482462ff74d9bb4b162b3f9478, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.57199997
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 9c65e1482462ff74d9bb4b162b3f9478, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.006928272
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 9c65e1482462ff74d9bb4b162b3f9478, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.014052333
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 9c65e1482462ff74d9bb4b162b3f9478, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.99122614
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 9c65e1482462ff74d9bb4b162b3f9478, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.13124555
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 9c65e1482462ff74d9bb4b162b3f9478, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -15.07
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 9c65e1482462ff74d9bb4b162b3f9478, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -178.966
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 9c65e1482462ff74d9bb4b162b3f9478, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -1.761
-      objectReference: {fileID: 0}
-    - target: {fileID: 114949790187472416, guid: 9c65e1482462ff74d9bb4b162b3f9478, type: 3}
-      propertyPath: createThisMany
-      value: 4
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9c65e1482462ff74d9bb4b162b3f9478, type: 3}
 --- !u!1001 &347723085
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1766,16 +1705,6 @@ MonoBehaviour:
   _PostProcessShaderAccurate: {fileID: 4800000, guid: 2ebed186567d3c244a87538744a62920, type: 3}
   _PixelationShader: {fileID: 4800000, guid: f2da0e2a14a532548b5db043244b3df1, type: 3}
   _InterlacingShader: {fileID: 4800000, guid: 03ebd34214b41ef459d7ee6753b062be, type: 3}
---- !u!4 &799973507 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: 9c65e1482462ff74d9bb4b162b3f9478, type: 3}
-  m_PrefabInstance: {fileID: 307469208}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &999744862 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2150966801789658657, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
-  m_PrefabInstance: {fileID: 1862597306}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1008770103
 GameObject:
   m_ObjectHideFlags: 0
@@ -3745,10 +3674,7 @@ PrefabInstance:
       objectReference: {fileID: 1384432459}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 2150966801789658657, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 799973507}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2149745963345890741, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}
       insertIndex: -1
