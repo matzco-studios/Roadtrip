@@ -14,7 +14,7 @@ namespace Map
         private const float ActivationDistance = 0.02f;
         private bool _inZone;
         public float Speed = 0.75f;
-        public bool _stopped;
+        private bool _stopped;
         
         private void Start()
         {

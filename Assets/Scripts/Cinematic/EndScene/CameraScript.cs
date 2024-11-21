@@ -13,6 +13,7 @@ namespace Cinematic.EndScene
         [SerializeField] private GameObject _brokenEffect;
         [SerializeField] private AudioSource _brokenSound;
         [SerializeField] private Zone _zone;
+        [SerializeField] private PlayerScript _player;
 
         private void OnEnable()
         {
@@ -32,6 +33,7 @@ namespace Cinematic.EndScene
             _brokenSound.Play();
             _brokenEffect.SetActive(true);
             _zone.StopZone();
+            _player.StopPlayer();
             yield return null;
         }
     }
