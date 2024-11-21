@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Map;
 using UnityEngine;
 
 namespace Cinematic.EndScene
@@ -11,6 +12,7 @@ namespace Cinematic.EndScene
         private const float RotationDelta = 50f;
         [SerializeField] private GameObject _brokenEffect;
         [SerializeField] private AudioSource _brokenSound;
+        [SerializeField] private Zone _zone;
 
         private void OnEnable()
         {
@@ -29,6 +31,7 @@ namespace Cinematic.EndScene
 
             _brokenSound.Play();
             _brokenEffect.SetActive(true);
+            _zone.StopZone();
             yield return null;
         }
     }

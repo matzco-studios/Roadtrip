@@ -172,6 +172,7 @@ MonoBehaviour:
   _ppv: {fileID: 469901245}
   _player: {fileID: 2060181272}
   Speed: 1
+  _stopped: 0
 --- !u!23 &232297013
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1679,6 +1680,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _brokenEffect: {fileID: 2031113839}
   _brokenSound: {fileID: 2040694882}
+  _zone: {fileID: 232297012}
 --- !u!82 &2040694882
 AudioSource:
   m_ObjectHideFlags: 0

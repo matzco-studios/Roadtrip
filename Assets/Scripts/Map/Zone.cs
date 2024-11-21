@@ -14,6 +14,7 @@ namespace Map
         private const float ActivationDistance = 0.02f;
         private bool _inZone;
         public float Speed = 0.75f;
+        public bool _stopped;
         
         private void Start()
         {
@@ -21,13 +22,16 @@ namespace Map
             _playerController = _player.GetComponent<PlayerController>();
             _ppv.weight = 0;
             if(_playerController) StartCoroutine(RemovePlayerHealth());
+            StartCoroutine(MoveZone());
         }
 
         public bool IsInTheZone() => _player.transform.position.z - transform.position.z <= ActivationDistance;
 
+        public void StopZone() => _stopped = true;
+        
         IEnumerator RemovePlayerHealth()
         {
-            while (true)
+            while (!_stopped)
             {
                 yield return null;
                 
@@ -38,18 +42,22 @@ namespace Map
                 }
             }
         }
-        
-        private void Update()
+
+        private IEnumerator MoveZone()
         {
-            _inZone = IsInTheZone();
+            while (!_stopped)
+            {
+                yield return null;
+                _inZone = IsInTheZone();
 
-            _ppv.weight = Mathf.Lerp(
-                _ppv.weight, 
-                _inZone ? 1f : 0f, 
-                _inZone ? 3 * Time.deltaTime : Time.deltaTime / 4
-            );
+                _ppv.weight = Mathf.Lerp(
+                    _ppv.weight, 
+                    _inZone ? 1f : 0f, 
+                    _inZone ? 3 * Time.deltaTime : Time.deltaTime / 4
+                );
 
-            transform.position = new (transform.position.x, transform.position.y, transform.position.z + Speed * Time.deltaTime);
+                transform.position = new (transform.position.x, transform.position.y, transform.position.z + Speed * Time.deltaTime);
+            }
         }
     }
 }
