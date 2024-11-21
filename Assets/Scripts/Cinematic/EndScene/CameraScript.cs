@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Map;
 using UnityEngine;
@@ -14,6 +13,7 @@ namespace Cinematic.EndScene
         [SerializeField] private AudioSource _brokenSound;
         [SerializeField] private Zone _zone;
         [SerializeField] private PlayerScript _player;
+        [SerializeField] private GameObject _toBeContinued;
 
         private void OnEnable()
         {
@@ -34,7 +34,9 @@ namespace Cinematic.EndScene
             _brokenEffect.SetActive(true);
             _zone.StopZone();
             _player.StopPlayer();
-            yield return null;
+
+            yield return new WaitForSeconds(1f);
+            _toBeContinued.SetActive(true);
         }
     }
 }
