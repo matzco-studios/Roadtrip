@@ -157,13 +157,16 @@ namespace Player.Mechanics
                 if (item.gameObject.activeInHierarchy)
                 {
                     var itemScript = item.GetComponent<GrabbableItem>();
-                    var keys = itemScript.ActionDictionary.Keys;
-                    foreach (var key in keys)
+                    if (itemScript)
                     {
-                        if (Input.GetKeyDown(key))
+                        var keys = itemScript.ActionDictionary.Keys;
+                        foreach (var key in keys)
                         {
-                            itemScript.ActionDictionary.TryGetValue(key, out GrabbableItem.KeyAction action);
-                            action();
+                            if (Input.GetKeyDown(key))
+                            {
+                                itemScript.ActionDictionary.TryGetValue(key, out GrabbableItem.KeyAction action);
+                                action();
+                            }
                         }
                     }
                 }
