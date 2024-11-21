@@ -9,7 +9,6 @@ TagManager:
   - GasPump
   - FuelTank
   - InteractableItem
-  - Car
   - WheelOfCar
   - CarUI
   - ActionMessage
@@ -17,8 +16,11 @@ TagManager:
   - Battery
   - BatteryCollider
   - LightCollider
-  - GasMachine
   - Zone
+  - GasMachine
+  - Scorchlet
+  - CarTrunk
+  - ScorchletSurface
   layers:
   - Default
   - TransparentFX

@@ -1,9 +1,10 @@
 using System;
+using Items.Mechanics;
 using UnityEngine;
 
 namespace Items
 {
-    public class Battery : MonoBehaviour
+    public class Battery : GrabbableItem
     {
         private Vector3 _initialPosition;
         private Quaternion _initialRotation;
