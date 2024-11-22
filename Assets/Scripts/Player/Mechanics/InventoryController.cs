@@ -149,5 +149,28 @@ namespace Player.Mechanics
             SetCurrentItemActive(active);
             _enabled = active;
         }
+
+        void Update(){
+            if (_currentSelectedItem != None)
+            {
+                Transform item = transform.GetChild(_currentSelectedItem);
+                if (item.gameObject.activeInHierarchy)
+                {
+                    var itemScript = item.GetComponent<GrabbableItem>();
+                    if (itemScript)
+                    {
+                        var keys = itemScript.ActionDictionary.Keys;
+                        foreach (var key in keys)
+                        {
+                            if (Input.GetKeyDown(key))
+                            {
+                                itemScript.ActionDictionary.TryGetValue(key, out GrabbableItem.KeyAction action);
+                                action();
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
