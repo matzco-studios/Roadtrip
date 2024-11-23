@@ -41,6 +41,9 @@ namespace Items
         public void AddAmmo(int amnt)
         {
             _magazine = Mathf.Clamp(_magazine+amnt, 0, _magSize);
+            if (_magazine==_magSize){
+                _animator.SetTrigger("StopReload");
+            }
         }
 
         public Gun()
