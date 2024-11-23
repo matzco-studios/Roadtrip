@@ -23,6 +23,7 @@ namespace Items
         private bool isReloading = false;
 
         private void Shoot(){
+            if (isReloading) return;
             if (_shootCooldown<0 && _magazine>0)
             {
                 _cameraController.ApplyRecoilEffect(_recoil);
@@ -40,6 +41,7 @@ namespace Items
 
         public void AddAmmo(int amnt)
         {
+            isReloading = false;
             _magazine = Mathf.Clamp(_magazine+amnt, 0, _magSize);
             if (_magazine==_magSize){
                 _animator.SetTrigger("StopReload");
