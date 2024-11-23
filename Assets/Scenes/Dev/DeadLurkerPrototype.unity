@@ -3250,6 +3250,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -2832868155665539703, guid: bdf30e8ce1a03ab40bf2f1c7b5c03f5c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.42
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bdf30e8ce1a03ab40bf2f1c7b5c03f5c, type: 3}
       propertyPath: m_Name
       value: shotgun
@@ -3257,6 +3261,18 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: bdf30e8ce1a03ab40bf2f1c7b5c03f5c, type: 3}
       propertyPath: m_TagString
       value: GrabbableItem
+      objectReference: {fileID: 0}
+    - target: {fileID: 8096865251424255639, guid: bdf30e8ce1a03ab40bf2f1c7b5c03f5c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8096865251424255639, guid: bdf30e8ce1a03ab40bf2f1c7b5c03f5c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.67382
+      objectReference: {fileID: 0}
+    - target: {fileID: 8096865251424255639, guid: bdf30e8ce1a03ab40bf2f1c7b5c03f5c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.226962
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3348,7 +3364,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.15, y: 0.455, z: 1.87}
-  m_Center: {x: 0, y: 0.365, z: -1.53}
+  m_Center: {x: 0, y: 0, z: -1.53}
 --- !u!65 &1400859065
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3369,7 +3385,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.15, y: 0.2875, z: 3.62}
-  m_Center: {x: 0, y: 0.0775, z: 0.625}
+  m_Center: {x: 0, y: -0.34, z: 0.625}
 --- !u!95 &1400859067
 Animator:
   serializedVersion: 5
