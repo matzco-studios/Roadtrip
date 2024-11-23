@@ -38,6 +38,11 @@ namespace Items
             _animator.SetTrigger("Reload");
         }
 
+        public void AddAmmo(int amnt)
+        {
+            _magazine = Mathf.Clamp(_magazine+amnt, 0, _magSize);
+        }
+
         public Gun()
         {
             ActionDictionary.Add(KeyCode.Mouse0, Shoot);
