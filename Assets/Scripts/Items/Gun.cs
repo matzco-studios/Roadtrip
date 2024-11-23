@@ -30,8 +30,7 @@ namespace Items
                 _magazine--;
                 isReloading = false;
                 _animator.SetTrigger("Shoot");
-            }
-            _animator.SetTrigger("ShootEmpty");
+            }else{ _animator.SetTrigger("ShootEmpty");}
         }
 
         private void Reload(){
