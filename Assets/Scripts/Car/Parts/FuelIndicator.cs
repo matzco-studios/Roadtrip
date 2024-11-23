@@ -11,7 +11,8 @@ namespace Car.Parts
 
         void Start()
         {
-            _car = transform.parent.GetComponent<CarController>();
+            _car = GameObject.FindGameObjectWithTag("Car").GetComponent<CarController>();
+            // _car = transform.parent.GetComponent<CarController>();
         }
 
         // Update is called once per frame
