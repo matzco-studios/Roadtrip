@@ -1,3 +1,4 @@
+using Enemies.Scorchlet;
 using UnityEngine;
 
 namespace Items
