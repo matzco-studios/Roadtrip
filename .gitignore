@@ -72,7 +72,3 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
-
-# Ignorer des fichiers specifiques pour la rue RoadArchitect
-Editor/Library/ESOWBeam1R.rao
-Editor/Library/ESOWBeam1R.rao.meta
