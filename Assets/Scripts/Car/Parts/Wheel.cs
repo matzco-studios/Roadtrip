@@ -20,7 +20,7 @@ namespace Car.Parts
             set
             {
                 _pressure = value;
-                isFlat = value > 0;
+                isFlat = value == 0;
             }
         }
 
