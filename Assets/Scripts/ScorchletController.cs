@@ -19,6 +19,7 @@ public class ScorchletController : MonoBehaviour
     private Vector3 oppositeDirection;
     private NavMeshAgent agent;
     private AudioSource screechingSound;
+    private float carDistance;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +41,7 @@ public class ScorchletController : MonoBehaviour
     void Update()
     {
         playerDistance = Vector3.Distance(transform.position, player.transform.position);
+        carDistance = Vector3.Distance(transform.position, carTrunk.transform.position);
         if (!hasTakenObject && !isInTrunk && !isWatched)
         {
             float distance = Vector3.Distance(transform.position, carTrunk.transform.position);
@@ -78,6 +80,10 @@ public class ScorchletController : MonoBehaviour
                 isWatched = false;
                 Destroy(gameObject);
             }
+        }
+        if (carDistance > 10)
+        {
+            Destroy(gameObject);
         }
         if (playerDistance <= 2 && !isFleeing && !isWatched)
         {
