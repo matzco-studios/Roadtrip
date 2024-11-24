@@ -1,3 +1,60 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:3867db6103e919fd6dbc8e41db9a46364a578af9d8c53c0f3f4bfc1c587db0e6
-size 632
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Undefined
+  - GrabbableItem
+  - GasPump
+  - FuelTank
+  - InteractableItem
+  - Car
+  - WheelOfCar
+  - CarUI
+  - ActionMessage
+  - Car
+  - Battery
+  - BatteryCollider
+  - LightCollider
+  - GasMachine
+  - Scorchlet
+  - CarTrunk
+  - ScorchletSurface
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - GasPump
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
