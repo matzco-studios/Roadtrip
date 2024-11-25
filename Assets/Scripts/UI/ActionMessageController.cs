@@ -47,10 +47,10 @@ namespace UI
         /// <param name="active">To tell to activate or desactivate.</param>
         public void SetActive(bool active = true)
         {
-            _press.SetActive(active);
-            _key.SetActive(active);
-            _action.SetActive(active);
-            _itemName.SetActive(active);
+            _press.enabled = active;
+            _key.enabled = active;
+            _action.enabled = active;
+            _itemName.enabled = active;
             _crosshair.sprite = active ? _crosshairLook : _crosshairNormal;
         }
 
