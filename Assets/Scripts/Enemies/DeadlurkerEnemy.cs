@@ -24,6 +24,17 @@ public class DeadlurkerEnemy : EnemyController
     // Update is called once per frame
     void Update()
     {
-        currentState = currentState.Process();
+        if (currentState!=null)
+            currentState = currentState.Process();
+    }
+
+    public override void OnDeath(){
+        anim.SetTrigger("Death");
+        currentState = null;
+        agent.enabled = false;
+    }
+
+    public override void OnHit(){
+        anim.SetTrigger("Hit");
     }
 }
