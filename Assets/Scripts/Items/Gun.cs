@@ -42,7 +42,8 @@ namespace Items
                 isReloading = false;
                 _soundShoot.Play();
                 _animator.SetTrigger("Shoot");
-                _ray = new Ray(_cameraController.transform.position, _cameraController.transform.forward);
+                Transform head = _cameraController.GetHead().transform;
+                _ray = new Ray(head.position, head.forward);
                 if (Physics.Raycast(_ray, out _raycastHit, _shootDist)){
                     if (_raycastHit.collider.gameObject.CompareTag("Enemy")){
                         float dmg = _damage;
