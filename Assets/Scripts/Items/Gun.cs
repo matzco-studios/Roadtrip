@@ -46,9 +46,9 @@ namespace Items
 
         public void AddAmmo(int amnt)
         {
-            isReloading = false;
             _magazine = Mathf.Clamp(_magazine+amnt, 0, _magSize);
             if (_magazine==_magSize){
+                isReloading = false;
                 _animator.SetTrigger("StopReload");
             }
             _soundReload.Play();
