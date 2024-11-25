@@ -17,6 +17,11 @@ TagManager:
   - Battery
   - BatteryCollider
   - LightCollider
+  - GasMachine
+  - Scorchlet
+  - CarTrunk
+  - ScorchletSurface
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Player
@@ -10,6 +11,17 @@ namespace Player
         [SerializeField] private float _coyoteTimeMax = 0.21f;
         [SerializeField] private float _jumpBufferMax = 0.21f;
         [SerializeField] private float _gravityStrength = -9.81f;
+        private const float MaxHealth = 100f;
+        [SerializeField] private float _health = MaxHealth;
+        
+        public float Health => _health;
+
+        public bool IsDead() => _health == 0;
+        
+        public void AddHealth(float amount) => _health = Math.Clamp(_health + amount, 0, MaxHealth);
+
+        public void ReduceHealth(float amount) => _health = Math.Clamp(_health - amount, 0, MaxHealth);
+        
         private float _coyoteTime;
         private float _jumpBuffer;
         private CharacterController _controller;
@@ -87,6 +99,11 @@ namespace Player
         {
             Movement();
             Gravity();
+        }
+
+        public void ApplyVelocity(Vector3 force)
+        {
+            _velocity += force;
         }
     }
 }

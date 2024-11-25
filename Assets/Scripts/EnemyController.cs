@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour
     public Animator animator;
 
     public float speed;
+    public float hp = 100f;
     // public float activationDistance;
 
     private bool isWatched;
@@ -49,5 +50,21 @@ public class EnemyController : MonoBehaviour
             );
         } */
 
+    }
+
+    public virtual void OnDeath(){
+        Destroy(gameObject);
+    }
+    public virtual void OnHit(){
+        Destroy(gameObject);
+    }
+
+    public void Hurt(float damage){
+        hp -=damage;
+        if (hp<0){
+            OnDeath();
+        }else{
+            OnHit();
+        }
     }
 }
