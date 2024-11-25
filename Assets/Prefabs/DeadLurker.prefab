@@ -590,6 +590,7 @@ MonoBehaviour:
   postProcess: {fileID: 0}
   animator: {fileID: 0}
   speed: 0
+  hp: 100
 --- !u!65 &1609968656382591530
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -609,7 +610,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1.8}
+  m_Size: {x: 1.6, y: 1, z: 1.8}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &7314561270007743608
 GameObject:
