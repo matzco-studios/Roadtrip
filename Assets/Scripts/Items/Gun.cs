@@ -47,7 +47,7 @@ namespace Items
                     if (_raycastHit.collider.gameObject.CompareTag("Enemy")){
                         float dmg = _damage;
                         _raycastHit.collider.GetComponent<EnemyController>()
-                        .Hurt( Mathf.Min(dmg-(_raycastHit.distance/10*_falloffAmount), _minDamage) );
+                        .Hurt( Mathf.Max(dmg-(_raycastHit.distance/10*_falloffAmount), _minDamage) );
                     }
                 }
             }else{ _animator.SetTrigger("ShootEmpty");}
