@@ -13,6 +13,8 @@ namespace Player
             _recoil.y += amnt;
         }
 
+        public Transform GetHead() {return _head;}
+
         void Update()
         {
             // Rotate camera and head
