@@ -47,7 +47,10 @@ namespace UI
         /// <param name="active">To tell to activate or desactivate.</param>
         public void SetActive(bool active = true)
         {
-            gameObject.SetActive(active);
+            _press.SetActive(active);
+            _key.SetActive(active);
+            _action.SetActive(active);
+            _itemName.SetActive(active);
             _crosshair.sprite = active ? _crosshairLook : _crosshairNormal;
         }
 
