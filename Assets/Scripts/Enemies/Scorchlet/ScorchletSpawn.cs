@@ -55,8 +55,9 @@ namespace Enemies.Scorchlet
         {
             truckPosition = carTrunk.transform.position;
             spawnPositionDistance = new Vector3(UnityEngine.Random.Range(-3, 3), 0, UnityEngine.Random.Range(-3, -6));
-            Vector3 spawnPosition = new Vector3(truckPosition.x + spawnPositionDistance.x, 0, truckPosition.z + spawnPositionDistance.z);
+            Vector3 spawnPosition = new Vector3(truckPosition.x + spawnPositionDistance.x, carTrunk.transform.position.y, truckPosition.z + spawnPositionDistance.z);
             scorchlet = Instantiate(scorchletPrefab, spawnPosition, Quaternion.identity);
+            Debug.Log(spawnPosition);
         }
     }
 }
