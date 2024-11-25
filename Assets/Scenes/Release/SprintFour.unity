@@ -36329,7 +36329,7 @@ PrefabInstance:
     - target: {fileID: 4165685437362969766, guid: 122ec7e32efc7d940a26453f403216c5, type: 3}
       propertyPath: items.Array.data[1]
       value: 
-      objectReference: {fileID: 1427382464}
+      objectReference: {fileID: 6593603207547426097, guid: ca32dd0bcce89174d92abb8d0ee95c80, type: 3}
     - target: {fileID: 4165685437362969766, guid: 122ec7e32efc7d940a26453f403216c5, type: 3}
       propertyPath: items.Array.data[2]
       value: 
@@ -40270,11 +40270,6 @@ Transform:
   - {fileID: 55558007}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1427382464 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6593603207547426097, guid: ca32dd0bcce89174d92abb8d0ee95c80, type: 3}
-  m_PrefabInstance: {fileID: 998097743059099460}
-  m_PrefabAsset: {fileID: 0}
 --- !u!134 &1428689045
 PhysicMaterial:
   m_ObjectHideFlags: 0
