@@ -28,10 +28,8 @@ namespace Items
         }
         public FlashLight() : base(Quaternion.Euler(-19.109f, -90, -85.682f))
         {
-            KeyAction mouseL = LeftMouse;
-            ActionDictionary.Add(KeyCode.Mouse0, mouseL);
-            KeyAction mouseR = Shake;
-            ActionDictionary.Add(KeyCode.Mouse1, mouseR);
+            ActionDictionary.Add(KeyCode.Mouse0, LeftMouse);
+            ActionDictionary.Add(KeyCode.Mouse1, Shake);
         }
 
         void Start()
