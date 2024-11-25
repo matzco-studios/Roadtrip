@@ -16,6 +16,8 @@ namespace Items
         private float _recoil = .8f;
         [SerializeField]
         private float _cooldown = .425f;
+        [SerializeField]
+        private float _shootDist = 150f;
         private CameraController _cameraController;
         private Animator _animator;
         private AudioSource _soundReload;
@@ -23,6 +25,8 @@ namespace Items
         private int _magazine;
         private float _shootCooldown;
         private bool isReloading = false;
+        private RaycastHit _raycastHit;
+        private Ray _ray;
 
         private void Shoot(){
             if (isReloading || _shootCooldown>0) return;
@@ -34,6 +38,13 @@ namespace Items
                 isReloading = false;
                 _soundShoot.Play();
                 _animator.SetTrigger("Shoot");
+                _ray = new Ray(_cameraController.transform.position, _cameraController.transform.forward);
+                if (Physics.Raycast(_ray, out _raycastHit, _shootDist)){
+                    print(_raycastHit.collider.gameObject.tag);
+                    if (_raycastHit.collider.gameObject.CompareTag("Enemy")){
+                        _raycastHit.collider.GetComponent<EnemyController>().Hurt(_damage);
+                    }
+                }
             }else{ _animator.SetTrigger("ShootEmpty");}
         }
 
