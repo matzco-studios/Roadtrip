@@ -10,6 +10,7 @@ namespace Items
         private float _shakeAmnt;
         private Animator _animator;
         private Rigidbody _rigidbody;
+        private AudioSource _audioSource;
         private void LeftMouse()
         {
             _battery-=0.8f;
@@ -23,6 +24,7 @@ namespace Items
             _battery += 10;
             _isTurnedOn = false;
             _light.enabled = _isTurnedOn;
+            if (!_audioSource.isPlaying) {_audioSource.Play();}
         }
         public FlashLight() : base(Quaternion.Euler(-19.109f, -90, -85.682f))
         {
@@ -38,6 +40,7 @@ namespace Items
             _light.enabled = _isTurnedOn;
             _animator = GetComponent<Animator>();
             _rigidbody = GetComponent<Rigidbody>();
+            _audioSource = GetComponent<AudioSource>();
         }
 
         void Update()
@@ -50,7 +53,8 @@ namespace Items
                 else{ _battery -= Time.deltaTime*22; }
             }
             _animator.enabled = _rigidbody.isKinematic;
-            _shakeAmnt += (0-_shakeAmnt)/20;
+            _shakeAmnt += (0-_shakeAmnt)*Time.deltaTime*16;
+            if (_shakeAmnt<.1) {_audioSource.Stop();}
             _animator.SetFloat("Shake", _shakeAmnt);
         }
     }
