@@ -419,3 +419,5 @@ MonoBehaviour:
   _damage: 47
   _recoil: 4
   _cooldown: 1
+  _shootDist: 30
+  _falloffAmount: 14
