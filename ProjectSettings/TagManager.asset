@@ -18,6 +18,9 @@ TagManager:
   - BatteryCollider
   - LightCollider
   - GasMachine
+  - Scorchlet
+  - CarTrunk
+  - ScorchletSurface
   - Enemy
   layers:
   - Default
