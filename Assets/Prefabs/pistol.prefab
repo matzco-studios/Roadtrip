@@ -489,6 +489,7 @@ MonoBehaviour:
   Rotation: {x: 1, y: -0.00000004371139, z: -0.00000004371139, w: 1.9106855e-15}
   Name: Pistol
   _magSize: 7
-  _damage: 13
+  _damage: 23
   _recoil: 1.45
   _cooldown: 0.425
+  _shootDist: 120
