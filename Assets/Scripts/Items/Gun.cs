@@ -20,6 +20,8 @@ namespace Items
         private float _shootDist = 150f;
         [SerializeField]
         private float _falloffAmount = 5f;
+        [SerializeField]
+        private float _minDamage = 5f;
         private CameraController _cameraController;
         private Animator _animator;
         private AudioSource _soundReload;
@@ -45,7 +47,7 @@ namespace Items
                     if (_raycastHit.collider.gameObject.CompareTag("Enemy")){
                         float dmg = _damage;
                         _raycastHit.collider.GetComponent<EnemyController>()
-                        .Hurt( dmg-(_raycastHit.distance/10*_falloffAmount) );
+                        .Hurt( Mathf.Min(dmg-(_raycastHit.distance/10*_falloffAmount), _minDamage) );
                     }
                 }
             }else{ _animator.SetTrigger("ShootEmpty");}
