@@ -54,6 +54,8 @@ namespace Items
             _soundReload.Play();
         }
 
+        public void PlayReloadSound() { _soundReload.Play(); }
+
         public Gun()
         {
             ActionDictionary.Add(KeyCode.Mouse0, Shoot);
