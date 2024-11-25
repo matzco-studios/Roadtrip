@@ -18,6 +18,8 @@ namespace Items
         private float _cooldown = .425f;
         [SerializeField]
         private float _shootDist = 150f;
+        [SerializeField]
+        private float _falloffAmount = 5f;
         private CameraController _cameraController;
         private Animator _animator;
         private AudioSource _soundReload;
@@ -40,9 +42,10 @@ namespace Items
                 _animator.SetTrigger("Shoot");
                 _ray = new Ray(_cameraController.transform.position, _cameraController.transform.forward);
                 if (Physics.Raycast(_ray, out _raycastHit, _shootDist)){
-                    print(_raycastHit.collider.gameObject.tag);
                     if (_raycastHit.collider.gameObject.CompareTag("Enemy")){
-                        _raycastHit.collider.GetComponent<EnemyController>().Hurt(_damage);
+                        float dmg = _damage;
+                        _raycastHit.collider.GetComponent<EnemyController>()
+                        .Hurt( dmg-(_raycastHit.distance/10*_falloffAmount) );
                     }
                 }
             }else{ _animator.SetTrigger("ShootEmpty");}
