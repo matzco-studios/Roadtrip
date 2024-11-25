@@ -25,8 +25,7 @@ namespace Items
         private bool isReloading = false;
 
         private void Shoot(){
-            if (isReloading) return;
-            if (_shootCooldown>0) return;
+            if (isReloading || _shootCooldown>0) return;
             if (_magazine>0)
             {
                 _cameraController.ApplyRecoilEffect(_recoil);
@@ -39,6 +38,7 @@ namespace Items
         }
 
         private void Reload(){
+            if (isReloading || _shootCooldown>0 || _magazine==_magSize) return;
             isReloading = true;
             _animator.SetTrigger("Reload");
             _soundReload.Play();
