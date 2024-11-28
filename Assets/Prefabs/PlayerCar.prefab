@@ -249,7 +249,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -36918,6 +36918,7 @@ MonoBehaviour:
   acceleration: 16
   maxSpeed: 20
   currentFuel: 0
+  _gasParticles: {fileID: 8886808462962692955}
   IsLightsOn: 0
   fuelBar: {fileID: 0}
   Battery: {fileID: 5122357311636334117}
