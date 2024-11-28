@@ -7,12 +7,11 @@ public class FirstCamAnimation : MonoBehaviour
     public GameObject firstCamera;
     public GameObject player;
     private Animator _camAnim;
-    private bool _animtionPlayed = false;
     // Start is called before the first frame update
     void Start()
     {
         player.SetActive(false);
-        _camAnim = firstCamera.GetComponent<Animator>();;
+        _camAnim = firstCamera.GetComponent<Animator>();
         _camAnim.SetTrigger("PlayJenkins");
     }
 
