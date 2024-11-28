@@ -19,6 +19,8 @@ public class BatteryTests
     {
         _battery = new GameObject("Battery");
         _controller = _battery.AddComponent<Battery>();
+        // To ensure that the health is at 100
+        _controller.AddHealth(100);
         _battery.tag = "GrabbableItem";
         _batteryCollider = new GameObject("BatteryCollider");
         _batteryCollider.tag = "BatteryCollider";
@@ -27,11 +29,21 @@ public class BatteryTests
     }
 
     [Test]
+    public void When_Adding50ToBatteryHealth_Except_CurrentHealthEqualsOldHealthPlus50()
+    {
+        // To set the health to zero.
+        _controller.SetDead();
+
+        var oldHealth = _controller.Health;
+        _controller.AddHealth(50);
+        Assert.AreEqual(_controller.Health, oldHealth + 50);
+    }
+
+    [Test]
     public void When_ReducingBatteryHealthBy20_Except_CurrentHealthEqualsOldHealthMinus20()
     {
-        var currentHealth = _controller.Health;
         _controller.ReduceHealth(20);
-        Assert.AreEqual(currentHealth - 20, _controller.Health);
+        Assert.AreEqual(_controller.Health, 80);
     }
 
     [Test]
@@ -40,12 +52,4 @@ public class BatteryTests
         _controller.SetDead();
         Assert.AreEqual(_controller.Health, 0);
     }
-
-   /*[UnityTest]
-    public void When_BatteryIsGrabbedFromCar_Except_CarControllerToBeNull()
-    {
-        _controller.OnTriggerEnter(_batteryCollider)
-        _controller.SetDead();
-        Assert.AreEqual(_controller.Health, 0);
-    }*/
 }
