@@ -41,7 +41,7 @@ namespace Items
             _rigidbody = GetComponent<Rigidbody>();
         }
 
-        private void OnTriggerEnter(Collider other)
+        public void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("BatteryCollider") && _carController.Battery == null)
             {
@@ -54,7 +54,7 @@ namespace Items
             }
         }
 
-        private void OnTriggerExit(Collider other)
+        public void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("BatteryCollider") && _carController.Battery && _carController.Battery.Equals(this))
             {
