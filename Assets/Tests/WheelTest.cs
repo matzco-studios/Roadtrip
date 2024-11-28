@@ -28,9 +28,19 @@ public class WheelTest
     }
 
     [Test]
-    public void When_Wheel_FlatTire_Expect_pressureIsZero ()
+    public void When_Wheel_FlatTire_Expect_pressureIsZero()
     {
         wheel.FlatTire();
         Assert.AreEqual(wheel.Pressure, 0);
+    }
+
+    [Test]
+    public void When_Wheel_AddPressure_Expect_pressureGreater()
+    {
+        wheel.FlatTire(); // Flat Tire so pressure is 0
+        var oldPressure = wheel.Pressure;
+        
+        wheel.AddPressure(10);
+        Assert.Greater(wheel.Pressure, oldPressure);
     }
 }
