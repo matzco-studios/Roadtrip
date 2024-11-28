@@ -13,7 +13,7 @@ public class WheelTest
     private GameObject wheelGO;
     
     /// <summary>
-    ///     Setup FlashLight
+    ///     Setup Wheel
     /// </summary>
     [SetUp]
     public void SetUp()
@@ -23,10 +23,16 @@ public class WheelTest
         wheel = new Wheel()
         {
             wheelObject = wheelGO,
-            wheelCollider = wheelGO.gameObject.AddComponent<WheelCollider>()
+            wheelCollider = wheelGO.gameObject.AddComponent<WheelCollider>(),
         };
+        wheel.AddPressure(Wheel.MaxPsi);
     }
 
+    
+    /// <summary>
+    ///     Test when FlatTire method is called
+    ///     pressure should be at 0 
+    /// </summary>
     [Test]
     public void When_Wheel_FlatTire_Expect_pressureIsZero()
     {
@@ -34,13 +40,30 @@ public class WheelTest
         Assert.AreEqual(wheel.Pressure, 0);
     }
 
+    /// <summary>
+    ///     Test when AddPressure method is called
+    ///     should increase the pressure by a certain
+    ///     amount, in this case by 10
+    /// </summary>
     [Test]
     public void When_Wheel_AddPressure_Expect_pressureGreater()
     {
-        wheel.FlatTire(); // Flat Tire so pressure is 0
+        wheel.FlatTire();
         var oldPressure = wheel.Pressure;
         
         wheel.AddPressure(10);
         Assert.Greater(wheel.Pressure, oldPressure);
+    }
+
+    /// <summary>
+    ///     Test when ReducePressure method is called
+    ///     should reduce the pressure by a certain
+    ///     amount, in this case by 10 
+    /// </summary>
+    [Test]
+    public void When_Wheel_ReducePressure_Expect_pressureLessThanLast()
+    {
+        wheel.ReducePressure(10);
+        Assert.Less(wheel.Pressure, Wheel.MaxPsi);
     }
 }
