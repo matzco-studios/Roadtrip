@@ -7,6 +7,7 @@ public class FirstCamAnimation : MonoBehaviour
     public GameObject firstCamera;
     public GameObject player;
     private Animator _camAnim;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -20,10 +21,10 @@ public class FirstCamAnimation : MonoBehaviour
     {
         if (_camAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f)
         {
-            _camAnim.SetTrigger("PlayJenkins");
             firstCamera.SetActive(false);
             player.SetActive(true);
             player.transform.rotation = Quaternion.Euler(0, -450, 0);
+            
         }
     }
 }
