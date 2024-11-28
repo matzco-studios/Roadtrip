@@ -53,7 +53,7 @@ public class ScorchletTest
         _scorchlet.AddComponent<ScorchletController>();
         _scorchlet.transform.position = new Vector3(0, 0, 0);
         _scorchlet.GetComponent<ScorchletController>().IsFlashed();
-        Assert.IsTrue(_scorchlet.GetComponent<ScorchletController>().isWatched);
+        Assert.IsTrue(_scorchlet.GetComponent<ScorchletController>().IsWatched);
     }
 
 
