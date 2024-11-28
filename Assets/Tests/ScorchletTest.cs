@@ -23,7 +23,16 @@ public class ScorchletTest
         _truck = Object.Instantiate(_truck);
         _player = Object.Instantiate(_player);
     }
-    
+
+    [TearDown]
+    public void TearDown()
+    {
+        //GameObject.Destroy(_scorchlet);
+        GameObject.Destroy(_truck);
+        GameObject.Destroy(_player);
+        //GameObject.Destroy(_scorchletPrefab);
+    }
+
     [Test]
     public void ScorchletSpawnTest()
     {
@@ -41,14 +50,4 @@ public class ScorchletTest
     //     _player.transform.position = new Vector3(11, 0, 0);
     //     Assert.That(_scorchlet, Is.Not.Null);
     // }
-
-
-    [TearDown]
-    public void Teardown()
-    {
-        Object.Destroy(_scorchlet);
-        Object.Destroy(_truck);
-        Object.Destroy(_player);
-    }
-
 }

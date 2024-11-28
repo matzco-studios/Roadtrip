@@ -28,7 +28,14 @@ public class WheelTest
         wheel.AddPressure(Wheel.MaxPsi);
     }
 
-    
+
+    [TearDown]
+    public void Teardown()
+    {
+        Object.Destroy(wheelGO);
+    }
+
+
     /// <summary>
     ///     Test when FlatTire method is called
     ///     pressure should be at 0 

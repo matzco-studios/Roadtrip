@@ -21,6 +21,12 @@ public class BatteryTests
         _battery.tag = "GrabbableItem";
     }
 
+    [TearDown]
+    public void TearDown()
+    {
+        GameObject.Destroy(_battery);
+    }
+
     [Test]
     public void When_Adding50ToBatteryHealth_Except_CurrentHealthEqualsOldHealthPlus50()
     {
