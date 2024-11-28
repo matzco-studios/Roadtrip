@@ -18,8 +18,8 @@ namespace Cinematic.EndScene
         
         private void OnEnable()
         {
-            transform.position = new (15.024f, 1.08f, transform.position.z);
             transform.SetParent(null);
+            transform.position = new (transform.position.x - 2f, transform.position.y, transform.position.z);
             _controller.enabled = true;
             _zone.Speed = 5f;
             StartCoroutine(PlayerMovement());

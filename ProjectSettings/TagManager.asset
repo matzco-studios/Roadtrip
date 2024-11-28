@@ -21,6 +21,7 @@ TagManager:
   - Scorchlet
   - CarTrunk
   - ScorchletSurface
+  - Enemy
   layers:
   - Default
   - TransparentFX
