@@ -1,30 +1,34 @@
 using Enemies.Scorchlet;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Items
 {
     public class FlashLight : Mechanics.GrabbableItem
     {
-        private float _battery = 100f;
-        private bool _isTurnedOn = false;
+        public bool IsTurnedOn = false;
         private Light _light;
+        private float _battery = 100f;
         private float _shakeAmnt;
         private Animator _animator;
         private Rigidbody _rigidbody;
         private AudioSource _audioSource;
-        private void LeftMouse()
+
+        public float Battery => _battery;
+        
+        public void LeftMouse()
         {
             _battery -= 0.8f;
-            _isTurnedOn = !_isTurnedOn;
-            _light.enabled = _isTurnedOn;
+            IsTurnedOn = !IsTurnedOn;
+            _light.enabled = true;
             _animator.SetTrigger("Toggle");
         }
         private void Shake()
         {
             _shakeAmnt += 15;
             _battery += 10;
-            _isTurnedOn = false;
-            _light.enabled = _isTurnedOn;
+            IsTurnedOn = false;
+            _light.enabled = IsTurnedOn;
             if (!_audioSource.isPlaying) {_audioSource.Play();}
         }
         public FlashLight() : base(Quaternion.Euler(-19.109f, -90, -85.682f))
@@ -36,7 +40,7 @@ namespace Items
         void Start()
         {
             _light = transform.GetComponentInChildren<Light>();
-            _light.enabled = _isTurnedOn;
+            _light.enabled = IsTurnedOn;
             _animator = GetComponent<Animator>();
             _rigidbody = GetComponent<Rigidbody>();
             _audioSource = GetComponent<AudioSource>();
@@ -45,7 +49,7 @@ namespace Items
         void Update()
         {
             _battery = Mathf.Clamp(_battery, -2, 150);
-            if (_isTurnedOn)
+            if (IsTurnedOn)
             {
                 _light.enabled = !(Mathf.Floor(_battery * _battery * 80) % Mathf.Ceil(_battery * 1.35f) <= Mathf.Sqrt(Mathf.Sqrt(_battery) * 0.865f));
                 if (_battery < 0) { LeftMouse(); _battery += 2.6725f; }
@@ -62,7 +66,7 @@ namespace Items
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.up, out hit, 5))
             {
-                if (hit.collider.CompareTag("Scorchlet") && _isTurnedOn)
+                if (hit.collider.CompareTag("Scorchlet") && IsTurnedOn)
                 {
                     hit.collider.GetComponent<ScorchletController>().IsFlashed();
                 }
