@@ -24,7 +24,7 @@ namespace Cinematic.EndScene
         private float turnAngle = 15f;
         private float speedMultiplier;
         private float carWheelMaxAngle = 150f;
-        public float maxSpeed = 5f;
+        public float maxSpeed = 10f;
         public bool IsLightsOn = true;
         private float gasInput = 5f;
         public float lowVolume = 0.25f;
@@ -144,6 +144,7 @@ namespace Cinematic.EndScene
             EngineSound();
             _leftFrontDoorAnim.enabled = false;
 
+            _rb.velocity.Set(4.65f, 0.00f, 5.55f);
             StartCoroutine(CarLoop());
             StartCoroutine(DeadBatteryEvent());
         }
@@ -156,7 +157,7 @@ namespace Cinematic.EndScene
                 
                 currentSpeed = _rb.velocity.magnitude;
                 currentEngineVolume = _rb.velocity.magnitude / 50f;
-                
+
                 if (!_batteryDead)
                 {
                     MoveCarForward();
