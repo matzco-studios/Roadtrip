@@ -19,7 +19,7 @@ public class FirstCamAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_camAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f)
+        if (_camAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f)
         {
             firstCamera.SetActive(false);
             player.SetActive(true);
