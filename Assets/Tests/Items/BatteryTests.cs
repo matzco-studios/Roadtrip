@@ -10,9 +10,6 @@ public class BatteryTests
 {
     private GameObject _battery;
     private Battery _controller;
-    private GameObject _batteryCollider;
-    private GameObject _car;
-    private CarController _carController;
 
     [SetUp]
     public void SetUp()
@@ -22,10 +19,6 @@ public class BatteryTests
         // To ensure that the health is at 100
         _controller.AddHealth(100);
         _battery.tag = "GrabbableItem";
-        _batteryCollider = new GameObject("BatteryCollider");
-        _batteryCollider.tag = "BatteryCollider";
-        _car = new GameObject("Car");
-        _carController = _car.AddComponent<CarController>();
     }
 
     [Test]
