@@ -491,11 +491,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c8199add10f54d8c90a10b2eb14a985, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.73
+      value: -8.63
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c8199add10f54d8c90a10b2eb14a985, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.71
+      value: -0.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c8199add10f54d8c90a10b2eb14a985, type: 3}
       propertyPath: m_LocalPosition.z
@@ -529,6 +529,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3220217023556873967, guid: 0c8199add10f54d8c90a10b2eb14a985, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d06639cda04674fe8a91051043f82751, type: 2}
+    - target: {fileID: -1461304994638716399, guid: 0c8199add10f54d8c90a10b2eb14a985, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d06639cda04674fe8a91051043f82751, type: 2}
     - target: {fileID: 164570823051487818, guid: 0c8199add10f54d8c90a10b2eb14a985, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.021
@@ -561,6 +569,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 1.849
       objectReference: {fileID: 0}
+    - target: {fileID: 6831737488511851612, guid: 0c8199add10f54d8c90a10b2eb14a985, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d06639cda04674fe8a91051043f82751, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: -8391222552659086748, guid: 0c8199add10f54d8c90a10b2eb14a985, type: 3}
@@ -2032,10 +2044,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3220217023556873967, guid: 0c8199add10f54d8c90a10b2eb14a985, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d06639cda04674fe8a91051043f82751, type: 2}
+    - target: {fileID: -1461304994638716399, guid: 0c8199add10f54d8c90a10b2eb14a985, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d06639cda04674fe8a91051043f82751, type: 2}
     - target: {fileID: 919132149155446097, guid: 0c8199add10f54d8c90a10b2eb14a985, type: 3}
       propertyPath: m_Name
       value: shapespark_curtains-set (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6831737488511851612, guid: 0c8199add10f54d8c90a10b2eb14a985, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d06639cda04674fe8a91051043f82751, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: -8391222552659086748, guid: 0c8199add10f54d8c90a10b2eb14a985, type: 3}
