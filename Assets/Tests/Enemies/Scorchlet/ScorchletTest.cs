@@ -1,4 +1,6 @@
-using System.Collections.Generic;
+using System.Collections;
+using System.Threading;
+using Enemies.Scorchlet;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 using UnityEditor;
@@ -10,44 +12,57 @@ public class ScorchletTest
 {
     private GameObject _scorchlet;
     private GameObject _truck;
-    public GameObject _player;
+    private GameObject _player;
     private GameObject _scorchletPrefab;
 
 
     [SetUp]
     public void SetUp()
     {
-        _truck = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerCar.prefab");
-        _player = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/TemporaryPlayer.prefab");
+        // _truck = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerCar.prefab");
+        // _player = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/TemporaryPlayer.prefab");
         _scorchletPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Scorchlet_monster.prefab");
-        _truck = Object.Instantiate(_truck);
-        _player = Object.Instantiate(_player);
-    }
-
-    [TearDown]
-    public void TearDown()
-    {
-        //GameObject.Destroy(_scorchlet);
-        GameObject.Destroy(_truck);
-        GameObject.Destroy(_player);
-        //GameObject.Destroy(_scorchletPrefab);
+        // _truck = Object.Instantiate(_truck);
+        // _truck.AddComponent<ScorchletSpawn>();
+        // _player = Object.Instantiate(_player);
     }
 
     [Test]
     public void ScorchletSpawnTest()
     {
-        // _scorchletPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Scorchlet_monster.prefab");
         _scorchlet = Object.Instantiate(_scorchletPrefab);
         Assert.That(_scorchlet, Is.Not.Null);
     }
 
-    // [Test]
-    // public void ScorchletTriggerTest()
+    // [UnityTest]
+    // public IEnumerator ScorchletMovement()
     // {
-        // _scorchletPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Scorchlet_monster.prefab");
-    //     _scorchlet = Object.Instantiate(_scorchletPrefab);
-    //     _truck.transform.position = new Vector3(0, 0, 0);
-    //     _player.transform.position = new Vector3(11, 0, 0);
-    //     Assert.That(_scorchlet, Is.Not.Null);
+    //     _scorchlet = new GameObject();
+    //     _scorchlet.AddComponent<ScorchletController>();
+    //     _scorchlet.transform.position = new Vector3(0, 0, 0);
+    //     _truck = new GameObject();
+    //     _truck.transform.position = new Vector3(10, 0, 10);
+    //     yield return new WaitForSeconds(10f);
+    //     Assert.AreNotEqual(_scorchlet.transform.position, new Vector3(0, 0, 0));
     // }
+
+    [Test]
+    public void ScorchletFlee()
+    {
+        _scorchlet = new GameObject();
+        _scorchlet.AddComponent<ScorchletController>();
+        _scorchlet.transform.position = new Vector3(0, 0, 0);
+        _scorchlet.GetComponent<ScorchletController>().IsFlashed();
+        Assert.IsTrue(_scorchlet.GetComponent<ScorchletController>().isWatched);
+    }
+
+
+    [TearDown]
+    public void Teardown()
+    {
+        Object.Destroy(_scorchlet);
+        Object.Destroy(_truck);
+        Object.Destroy(_player);
+    }
+
 }
