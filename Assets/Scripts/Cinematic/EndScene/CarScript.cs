@@ -14,6 +14,7 @@ namespace Cinematic.EndScene
         public AudioSource engineSound;
         public AudioSource engineCoughSound;
         public AudioSource CrashSound;
+        public AudioSource EndSound;
         public List<CarLight> carLights;
         public float currentSpeed;
         private float currentEngineVolume;
@@ -136,7 +137,11 @@ namespace Cinematic.EndScene
             AnimateWheels();
         }
 
-        void Start()
+        private void Awake() {
+            EndSound.Play();
+        }
+
+        private void Start()
         {
             _rb = GetComponent<Rigidbody>();
             engineSound = GetComponent<AudioSource>();
