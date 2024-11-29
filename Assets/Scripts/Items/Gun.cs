@@ -31,6 +31,8 @@ namespace Items
         private bool isReloading = false;
         private RaycastHit _raycastHit;
         private Ray _ray;
+        private ParticleSystem _muzzleFlash;
+        private Light _light;
 
         private void Shoot(){
             if (isReloading || _shootCooldown>0) return;
@@ -51,6 +53,8 @@ namespace Items
                         .Hurt( Mathf.Max(dmg-(_raycastHit.distance/10*_falloffAmount), _minDamage) );
                     }
                 }
+                _muzzleFlash.Play();
+                _light.intensity = 8;
             }else{ _animator.SetTrigger("ShootEmpty");}
         }
 
@@ -65,13 +69,13 @@ namespace Items
         {
             _magazine = Mathf.Clamp(_magazine+amnt, 0, _magSize);
             if (_magazine==_magSize){
-                isReloading = false;
                 _animator.SetTrigger("StopReload");
             }
             _soundReload.Play();
+            isReloading = false;
         }
 
-        public void PlayReloadSound() { _soundReload.Play(); }
+        public void PlayReloadSound() { _soundReload.Play(); isReloading = false; }
 
         public Gun()
         {
@@ -85,11 +89,18 @@ namespace Items
             _animator =GetComponent<Animator>();
             _soundShoot = GetComponents<AudioSource>()[0];
             _soundReload = GetComponents<AudioSource>()[1];
+            _muzzleFlash = GetComponentInChildren<ParticleSystem>();
+            _light = GetComponentInChildren<Light>();
+            foreach (MeshRenderer mesh in GetComponentsInChildren<MeshRenderer>()) {
+                mesh.receiveShadows = false;
+                mesh.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            }
         }
 
         void Update()
         {
             _shootCooldown -= Time.deltaTime;
+            _light.intensity += (0-_light.intensity)*Time.deltaTime*25;
         }
     }
 }
