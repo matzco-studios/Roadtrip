@@ -11,7 +11,19 @@ enum FloorType
 
 public class FootSteps : MonoBehaviour
 {
+    #region Members
+
     [SerializeField] private AudioClip[] _clips;
+    
+    #endregion
+
+    #region Properties
+    
+    // Here goes all the properties
+    
+    #endregion
+
+    #region CustomMethods
 
     /// <summary>
     ///     Pick a random audio clip depending on the floor type
@@ -26,7 +38,11 @@ public class FootSteps : MonoBehaviour
         // Choose a random audio clip;
         return null;
     }
-        
+    
+    #endregion
+
+    #region UnityGameMethods
+
     void Start()
     {
     }
@@ -35,4 +51,6 @@ public class FootSteps : MonoBehaviour
     {
         // Play the audio
     }
+    
+    #endregion
 }
