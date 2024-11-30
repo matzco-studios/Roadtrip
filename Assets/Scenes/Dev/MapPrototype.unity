@@ -44221,6 +44221,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2011484979036539009, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
+      propertyPath: _bobbingSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3383718482952794861, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
       propertyPath: _message
       value: 

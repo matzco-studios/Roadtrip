@@ -18,7 +18,7 @@ namespace Map
         }
 
         private bool IsInTheZone() => _player.transform.position.z - transform.position.z <= ActivationDistance;
-
+ 
         private void Update()
         {
             var inZone = IsInTheZone();

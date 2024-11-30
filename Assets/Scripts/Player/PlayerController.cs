@@ -1,38 +1,43 @@
 using System;
+using Car;
 using UnityEngine;
 
 namespace Player
 {
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] private float _movementSpeed = 4;
+        private const float MaxHealth = 100f;
+        
+        [SerializeField] private float _movementSpeed = 3;
         [SerializeField] private float _jumpForce = 5;
         [SerializeField] private Transform _head;
         [SerializeField] private float _coyoteTimeMax = 0.21f;
         [SerializeField] private float _jumpBufferMax = 0.21f;
         [SerializeField] private float _gravityStrength = -9.81f;
-        private const float MaxHealth = 100f;
         [SerializeField] private float _health = MaxHealth;
         
-        public float Health => _health;
-
-        public bool IsDead() => _health == 0;
-        
-        public void AddHealth(float amount) => _health = Math.Clamp(_health + amount, 0, MaxHealth);
-
-        public void ReduceHealth(float amount) => _health = Math.Clamp(_health - amount, 0, MaxHealth);
+        private CharacterController _controller;
         
         private float _coyoteTime;
         private float _jumpBuffer;
-        private CharacterController _controller;
         private Vector3 _inputDir;
         private Vector3 _direction;
-        private Vector3 _velocity = Vector3.zero;
         private Vector3 _gravityVelocity = Vector3.zero;
+        private static Vector3 _velocity = Vector3.zero;
+        
+        public float Health => _health;
+        public bool IsDead() => _health == 0;
+        public void AddHealth(float amount) => 
+            _health = Math.Clamp(_health + amount, 0, MaxHealth);
+
+        public void ReduceHealth(float amount) => 
+            _health = Math.Clamp(_health - amount, 0, MaxHealth);
+
+        public static bool IsWalking => _velocity.magnitude > 0.1; 
 
         void Start()
         {
-            UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+            Cursor.lockState = CursorLockMode.Locked;
             _controller = GetComponent<CharacterController>();
         }
 
@@ -60,14 +65,14 @@ namespace Player
 
         private void Movement()
         {
-            Vector3 targetVelocity = _movementSpeed * _direction;
+            var targetVelocity = _movementSpeed * _direction;
 
             _velocity += (targetVelocity - _velocity) / 15;
             if (_inputDir.Equals(Vector3.zero))
             {
                 _velocity += (Vector3.zero - _velocity) / 10;
             }
-
+            
             _controller.Move(_velocity * Time.fixedDeltaTime);
         }
 
@@ -86,10 +91,9 @@ namespace Player
 
         void Update()
         {
+            Debug.Log(_velocity.magnitude);
             if (Input.GetKey(KeyCode.Escape))
-            {
                 Application.Quit();
-            }
 
             HandleJump();
             PlayerDirection();
