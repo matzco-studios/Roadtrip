@@ -20,6 +20,7 @@ namespace Cinematic.EndScene
             _player = GameObject.FindWithTag("Player").GetComponent<PlayerScript>();
             _animator = GetComponent<Animator>();
             _zone = GameObject.FindWithTag("Zone").GetComponent<Zone>();
+            _animator.SetTrigger("StartOutZoom");
         }
 
         public IEnumerator EndRotation()
