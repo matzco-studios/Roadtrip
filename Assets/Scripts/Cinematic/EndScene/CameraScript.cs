@@ -16,6 +16,10 @@ namespace Cinematic.EndScene
 
         public bool IsEndRotation() => _endRotation;
 
+        public void PlayerZoom() {
+            _animator.SetTrigger("PlayerZoom");
+        }
+
         private void Start() {
             _player = GameObject.FindWithTag("Player").GetComponent<PlayerScript>();
             _animator = GetComponent<Animator>();

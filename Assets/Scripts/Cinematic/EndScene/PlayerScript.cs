@@ -23,6 +23,7 @@ namespace Cinematic.EndScene
 
         public IEnumerator PlayerMovement()
         {
+            _camera.PlayerZoom();
             _animator.enabled = true;
             yield return null;
 
