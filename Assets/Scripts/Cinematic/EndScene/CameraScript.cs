@@ -6,37 +6,37 @@ namespace Cinematic.EndScene
 {
     public class CameraScript : MonoBehaviour
     {
-        private float _rotation;
-        private const float MaxRotation = -90f;
-        private const float RotationDelta = 50f;
         [SerializeField] private GameObject _brokenEffect;
         [SerializeField] private AudioSource _brokenSound;
-        [SerializeField] private Zone _zone;
-        [SerializeField] private PlayerScript _player;
         [SerializeField] private GameObject _toBeContinued;
+        private Zone _zone;
+        private Animator _animator;
+        private bool _endRotation;
+        private PlayerScript _player;
 
-        private void OnEnable()
-        {
-            transform.SetParent(null);
-            StartCoroutine(ChangeRotation());
+        public bool IsEndRotation() => _endRotation;
+
+        private void Start() {
+            _player = GameObject.FindWithTag("Player").GetComponent<PlayerScript>();
+            _animator = GetComponent<Animator>();
+            _zone = GameObject.FindWithTag("Zone").GetComponent<Zone>();
         }
 
-        private IEnumerator ChangeRotation()
+        public IEnumerator EndRotation()
         {
-            while (_rotation > MaxRotation)
-            {
-                _rotation = Mathf.MoveTowards(_rotation, MaxRotation, RotationDelta * Time.deltaTime);
-                transform.rotation = Quaternion.Euler(_rotation, 180f, 0f);
-                yield return null;
-            }
+            _endRotation = true;
+            _animator.SetTrigger("EndRotation");
+
+            yield return new WaitUntil(() => transform.rotation.x >= 0.24f);
 
             _brokenSound.Play();
             _brokenEffect.SetActive(true);
-            _zone.StopZone();
-            _player.StopPlayer();
+            _zone.Stop();
+            _player.Stop();
 
             yield return new WaitForSeconds(1f);
             _toBeContinued.SetActive(true);
+
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Map
 
         public bool IsInTheZone() => _player.transform.position.z - transform.position.z <= ActivationDistance;
 
-        public void StopZone() => _stopped = true;
+        public void Stop() => _stopped = true;
         
         IEnumerator RemovePlayerHealth()
         {

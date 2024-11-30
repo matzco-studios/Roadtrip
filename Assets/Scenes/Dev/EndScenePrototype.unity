@@ -596,7 +596,6 @@ MonoBehaviour:
   minSpeedVolume: 10
   maxSpeedVolume: 21
   IsPlayerInside: 1
-  _player: {fileID: 1060493136}
 --- !u!1 &691196509
 GameObject:
   m_ObjectHideFlags: 0
@@ -879,15 +878,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1060493135}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9d54bedeacb458eb2a4d8b8f05eb5f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _movementSpeed: 4
   _controller: {fileID: 1060493137}
-  _zone: {fileID: 232297012}
-  _camera: {fileID: 2040694881}
+  _animator: {fileID: 1060493138}
 --- !u!143 &1060493137
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1981,9 +1979,10 @@ GameObject:
   - component: {fileID: 2040694877}
   - component: {fileID: 2040694881}
   - component: {fileID: 2040694882}
+  - component: {fileID: 2040694883}
   m_Layer: 2
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: Camera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2129,15 +2128,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2040694876}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 589eabfef8074d9593200a1f257b437e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _brokenEffect: {fileID: 2031113839}
   _brokenSound: {fileID: 2040694882}
-  _zone: {fileID: 232297012}
-  _player: {fileID: 1060493136}
   _toBeContinued: {fileID: 367648532}
 --- !u!82 &2040694882
 AudioSource:
@@ -2235,6 +2232,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &2040694883
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040694876}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 614eb46bf72d95644a27b8c627833c2e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &2105569633 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4611639926656270449, guid: 99e8edd387caa1842a9cd511e8c1b36a, type: 3}

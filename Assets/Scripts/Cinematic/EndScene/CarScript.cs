@@ -35,9 +35,11 @@ namespace Cinematic.EndScene
         public bool IsPlayerInside;
         private bool _batteryDead;
         private bool _stopped = true;
-        [SerializeField] PlayerScript _player;
+        private PlayerScript _player;
 
-        void PlayDeadBatterySound()
+
+
+        private void PlayDeadBatterySound()
         {
             Debug.Log("The battery is dead.");
             engineCoughSound.volume = 0.5f;
@@ -143,6 +145,7 @@ namespace Cinematic.EndScene
 
         private void Start()
         {
+            _player = GameObject.FindWithTag("Player").GetComponent<PlayerScript>();
             _rb = GetComponent<Rigidbody>();
             engineSound = GetComponent<AudioSource>();
             ToggleEngine();
@@ -179,7 +182,7 @@ namespace Cinematic.EndScene
             _leftFrontDoorAnim.enabled = true;
             CrashSound.Play();
             yield return new WaitForSeconds(1f);
-            _player.enabled = true;
+            StartCoroutine(_player.PlayerMovement());
         }
     }
 }
