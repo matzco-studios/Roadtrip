@@ -146,6 +146,73 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &536718185839398594
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4686006557079599247}
+  - component: {fileID: 5255821599680392999}
+  - component: {fileID: 8835556037100112315}
+  m_Layer: 0
+  m_Name: FuelHole
+  m_TagString: InteractableItem
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4686006557079599247
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536718185839398594}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.924, y: 0.136, z: -0.261}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 2145498017773549203}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5255821599680392999
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536718185839398594}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 4
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 59
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8835556037100112315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536718185839398594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3f834883fcc2034f8030dd7f7daf554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _message: {fileID: 0}
 --- !u!1 &883698279161348116
 GameObject:
   m_ObjectHideFlags: 0
@@ -35957,6 +36024,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4778721331114830, guid: 20d6170d440e52b438267a860798bb0a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8258453107298549796}
+    - targetCorrespondingSourceObject: {fileID: 4778721331114830, guid: 20d6170d440e52b438267a860798bb0a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4686006557079599247}
     - targetCorrespondingSourceObject: {fileID: 6636500198421168460, guid: 20d6170d440e52b438267a860798bb0a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 960827917888763883}
