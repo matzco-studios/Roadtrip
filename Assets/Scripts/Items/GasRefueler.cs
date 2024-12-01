@@ -102,7 +102,6 @@ namespace Items
                 else
                 {
                     _isPicked = false;
-                    rb.useGravity = false;
                     rb.constraints = RigidbodyConstraints.None;
                 }
             }
