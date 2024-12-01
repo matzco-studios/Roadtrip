@@ -5351,7 +5351,7 @@ MonoBehaviour:
   Rotation: {x: 0, y: 0, z: 1, w: -0.00000004371139}
   Name: Shotgun
   _magSize: 4
-  _damage: 47
+  _damage: 52
   _recoil: 4
   _cooldown: 1
   _shootDist: 22
