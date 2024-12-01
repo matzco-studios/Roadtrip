@@ -5353,7 +5353,7 @@ MonoBehaviour:
   _magSize: 4
   _damage: 52
   _recoil: 4
-  _cooldown: 1
+  _cooldown: 1.2
   _shootDist: 22
   _falloffAmount: 12.8
   _minDamage: 8
