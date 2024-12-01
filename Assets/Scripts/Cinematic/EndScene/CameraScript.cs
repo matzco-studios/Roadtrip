@@ -43,10 +43,8 @@ namespace Cinematic.EndScene
             _animator.SetTrigger("EndRotation");
 
             yield return new WaitUntil(() => transform.rotation.x >= 0.24f);
-
             _brokenSound.Play();
             _brokenEffect.SetActive(true);
-            _zone.Stop();
             _player.Stop();
 
             yield return new WaitForSeconds(1.5f);
@@ -54,6 +52,7 @@ namespace Cinematic.EndScene
             _multiColorBars.SetActive(true);
             _noSignalSound.Play();
             _brokenEffect.SetActive(false);
+            _zone.Stop();
 
             yield return new WaitForSeconds(1f);
             _blackScreen.SetActive(true);
