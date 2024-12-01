@@ -14,7 +14,6 @@ namespace Cinematic.EndScene
         public AudioSource engineSound;
         public AudioSource engineCoughSound;
         public AudioSource CrashSound;
-        public AudioSource EndSound;
         public List<CarLight> carLights;
         public float currentSpeed;
         private float currentEngineVolume;
@@ -139,10 +138,6 @@ namespace Cinematic.EndScene
             AnimateWheels();
         }
 
-        private void Awake() {
-            EndSound.Play();
-        }
-
         private void Start()
         {
             _player = GameObject.FindWithTag("Player").GetComponent<PlayerScript>();
@@ -152,7 +147,6 @@ namespace Cinematic.EndScene
             EngineSound();
             _leftFrontDoorAnim.enabled = false;
 
-            _rb.velocity.Set(4.65f, 0.00f, 5.55f);
             StartCoroutine(CarLoop());
             StartCoroutine(DeadBatteryEvent());
         }

@@ -6,9 +6,11 @@ namespace Cinematic.EndScene
 {
     public class CameraScript : MonoBehaviour
     {
+        [SerializeField] private AudioSource _endSound;
         [SerializeField] private GameObject _brokenEffect;
         [SerializeField] private AudioSource _brokenSound;
         [SerializeField] private GameObject _multiColorBars;
+        [SerializeField] private AudioSource _noSignalSound;
         [SerializeField] private GameObject _blackScreen;
 
         private Zone _zone;
@@ -20,6 +22,10 @@ namespace Cinematic.EndScene
 
         public void PlayerZoom() {
             _animator.SetTrigger("PlayerZoom");
+        }
+
+        private void Awake() {
+            _endSound.Play();
         }
 
         private void Start() {
@@ -40,12 +46,17 @@ namespace Cinematic.EndScene
             _brokenEffect.SetActive(true);
             _zone.Stop();
             _player.Stop();
-            yield return new WaitForSeconds(1f);
+
+            yield return new WaitForSeconds(1.5f);
+            _endSound.Stop();
             _multiColorBars.SetActive(true);
+            _noSignalSound.Play();
             _brokenEffect.SetActive(false);
+
             yield return new WaitForSeconds(1f);
             _blackScreen.SetActive(true);
             _multiColorBars.SetActive(false);
+            _noSignalSound.Stop();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Cinematic.EndScene
 {
     public class PlayerScript : MonoBehaviour
     {
-        [SerializeField] private float _movementSpeed = 5f;
+        [SerializeField] private float _movementSpeed = 4f;
         [SerializeField] private CharacterController _controller;
         [SerializeField] private Animator _animator;
         private Zone _zone;
