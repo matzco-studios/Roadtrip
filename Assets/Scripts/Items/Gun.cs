@@ -47,7 +47,8 @@ namespace Items
                 Transform head = _cameraController.GetHead().transform;
                 _ray = new Ray(head.position, head.forward);
                 if (Physics.Raycast(_ray, out _raycastHit, _shootDist)){
-                    if (_raycastHit.collider.gameObject.CompareTag("Enemy")){
+                    var obj = _raycastHit.collider.gameObject;
+                    if (obj.CompareTag("Enemy") || obj.CompareTag("Scorchlet")){
                         float dmg = _damage;
                         _raycastHit.collider.GetComponent<EnemyController>()
                         .Hurt( Mathf.Max(dmg-(_raycastHit.distance/10*_falloffAmount), _minDamage) );
