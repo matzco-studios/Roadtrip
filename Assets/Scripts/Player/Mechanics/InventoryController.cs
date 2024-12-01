@@ -150,6 +150,13 @@ namespace Player.Mechanics
             _enabled = active;
         }
 
+        public GameObject GetCurrentItem()
+        {
+            Transform item = transform.GetChild(_currentSelectedItem);
+            if (item) return item.gameObject;
+            else return null;
+        }
+
         void Update(){
             if (_currentSelectedItem != None)
             {
