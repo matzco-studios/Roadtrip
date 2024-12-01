@@ -30,7 +30,7 @@ namespace Player
         private void CalculateBobbing()
         {
             _bobbingPos = Vector3.zero;
-            
+
             // Sin Wave Formula
             _bobbingPos.y += Mathf.Lerp(
                 
@@ -50,13 +50,10 @@ namespace Player
             _head.position = tempPos;
         }
 
-        private void Start()
-        {
-            _bobbingStartPos = _head.position;
-        }
-
         void Update()
         {
+            _bobbingStartPos = _head.position;
+
             // Rotate camera and head
             var mouseX = Input.GetAxis("Mouse X") * _sensitivity;
             var mouseY = Input.GetAxis("Mouse Y") * _sensitivity;
