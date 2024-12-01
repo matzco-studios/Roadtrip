@@ -1,6 +1,7 @@
 using System.Collections;
 using Map;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Cinematic.EndScene
 {
@@ -12,6 +13,7 @@ namespace Cinematic.EndScene
         [SerializeField] private GameObject _multiColorBars;
         [SerializeField] private AudioSource _noSignalSound;
         [SerializeField] private GameObject _blackScreen;
+        [SerializeField] private AudioSource _finalMessage;
 
         private Zone _zone;
         private Animator _animator;
@@ -55,8 +57,11 @@ namespace Cinematic.EndScene
 
             yield return new WaitForSeconds(1f);
             _blackScreen.SetActive(true);
+            _finalMessage.Play();
             _multiColorBars.SetActive(false);
             _noSignalSound.Stop();
+            yield return new WaitWhile(() => _finalMessage.isPlaying);
+            SceneManager.LoadScene(0);
         }
     }
 }
