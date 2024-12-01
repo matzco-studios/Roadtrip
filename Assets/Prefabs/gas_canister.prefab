@@ -582,6 +582,7 @@ MonoBehaviour:
   Rotation: {x: 0, y: 0, z: 0, w: 0}
   Name: Gas Canister
   _message: {fileID: 0}
+  isLimited: 1
 --- !u!64 &4458266976128520329
 MeshCollider:
   m_ObjectHideFlags: 0
