@@ -82,7 +82,7 @@ namespace Items.Mechanics
                 yield return new WaitForSeconds(spawnDelay);
                 CheckPlayerNeeds();
                 
-                Instantiate(_priorItems.Peek(), new Vector3(spawnPos.x, .2f, spawnPos.z), Quaternion.identity);
+                Instantiate(_priorItems.Peek(), new Vector3(spawnPos.x, _playerPosition.position.y+.2f, spawnPos.z), Quaternion.identity);
                 _priorItems.Dequeue();
             }
         }

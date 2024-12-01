@@ -21,7 +21,7 @@ namespace Enemies.Fsm.State.DeadLurkerTypes
         {
             wait-= 1.0f;
             Anim.SetFloat("WalkSpeed", 0);
-            Npc.transform.LookAt(Vector3.Scale(Player.position, new Vector3(1f, 0f, 1f)));
+            DeadLurkerLurk.LookAtPlayer(Player, Npc);
 
             if (wait<=0){
                 Agent.isStopped =false;
