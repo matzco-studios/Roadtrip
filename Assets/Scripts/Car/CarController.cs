@@ -31,6 +31,7 @@ namespace Car
         private bool outOfFuel;
         public float currentFuel = 50f;
         private float fuelConsumption;
+        [SerializeField] private ParticleSystem _gasParticles;
         public bool IsLightsOn;
         public Image fuelBar;
         public Battery Battery;
@@ -58,6 +59,7 @@ namespace Car
             {
                 if (!IsRunning)
                 {
+                    _gasParticles.Play();
                     if (outOfFuel)
                     {
                         Debug.Log("Out of fuel");
@@ -78,8 +80,9 @@ namespace Car
                         IsRunning = true;
                     }
                 }
-                else if (IsRunning)
+                else
                 {
+                    _gasParticles.Stop();
                     IsRunning = false;
                     engineSound.pitch = currentEngineVolume;
                 }
