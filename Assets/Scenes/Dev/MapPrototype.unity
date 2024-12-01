@@ -44241,7 +44241,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: TemporaryPlayer
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6362826837890257876, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6605612837861993684, guid: 87fdf64c512b728fb892677c39c9310d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -47736,7 +47741,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: bd0364d9c55a14af398b56410facd6c5, type: 3}
   - {fileID: 8300000, guid: e20e20490299644b6bd33f2ecc9d7088, type: 3}
   - {fileID: 8300000, guid: e5754ef0a43504b0b900917b348b3d7d, type: 3}
-  _rate: 0.5
+  rate: 0.45
 --- !u!82 &1741763370
 AudioSource:
   m_ObjectHideFlags: 0
@@ -55237,9 +55242,9 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 691196510}
   - {fileID: 1833142249}
   - {fileID: 27003127}
-  - {fileID: 691196510}
   - {fileID: 998097743059099460}
   - {fileID: 1409984327}
   - {fileID: 2128802849}
