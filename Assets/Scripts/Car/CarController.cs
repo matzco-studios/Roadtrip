@@ -29,7 +29,7 @@ namespace Car
         private float carWheelMaxAngle = 150f;
         public float maxSpeed = 20f;
         private bool outOfFuel;
-        public float currentFuel;
+        public float currentFuel = 50f;
         private float fuelConsumption;
         public bool IsLightsOn;
         public Image fuelBar;
@@ -42,7 +42,7 @@ namespace Car
         public float minSpeedVolume = 10f;
         public float maxSpeedVolume = 21f;
         public bool IsPlayerInside = false;
-        public const float MaxFuel = 100f;
+        public const float MaxFuel = 2000000f;
 
         public bool IsBatteryInside() => Battery;
 
@@ -233,7 +233,6 @@ namespace Car
         {
             rb = GetComponent<Rigidbody>();
             engineSound = GetComponent<AudioSource>();
-            currentFuel = 50f;
             fuelBar.fillAmount = 1f;
         }
 
