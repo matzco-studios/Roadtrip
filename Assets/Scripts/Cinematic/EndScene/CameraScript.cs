@@ -9,6 +9,8 @@ namespace Cinematic.EndScene
         [SerializeField] private GameObject _brokenEffect;
         [SerializeField] private AudioSource _brokenSound;
         [SerializeField] private GameObject _multiColorBars;
+        [SerializeField] private GameObject _blackScreen;
+
         private Zone _zone;
         private Animator _animator;
         private bool _endRotation;
@@ -41,6 +43,9 @@ namespace Cinematic.EndScene
             yield return new WaitForSeconds(1f);
             _multiColorBars.SetActive(true);
             _brokenEffect.SetActive(false);
+            yield return new WaitForSeconds(1f);
+            _blackScreen.SetActive(true);
+            _multiColorBars.SetActive(false);
         }
     }
 }
