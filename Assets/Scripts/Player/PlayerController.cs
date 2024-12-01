@@ -91,7 +91,6 @@ namespace Player
 
         void Update()
         {
-            Debug.Log(_velocity.magnitude);
             if (Input.GetKey(KeyCode.Escape))
                 Application.Quit();
 
