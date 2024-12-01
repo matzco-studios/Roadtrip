@@ -59,7 +59,7 @@ namespace Items
                         transform.SetParent(fuelTank);
                         transform.SetLocalPositionAndRotation(_fillingPosition, _fillingRotation);
                         GameObject.FindGameObjectWithTag("Car").GetComponent<CarController>().Refuel(0.1f);
-                        _fuelAmount -= 0.1f * Time.deltaTime;
+                        _fuelAmount -= 0.1f * Time.fixedDeltaTime;
                     }
                     else
                     {
