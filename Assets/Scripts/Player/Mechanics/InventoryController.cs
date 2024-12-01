@@ -152,9 +152,9 @@ namespace Player.Mechanics
 
         public GameObject GetCurrentItem()
         {
+            if (transform.childCount==0) return null;
             Transform item = transform.GetChild(_currentSelectedItem);
-            if (item) return item.gameObject;
-            else return null;
+            return item.gameObject;
         }
 
         void Update(){
