@@ -15,7 +15,7 @@ public class FootSteps : MonoBehaviour
     private AudioSource _audio;
 
     [Range(0f, 1f)] [SerializeField]
-    private float _rate;
+    private float rate;
     private float _coolDown;
     
     #endregion
@@ -53,9 +53,9 @@ public class FootSteps : MonoBehaviour
         if (_coolDown < 0 && PlayerController.IsWalking)
         {
             _audio.PlayOneShot(PickRandomAudioClip()); 
-            _coolDown = _rate;
+            _coolDown = rate;
         }
     }
-
+    
     #endregion
 }
