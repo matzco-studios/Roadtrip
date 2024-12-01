@@ -26,7 +26,8 @@ namespace Player
         private static Vector3 _velocity = Vector3.zero;
         
         public float Health => _health;
-        public bool IsDead() => _health == 0;
+        public bool IsDead => _health == 0;
+        
         public void AddHealth(float amount) => 
             _health = Math.Clamp(_health + amount, 0, MaxHealth);
 
