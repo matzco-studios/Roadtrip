@@ -33,7 +33,8 @@ namespace Player
         public void ReduceHealth(float amount) => 
             _health = Math.Clamp(_health - amount, 0, MaxHealth);
 
-        public static bool IsWalking => _velocity.magnitude > 0.1; 
+        public static bool IsWalking => 
+            _velocity.magnitude > 0.1 && !GameObject.FindGameObjectWithTag("Car").GetComponent<CarController>().IsPlayerInside; 
 
         void Start()
         {
