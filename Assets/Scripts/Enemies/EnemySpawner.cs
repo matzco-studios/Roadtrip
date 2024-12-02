@@ -22,21 +22,24 @@ public class EnemySpawner : MonoBehaviour
     {
         return Vector3.Distance(enemy.position, _player.position)<dist;
     }
-    IEnumerator DeadlurkerManager() 
+    IEnumerator EnemyManager(float minT, float maxT, 
+        List<GameObject> enemyList, GameObject prefab, 
+        int max, float chance, float dist) 
     {
         while (true)
         {
-            var timer = Random.Range(6, 16);
+            var timer = Random.Range(minT, maxT);
             print($"Event scheduled in {timer} seconds.");
             yield return new WaitForSeconds(timer);
             
-            if (_deadlurkerEnemies.Count<_deadlurkerMax)
+            if (enemyList.Count<max)
             {
-                if (Random.Range(0f, 10f)<_deadlurkerChance) {
-                    _deadlurkerChance -= Random.Range(1.5f, 3.2f);
+                if (Random.Range(0f, 10f)<chance) {
+                    chance -= Random.Range(1.5f, 3.2f);
                     // SPAWN ENEMY AND ADD TO LIST
+                    print("SPAWN " + prefab + " AT " + Random.Range(dist*0.6f, dist*0.8f));
                 } else {
-                    _deadlurkerChance++;
+                    chance++;
                 }
             }
         }
@@ -59,7 +62,8 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player").transform;
-        StartCoroutine(DeadlurkerManager());
+        StartCoroutine(EnemyManager(6, 15, _deadlurkerEnemies, _deadlurkerPrefab, _deadlurkerMax, _deadlurkerChance, _deadlurkerDespawn));
+        StartCoroutine(EnemyManager(8, 24, _sunburnedEnemies, _sunburnedPrefab, _sunburnedMax, _sunburnedChance, _sunburnedDespawn));
     }
 
     void LateUpdate(){
