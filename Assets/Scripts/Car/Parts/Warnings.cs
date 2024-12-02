@@ -32,14 +32,17 @@ namespace Car.Parts
         {
             for (;;)
             {
+                if (_car.currentFuel == 0) 
+                    _fuelIndicator.SetActive(true);
+
                 yield return new WaitForSeconds(.5f);
                 _fuelIndicator.SetActive(false);
-                
+
                 if ((_car.currentFuel < 30 && _car.currentFuel != 0) && _car.IsPlayerInside)
                 {
                     yield return new WaitForSeconds(.5f);
                     _fuelIndicator.SetActive(true);
-                }
+                } 
             }
         }
 
@@ -54,6 +57,7 @@ namespace Car.Parts
 
             _batteryIndicator.SetActive((!_car.IsBatteryInside() || _car.Battery.IsDead()) && _car.IsPlayerInside);
             _pressureIndicator.SetActive(_car.wheels.Count(w => w.isFlat) >= 1 && _car.IsPlayerInside);
+
         }
     }
 }
