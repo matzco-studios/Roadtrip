@@ -101,7 +101,7 @@ namespace Items
         void Update()
         {
             _shootCooldown -= Time.deltaTime;
-            _light.intensity += (0-_light.intensity)*Time.deltaTime*25;
+            _light.intensity += (0-_light.intensity)*Time.deltaTime*16;
         }
     }
 }
