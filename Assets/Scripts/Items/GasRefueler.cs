@@ -81,7 +81,6 @@ namespace Items
 
         void ResetPosition(bool isEmpty)
         {
-
             if (isEmpty) GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<InventoryController>().DropCurrentItem();
             else
             {
