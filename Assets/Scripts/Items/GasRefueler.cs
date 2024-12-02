@@ -88,7 +88,6 @@ namespace Items
 
         void FixedUpdate()
         {
-            Debug.Log(_fuelAmount);
             if (transform.parent != null && transform.parent.gameObject != null)
             {
                 if (gameObject.transform.parent.gameObject.name == "ItemContainer")
