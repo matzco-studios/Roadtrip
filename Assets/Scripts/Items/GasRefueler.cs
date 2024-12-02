@@ -63,12 +63,12 @@ namespace Items
                     }
                     else
                     {
-                        ResetPosition();
+                        ResetPosition(true);
                     }
                 }
                 else if (rb.isKinematic)
                 {
-                    ResetPosition();
+                    ResetPosition(false);
                 }
             }
             else if (other.gameObject.CompareTag("GasMachine") && !_isPicked && (transform.parent == null || transform.parent == _initialParent.transform))
@@ -79,11 +79,16 @@ namespace Items
             }
         }
 
-        void ResetPosition()
+        void ResetPosition(bool isEmpty)
         {
-            triggerBox.excludeLayers = LayerMask.GetMask();
-            transform.SetLocalPositionAndRotation(_pickedPosition, _pickedRotation);
-            transform.SetParent(_pickedParent.transform);
+
+            if (isEmpty) GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<InventoryController>().DropCurrentItem();
+            else
+            {
+                triggerBox.excludeLayers = LayerMask.GetMask();
+                transform.SetLocalPositionAndRotation(_pickedPosition, _pickedRotation);
+                transform.SetParent(_pickedParent.transform);
+            }
         }
 
         void FixedUpdate()
