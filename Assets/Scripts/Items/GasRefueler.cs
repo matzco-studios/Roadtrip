@@ -25,7 +25,8 @@ namespace Items
 
         void Start()
         {
-            if (isLimited) _fuelAmount = Random.Range(0.1f, 1f);
+            if (isLimited) _fuelAmount = Random.Range(0.5f, 1.5f);
+            else _fuelAmount = float.PositiveInfinity;
             _refillSound = GetComponent<AudioSource>();
             if (!isLimited) _initialParent = transform.parent.gameObject;
             _initialPosition = transform.position;
@@ -100,7 +101,6 @@ namespace Items
 
         void FixedUpdate()
         {
-            if (!isLimited) _fuelAmount = float.PositiveInfinity;
             if (transform.parent != null && transform.parent.gameObject != null)
             {
                 if (gameObject.transform.parent.gameObject.name == "ItemContainer")
