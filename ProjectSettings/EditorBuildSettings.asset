@@ -6,21 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Main Menu.unity
-    guid: 3d3d9895a0299134b9897e46d25f0f7b
-  - enabled: 1
-    path: Assets/Scenes/Release/SprintOne.unity
-    guid: ed67369aac6cb5327a1ad16731709607
-  - enabled: 1
-    path: Assets/Scenes/Release/SprintFour.unity
-    guid: cb1778e5493f8294b9de53057c4179cc
-  - enabled: 1
-    path: Assets/Scenes/Release/SprintTwo.unity
-    guid: 16a13e0b09a524cf7bcfe1faef962b71
-  - enabled: 1
-    path: Assets/Scenes/Scorchlet/ScorchletJumpscare.unity
-    guid: f13ca13f79ca8484fa0a9f94bf4c994b
-  - enabled: 1
-    path: Assets/Scenes/Dev/ScorchletPrototype.unity
-    guid: 128f93262d4aa5aa4a5882b20658075c
+    path: Assets/Scenes/The_Viking_Village.unity
+    guid: 00000000000000000000000000000000
   m_configObjects: {}

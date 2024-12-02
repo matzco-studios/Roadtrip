@@ -3,43 +3,25 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Undefined
-  - GrabbableItem
-  - GasPump
-  - FuelTank
-  - InteractableItem
-  - Car
-  - WheelOfCar
-  - CarUI
-  - ActionMessage
-  - Car
-  - Battery
-  - BatteryCollider
-  - LightCollider
-  - GasMachine
-  - Scorchlet
-  - CarTrunk
-  - ScorchletSurface
-  - Enemy
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - GasPump
+  - 
   - Water
   - UI
   - 
   - 
+  - Reflection_Probes
+  - Lighting
+  - Props
+  - ReflectedInWater
+  - Ground
+  - AccessibleVolume
+  - PostProcessing
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - MainGround
   - 
   - 
   - 
