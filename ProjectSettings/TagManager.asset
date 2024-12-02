@@ -23,6 +23,7 @@ TagManager:
   - ScorchletSurface
   - Enemy
   - Camera
+  - EndTrigger
   layers:
   - Default
   - TransparentFX

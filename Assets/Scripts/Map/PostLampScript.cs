@@ -21,7 +21,6 @@ namespace Map
         {
             while (true)
             {
-                Debug.Log("Flickering");
                 _spotlight.enabled = true;
                 _pointLight.enabled = true;
                 yield return new WaitForSeconds(Random.Range(minUpTime, maxUpTime));
