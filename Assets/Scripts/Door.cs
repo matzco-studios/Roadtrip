@@ -48,7 +48,7 @@ namespace DoorScript
 		{
 			fade.FadeIn();
 			yield return new WaitForSeconds(1);
-			SceneManager.LoadScene("Scene2");
+			SceneManager.LoadScene(1);
 		}
 
 		public void OpenDoor()
