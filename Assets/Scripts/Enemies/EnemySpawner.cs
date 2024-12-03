@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
     private float _sunburnedChance = 1, _deadlurkerChance = 1;
 
     [SerializeField]
-    private float _sunburnedDespawn = 140, _deadlurkerDespawn = 80;
+    private float _sunburnedDespawn = 140, _deadlurkerDespawn = 140;
     private Transform _player;
 
     private bool IsInDistance(Transform enemy, float dist)
@@ -29,15 +30,27 @@ public class EnemySpawner : MonoBehaviour
         while (true)
         {
             var timer = Random.Range(minT, maxT);
-            print($"Event scheduled in {timer} seconds.");
+            print($"Spawn in {timer} seconds!!!!");
             yield return new WaitForSeconds(timer);
             
             if (enemyList.Count<max)
             {
                 if (Random.Range(0f, 10f)<chance) {
                     chance -= Random.Range(1.5f, 3.2f);
-                    // SPAWN ENEMY AND ADD TO LIST
-                    print("SPAWN " + prefab + " AT " + Random.Range(dist*0.6f, dist*0.8f));
+                    var spawnPoint = Random.Range(dist*0.6f, dist*0.8f);
+                    var pos = _player.position - _player.forward*spawnPoint;
+                    print(pos);
+                    if(NavMesh.SamplePosition(pos, out NavMeshHit hit, 6, NavMesh.AllAreas)){
+                        GameObject obj = Instantiate(prefab, hit.position, Quaternion.Euler(Vector3.zero), null);
+                        enemyList.Add(obj);
+
+                        var agent = obj.GetComponent<NavMeshAgent>();
+                        
+                        print("SPAWN " + obj + " AT " + obj.transform.position);
+                    }else{
+                        print("Couldnt spawn!");
+                        print(hit.position);
+                    }
                 } else {
                     chance++;
                 }
