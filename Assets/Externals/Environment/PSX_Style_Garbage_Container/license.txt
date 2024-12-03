@@ -1,0 +1,11 @@
+Model Information:
+* title:	PSX Style Garbage Container
+* source:	https://sketchfab.com/3d-models/psx-style-garbage-container-0180742452fe4a3d9d1dc4c143c6d649
+* author:	wooolvie (https://sketchfab.com/wooolvie)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "PSX Style Garbage Container" (https://sketchfab.com/3d-models/psx-style-garbage-container-0180742452fe4a3d9d1dc4c143c6d649) by wooolvie (https://sketchfab.com/wooolvie) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

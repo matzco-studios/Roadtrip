@@ -16,7 +16,7 @@ namespace Car.Parts
             _fuelIndicator,
             _fuelBar;
         
-        [SerializeField] private float aFull, aEmpty = 90;
+        [SerializeField] private float aFull, aEmpty;
         
         private void Awake()
         {
@@ -53,7 +53,7 @@ namespace Car.Parts
 
         private void Update()
         {
-            _fuelBar.transform.localEulerAngles = new Vector3(0, 0, Mathf.LerpAngle(aEmpty, aFull, _car.currentFuel / 100f));
+            _fuelBar.transform.eulerAngles = new Vector3(0, 0, Mathf.LerpAngle(aFull, aEmpty , _car.currentFuel / 100f)  );
 
             _batteryIndicator.SetActive((!_car.IsBatteryInside() || _car.Battery.IsDead()) && _car.IsPlayerInside);
             _pressureIndicator.SetActive(_car.wheels.Count(w => w.isFlat) >= 1 && _car.IsPlayerInside);
