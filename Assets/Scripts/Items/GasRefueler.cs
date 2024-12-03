@@ -16,7 +16,7 @@ namespace Items
         private Transform fuelTank;
         private GameObject _pickedParent;
         private Rigidbody rb;
-        private float _fuelAmount;
+        [SerializeField] private float _fuelAmount;
         private BoxCollider triggerBox;
         private GameObject _initialParent;
         private Vector3 _initialPosition;
@@ -25,8 +25,7 @@ namespace Items
 
         void Start()
         {
-            if (isLimited) _fuelAmount = Random.Range(0.5f, 1.5f);
-            else _fuelAmount = float.PositiveInfinity;
+            if (!isLimited) _fuelAmount = float.PositiveInfinity;
             _refillSound = GetComponent<AudioSource>();
             if (!isLimited) _initialParent = transform.parent.gameObject;
             _initialPosition = transform.position;
