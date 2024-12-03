@@ -7,14 +7,12 @@ namespace Player
     {
         #region Members
         
-        [SerializeField]
-        [Range(10f, 20f)] private float _bobbingSpeed = 10f;
-        
         [SerializeField] private float _sensitivity = 2.0f;
         [SerializeField] private Transform _head;
 
-        private Vector3 _bobbingStartPos;
-        private Vector3 _bobbingPos;
+        // [SerializeField] [Range(10f, 20f)] private float _bobbingSpeed = 10f;
+        // private Vector3 _bobbingStartPos;
+        // private Vector3 _bobbingPos;
 
         private float _verticalRotation = 0;
         private Vector2 _recoil;
@@ -36,7 +34,8 @@ namespace Player
          * TODO - Make that a complete bobbing is made when player walk to it always reset to the start position
          * 
          */
-        private void CalculateBobbing()
+        /*
+         private void CalculateBobbing()
         {
             _bobbingPos = Vector3.zero;
 
@@ -51,13 +50,16 @@ namespace Player
 
             _head.position += _bobbingPos;
         }
+        */
 
+        /*
         private void StopBobbing()
         {
             var tempPos = _head.position;
             tempPos.y = Mathf.Lerp(tempPos.y, _bobbingStartPos.y, .5f * Time.deltaTime);
             _head.position = tempPos;
         }
+        */
 
         #endregion
         
@@ -65,7 +67,7 @@ namespace Player
         
         void Update()
         {
-            _bobbingStartPos = _head.position;
+            // _bobbingStartPos = _head.position;
 
             // Rotate camera and head
             var mouseX = Input.GetAxis("Mouse X") * _sensitivity;
@@ -80,11 +82,13 @@ namespace Player
             
             transform.Rotate(Vector3.up * mouseX);
 
+            /*
             if (PlayerController.IsWalking)
             {
                 CalculateBobbing(); 
                 StopBobbing();
             }
+            */
         }
         
         #endregion
