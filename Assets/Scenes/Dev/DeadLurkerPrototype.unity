@@ -2274,7 +2274,7 @@ MonoBehaviour:
   _deadlurkerPrefab: {fileID: 6817789680546721565, guid: ecf2ad522e210f24aaea7aea6370a3fb,
     type: 3}
   _sunburnedMax: 2
-  _deadlurkerMax: 3
+  _deadlurkerMax: 4
   _sunburnedChance: 1
   _deadlurkerChance: 1
   _sunburnedDespawn: 140
