@@ -62,7 +62,7 @@ public class EnemySpawner : MonoBehaviour
     {
         GameObject objToDelete = null;
         foreach(GameObject obj in enemyList){
-            if (!IsInDistance(obj.transform, despawnDist)){
+            if (!IsInDistance(obj.transform, despawnDist/2) && obj.GetComponent<EnemyController>().hp<=0 && !obj.GetComponentInChildren<Renderer>().isVisible){
                 objToDelete = obj; break;
             }
         }
