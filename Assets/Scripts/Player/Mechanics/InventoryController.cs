@@ -128,7 +128,7 @@ namespace Player.Mechanics
         /// Function that let the user change the current item using the alpha keys (1, 2 and 3).
         /// </summary>
         public void KeyboardItemChange()
-        {
+        { 
             if (Input.GetKey(KeyCode.Alpha1)) SelectAnotherItem(First);
             else if (Input.GetKey(KeyCode.Alpha2)) SelectAnotherItem(Second);
             else if (Input.GetKey(KeyCode.Alpha3)) SelectAnotherItem(Third);
@@ -160,19 +160,21 @@ namespace Player.Mechanics
         void Update(){
             if (_currentSelectedItem != None)
             {
-                Transform item = transform.GetChild(_currentSelectedItem);
-                if (item.gameObject.activeInHierarchy)
-                {
-                    var itemScript = item.GetComponent<GrabbableItem>();
-                    if (itemScript)
+                if (transform.childCount>_currentSelectedItem){
+                    Transform item = transform.GetChild(_currentSelectedItem);
+                    if (item.gameObject.activeInHierarchy)
                     {
-                        var keys = itemScript.ActionDictionary.Keys;
-                        foreach (var key in keys)
+                        var itemScript = item.GetComponent<GrabbableItem>();
+                        if (itemScript)
                         {
-                            if (Input.GetKeyDown(key))
+                            var keys = itemScript.ActionDictionary.Keys;
+                            foreach (var key in keys)
                             {
-                                itemScript.ActionDictionary.TryGetValue(key, out GrabbableItem.KeyAction action);
-                                action();
+                                if (Input.GetKeyDown(key))
+                                {
+                                    itemScript.ActionDictionary.TryGetValue(key, out GrabbableItem.KeyAction action);
+                                    action();
+                                }
                             }
                         }
                     }
