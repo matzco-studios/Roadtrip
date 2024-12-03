@@ -8,10 +8,11 @@ using UnityEngine.SceneManagement;
 namespace Enemies.Scorchlet
 {
 
-    public class ScorchletController : MonoBehaviour
+    public class ScorchletController : EnemyController
     {
         private GameObject carTrunk;
         private GameObject player;
+        private GameObject itemMemory;
         private Animator anim;
         private bool hasTakenObject;
         private bool isInTrunk;
@@ -48,7 +49,7 @@ namespace Enemies.Scorchlet
             if (!hasTakenObject && !isInTrunk && !isWatched)
             {
                 float distance = Vector3.Distance(transform.position, carTrunk.transform.position);
-                if (distance > 2.5f)
+                if (distance > 2.85f)
                 {
                     MoveToTrunk();
                 }
@@ -84,7 +85,7 @@ namespace Enemies.Scorchlet
                     Destroy(gameObject);
                 }
             }
-            if (carDistance > 10)
+            if (carDistance > 20 && isFleeing)
             {
                 Destroy(gameObject);
             }
@@ -106,11 +107,29 @@ namespace Enemies.Scorchlet
             anim.speed = fleeSpeed;
             agent.SetDestination(oppositeDirection);
         }
+        public override void OnHit()
+        {
+            isFleeing = true;
+            IsFlashed();
+            Flee();
+        }
+        public override void OnDeath()
+        {
+            if (itemMemory)
+            {
+                itemMemory.transform.parent = null;
+                itemMemory.GetComponent<Rigidbody>().isKinematic = false;
+                itemMemory = null;
+            }
+            
+        }
+
         void TakeObject(GameObject item)
         {
             item.GetComponent<Rigidbody>().isKinematic = true;
             item.transform.SetParent(transform);
             item.transform.localPosition = new Vector3(0, 0.80f, 0.9f);
+            itemMemory = item;
         }
 
     }
