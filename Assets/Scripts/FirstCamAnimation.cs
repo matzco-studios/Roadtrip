@@ -1,14 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class FirstCamAnimation : MonoBehaviour
 {
     public GameObject firstCamera;
     public GameObject player;
+    
     private Animator _camAnim;
     
-    // Start is called before the first frame update
     void Start()
     {
         player.SetActive(false);
@@ -24,7 +26,6 @@ public class FirstCamAnimation : MonoBehaviour
             firstCamera.SetActive(false);
             player.SetActive(true);
             player.transform.rotation = Quaternion.Euler(0, -450, 0);
-            
         }
     }
 }
