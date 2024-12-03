@@ -37,7 +37,7 @@ public class EnemySpawner : MonoBehaviour
             
             if (enemyList.Count<max)
             {
-                if (Random.Range(0f, 10f)<chance) {
+                if (Random.Range(0f, 10f)<chance && !_car.IsPlayerInside) {
                     chance -= Random.Range(1.5f, 3.2f);
                     var spawnPoint = Random.Range(dist*0.6f, dist*0.8f);
                     var pos = _player.position - _player.forward*spawnPoint;
@@ -54,7 +54,7 @@ public class EnemySpawner : MonoBehaviour
                         print(hit.position);
                     }
                 } else {
-                    chance++;
+                    chance += (_car.IsPlayerInside) ? 2.1f : 1.24f;
                 }
             }
         }
