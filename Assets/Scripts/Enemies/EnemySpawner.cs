@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Car;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -18,6 +19,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private float _sunburnedDespawn = 140, _deadlurkerDespawn = 140;
     private Transform _player;
+    private CarController _car;
 
     private bool IsInDistance(Transform enemy, float dist)
     {
@@ -62,7 +64,12 @@ public class EnemySpawner : MonoBehaviour
     {
         GameObject objToDelete = null;
         foreach(GameObject obj in enemyList){
-            if (!IsInDistance(obj.transform, despawnDist/2) && obj.GetComponent<EnemyController>().hp<=0 && !obj.GetComponentInChildren<Renderer>().isVisible){
+            bool isFarAwayEnough = !IsInDistance(obj.transform, despawnDist/2);
+            bool isFarAwayEnoughLonger = !IsInDistance(obj.transform, despawnDist*0.7f);
+            if (isFarAwayEnoughLonger && _car.IsPlayerInside || 
+                (obj.GetComponent<EnemyController>().hp<=0 && 
+                    !obj.GetComponentInChildren<Renderer>().isVisible &&
+                    isFarAwayEnough)){
                 objToDelete = obj; break;
             }
         }
@@ -75,6 +82,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player").transform;
+        _car = GameObject.FindGameObjectWithTag("Car").GetComponent<CarController>();
         StartCoroutine(EnemyManager(6, 15, _deadlurkerEnemies, _deadlurkerPrefab, _deadlurkerMax, _deadlurkerChance, _deadlurkerDespawn));
         StartCoroutine(EnemyManager(8, 24, _sunburnedEnemies, _sunburnedPrefab, _sunburnedMax, _sunburnedChance, _sunburnedDespawn));
     }
