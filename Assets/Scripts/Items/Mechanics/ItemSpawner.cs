@@ -82,7 +82,7 @@ namespace Items.Mechanics
             var dist = Random.insideUnitSphere;
             dist /= dist.magnitude;
             var spawnPos = _playerPosition.position + (dist * spawnRadius*0.7f);
-            spawnPos.y = _playerPosition.position.y+ 35;
+            spawnPos.y = _playerPosition.position.y+ 15;
             
             if (_car.IsPlayerInside){
                 var iSpawn = Instantiate(_priorItems.Peek(), spawnPos, Quaternion.identity);
