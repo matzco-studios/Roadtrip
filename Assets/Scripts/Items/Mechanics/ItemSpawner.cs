@@ -26,6 +26,8 @@ namespace Items.Mechanics
 
         private GameObject FindPriorInBonus(string name) => 
             items.First(i => i.name.Equals(name));
+
+        private List<GameObject> spawnList = new();
         
         private void Awake()
         {
@@ -82,14 +84,27 @@ namespace Items.Mechanics
             // Spawn Item Continuously each 5 seconds
             while (true)
             {
-                var spawnPos = _playerPosition.position + Random.insideUnitSphere * spawnRadius;
+                var dist = Random.insideUnitSphere;
+                dist /= dist.magnitude;
+                var spawnPos = _playerPosition.position + Vector3.up + (dist * spawnRadius);
                 
                 yield return new WaitForSeconds(spawnDelay);
                 CheckPlayerNeeds();
                 
                 if (_car.IsPlayerInside){
-                    Instantiate(_priorItems.Peek(), new Vector3(spawnPos.x, _playerPosition.position.y+.2f, spawnPos.z), Quaternion.identity);
+                    spawnList.Add(Instantiate(_priorItems.Peek(), spawnPos, Quaternion.identity));
                     _priorItems.Dequeue();
+                }
+
+                GameObject obj = null;
+                foreach (GameObject itm in spawnList){
+                    if (Vector3.Distance(_playerPosition.position, itm.transform.position)>spawnRadius*3){
+                        Destroy(itm); obj = itm; break;
+                    }
+                }
+
+                if (obj){
+                    spawnList.Remove(obj);
                 }
             }
         }
