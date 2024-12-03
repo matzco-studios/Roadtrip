@@ -28,8 +28,9 @@ namespace Car.Events
         {
             while (true)
             {
-                // Range should be between 45 and 76. It is low temporarily for development. 
-                var timer = Random.Range(10, 31);
+                // Range should be between 45 and 76 for prod
+                // 10, 31 is dev
+                var timer = Random.Range(45, 75);
                 print($"Event scheduled in {timer} seconds.");
                 yield return new WaitForSeconds(timer);
 
