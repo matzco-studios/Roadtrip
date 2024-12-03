@@ -16,7 +16,7 @@ namespace Items
         private Transform fuelTank;
         private GameObject _pickedParent;
         private Rigidbody rb;
-        [SerializeField] private float _fuelAmount;
+        [SerializeField, Range(0.1f, 1)] private float _fuelAmount;
         private BoxCollider triggerBox;
         private GameObject _initialParent;
         private Vector3 _initialPosition;
