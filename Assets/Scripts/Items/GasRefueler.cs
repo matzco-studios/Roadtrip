@@ -21,12 +21,14 @@ namespace Items
         private GameObject _initialParent;
         private Vector3 _initialPosition;
         private Vector3 _initialRotation;
+        private AudioSource _refillSound;
 
         void Start()
         {
-            if (!isLimited) _initialParent = transform.parent.gameObject;
-            if (isLimited) _fuelAmount = Random.Range(0.1f, 0.5f);
+            if (isLimited) _fuelAmount = Random.Range(0.5f, 1.5f);
             else _fuelAmount = float.PositiveInfinity;
+            _refillSound = GetComponent<AudioSource>();
+            if (!isLimited) _initialParent = transform.parent.gameObject;
             _initialPosition = transform.position;
             _initialRotation = transform.rotation.eulerAngles;
             _isPicked = false;
@@ -55,20 +57,27 @@ namespace Items
                 {
                     if (_fuelAmount > 0)
                     {
+                        if (!_refillSound.isPlaying) _refillSound.Play();
                         triggerBox.excludeLayers = LayerMask.GetMask("Ignore Raycast");
                         transform.SetParent(fuelTank);
                         transform.SetLocalPositionAndRotation(_fillingPosition, _fillingRotation);
                         GameObject.FindGameObjectWithTag("Car").GetComponent<CarController>().Refuel(0.1f);
                         _fuelAmount -= 0.1f * Time.fixedDeltaTime;
+                        if (GameObject.FindGameObjectWithTag("Car").GetComponent<CarController>().currentFuel >= 100)
+                        {
+                            _refillSound.Stop();
+                        }
                     }
                     else
                     {
-                        ResetPosition();
+                        _refillSound.Stop();
+                        if (isLimited) ResetPosition(true);
                     }
                 }
                 else if (rb.isKinematic)
                 {
-                    ResetPosition();
+                    _refillSound.Stop();
+                    ResetPosition(false);
                 }
             }
             else if (other.gameObject.CompareTag("GasMachine") && !_isPicked && (transform.parent == null || transform.parent == _initialParent.transform))
@@ -79,16 +88,19 @@ namespace Items
             }
         }
 
-        void ResetPosition()
+        void ResetPosition(bool _isEmpty)
         {
-            triggerBox.excludeLayers = LayerMask.GetMask();
-            transform.SetLocalPositionAndRotation(_pickedPosition, _pickedRotation);
-            transform.SetParent(_pickedParent.transform);
+            if (_isEmpty) GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<InventoryController>().DropCurrentItem();
+            else
+            {
+                triggerBox.excludeLayers = LayerMask.GetMask();
+                transform.SetLocalPositionAndRotation(_pickedPosition, _pickedRotation);
+                transform.SetParent(_pickedParent.transform);
+            }
         }
 
         void FixedUpdate()
         {
-            Debug.Log(_fuelAmount);
             if (transform.parent != null && transform.parent.gameObject != null)
             {
                 if (gameObject.transform.parent.gameObject.name == "ItemContainer")

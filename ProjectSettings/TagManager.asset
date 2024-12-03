@@ -23,24 +23,25 @@ TagManager:
   - ScorchletSurface
   - Enemy
   - Camera
+  - EndTrigger
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - GasPump
+  - 
   - Water
   - UI
+  - PostProcessing
   - 
+  - Reflection_Probes
+  - Lighting
+  - Props
+  - ReflectedInWater
+  - Ground
+  - AccessibleVolume
+  - PostProcessing
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - MainGround
   - 
   - 
   - 

@@ -116,7 +116,7 @@ namespace Car.Events
                 
                 if (_carController.IsCarRunning())
                 {
-                    _carController.RemoveFuel(Time.deltaTime / 2);
+                    _carController.RemoveFuel(Time.deltaTime / 5);
                 }
             }
         }
