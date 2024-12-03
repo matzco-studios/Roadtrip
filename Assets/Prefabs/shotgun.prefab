@@ -5357,4 +5357,4 @@ MonoBehaviour:
   _shootDist: 22
   _falloffAmount: 12.8
   _minDamage: 8
-  ammo: 38
+  ammo: 25
