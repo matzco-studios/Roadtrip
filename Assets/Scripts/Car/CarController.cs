@@ -11,6 +11,8 @@ namespace Car
 {
     public class CarController : MonoBehaviour
     {
+        #region Members
+
         private Rigidbody rb;
         public List<Wheel> wheels;
         public GameObject steeringWheel;
@@ -29,7 +31,7 @@ namespace Car
         private float carWheelMaxAngle = 150f;
         public float maxSpeed = 20f;
         private bool outOfFuel;
-        public float currentFuel = 50f;
+        public float currentFuel;
         private float fuelConsumption;
         [SerializeField] private ParticleSystem _gasParticles;
         public bool IsLightsOn;
@@ -43,14 +45,18 @@ namespace Car
         public float minSpeedVolume = 10f;
         public float maxSpeedVolume = 21f;
         public bool IsPlayerInside = false;
-        public const float MaxFuel = 2000000f;
+        public const float MaxFuel = 100f;
+
+        #endregion
+
+        #region Properties
 
         public bool IsBatteryInside() => Battery;
+        public bool IsCarRunning() => IsRunning;
+        
+        #endregion
 
-        public bool IsCarRunning()
-        {
-            return IsRunning;
-        }
+        #region Controls
 
         public void StartEngine()
         {
@@ -89,6 +95,7 @@ namespace Car
             }
         }
 
+
         private void GetInputs()
         {
             gasInput = IsPlayerInside ? Input.GetAxis("Vertical") : 0.0f;
@@ -109,6 +116,9 @@ namespace Car
             }
             else fuelConsumption = 0f;
         }
+        #endregion
+
+        #region Fuel
 
         public void Refuel(float amount)
         {
@@ -143,6 +153,9 @@ namespace Car
                 fuelBar.fillAmount = currentFuel / 100;
             }
         }
+        #endregion
+
+        #region Movements
 
         private void TurnCar()
         {
@@ -184,7 +197,9 @@ namespace Car
 
         private void SetMaxSpeed() => // sets the max speed of the car so it doesn't go faster and faster
             speedMultiplier = (currentSpeed > maxSpeed) ? 0 : 400; 
+        #endregion
 
+        #region Animations & Sounds
         private void AnimateWheels()
         {
             foreach (var wheel in wheels)
@@ -207,6 +222,11 @@ namespace Car
             
             engineSound.mute = !IsPlayerInside && !IsRunning;
         }
+        #endregion
+        
+        #region Lights
+
+        
 
         private void DisableLights()
         {
@@ -230,12 +250,16 @@ namespace Car
             }
             DisableLights();      
         }
+        #endregion
+
+        #region UnityGameMethods (Start, Update ...)
 
         // Start is called before the first frame update
         void Start()
         {
             rb = GetComponent<Rigidbody>();
             engineSound = GetComponent<AudioSource>();
+            currentFuel = 50f;
             fuelBar.fillAmount = 1f;
         }
 
@@ -259,5 +283,7 @@ namespace Car
             SetMaxSpeed();
             EngineSound();
         }
+        
+        #endregion
     }
 }

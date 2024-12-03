@@ -11,7 +11,7 @@ namespace Items.Mechanics
     {
         private GameObject _akkum;
         private GameObject _carLight;
-        // private GameObject _fuelTank;
+        private GameObject _fuelTank;
         
         private CarController _car;
         private Transform     _playerPosition;
@@ -34,7 +34,7 @@ namespace Items.Mechanics
             
             _akkum    = FindPriorInBonus("Akkum");
             _carLight = FindPriorInBonus("CarLight");
-            // _fuelTank = FindPriorInBonus("FuelTank"); // NOT HERE YET
+            _fuelTank = FindPriorInBonus("FuelTank");
         }
 
         private void CheckPlayerNeeds()
@@ -51,16 +51,21 @@ namespace Items.Mechanics
             //     _priorItems.Enqueue(_fuelTank); // Max fuel value is 38, enqueue when it's at half
             
             // Akkum 
-            if (!_car.IsBatteryInside() && !_priorItems.Contains(_akkum))
+            if ((!_car.IsBatteryInside() || _car.Battery.IsDead()) && !_priorItems.Contains(_akkum)){
                 _priorItems.Enqueue(_akkum);
-            
+            }
             // CarLight
             else if (_car.carLights.FindAll(l => !l.IsWorking).Count >= 2 && !_priorItems.Contains(_carLight))
             {
                 _priorItems.Enqueue(_carLight);
                 Debug.Log(_car.carLights.FindAll(l => !l.IsWorking).Count());
             }
-            
+            // FuelTank
+            else if (_car.currentFuel < Random.Range(10, 20) && !_priorItems.Contains(_fuelTank))
+            {
+                _priorItems.Enqueue(_fuelTank);
+                Debug.Log(_car.carLights.FindAll(l => !l.IsWorking).Count());
+            }
             // Bonus
             else
                 // Pick a random item from the bonusItems list
@@ -82,8 +87,10 @@ namespace Items.Mechanics
                 yield return new WaitForSeconds(spawnDelay);
                 CheckPlayerNeeds();
                 
-                Instantiate(_priorItems.Peek(), new Vector3(spawnPos.x, _playerPosition.position.y+.2f, spawnPos.z), Quaternion.identity);
-                _priorItems.Dequeue();
+                if (_car.IsPlayerInside){
+                    Instantiate(_priorItems.Peek(), new Vector3(spawnPos.x, _playerPosition.position.y+.2f, spawnPos.z), Quaternion.identity);
+                    _priorItems.Dequeue();
+                }
             }
         }
 

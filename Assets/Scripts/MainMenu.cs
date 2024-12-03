@@ -3,6 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+    }
     public void PlayGame()
     {
         SceneManager.LoadScene(2);

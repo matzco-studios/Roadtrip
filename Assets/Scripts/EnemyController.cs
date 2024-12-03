@@ -17,7 +17,7 @@ public class EnemyController : MonoBehaviour
         Destroy(gameObject);
     }
     public virtual void OnHit(){
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
     public void Hurt(float damage){
