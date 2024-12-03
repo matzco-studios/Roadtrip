@@ -45,7 +45,7 @@ public class EnemySpawner : MonoBehaviour
                     var spawnPoint = Random.Range(dist*0.6f, dist*0.8f);
                     var pos = _player.position - _player.forward*spawnPoint;
                     print(pos);
-                    if(NavMesh.SamplePosition(pos, out NavMeshHit hit, 6, NavMesh.AllAreas)){
+                    if(NavMesh.SamplePosition(pos, out NavMeshHit hit, 16, NavMesh.AllAreas)){
                         GameObject obj = Instantiate(prefab, hit.position, Quaternion.Euler(Vector3.zero), null);
                         enemyList.Add(obj);
 
