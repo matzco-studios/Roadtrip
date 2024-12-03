@@ -2276,9 +2276,9 @@ MonoBehaviour:
   _sunburnedMax: 2
   _deadlurkerMax: 3
   _sunburnedChance: 1
-  _deadlurkerChance: 10
+  _deadlurkerChance: 1
   _sunburnedDespawn: 140
-  _deadlurkerDespawn: 80
+  _deadlurkerDespawn: 140
 --- !u!1 &1500947433
 GameObject:
   m_ObjectHideFlags: 0
