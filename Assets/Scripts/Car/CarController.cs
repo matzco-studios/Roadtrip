@@ -35,7 +35,6 @@ namespace Car
         private float fuelConsumption;
         [SerializeField] private ParticleSystem _gasParticles;
         public bool IsLightsOn;
-        public Image fuelBar;
         public Battery Battery;
         private float gasInput;
         private float turnInput;
@@ -128,7 +127,6 @@ namespace Car
             {
                 currentFuel += amount;
                 Math.Clamp(currentFuel, 0, 100);
-                fuelBar.fillAmount = currentFuel / 100;
             }
         }
 
@@ -152,7 +150,6 @@ namespace Car
                 outOfFuel = false;
                 currentFuel -= Time.deltaTime * fuelConsumption;
                 Math.Clamp(currentFuel, 0, 100);
-                fuelBar.fillAmount = currentFuel / 100;
             }
         }
         #endregion
@@ -262,7 +259,6 @@ namespace Car
             rb = GetComponent<Rigidbody>();
             engineSound = GetComponent<AudioSource>();
             currentFuel = 50f;
-            fuelBar.fillAmount = 1f;
         }
 
         // Update is called once per frame
