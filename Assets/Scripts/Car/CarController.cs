@@ -105,7 +105,7 @@ namespace Car
                         wheel.wheelCollider.motorTorque = gasInput * acceleration * speedMultiplier * Time.deltaTime;
                     }
                 }
-                fuelConsumption = currentSpeed / 10 * Math.Abs(gasInput);
+                fuelConsumption = currentSpeed / 12 * Math.Abs(gasInput);
             }
             else fuelConsumption = 0f;
         }
