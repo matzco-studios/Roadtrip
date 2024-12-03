@@ -2200,6 +2200,7 @@ GameObject:
   - component: {fileID: 1409984327}
   - component: {fileID: 1409984326}
   - component: {fileID: 1409984325}
+  - component: {fileID: 1409984329}
   - component: {fileID: 1409984328}
   m_Layer: 0
   m_Name: EventSystem
@@ -2267,20 +2268,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1409984324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df31e72a17a82e54bb21be8320f801d1, type: 3}
+  m_Script: {fileID: 11500000, guid: bf8704ef7ca5f6b4bade9a730eaed76b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sunburnedPrefab: {fileID: 6817789680546721565, guid: ecf2ad522e210f24aaea7aea6370a3fb,
-    type: 3}
-  _deadlurkerPrefab: {fileID: 6817789680546721565, guid: ecf2ad522e210f24aaea7aea6370a3fb,
-    type: 3}
-  _sunburnedMax: 2
-  _deadlurkerMax: 4
-  _sunburnedChance: 1
-  _deadlurkerChance: 1
-  _sunburnedDespawn: 180
-  _deadlurkerDespawn: 140
---- !u!114 &1409984328
+  scorchletPrefab: {fileID: 127060, guid: 95ff2b139e7da8a43baedd7f27edf718, type: 3}
+  carLength: 5.4
+  carWidth: 0.5
+--- !u!114 &1409984329
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2289,12 +2283,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1409984324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf8704ef7ca5f6b4bade9a730eaed76b, type: 3}
+  m_Script: {fileID: 11500000, guid: df31e72a17a82e54bb21be8320f801d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scorchletPrefab: {fileID: 127060, guid: 95ff2b139e7da8a43baedd7f27edf718, type: 3}
-  carLength: 5.4
-  carWidth: 0.5
+  _sunburnedPrefab: {fileID: 6817789680546721565, guid: ecf2ad522e210f24aaea7aea6370a3fb,
+    type: 3}
+  _deadlurkerPrefab: {fileID: 6817789680546721565, guid: ecf2ad522e210f24aaea7aea6370a3fb,
+    type: 3}
+  _sunburnedMax: 2
+  _deadlurkerMax: 3
+  _sunburnedChance: 1
+  _deadlurkerChance: 1
+  _sunburnedDespawn: 140
+  _deadlurkerDespawn: 140
+  _sunburnedTimeMin: 8
+  _sunburnedTimeMax: 20
+  _deadlurkerTimeMin: 6
+  _deadlurkerTimeMax: 14
 --- !u!1 &1500947433
 GameObject:
   m_ObjectHideFlags: 0
