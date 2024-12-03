@@ -1,3 +1,5 @@
+using Items.Mechanics;
+
 namespace Car.Events.Types
 {
     public class DeadBatteryEvent : CarEvent
@@ -8,6 +10,7 @@ namespace Car.Events.Types
             {
                 print("Battery is dead.");
                 Car.Battery.SetDead();
+                ItemSpawner.SetSpawn();
             }
             else
             {
