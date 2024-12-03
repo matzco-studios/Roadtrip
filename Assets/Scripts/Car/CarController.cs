@@ -60,6 +60,7 @@ namespace Car
 
         public void StartEngine()
         {
+
             if (IsPlayerInside)
             {
                 if (!IsRunning)
@@ -221,7 +222,8 @@ namespace Car
             
             engineSound.mute = !IsPlayerInside && !IsRunning;
         }
-
+        #endregion
+        
         #region Lights
 
         
@@ -248,8 +250,6 @@ namespace Car
             }
             DisableLights();      
         }
-        #endregion
-        
         #endregion
 
         #region UnityGameMethods (Start, Update ...)

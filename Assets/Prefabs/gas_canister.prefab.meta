@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/gas_canister.prefab.meta
+guid: 48c6666d48647fc4db1fcb742758b31d
+========
+guid: 117680dcfab854641b13dc3b03dc0c2c
+>>>>>>>> dev:Assets/Prefabs/Battery.prefab.meta
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

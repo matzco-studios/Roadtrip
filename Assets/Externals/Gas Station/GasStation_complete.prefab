@@ -735,12 +735,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 127744}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d360ac3103d28642be78e9e2fa5bdf4, type: 3}
+  m_Script: {fileID: 11500000, guid: 155f888854e8f334a9eb5fc68ba9f7e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Rotation: {x: 0, y: 0, z: 0, w: 0}
   Name: 
   _message: {fileID: 0}
+  isLimited: 0
 --- !u!64 &7538674073166888890
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2470,12 +2471,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4882484122416846144}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d360ac3103d28642be78e9e2fa5bdf4, type: 3}
+  m_Script: {fileID: 11500000, guid: 155f888854e8f334a9eb5fc68ba9f7e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Rotation: {x: 0, y: 0, z: 0, w: 0}
   Name: 
   _message: {fileID: 0}
+  isLimited: 0
 --- !u!64 &5238639116243651913
 MeshCollider:
   m_ObjectHideFlags: 0
