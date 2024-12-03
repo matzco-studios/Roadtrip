@@ -92,6 +92,7 @@ namespace Car
         private void GetInputs()
         {
             gasInput = IsPlayerInside ? Input.GetAxis("Vertical") : 0.0f;
+            gasInput = (gasInput<0) ? gasInput/3 : gasInput;
             turnInput = IsPlayerInside ? Input.GetAxis("Horizontal") : 0.0f;
         }
 
