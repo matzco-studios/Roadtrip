@@ -24,8 +24,14 @@ namespace Items.Mechanics
         private Queue<GameObject> _priorItems = new();
         public  GameObject[]      items;
 
+        private static bool instaSpawn = false;
+
         private GameObject FindPriorInBonus(string name) => 
             items.First(i => i.name.Equals(name));
+
+        private List<GameObject> spawnList = new();
+
+        public static void SetSpawn() => instaSpawn = true;
         
         private void Awake()
         {
@@ -71,6 +77,31 @@ namespace Items.Mechanics
                 // Pick a random item from the bonusItems list
                 _priorItems.Enqueue(items[Random.Range(0, items.Length)]);
         }
+
+        private void SpawnNow(){
+            var dist = Random.insideUnitSphere;
+            dist /= dist.magnitude;
+            var spawnPos = _playerPosition.position + (dist * spawnRadius*0.7f);
+            spawnPos.y = _playerPosition.position.y+ 35;
+            
+            if (_car.IsPlayerInside){
+                var iSpawn = Instantiate(_priorItems.Peek(), spawnPos, Quaternion.identity);
+                iSpawn.GetComponent<Rigidbody>().isKinematic = false;
+                spawnList.Add(iSpawn);
+                _priorItems.Dequeue();
+            }
+
+            GameObject obj = null;
+            foreach (GameObject itm in spawnList){
+                if (Vector3.Distance(_car.transform.position, itm.transform.position)>spawnRadius*3){
+                    Destroy(itm); obj = itm; break;
+                }
+            }
+
+            if (obj){
+                spawnList.Remove(obj);
+            }
+        }
         
         /// <summary>
         /// This method is called every <b>5 seconds</b>.
@@ -82,15 +113,10 @@ namespace Items.Mechanics
             // Spawn Item Continuously each 5 seconds
             while (true)
             {
-                var spawnPos = _playerPosition.position + Random.insideUnitSphere * spawnRadius;
-                
                 yield return new WaitForSeconds(spawnDelay);
                 CheckPlayerNeeds();
                 
-                if (_car.IsPlayerInside){
-                    Instantiate(_priorItems.Peek(), new Vector3(spawnPos.x, _playerPosition.position.y+.2f, spawnPos.z), Quaternion.identity);
-                    _priorItems.Dequeue();
-                }
+                SpawnNow();
             }
         }
 
@@ -100,6 +126,14 @@ namespace Items.Mechanics
         private void Start()
         {
             StartCoroutine(ItemSpawn());
+        }
+
+        void Update(){
+            if (instaSpawn) {
+                instaSpawn = false;
+                _priorItems.Enqueue(_akkum);
+                SpawnNow();
+            }
         }
     }
 }
