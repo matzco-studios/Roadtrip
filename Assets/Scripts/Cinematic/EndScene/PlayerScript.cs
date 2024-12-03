@@ -30,7 +30,7 @@ namespace Cinematic.EndScene
             transform.SetParent(null);
             transform.position = new (transform.position.x - 2f, transform.position.y, transform.position.z);
             _controller.enabled = true;
-            _zone.Speed = 7f;
+            _zone.Speed = 9f;
             
             while (!_stopped)
             {
@@ -42,6 +42,8 @@ namespace Cinematic.EndScene
                     StartCoroutine(_camera.EndRotation());
                 }
             }
+
+            _animator.enabled = false;
         }
     }
 }
