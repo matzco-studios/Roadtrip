@@ -584,6 +584,7 @@ MonoBehaviour:
   Name: Gas Canister
   _message: {fileID: 0}
   isLimited: 1
+  _fuelAmount: 0.4
 --- !u!64 &4458266976128520329
 MeshCollider:
   m_ObjectHideFlags: 0
