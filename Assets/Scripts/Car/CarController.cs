@@ -258,7 +258,6 @@ namespace Car
         {
             rb = GetComponent<Rigidbody>();
             engineSound = GetComponent<AudioSource>();
-            currentFuel = 50f;
         }
 
         // Update is called once per frame
