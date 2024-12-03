@@ -12,14 +12,16 @@ namespace Enemies.Sunburned
     {
         [SerializeField] private PostProcessVolume postProcess;
         [SerializeField] private float activationDistance;
-        
-        private Renderer _renderer;
-        private Animator _animator;
+
+        private Rigidbody _rigidbody;
+        private Renderer  _renderer;
+        private Animator  _animator;
         
         private bool _isWatched;
 
         private void Awake()
         {
+            _rigidbody = GetComponent<Rigidbody>();
             _renderer = GetComponent<Renderer>();
             _animator = transform.GetChild(1).GetComponent<Animator>();
         }
@@ -36,7 +38,9 @@ namespace Enemies.Sunburned
             {
                 transform.LookAt(new Vector3(Target.position.x, transform.position.y, Target.position.z));
                 transform.position = Vector3.MoveTowards(transform.position, Target.position, speed * Time.deltaTime);
-            } 
+
+            }
+            _rigidbody.isKinematic = _isWatched;
             _animator.enabled = !_isWatched;
             
             /*

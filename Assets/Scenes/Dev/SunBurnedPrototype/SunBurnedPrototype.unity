@@ -300,6 +300,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DeadLurker
       objectReference: {fileID: 0}
+    - target: {fileID: 6817789680546721565, guid: ecf2ad522e210f24aaea7aea6370a3fb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3786,9 +3791,9 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!65 &148646423
 BoxCollider:
