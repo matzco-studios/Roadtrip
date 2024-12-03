@@ -20,11 +20,11 @@ namespace Cinematic.EndScene
         [SerializeField] private Animator _leftFrontDoorAnim;
 
         public float acceleration = 15f;
-        private float deceleration = 10f;
+        public float BrakeDeceleration = 6500f;
         private float turnAngle = 15f;
         private float speedMultiplier;
         private float carWheelMaxAngle = 150f;
-        public float maxSpeed = 10f;
+        public float maxSpeed = 15f;
         public bool IsLightsOn = true;
         private float gasInput = 5f;
         public float lowVolume = 0.25f;
@@ -33,10 +33,9 @@ namespace Cinematic.EndScene
         public float maxSpeedVolume = 21f;
         public bool IsPlayerInside;
         private bool _batteryDead;
-        private bool _stopped = true;
         private PlayerScript _player;
 
-
+        private bool _stopCarTrigger;
 
         private void PlayDeadBatterySound()
         {
@@ -52,7 +51,6 @@ namespace Cinematic.EndScene
             if (_running)
             {
                 _running = false;
-                _stopped = false;
                 engineSound.pitch = currentEngineVolume;
             }
 
@@ -109,7 +107,8 @@ namespace Cinematic.EndScene
 
         IEnumerator DeadBatteryEvent()
         {
-            yield return new WaitForSeconds(2f);
+            StartCoroutine(Brake());
+
             _batteryDead = true;
             ToggleEngine();
             ToggleLights();
@@ -124,59 +123,69 @@ namespace Cinematic.EndScene
             }
 
             currentSpeed = 0;
-            _stopped = true;
+
+            _leftFrontDoorAnim.enabled = true;
+            CrashSound.Play();
+
+            yield return new WaitForSeconds(1f);
+            StartCoroutine(_player.PlayerMovement());
         }
 
-        private void Brake()
+        private IEnumerator Brake()
         {
-            foreach (var wheel in Wheels)
+
+            yield return new WaitWhile(() =>
             {
-                wheel.wheelCollider.brakeTorque = deceleration * 350 * Time.deltaTime;
-                wheel.wheelCollider.motorTorque = 0;
-            }
-            
-            AnimateWheels();
+                print($"Velocity: {_rb.velocity.magnitude}");
+
+                foreach (var wheel in Wheels)
+                {
+                    wheel.wheelCollider.brakeTorque = BrakeDeceleration * Time.deltaTime;
+                    wheel.wheelCollider.motorTorque = 0;
+                }
+
+                AnimateWheels();
+                return _rb.velocity.magnitude > 0.8;
+            });
         }
 
         private void Start()
         {
+
             _player = GameObject.FindWithTag("Player").GetComponent<PlayerScript>();
             _rb = GetComponent<Rigidbody>();
+            _rb.velocity.Set(4.65f, 0.00f, 5.55f);
+            
             engineSound = GetComponent<AudioSource>();
             ToggleEngine();
             EngineSound();
             _leftFrontDoorAnim.enabled = false;
 
             StartCoroutine(CarLoop());
-            StartCoroutine(DeadBatteryEvent());
         }
 
         IEnumerator CarLoop()
         {
-            while (!_batteryDead || !_stopped)
+            while (!_batteryDead)
             {
                 yield return null;
-                
+
                 currentSpeed = _rb.velocity.magnitude;
                 currentEngineVolume = _rb.velocity.magnitude / 50f;
 
-                if (!_batteryDead)
-                {
-                    MoveCarForward();
-                    AnimateWheels();
-                    SetMaxSpeed();
-                }
-                
-                else if(!_stopped)
-                {
-                    Brake();
-                }
+                MoveCarForward();
+                AnimateWheels();
+                SetMaxSpeed();
             }
-            
-            _leftFrontDoorAnim.enabled = true;
-            CrashSound.Play();
-            yield return new WaitForSeconds(1f);
-            StartCoroutine(_player.PlayerMovement());
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("EndTrigger") && !_stopCarTrigger)
+            {
+                _stopCarTrigger = true;
+                StartCoroutine(DeadBatteryEvent());
+            }
         }
     }
 }
