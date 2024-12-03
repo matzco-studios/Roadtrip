@@ -5433,6 +5433,7 @@ MonoBehaviour:
   _shootDist: 85
   _falloffAmount: 5.7
   _minDamage: 6.25
+  ammo: 65
 --- !u!4 &4348919319086249275 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 330bbb3c2738fb44f9e2635272366e62, type: 3}
