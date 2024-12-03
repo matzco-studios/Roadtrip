@@ -2270,14 +2270,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df31e72a17a82e54bb21be8320f801d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sunburnedPrefab: {fileID: 0}
+  _sunburnedPrefab: {fileID: 6817789680546721565, guid: ecf2ad522e210f24aaea7aea6370a3fb,
+    type: 3}
   _deadlurkerPrefab: {fileID: 6817789680546721565, guid: ecf2ad522e210f24aaea7aea6370a3fb,
     type: 3}
   _sunburnedMax: 2
   _deadlurkerMax: 4
   _sunburnedChance: 1
   _deadlurkerChance: 1
-  _sunburnedDespawn: 140
+  _sunburnedDespawn: 180
   _deadlurkerDespawn: 140
 --- !u!1 &1500947433
 GameObject:
