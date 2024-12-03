@@ -58,8 +58,6 @@ namespace Player
 
             if (_jumpBuffer >= 0 && _coyoteTime >= 0)
                 _gravityVelocity.y = _jumpForce;
-
-            Debug.Log(_isGrounded);
         }
 
         private void PlayerDirection()
