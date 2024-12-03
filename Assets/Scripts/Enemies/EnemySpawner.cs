@@ -18,6 +18,9 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField]
     private float _sunburnedDespawn = 140, _deadlurkerDespawn = 140;
+
+    [SerializeField]
+    private float _sunburnedTimeMin = 8, _sunburnedTimeMax = 20, _deadlurkerTimeMin = 6, _deadlurkerTimeMax = 14;
     private Transform _player;
     private CarController _car;
 
@@ -83,8 +86,8 @@ public class EnemySpawner : MonoBehaviour
     {
         _player = GameObject.FindGameObjectWithTag("Player").transform;
         _car = GameObject.FindGameObjectWithTag("Car").GetComponent<CarController>();
-        StartCoroutine(EnemyManager(6, 15, _deadlurkerEnemies, _deadlurkerPrefab, _deadlurkerMax, _deadlurkerChance, _deadlurkerDespawn));
-        StartCoroutine(EnemyManager(8, 24, _sunburnedEnemies, _sunburnedPrefab, _sunburnedMax, _sunburnedChance, _sunburnedDespawn));
+        StartCoroutine(EnemyManager(_deadlurkerTimeMin, _deadlurkerTimeMax, _deadlurkerEnemies, _deadlurkerPrefab, _deadlurkerMax, _deadlurkerChance, _deadlurkerDespawn));
+        StartCoroutine(EnemyManager(_sunburnedTimeMin, _sunburnedTimeMax, _sunburnedEnemies, _sunburnedPrefab, _sunburnedMax, _sunburnedChance, _sunburnedDespawn));
     }
 
     void LateUpdate(){
