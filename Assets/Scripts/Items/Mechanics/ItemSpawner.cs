@@ -86,7 +86,7 @@ namespace Items.Mechanics
             {
                 var dist = Random.insideUnitSphere;
                 dist /= dist.magnitude;
-                var spawnPos = _playerPosition.position + Vector3.up + (dist * spawnRadius);
+                var spawnPos = _playerPosition.position + Vector3.up + (dist * spawnRadius*0.8f);
                 
                 yield return new WaitForSeconds(spawnDelay);
                 CheckPlayerNeeds();
@@ -98,7 +98,7 @@ namespace Items.Mechanics
 
                 GameObject obj = null;
                 foreach (GameObject itm in spawnList){
-                    if (Vector3.Distance(_playerPosition.position, itm.transform.position)>spawnRadius*3){
+                    if (Vector3.Distance(_car.transform.position, itm.transform.position)>spawnRadius*3){
                         Destroy(itm); obj = itm; break;
                     }
                 }
