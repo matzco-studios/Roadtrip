@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
 using Animator = UnityEngine.Animator;
 
 
@@ -10,9 +6,6 @@ namespace Enemies.Sunburned
 {
     public class SunburnedEnemy : EnemyController
     {
-        [SerializeField] private PostProcessVolume postProcess;
-        [SerializeField] private float activationDistance;
-
         private Rigidbody _rigidbody;
         private Renderer  _renderer;
         private Animator  _animator;
@@ -42,19 +35,6 @@ namespace Enemies.Sunburned
             }
             _rigidbody.isKinematic = _isWatched;
             _animator.enabled = !_isWatched;
-            
-            /*
-             * Check if player is near, if yes,
-             * make use of the Post Process effect
-             */
-            if (Vector3.Distance(Target.position, transform.position) < activationDistance) {
-                postProcess.weight = Mathf.Lerp(
-                    postProcess.weight,
-                    (_isWatched ? 1f : 0f),
-                    speed * Time.deltaTime
-                );
-            }
-
         }
     }
 }
