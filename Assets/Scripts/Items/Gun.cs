@@ -1,6 +1,7 @@
 using System;
 using Items.Mechanics;
 using Player;
+using Player.Mechanics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -22,6 +23,8 @@ namespace Items
         private float _falloffAmount = 5f;
         [SerializeField]
         private float _minDamage = 5f;
+        [SerializeField]
+        private int ammo = 40;
         private CameraController _cameraController;
         private Animator _animator;
         private AudioSource _soundReload;
@@ -35,6 +38,7 @@ namespace Items
         private Light _light;
 
         private void Shoot(){
+            if (ammo<=0 && _magazine<=0) {DropGun(); return;}
             if (isReloading || _shootCooldown>0) return;
             if (_magazine>0)
             {
@@ -47,7 +51,8 @@ namespace Items
                 Transform head = _cameraController.GetHead().transform;
                 _ray = new Ray(head.position, head.forward);
                 if (Physics.Raycast(_ray, out _raycastHit, _shootDist)){
-                    if (_raycastHit.collider.gameObject.CompareTag("Enemy")){
+                    var obj = _raycastHit.collider.gameObject;
+                    if (obj.CompareTag("Enemy") || obj.CompareTag("Scorchlet")){
                         float dmg = _damage;
                         _raycastHit.collider.GetComponent<EnemyController>()
                         .Hurt( Mathf.Max(dmg-(_raycastHit.distance/10*_falloffAmount), _minDamage) );
@@ -59,16 +64,23 @@ namespace Items
         }
 
         private void Reload(){
+            if (ammo<=0) {return;}
             if (isReloading || _shootCooldown>0 || _magazine==_magSize) return;
             isReloading = true;
             _animator.SetTrigger("Reload");
             _soundReload.Play();
         }
 
+        private void DropGun(){
+            GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<InventoryController>().DropCurrentItem();
+        }
+
         public void AddAmmo(int amnt)
         {
+            amnt = Mathf.Clamp(amnt, 0, _magSize);
             _magazine = Mathf.Clamp(_magazine+amnt, 0, _magSize);
-            if (_magazine==_magSize){
+            ammo -= amnt;
+            if (_magazine==_magSize || ammo <= 0){
                 _animator.SetTrigger("StopReload");
             }
             _soundReload.Play();
@@ -100,7 +112,7 @@ namespace Items
         void Update()
         {
             _shootCooldown -= Time.deltaTime;
-            _light.intensity += (0-_light.intensity)*Time.deltaTime*25;
+            _light.intensity += (0-_light.intensity)*Time.deltaTime*16;
         }
     }
 }
