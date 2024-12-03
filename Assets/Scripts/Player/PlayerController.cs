@@ -42,7 +42,7 @@ namespace Player
 
         void Start()
         {
-            _carController = GameObject.FindGameObjectWithTag("Car").GetComponent<CarController>();
+            _carController = GameObject.FindGameObjectWithTag("Car")?.GetComponent<CarController>();
 
             Cursor.lockState = CursorLockMode.Locked;
             _controller = GetComponent<CharacterController>();
