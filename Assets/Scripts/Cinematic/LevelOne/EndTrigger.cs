@@ -4,8 +4,13 @@ using UnityEngine.SceneManagement;
 
 public class EndTrigger : MonoBehaviour
 {
+    FadeInOut fade;
     private bool _triggered;
 
+    void Start()
+    {
+        fade = FindObjectOfType<FadeInOut>();
+    }	
     private IEnumerator LoadScene() {
         _triggered = true;
         var scene = SceneManager.LoadSceneAsync(3);
@@ -15,7 +20,8 @@ public class EndTrigger : MonoBehaviour
             print($"IS_DONE: {scene.isDone} AND Loading scene {scene.progress}...");
             return scene.progress < 0.9f;
         });
-
+        fade.FadeIn();
+        yield return new WaitForSeconds(1);
         scene.allowSceneActivation = true;
     }
 
