@@ -18,18 +18,23 @@ namespace Items
         private Rigidbody rb;
         [SerializeField, Range(0.1f, 1)] private float _fuelAmount;
         private BoxCollider triggerBox;
-        private GameObject _initialParent;
-        private Vector3 _initialPosition;
-        private Vector3 _initialRotation;
+        private GameObject _gasMachine;
+        private Vector3 _initialGasMachinePosition;
+        private Vector3 _initialGasMachineRotation;
         private AudioSource _refillSound;
+        private GameObject _inventory;
 
         void Start()
         {
-            if (!isLimited) _fuelAmount = float.PositiveInfinity;
             _refillSound = GetComponent<AudioSource>();
-            if (!isLimited) _initialParent = transform.parent.gameObject;
-            _initialPosition = transform.position;
-            _initialRotation = transform.rotation.eulerAngles;
+            if (!isLimited)
+            {
+                _fuelAmount = float.PositiveInfinity;
+                _gasMachine = transform.parent.gameObject;
+                _initialGasMachinePosition = transform.position;
+                _initialGasMachineRotation = transform.rotation.eulerAngles;
+            }
+            _inventory = GameObject.FindGameObjectWithTag("Inventory");
             _isPicked = false;
             _pickedPosition = new Vector3(0, 0, 0);
             _pickedParent = null;
@@ -79,10 +84,10 @@ namespace Items
                     ResetPosition(false);
                 }
             }
-            else if (other.gameObject.CompareTag("GasMachine") && !_isPicked && (transform.parent == null || transform.parent == _initialParent.transform))
+            else if (other.gameObject.CompareTag("GasMachine") && !_isPicked && (transform.parent == null || transform.parent == _gasMachine.transform))
             {
-                transform.SetPositionAndRotation(_initialPosition, Quaternion.Euler(_initialRotation));
-                transform.SetParent(_initialParent.transform);
+                transform.SetPositionAndRotation(_initialGasMachinePosition, Quaternion.Euler(_initialGasMachineRotation));
+                transform.SetParent(_gasMachine.transform);
                 rb.constraints = RigidbodyConstraints.FreezeAll;
             }
         }

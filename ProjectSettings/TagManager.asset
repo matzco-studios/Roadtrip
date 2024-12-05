@@ -24,6 +24,7 @@ TagManager:
   - Enemy
   - Camera
   - EndTrigger
+  - Inventory
   layers:
   - Default
   - TransparentFX
