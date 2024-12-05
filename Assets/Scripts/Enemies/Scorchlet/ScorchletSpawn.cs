@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Enemies.Scorchlet
 {
@@ -57,7 +58,7 @@ namespace Enemies.Scorchlet
             spawnPositionDistance = new Vector3(UnityEngine.Random.Range(-3, 3), 0, UnityEngine.Random.Range(-3, -6));
             Vector3 spawnPosition = new Vector3(truckPosition.x + spawnPositionDistance.x, carTrunk.transform.position.y, truckPosition.z + spawnPositionDistance.z);
             scorchlet = Instantiate(scorchletPrefab, spawnPosition, Quaternion.identity);
-            Debug.Log(spawnPosition);
+            scorchlet.GetComponent<NavMeshAgent>().enabled = false;
         }
     }
 }

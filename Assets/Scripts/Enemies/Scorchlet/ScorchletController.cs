@@ -49,13 +49,14 @@ namespace Enemies.Scorchlet
             if (!hasTakenObject && !isInTrunk && !isWatched)
             {
                 float distance = Vector3.Distance(transform.position, carTrunk.transform.position);
-                if (distance > 2.85f)
+                if (distance > 2.5f)
                 {
                     MoveToTrunk();
                 }
                 else
                 {
                     anim.SetInteger("moving", 0);
+                    GetComponent<NavMeshAgent>().enabled = true;;
                     isInTrunk = true;
                 }
             }
@@ -85,7 +86,7 @@ namespace Enemies.Scorchlet
                     Destroy(gameObject);
                 }
             }
-            if (carDistance > 20 && isFleeing)
+            if (carDistance > 20)
             {
                 Destroy(gameObject);
             }
