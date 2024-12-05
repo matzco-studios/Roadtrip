@@ -29,14 +29,20 @@ namespace Player
         private Vector3 _gravityVelocity = Vector3.zero;
         private static Vector3 _velocity = Vector3.zero;
 
+        private float _healthCooldown = 0;
+
         public float Health => _health;
         public bool IsDead => _health == 0;
 
-        public void AddHealth(float amount) =>
+        public void AddHealth(float amount){
             _health = Mathf.Clamp(_health + amount, 0, MaxHealth);
+            _healthCooldown = 2f;
+        }
 
-        public void ReduceHealth(float amount) =>
+        public void ReduceHealth(float amount) {
             _health = Mathf.Clamp(_health - amount, 0, MaxHealth);
+            _healthCooldown = 10f;
+        }
 
         public static bool IsWalking =>
             _velocity.magnitude > 0.1 && !_carController.IsPlayerInside && _isGrounded;
@@ -127,6 +133,12 @@ namespace Player
                 Rigidbody rb = gameObject.AddComponent<Rigidbody>();
                 gameObject.AddComponent<CapsuleCollider>();
                 StartCoroutine(DeadCutscene(rb));
+            }
+
+            if (_healthCooldown<0){
+                AddHealth(5);
+            }else{
+                _healthCooldown-=Time.deltaTime;
             }
         }
 
