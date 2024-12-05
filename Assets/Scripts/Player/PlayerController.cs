@@ -117,9 +117,6 @@ namespace Player
 
         void Update()
         {
-            if (Input.GetKey(KeyCode.Escape))
-                _health = 0;
-
             HandleJump();
             PlayerDirection();
 
