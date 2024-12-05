@@ -154,7 +154,6 @@ namespace Cinematic.EndScene
 
             _player = GameObject.FindWithTag("Player").GetComponent<PlayerScript>();
             _rb = GetComponent<Rigidbody>();
-            _rb.velocity.Set(4.65f, 0.00f, 5.55f);
             
             engineSound = GetComponent<AudioSource>();
             ToggleEngine();
@@ -166,6 +165,7 @@ namespace Cinematic.EndScene
 
         IEnumerator CarLoop()
         {
+            _rb.AddForce(4.65f*8000, 0.00f, 5.55f*8000);
             while (!_batteryDead)
             {
                 yield return null;
@@ -186,6 +186,10 @@ namespace Cinematic.EndScene
                 _stopCarTrigger = true;
                 StartCoroutine(DeadBatteryEvent());
             }
+        }
+
+        void Update(){
+            print($"Velocity: {_rb.velocity} at {currentSpeed}");
         }
     }
 }

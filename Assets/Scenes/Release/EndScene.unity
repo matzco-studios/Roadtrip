@@ -538,7 +538,7 @@ MonoBehaviour:
   currentSpeed: 0
   _leftFrontDoorAnim: {fileID: 1711667070}
   acceleration: 25
-  BrakeDeceleration: 20000
+  BrakeDeceleration: 24000
   maxSpeed: 16
   IsLightsOn: 1
   lowVolume: 0.25
@@ -1318,7 +1318,7 @@ PrefabInstance:
     - target: {fileID: 2145951141328495067, guid: 99e8edd387caa1842a9cd511e8c1b36a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -17.55
+      value: -17.259
       objectReference: {fileID: 0}
     - target: {fileID: 2145951141328495067, guid: 99e8edd387caa1842a9cd511e8c1b36a,
         type: 3}
