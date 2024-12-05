@@ -110,6 +110,7 @@ namespace Items
                 if (gameObject.transform.parent.gameObject.name == "ItemContainer")
                 {
                     _isPicked = true;
+                    GetComponent<BoxCollider>().enabled = true;
                     rb.useGravity = false;
                     _pickedPosition = transform.localPosition;
                     _pickedRotation = transform.localRotation;

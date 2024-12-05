@@ -25,6 +25,7 @@ TagManager:
   - Camera
   - EndTrigger
   - Inventory
+  - FuelHole
   layers:
   - Default
   - TransparentFX
