@@ -19,6 +19,9 @@ namespace Player
         
         #endregion
 
+        public void SetSensitivity(float _s) => _sensitivity =_s;
+        public float GetSensitivity() => _sensitivity;
+
         #region CustomMethods
 
         public Transform GetHead() => _head;

@@ -1,6 +1,7 @@
-using System;
+using System.Collections;
 using Car;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Player
 {
@@ -32,10 +33,10 @@ namespace Player
         public bool IsDead => _health == 0;
 
         public void AddHealth(float amount) =>
-            _health = Math.Clamp(_health + amount, 0, MaxHealth);
+            _health = Mathf.Clamp(_health + amount, 0, MaxHealth);
 
         public void ReduceHealth(float amount) =>
-            _health = Math.Clamp(_health - amount, 0, MaxHealth);
+            _health = Mathf.Clamp(_health - amount, 0, MaxHealth);
 
         public static bool IsWalking =>
             _velocity.magnitude > 0.1 && !_carController.IsPlayerInside && _isGrounded;
@@ -93,13 +94,43 @@ namespace Player
             }
         }
 
+        IEnumerator DeadCutscene(Rigidbody rb){
+            CameraController cameraController = GetComponent<CameraController>();
+            rb.AddForce(Random.insideUnitSphere*2f, ForceMode.Impulse);
+            while (true){
+                yield return null;
+                rb.angularDrag+= Time.deltaTime;
+                float sens = cameraController.GetSensitivity();
+                cameraController.SetSensitivity(sens+((0-sens)*Time.deltaTime*0.3735f));
+
+                if (rb.angularDrag>5.2f){
+                    var fade = FindAnyObjectByType<FadeInOut>();
+                    fade.timeToFade = 0.35f;
+                    fade.FadeIn();
+                    yield return new WaitForSeconds(1/fade.timeToFade);
+                    SceneManager.LoadScene(0);
+                    break;
+                }
+            }
+            
+        }
+
         void Update()
         {
             if (Input.GetKey(KeyCode.Escape))
-                Application.Quit();
+                _health = 0;
 
             HandleJump();
             PlayerDirection();
+
+            if (IsDead && enabled){
+                enabled = false;
+                transform.eulerAngles = Vector3.Scale(transform.eulerAngles, new(1, 1, 0));
+                _controller.enabled = false;
+                Rigidbody rb = gameObject.AddComponent<Rigidbody>();
+                gameObject.AddComponent<CapsuleCollider>();
+                StartCoroutine(DeadCutscene(rb));
+            }
         }
 
         void FixedUpdate()
