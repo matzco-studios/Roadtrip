@@ -24,6 +24,8 @@ namespace Enemies.Scorchlet
         private NavMeshAgent agent;
         private AudioSource screechingSound;
         private float carDistance;
+        
+        public bool IsWatched => isWatched;
 
         // Start is called before the first frame update
         void Start()
