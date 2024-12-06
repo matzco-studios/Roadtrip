@@ -41,7 +41,7 @@ Roadtrip is a 3D horror and survival game. The story is that a scientific experi
 
 ### He stole the pump
 
-![scorchlet-sneak](https://github.com/user-attachments/assets/f779b42e-08cd-4817-ab6a-a7e419d73dd2)
+![scorchlet-sneak](https://github.com/user-attachments/assets/51cd9c0b-e4f5-4e3a-a34e-04518eb40947)
 
 ## Flashlight
 
