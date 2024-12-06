@@ -9,13 +9,23 @@ Roadtrip is a 3D horror and survival game. The story is that a scientific experi
 
 ## Preview
 
+## Main Menu
+
+![main-menu](https://github.com/user-attachments/assets/6af9773b-db33-4fb4-8a0e-75de854260d6)
+
 ## Zone System
 
 ![zone](https://github.com/user-attachments/assets/e9c2de66-ec14-498f-9edd-bd31c880419d)
 
 ### Post Process applied
 
-![zone-process](https://github.com/user-attachments/assets/1e1185cd-8a7e-4baa-a94f-175419cc8f0a)
+![zone-process](https://github.com/user-attachments/assets/7de44eab-eb5c-4fc7-a983-6ba4811c6384)
+
+## Car
+
+### Car Battery
+
+![battery](https://github.com/user-attachments/assets/60ed04b3-c890-4148-938b-3bdbebccca39)
 
 ## Dead Lurker
 
@@ -54,3 +64,4 @@ Roadtrip is a 3D horror and survival game. The story is that a scientific experi
 [@QuocDungTran380](https://github.com/QuocDungTran380)
 [@AchrafGroiez](https://github.com/AchrafGroiez)
 [@guettafa](https://github.com/guettafa)
+
