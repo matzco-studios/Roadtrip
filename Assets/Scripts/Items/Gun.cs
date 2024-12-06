@@ -1,6 +1,7 @@
 using System;
 using Items.Mechanics;
 using Player;
+using Player.Mechanics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -22,6 +23,8 @@ namespace Items
         private float _falloffAmount = 5f;
         [SerializeField]
         private float _minDamage = 5f;
+        [SerializeField]
+        private int ammo = 40;
         private CameraController _cameraController;
         private Animator _animator;
         private AudioSource _soundReload;
@@ -31,8 +34,11 @@ namespace Items
         private bool isReloading = false;
         private RaycastHit _raycastHit;
         private Ray _ray;
+        private ParticleSystem _muzzleFlash;
+        private Light _light;
 
         private void Shoot(){
+            if (ammo<=0 && _magazine<=0) {DropGun(); return;}
             if (isReloading || _shootCooldown>0) return;
             if (_magazine>0)
             {
@@ -45,33 +51,43 @@ namespace Items
                 Transform head = _cameraController.GetHead().transform;
                 _ray = new Ray(head.position, head.forward);
                 if (Physics.Raycast(_ray, out _raycastHit, _shootDist)){
-                    if (_raycastHit.collider.gameObject.CompareTag("Enemy")){
+                    var obj = _raycastHit.collider.gameObject;
+                    if (obj.CompareTag("Enemy") || obj.CompareTag("Scorchlet")){
                         float dmg = _damage;
                         _raycastHit.collider.GetComponent<EnemyController>()
                         .Hurt( Mathf.Max(dmg-(_raycastHit.distance/10*_falloffAmount), _minDamage) );
                     }
                 }
+                _muzzleFlash.Play();
+                _light.intensity = 8;
             }else{ _animator.SetTrigger("ShootEmpty");}
         }
 
         private void Reload(){
+            if (ammo<=0) {return;}
             if (isReloading || _shootCooldown>0 || _magazine==_magSize) return;
             isReloading = true;
             _animator.SetTrigger("Reload");
             _soundReload.Play();
         }
 
+        private void DropGun(){
+            GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<InventoryController>().DropCurrentItem();
+        }
+
         public void AddAmmo(int amnt)
         {
+            amnt = Mathf.Clamp(amnt, 0, _magSize);
             _magazine = Mathf.Clamp(_magazine+amnt, 0, _magSize);
-            if (_magazine==_magSize){
-                isReloading = false;
+            ammo -= amnt;
+            if (_magazine==_magSize || ammo <= 0){
                 _animator.SetTrigger("StopReload");
             }
             _soundReload.Play();
+            isReloading = false;
         }
 
-        public void PlayReloadSound() { _soundReload.Play(); }
+        public void PlayReloadSound() { _soundReload.Play(); isReloading = false; }
 
         public Gun()
         {
@@ -85,11 +101,18 @@ namespace Items
             _animator =GetComponent<Animator>();
             _soundShoot = GetComponents<AudioSource>()[0];
             _soundReload = GetComponents<AudioSource>()[1];
+            _muzzleFlash = GetComponentInChildren<ParticleSystem>();
+            _light = GetComponentInChildren<Light>();
+            foreach (MeshRenderer mesh in GetComponentsInChildren<MeshRenderer>()) {
+                mesh.receiveShadows = false;
+                mesh.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            }
         }
 
         void Update()
         {
             _shootCooldown -= Time.deltaTime;
+            _light.intensity += (0-_light.intensity)*Time.deltaTime*16;
         }
     }
 }

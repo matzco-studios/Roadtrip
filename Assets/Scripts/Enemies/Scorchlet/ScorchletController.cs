@@ -8,10 +8,11 @@ using UnityEngine.SceneManagement;
 namespace Enemies.Scorchlet
 {
 
-    public class ScorchletController : MonoBehaviour
+    public class ScorchletController : EnemyController
     {
         private GameObject carTrunk;
         private GameObject player;
+        private GameObject itemMemory;
         private Animator anim;
         private bool hasTakenObject;
         private bool isInTrunk;
@@ -23,6 +24,8 @@ namespace Enemies.Scorchlet
         private NavMeshAgent agent;
         private AudioSource screechingSound;
         private float carDistance;
+        
+        public bool IsWatched => isWatched;
 
         // Start is called before the first frame update
         void Start()
@@ -55,6 +58,7 @@ namespace Enemies.Scorchlet
                 else
                 {
                     anim.SetInteger("moving", 0);
+                    GetComponent<NavMeshAgent>().enabled = true;;
                     isInTrunk = true;
                 }
             }
@@ -84,7 +88,7 @@ namespace Enemies.Scorchlet
                     Destroy(gameObject);
                 }
             }
-            if (carDistance > 10)
+            if (carDistance > 20)
             {
                 Destroy(gameObject);
             }
@@ -106,11 +110,29 @@ namespace Enemies.Scorchlet
             anim.speed = fleeSpeed;
             agent.SetDestination(oppositeDirection);
         }
+        public override void OnHit()
+        {
+            isFleeing = true;
+            IsFlashed();
+            Flee();
+        }
+        public override void OnDeath()
+        {
+            if (itemMemory)
+            {
+                itemMemory.transform.parent = null;
+                itemMemory.GetComponent<Rigidbody>().isKinematic = false;
+                itemMemory = null;
+            }
+            
+        }
+
         void TakeObject(GameObject item)
         {
             item.GetComponent<Rigidbody>().isKinematic = true;
             item.transform.SetParent(transform);
             item.transform.localPosition = new Vector3(0, 0.80f, 0.9f);
+            itemMemory = item;
         }
 
     }

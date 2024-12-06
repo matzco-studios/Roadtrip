@@ -22,7 +22,7 @@ namespace Car
         public float currentSpeed;
         private float currentEngineVolume;
 
-        public float acceleration = 15f;
+        public float acceleration = 25f;
         private float deceleration = 20f;
         private float turnAngle = 15f;
         private float speedMultiplier;
@@ -33,7 +33,6 @@ namespace Car
         private float fuelConsumption;
         [SerializeField] private ParticleSystem _gasParticles;
         public bool IsLightsOn;
-        public Image fuelBar;
         public Battery Battery;
         private float gasInput;
         private float turnInput;
@@ -43,7 +42,7 @@ namespace Car
         public float minSpeedVolume = 10f;
         public float maxSpeedVolume = 21f;
         public bool IsPlayerInside = false;
-        public const float MaxFuel = 100f;
+        public const float MaxFuel = 2000000f;
 
         public bool IsBatteryInside() => Battery;
 
@@ -92,6 +91,7 @@ namespace Car
         private void GetInputs()
         {
             gasInput = IsPlayerInside ? Input.GetAxis("Vertical") : 0.0f;
+            gasInput = (gasInput<0) ? gasInput/3 : gasInput;
             turnInput = IsPlayerInside ? Input.GetAxis("Horizontal") : 0.0f;
         }
 
@@ -105,7 +105,7 @@ namespace Car
                         wheel.wheelCollider.motorTorque = gasInput * acceleration * speedMultiplier * Time.deltaTime;
                     }
                 }
-                fuelConsumption = currentSpeed * Math.Abs(gasInput);
+                fuelConsumption = currentSpeed / 10 * Math.Abs(gasInput);
             }
             else fuelConsumption = 0f;
         }
@@ -116,7 +116,6 @@ namespace Car
             {
                 currentFuel += amount;
                 Math.Clamp(currentFuel, 0, 100);
-                fuelBar.fillAmount = currentFuel / 100;
             }
         }
 
@@ -125,7 +124,7 @@ namespace Car
         {
             currentFuel = Mathf.Clamp(currentFuel - amount, 0, MaxFuel);
         }
-        
+
         [Obsolete]
         void ReduceFuel()
         {
@@ -140,7 +139,6 @@ namespace Car
                 outOfFuel = false;
                 currentFuel -= Time.deltaTime * fuelConsumption;
                 Math.Clamp(currentFuel, 0, 100);
-                fuelBar.fillAmount = currentFuel / 100;
             }
         }
 
@@ -163,27 +161,33 @@ namespace Car
 
         private void Brake()
         {
-            if (gasInput < 0) // if reverse/break is pressed
+            if (Input.GetKey(KeyCode.Space))
+            {
                 foreach (var wheel in wheels)
                 {
-                    wheel.wheelCollider.brakeTorque = deceleration * 1000 * Time.deltaTime;
+                    wheel.wheelCollider.brakeTorque = deceleration * 2000 * Time.deltaTime;
                     wheel.wheelCollider.motorTorque = 0;
                 }
-            
-            // if gas is pressed then it removes the brake
-            else if (gasInput > 0 && IsRunning) foreach (var wheel in wheels) wheel.wheelCollider.brakeTorque = 0;
-            
-            // if no gas is pressed then slows down the car
-            else 
+            }
+            else
+            {
+                foreach (var wheel in wheels)
+                {
+                    wheel.wheelCollider.brakeTorque = 0;
+                }
+            }
+            if (!IsRunning || gasInput == 0)
+            {
                 foreach (var wheel in wheels)
                 {
                     wheel.wheelCollider.brakeTorque = deceleration * 350 * Time.deltaTime;
                     wheel.wheelCollider.motorTorque = 0;
                 }
+            }
         }
 
         private void SetMaxSpeed() => // sets the max speed of the car so it doesn't go faster and faster
-            speedMultiplier = (currentSpeed > maxSpeed) ? 0 : 400; 
+            speedMultiplier = (currentSpeed > maxSpeed) ? 0 : 400;
 
         private void AnimateWheels()
         {
@@ -204,7 +208,7 @@ namespace Car
             if (currentSpeed < minSpeedVolume) engineSound.pitch = 0.25f;
             if (currentSpeed > minSpeedVolume && currentSpeed < maxSpeedVolume) engineSound.pitch = 0.25f + currentEngineVolume;
             if (engineSound.pitch <= 0.25f && !IsRunning) engineSound.volume = 0;
-            
+
             engineSound.mute = !IsPlayerInside && !IsRunning;
         }
 
@@ -214,9 +218,9 @@ namespace Car
             {
                 light.ULight.intensity = 0;
                 light.UFlare.Stop();
-            } 
+            }
         }
-        
+
         private void ToggleLights()
         {
             if (Input.GetKeyDown(KeyCode.L) && IsPlayerInside)
@@ -228,7 +232,7 @@ namespace Car
                     if (IsLightsOn) light.UFlare.Play(); else light.UFlare.Stop();
                 }
             }
-            DisableLights();      
+            DisableLights();
         }
 
         // Start is called before the first frame update
@@ -236,8 +240,6 @@ namespace Car
         {
             rb = GetComponent<Rigidbody>();
             engineSound = GetComponent<AudioSource>();
-            currentFuel = 50f;
-            fuelBar.fillAmount = 1f;
         }
 
         // Update is called once per frame

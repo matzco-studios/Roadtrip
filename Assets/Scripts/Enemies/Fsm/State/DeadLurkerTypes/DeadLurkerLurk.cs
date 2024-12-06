@@ -41,7 +41,7 @@ namespace Enemies.Fsm.State.DeadLurkerTypes
             Vector3 pos = Player.position + Quaternion.AngleAxis(Player.eulerAngles.y, Player.up) * _targetPos;
             
             _targetPos = _posBehindPlayer;
-            var spd = Mathf.Sqrt(Agent.remainingDistance*2.2f)+0.65f;
+            var spd = Mathf.Sqrt(Agent.remainingDistance*2.6f)/2+0.65f;
             Agent.speed = (spd == float.PositiveInfinity) ? 0.65f : spd;
             LookAtPlayer(Player, Npc);
 

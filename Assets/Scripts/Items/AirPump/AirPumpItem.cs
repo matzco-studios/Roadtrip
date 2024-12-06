@@ -18,6 +18,7 @@ namespace Items.AirPump
             _lineRenderer = GetComponentInChildren<LineRenderer>();
             _interactableAirPump = GetComponentInChildren<InteractableAirPump>();
             _psiDisplay = GetComponentInChildren<TextMeshPro>();
+            _lineRenderer.positionCount = 2;
         }
 
         void LateUpdate()

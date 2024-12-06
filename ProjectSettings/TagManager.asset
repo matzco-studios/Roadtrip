@@ -9,7 +9,6 @@ TagManager:
   - GasPump
   - FuelTank
   - InteractableItem
-  - Car
   - WheelOfCar
   - CarUI
   - ActionMessage
@@ -17,29 +16,34 @@ TagManager:
   - Battery
   - BatteryCollider
   - LightCollider
+  - Zone
   - GasMachine
   - Scorchlet
   - CarTrunk
   - ScorchletSurface
   - Enemy
+  - Camera
+  - EndTrigger
+  - Inventory
+  - FuelHole
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - GasPump
+  - PP
   - Water
   - UI
+  - PostProcessing
   - 
+  - Reflection_Probes
+  - Lighting
+  - Props
+  - ReflectedInWater
+  - Ground
+  - AccessibleVolume
+  - PostProcessing
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - MainGround
   - 
   - 
   - 
