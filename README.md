@@ -49,8 +49,8 @@ Roadtrip is a 3D horror and survival game. The story is that a scientific experi
 
 ## Contributors
 
-@JF195
-@ArturCaa
-@QuocDungTran380
-@AchrafGroiez
-@guettafa
+[@JF195](https://github.com/JF195)
+[@ArturCaa](https://github.com/ArturCaa)
+[@QuocDungTran380](https://github.com/QuocDungTran380)
+[@AchrafGroiez](https://github.com/AchrafGroiez)
+[@guettafa](https://github.com/guettafa)
