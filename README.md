@@ -1,1 +1,43 @@
 # Roadtrip
+
+Roadtrip is a 3D horror and survival game. The story is that a scientific experiment went wrong, so a dangerous gaz was released into nature and it turns every leaving being into a monster. The player will have to survive the gaz, the monster and the problem related to his car.
+
+## Technologies
+
+- C#
+- Unity
+
+# Preview
+
+## Zone System
+![zone](https://github.com/user-attachments/assets/e9c2de66-ec14-498f-9edd-bd31c880419d)
+### Post Process applied
+![zone-process](https://github.com/user-attachments/assets/1e1185cd-8a7e-4baa-a94f-175419cc8f0a)
+
+## Dead Lurker
+![dead-lurker](https://github.com/user-attachments/assets/88af9b40-15dc-4f1f-9ab0-1bed3d4550a6)
+### Going towards the player
+![dead-lurker-rush](https://github.com/user-attachments/assets/b0df7c85-55ac-4674-8d8b-47a1db133486)
+
+## Item Spawner
+![item-spawner](https://github.com/user-attachments/assets/19a97dfb-f9ab-4618-b900-05205346fce5)
+### Based on a list of items
+![item-spawner-parameters](https://github.com/user-attachments/assets/520aaa4f-daf2-4412-9840-6261cb9ecb44)
+
+## Map ( Road + Nature + Gaz Station )
+![map](https://github.com/user-attachments/assets/f5046458-08b1-41ca-95c7-ea993d915c0b)
+
+## Scorchlet AKA "le Gobelin"
+### He stole the pump
+![scorchlet-sneak](https://github.com/user-attachments/assets/f779b42e-08cd-4817-ab6a-a7e419d73dd2)
+
+## Flashlight
+![flashlight](https://github.com/user-attachments/assets/27bd0bb7-26c8-449d-919d-69ea7e433963)
+
+# Contributors
+
+@JF195 
+@ArturCaa 
+@QuocDungTran380 
+@AchrafGroiez  
+@guettafa
