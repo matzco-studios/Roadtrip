@@ -68,7 +68,8 @@ MonoBehaviour:
   m_text: E
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 77b54b3c500c7804fb8ec2cb260c4074, type: 2}
-  m_sharedMaterial: {fileID: 1840180227620404040, guid: 77b54b3c500c7804fb8ec2cb260c4074, type: 2}
+  m_sharedMaterial: {fileID: 1840180227620404040, guid: 77b54b3c500c7804fb8ec2cb260c4074,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -305,7 +306,8 @@ MonoBehaviour:
   m_text: Press
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 77b54b3c500c7804fb8ec2cb260c4074, type: 2}
-  m_sharedMaterial: {fileID: 1840180227620404040, guid: 77b54b3c500c7804fb8ec2cb260c4074, type: 2}
+  m_sharedMaterial: {fileID: 1840180227620404040, guid: 77b54b3c500c7804fb8ec2cb260c4074,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -439,7 +441,8 @@ MonoBehaviour:
   m_text: to grab
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 77b54b3c500c7804fb8ec2cb260c4074, type: 2}
-  m_sharedMaterial: {fileID: 1840180227620404040, guid: 77b54b3c500c7804fb8ec2cb260c4074, type: 2}
+  m_sharedMaterial: {fileID: 1840180227620404040, guid: 77b54b3c500c7804fb8ec2cb260c4074,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -573,7 +576,8 @@ MonoBehaviour:
   m_text: item
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 77b54b3c500c7804fb8ec2cb260c4074, type: 2}
-  m_sharedMaterial: {fileID: 1840180227620404040, guid: 77b54b3c500c7804fb8ec2cb260c4074, type: 2}
+  m_sharedMaterial: {fileID: 1840180227620404040, guid: 77b54b3c500c7804fb8ec2cb260c4074,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -798,9 +802,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
