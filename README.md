@@ -65,4 +65,4 @@ Roadtrip is a 3D horror and survival game. The story is that a scientific experi
 - [@AchrafGroiez](https://github.com/AchrafGroiez)
 - [@guettafa](https://github.com/guettafa)
 
-DISCLAIMER: Many of the 3D assets used in this project were taken from the Unity Assets Store and Sketchfab, all rights to these assets belong to their respective owners.
+DISCLAIMER: Many of the 3D assets used in this project were taken from the Unity Assets Store or Sketchfab, all rights to these assets belong to their respective owners.
