@@ -9,10 +9,6 @@ Roadtrip is a 3D horror and survival game. The story is that a scientific experi
 
 ## Preview
 
-<video width="100%" controls>
-    <source src="https://raw.githubusercontent.com/matzco-studios/Roadtrip/refs/heads/dev/Assets/Video/FinalTrailer.mp4" type="video/mp4" />
-</video>
-
 ## Main Menu
 
 ![main-menu](https://github.com/user-attachments/assets/6af9773b-db33-4fb4-8a0e-75de854260d6)
